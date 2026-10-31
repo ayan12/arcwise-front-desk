@@ -98,6 +98,7 @@ function Owner({ boards, open }) {
       <div class="row"><div><b>${bd.stats.waiting}</b><span>waiting</span></div><div><b>${bd.stats.chair}/${bd.barbers}</b><span>in chairs</span></div><div><b>${bd.stats.done}</b><span>served today</span></div></div>
       <div class="bar" aria-hidden="true"><span style=${`width:${bd.stats.done / total * 100}%;background:var(--green)`}></span><span style=${`width:${bd.stats.chair / total * 100}%;background:var(--gold)`}></span><span style=${`width:${bd.stats.waiting / total * 100}%;background:var(--line)`}></span></div>
       <div class="serving">Now serving ${bd.tickets.filter(t => t.status === 'chair').map(t => html`<i>${t.no}</i>`)}${!bd.stats.chair ? ' nobody' : ''} · ${bd.stats.nextWait ? 'new customer waits ~' + bd.stats.nextWait + ' min' : 'no wait for new customers'}</div>
+      <div class="serving">Reviews today: ${bd.reviews?.count || 0} rated${bd.reviews?.avg ? ' · avg ' + bd.reviews.avg + ' ★' : ''} · ${bd.reviews?.posted || 0} sent to Google</div>
       <div class="serving">${bd.stats.whatsapp} via WhatsApp · ${bd.stats.walkin} walk-in · ${bd.stats.noshow} no-show${bd.stats.avgCut ? ' · avg cut ' + bd.stats.avgCut + ' min' : ''}</div>
     </button>`;
   })}</div>`;

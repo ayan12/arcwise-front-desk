@@ -14,7 +14,7 @@ function show(d) {
     if (t.waitMins <= 0 || t.position === 1 && t.waitMins <= 5) { st.innerHTML = 'It’s <i>your turn</i> next'; sub.textContent = 'Come to the counter and show this number.'; }
     else { st.textContent = `Number ${t.position} in line`; sub.textContent = `About ${t.waitMins} minutes. We’ll WhatsApp you around 15 minutes before.`; }
   } else if (t.status === 'chair') { st.innerHTML = 'You’re <i>in the chair</i>'; sub.textContent = 'Enjoy the cut.'; }
-  else if (t.status === 'done') { st.innerHTML = 'Thanks for <i>coming in</i>'; sub.textContent = 'See you next time.'; }
+  else if (t.status === 'done') { st.innerHTML = 'Thanks for <i>coming in</i>'; sub.innerHTML = ''; const a = document.createElement('a'); a.href = '/review?b=' + b.key + '&t=' + t.id; a.textContent = 'Rate your visit ★'; a.style.cssText = 'display:inline-block;margin-top:10px;background:#C9A15A;color:#15130E;padding:12px 18px;border-radius:14px;font-weight:700;text-decoration:none'; sub.appendChild(a); }
   else if (t.status === 'noshow') { st.textContent = 'We missed you'; sub.textContent = 'Your number was called. Message the branch for a new spot.'; }
   else { st.textContent = 'Spot cancelled'; sub.textContent = 'Join again any time on WhatsApp.'; }
   const prog = $('prog'); prog.textContent = ''; prog.hidden = t.status !== 'waiting';

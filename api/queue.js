@@ -2,7 +2,8 @@
 import { json } from '../lib/engine.js';
 import { clientIp } from '../lib/auth.js';
 import { hit, storeEnabled } from '../lib/store.js';
-import { SHOP, branchOf, board, addTicket, act, getTicket, setBarbers, resetDay } from '../lib/queue.js';
+import { SHOP, branchOf, board, addTicket, act, getTicket, setBarbers, resetDay, reviewUrl, logReview } from '../lib/queue.js';
+import { draftReview, POINTS } from '../lib/review.js';
 import { handle, notifyAfterChange } from '../lib/bot.js';
 import { simPush, simRead } from '../lib/channels.js';
 
@@ -53,6 +54,14 @@ export default async function handler(req) {
         const t = await getTicket(env, url.searchParams.get('id'));
         return t ? json(publicTicket(t)) : json({ error: 'not_found' }, 404);
       }
+      if (a === 'review-info') {
+        const br = branchOf(url.searchParams.get('b') || '');
+        if (!br) return json({ error: 'bad_branch' }, 400);
+        let name = null, service = null;
+        const t = url.searchParams.get('t') ? await getTicket(env, url.searchParams.get('t')) : null;
+        if (t && t.branch.key === br.key) { name = t.ticket.name; service = t.ticket.service; }
+        return json({ branch: { key: br.key, name: br.name, full: br.full, e164: br.e164 }, google: reviewUrl(br), name, service, points: Object.fromEntries(Object.entries(POINTS).map(([k, v]) => [k, Object.fromEntries(Object.entries(v))])) });
+      }
       if (a === 'sim-poll') {
         const user = url.searchParams.get('user') || '';
         if (!/^[a-z0-9]{12,24}$/.test(user)) return json({ error: 'bad_user' }, 400);
@@ -86,6 +95,18 @@ export default async function handler(req) {
       await handle(env, { channel: 'sim', user, input, profileName: String(b.name || '').slice(0, 30) || null, base: base(req) });
       return json({ ok: true });
     }
+    if (b.action === 'review-draft') {
+      const br = branchOf(String(b.branch || ''));
+      if (!br) return json({ error: 'bad_branch' }, 400);
+      if ((await hit(env, `gq:rl:rv:${ip}:${Math.floor(Date.now() / 3600000)}`, 3700)) > 30) return json({ error: 'slow_down' }, 429);
+      if (!b.variant) await logReview(env, br.key, Math.max(1, Math.min(5, Math.round(Number(b.stars) || 5))), false);
+      return json(await draftReview(env, { ...b, branch: br.full }));
+    }
+    if (b.action === 'review-posted') {
+      const br = branchOf(String(b.branch || ''));
+      if (br && (await hit(env, `gq:rl:rvp:${ip}:${br.key}:${new Date().toISOString().slice(0, 10)}`, 90000)) <= 1) await logReview(env, br.key, 0, true);
+      return json({ ok: true });
+    }
     if (b.action === 'cancel-ticket') {
       const t = await getTicket(env, String(b.id || ''));
       if (!t || t.ticket.status !== 'waiting') return json({ error: 'not_found' }, 404);
@@ -114,12 +135,12 @@ export default async function handler(req) {
     }
     if (b.action === 'ticket') {
       const t = await act(env, br, String(b.id || ''), String(b.op || ''));
-      await notifyAfterChange(env, br, t);
+      await notifyAfterChange(env, br, t, base(req));
       return json({ ok: true, board: await board(env, br) });
     }
     if (b.action === 'barbers') {
       await setBarbers(env, br, b.n);
-      await notifyAfterChange(env, br, null);
+      await notifyAfterChange(env, br, null, base(req));
       return json({ ok: true, board: await board(env, br) });
     }
     if (b.action === 'reset') {

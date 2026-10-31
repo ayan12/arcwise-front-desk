@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#15130E">
+<title>Rate your visit · Gentology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;1,6..96,500&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root { --ink:#15130E; --panel:#1D1A14; --panel2:#25211A; --line:#332D23; --gold:#C9A15A; --gold-soft:#3A3020; --paper:#F3EBDC; --mute:#A39A88; --green:#4CB782; --wa:#25D366; color-scheme:dark }
+* { box-sizing:border-box; margin:0 }
+[hidden] { display:none !important }
+body { min-height:100vh; background:radial-gradient(900px 600px at 50% -10%, #2a2417, var(--ink) 60%); color:var(--paper); font:15px/1.5 Inter, system-ui, -apple-system, sans-serif; -webkit-font-smoothing:antialiased;
+  display:flex; justify-content:center; padding:max(24px, env(safe-area-inset-top,0px)) max(18px, env(safe-area-inset-right,0px)) 48px max(18px, env(safe-area-inset-left,0px)) }
+button, input, textarea { font:inherit; color:inherit }
+button { cursor:pointer; border:0; background:none }
+:focus-visible { outline:2px solid var(--gold); outline-offset:3px; border-radius:10px }
+.wrap { width:min(460px, 100%); display:flex; flex-direction:column; gap:18px }
+.top { display:flex; justify-content:space-between; align-items:center }
+.brand { font-family:'Bodoni Moda', serif; font-size:19px; letter-spacing:.03em }
+.brand small { display:block; font-family:Inter, sans-serif; font-size:12.5px; color:var(--mute); letter-spacing:0 }
+.lang { display:flex; background:var(--panel); border-radius:10px; padding:3px; box-shadow:inset 0 0 0 1px var(--line) }
+.lang button { padding:5px 10px; border-radius:8px; font-size:13px; font-weight:600; color:var(--mute) }
+.lang button.on { background:var(--gold); color:var(--ink) }
+h1 { font-family:'Bodoni Moda', serif; font-weight:500; font-size:38px; line-height:1.08; letter-spacing:-.01em; text-wrap:balance; margin-top:8px }
+h1 i { color:var(--gold) }
+.lead { color:var(--mute) }
+.card { background:var(--panel); border-radius:22px; padding:20px; box-shadow:inset 0 0 0 1px var(--line); display:flex; flex-direction:column; gap:14px; animation:in .3s ease-out }
+@keyframes in { from { transform:translateY(8px); opacity:0 } }
+.stars { display:flex; justify-content:space-between; gap:6px }
+.star { flex:1; aspect-ratio:1; max-width:68px; display:grid; place-items:center; border-radius:16px; transition:transform .15s }
+.star svg { width:100%; height:100%; max-width:52px; fill:transparent; stroke:#5a5141; stroke-width:1.4; transition:fill .15s, stroke .15s }
+.star.on svg { fill:var(--gold); stroke:var(--gold) }
+.star:hover { transform:scale(1.06) }
+.rlabel { text-align:center; font-family:'Bodoni Moda', serif; font-size:22px; min-height:30px }
+.rlabel span { color:var(--mute); font-family:Inter, sans-serif; font-size:14px }
+h2 { font-size:15px; font-weight:600 }
+.chips { display:flex; flex-wrap:wrap; gap:8px }
+.chip { padding:9px 13px; border-radius:999px; background:var(--panel2); box-shadow:inset 0 0 0 1px var(--line); font-size:14px; font-weight:500; text-align:left }
+.chip.on { background:var(--gold-soft); box-shadow:inset 0 0 0 1.5px var(--gold); color:var(--paper) }
+.chip.on:before { content:"✓ "; color:var(--gold); font-weight:700 }
+label { display:flex; flex-direction:column; gap:6px; font-size:13px; color:var(--mute) }
+input, textarea { background:var(--panel2); border:0; box-shadow:inset 0 0 0 1px var(--line); border-radius:14px; padding:12px 14px; font-size:16px; color:var(--paper); outline:none; width:100% }
+input:focus, textarea:focus { box-shadow:inset 0 0 0 1.5px var(--gold) }
+textarea { min-height:90px; resize:vertical; line-height:1.5 }
+textarea.draft { min-height:130px; font-size:16px }
+.btn { width:100%; padding:15px; border-radius:16px; font-weight:700; font-size:15.5px; text-align:center; text-decoration:none; display:flex; justify-content:center; align-items:center; gap:8px }
+.btn.gold { background:var(--gold); color:var(--ink) }
+.btn.line { box-shadow:inset 0 0 0 1px var(--line); color:var(--paper) }
+.btn.wa { background:#123524; color:var(--wa); box-shadow:inset 0 0 0 1px #1d5a3a }
+.btn:disabled { opacity:.6; cursor:default }
+.row { display:flex; justify-content:space-between; align-items:center; gap:10px }
+.link { color:var(--gold); font-weight:600; font-size:14px }
+.muted { color:var(--mute); font-size:13px }
+.how { list-style:none; padding:0; display:flex; flex-direction:column; gap:8px; counter-reset:s }
+.how li { display:grid; grid-template-columns:26px 1fr; gap:10px; color:var(--mute); font-size:14px; counter-increment:s }
+.how li:before { content:counter(s); width:26px; height:26px; border-radius:50%; border:1px solid var(--gold); color:var(--gold); display:grid; place-items:center; font-size:12px; font-weight:700 }
+.how b { color:var(--paper); font-weight:600 }
+.done { text-align:center; display:flex; flex-direction:column; gap:8px; align-items:center }
+.done .big { font-family:'Bodoni Moda', serif; font-size:30px }
+.foot { text-align:center; color:#6d6556; font-size:12px }
+.loading { opacity:.6 }
+@media (prefers-reduced-motion:reduce) { * { animation:none !important; transition:none !important } }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="top"><div class="brand">GENTOLOGY<small id="bname">Barbershop</small></div>
+    <div class="lang" role="group" aria-label="Language"><button type="button" data-l="id">ID</button><button type="button" data-l="en">EN</button></div></div>
+  <div><h1 id="title"></h1><p class="lead" id="lead"></p></div>
+
+  <section class="card" aria-labelledby="title">
+    <div class="stars" role="radiogroup" id="stars"></div>
+    <p class="rlabel" id="rlabel" aria-live="polite"></p>
+  </section>
+
+  <section class="card" id="step2" hidden>
+    <h2 id="pickTitle"></h2>
+    <div class="chips" id="chips"></div>
+    <label><span id="barberL"></span><input id="barber" maxlength="30" autocomplete="off"></label>
+    <label><span id="noteL"></span><textarea id="note" maxlength="300"></textarea></label>
+    <button class="btn gold" type="button" id="draftBtn"></button>
+  </section>
+
+  <section class="card" id="step3" hidden>
+    <div class="row"><h2 id="draftTitle"></h2><button class="link" type="button" id="again"></button></div>
+    <textarea class="draft" id="draft" aria-labelledby="draftTitle"></textarea>
+    <p class="muted" id="editHint"></p>
+    <button class="btn gold" type="button" id="post"></button>
+    <ol class="how" id="how"></ol>
+  </section>
+
+  <section class="card" id="owner" hidden>
+    <h2 id="ownerTitle"></h2>
+    <p class="muted" id="ownerText"></p>
+    <a class="btn wa" id="ownerBtn" target="_blank" rel="noopener"></a>
+  </section>
+
+  <section class="card done" id="thanks" hidden>
+    <p class="big" id="thanksTitle"></p><p class="muted" id="thanksText"></p>
+    <a class="btn line" id="reopen" target="_blank" rel="noopener"></a>
+  </section>
+
+  <p class="foot" id="foot"></p>
+</main>
+<script src="/review.js" type="module"></script>
+</body>
+</html>
