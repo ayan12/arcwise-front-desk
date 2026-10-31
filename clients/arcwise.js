@@ -29,11 +29,13 @@ export default {
       id: 'Halo Arcwise, saya mau minta konsep gratis untuk usaha saya.',
       nameLine: { en: ' My name is {name}.', id: ' Nama saya {name}.' },
       noName: { en: ' My name is  and my business is ', id: ' Nama saya  dan usaha saya ' },
+      aboutLine: { en: ' About us: {about}.', id: ' Tentang usaha saya: {about}.' },
     },
     question: {
       when: 'any other question for the team',
       en: 'Hi Arcwise, ', id: 'Halo Arcwise, ',
       nameLine: { en: 'this is {name}. ', id: 'saya {name}. ' },
+      aboutLine: { en: '{about}', id: '{about}' },
     },
   },
   knowledge: `
