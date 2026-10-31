@@ -4,304 +4,963 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Arcwise Client Dashboard</title>
+<title>Arcwise Workstation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
 <style>
-  :root {
-    --bg:#0F1115; --panel:#161920; --panel2:#1C2028; --line:#272B35; --fg:#F4F1EA; --mute:#9A9EA7; --dim:#6C717B;
-    --accent:#FF6A2B; --up:#3FB27F; --slow:#E0A93B; --down:#E5604D; color-scheme:dark;
-  }
-  * { box-sizing:border-box }
-  [hidden] { display:none !important }
-  body { margin:0; background:var(--bg); color:var(--fg); font:15px/1.5 Inter, system-ui, -apple-system, "Segoe UI", sans-serif }
-  .wrap { max-width:1180px; margin:0 auto; padding-block:28px 80px; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px)) }
-  h1, h2, .num { font-family:'Space Grotesk', Inter, system-ui, sans-serif }
-  header { display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap; margin-bottom:24px }
-  h1 { font-size:28px; margin:0; letter-spacing:-.01em }
-  .when { color:var(--mute); font-size:14px; margin:4px 0 0 }
-  .login { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px }
-  input { flex:1; min-width:200px; font:inherit; padding:10px 12px; border-radius:10px; border:1px solid var(--line); background:var(--panel); color:var(--fg) }
-  button, .btn { font:600 14px Inter, system-ui, sans-serif; border-radius:10px; padding:10px 14px; cursor:pointer; border:0; background:var(--accent); color:#0F1115; text-decoration:none; display:inline-block }
-  .ghost { background:transparent; color:var(--fg); border:1px solid var(--line) }
-  button:disabled { opacity:.55; cursor:default }
-  button:focus-visible, a:focus-visible, summary:focus-visible, input:focus-visible { outline:2px solid var(--accent); outline-offset:2px }
+:root {
+  --bg:#F5F3EE; --panel:#FFFFFF; --panel2:#F0EDE6; --hover:#EAE6DE; --line:#E2DED5; --line2:#D3CEC3;
+  --fg:#16181D; --mute:#5E636D; --dim:#8A8F98; --accent:#E8571A; --accent-ink:#FFFFFF; --accent-soft:#FCE6DA;
+  --up:#1F8F5F; --up-soft:#DDF2E7; --slow:#B07A12; --slow-soft:#F7ECCF; --down:#C93C2B; --down-soft:#F8DEDA;
+  --blue:#2F6FD6; --blue-soft:#DEE8FA; --violet:#7556C9; --violet-soft:#E9E3F8;
+  --shadow:0 1px 2px rgba(22,24,29,.06), 0 8px 24px rgba(22,24,29,.06);
+  --side:#101217; --side-fg:#E9E6DF; --side-mute:#8E929B; --side-hover:#1B1E25; --side-line:#23262E;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark) { :root:not([data-theme="light"]) {
+  --bg:#0E1014; --panel:#15181E; --panel2:#1B1F26; --hover:#20242C; --line:#252932; --line2:#323743;
+  --fg:#F1EEE8; --mute:#A2A6AF; --dim:#727782; --accent:#FF6A2B; --accent-ink:#101217; --accent-soft:#3A2116;
+  --up:#41B883; --up-soft:#15291F; --slow:#E0A93B; --slow-soft:#2E2512; --down:#EF6A58; --down-soft:#341A17;
+  --blue:#6E9EF0; --blue-soft:#18243A; --violet:#A58BEB; --violet-soft:#241D38;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.25);
+  --side:#0A0B0E; --side-fg:#E9E6DF; --side-mute:#868A93; --side-hover:#15171C; --side-line:#1C1F25;
+  color-scheme:dark;
+} }
+:root[data-theme="dark"] {
+  --bg:#0E1014; --panel:#15181E; --panel2:#1B1F26; --hover:#20242C; --line:#252932; --line2:#323743;
+  --fg:#F1EEE8; --mute:#A2A6AF; --dim:#727782; --accent:#FF6A2B; --accent-ink:#101217; --accent-soft:#3A2116;
+  --up:#41B883; --up-soft:#15291F; --slow:#E0A93B; --slow-soft:#2E2512; --down:#EF6A58; --down-soft:#341A17;
+  --blue:#6E9EF0; --blue-soft:#18243A; --violet:#A58BEB; --violet-soft:#241D38;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.25);
+  --side:#0A0B0E; --side-fg:#E9E6DF; --side-mute:#868A93; --side-hover:#15171C; --side-line:#1C1F25;
+  color-scheme:dark;
+}
+* { box-sizing:border-box }
+[hidden] { display:none !important }
+html, body { height:100% }
+body { margin:0; background:var(--bg); color:var(--fg); font:14px/1.5 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing:antialiased }
+button, input, select, textarea { font:inherit; color:inherit }
+a { color:inherit }
+h1, h2, h3, .num { font-family:'Space Grotesk', Inter, system-ui, sans-serif; letter-spacing:-.01em }
+:focus-visible { outline:2px solid var(--accent); outline-offset:2px; border-radius:6px }
 
-  .summary { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px; margin-bottom:24px }
-  .stat { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px }
-  .stat .num { font-size:30px; font-weight:600; line-height:1.1 }
-  .stat span { color:var(--mute); font-size:13px }
+/* ---------- shell ---------- */
+.app { display:grid; grid-template-columns:236px minmax(0,1fr); min-height:100vh }
+.side { background:var(--side); color:var(--side-fg); display:flex; flex-direction:column; position:sticky; top:0; height:100vh;
+  padding:18px 12px calc(14px + env(safe-area-inset-bottom,0px)) max(12px, env(safe-area-inset-left,0px)) }
+.brand { display:flex; align-items:center; gap:10px; padding:4px 8px 18px }
+.brand b { font-family:'Space Grotesk', sans-serif; font-size:16px; display:block; line-height:1.1 }
+.brand small { color:var(--side-mute); font-size:12px }
+.mark { width:32px; height:32px; border-radius:9px; background:#FF6A2B; display:grid; place-items:center; flex:none }
+.nav { display:flex; flex-direction:column; gap:2px }
+.nav a { display:flex; align-items:center; gap:11px; padding:9px 10px; border-radius:9px; text-decoration:none; color:var(--side-mute); font-weight:500 }
+.nav a:hover { background:var(--side-hover); color:var(--side-fg) }
+.nav a.on { background:var(--side-hover); color:var(--side-fg) }
+.nav a.on svg { color:#FF6A2B }
+.nav .count { margin-left:auto; font-size:11.5px; font-weight:600; color:var(--side-mute); background:var(--side-line); border-radius:999px; padding:1px 8px }
+.nav .count.alert { background:#C93C2B; color:#fff }
+.nav .count.good { background:#1F8F5F; color:#fff }
+.side .grow { flex:1 }
+.sidefoot { border-top:1px solid var(--side-line); padding-top:12px; display:flex; flex-direction:column; gap:4px }
+.sidefoot button { display:flex; align-items:center; gap:11px; padding:8px 10px; background:none; border:0; border-radius:9px; color:var(--side-mute); cursor:pointer; text-align:left }
+.sidefoot button:hover { background:var(--side-hover); color:var(--side-fg) }
+.synced { color:var(--side-mute); font-size:12px; padding:4px 10px 0 }
+.pulse { display:inline-block; width:7px; height:7px; border-radius:50%; background:#41B883; margin-right:6px; vertical-align:1px }
 
-  .grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px }
-  .card { background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px; display:flex; flex-direction:column; gap:16px; min-width:0 }
-  .top { display:flex; justify-content:space-between; align-items:flex-start; gap:12px }
-  .top h2 { margin:0; font-size:21px; font-weight:600 }
-  .top small { color:var(--mute) }
-  .pill { font-size:12px; font-weight:600; padding:4px 10px; border-radius:999px; background:var(--panel2); border:1px solid var(--line); white-space:nowrap }
-  .pill.won, .pill.live { border-color:var(--up); color:var(--up) }
-  .pill.meeting-set { border-color:var(--slow); color:var(--slow) }
-  .url { color:var(--mute); font-size:13px; word-break:break-all }
-  .url a { color:var(--mute) }
+.main { min-width:0; display:flex; flex-direction:column }
+.top { position:sticky; top:0; z-index:20; background:color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line); display:flex; align-items:center; gap:12px;
+  padding-block:14px; padding-left:28px; padding-right:max(28px, env(safe-area-inset-right,0px)) }
+.top h1 { font-size:21px; margin:0; font-weight:600 }
+.top .sub { color:var(--mute); font-size:13px }
+.top .spacer { flex:1 }
+.search { display:flex; align-items:center; gap:8px; background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:0 10px; width:260px; color:var(--dim) }
+.search input { border:0; background:none; outline:none; padding:8px 0; width:100%; color:var(--fg) }
+.iconbtn.menu-btn, .menu-btn { display:none }
+.content { padding-block:24px 64px; padding-left:28px; padding-right:max(28px, env(safe-area-inset-right,0px)); display:flex; flex-direction:column; gap:20px }
 
-  .sec { border-top:1px solid var(--line); padding-top:14px; display:flex; flex-direction:column; gap:10px }
-  .sec h3 { margin:0; font-size:13px; font-weight:600; color:var(--mute); letter-spacing:.02em }
-  .row { display:flex; gap:18px; flex-wrap:wrap; align-items:baseline }
-  .kv b { font-family:'Space Grotesk', Inter, sans-serif; font-size:20px; font-weight:600; display:block; line-height:1.2 }
-  .kv span { color:var(--mute); font-size:12.5px }
-  .state { display:inline-flex; align-items:center; gap:8px; font-weight:600 }
-  .dot { width:10px; height:10px; border-radius:50% }
-  .up .dot { background:var(--up) } .slow .dot { background:var(--slow) } .down .dot { background:var(--down) }
-  .note { color:var(--mute); font-size:13px; margin:0 }
-  .spark { display:block; width:100%; height:34px }
+/* ---------- controls ---------- */
+.btn { display:inline-flex; align-items:center; gap:7px; border-radius:9px; padding:8px 13px; border:1px solid var(--line); background:var(--panel); cursor:pointer; font-weight:600; font-size:13.5px; white-space:nowrap; text-decoration:none }
+.btn:hover { background:var(--hover) }
+.btn.primary { background:var(--accent); border-color:var(--accent); color:var(--accent-ink) }
+.btn.primary:hover { filter:brightness(1.05) }
+.btn.danger { color:var(--down); border-color:color-mix(in srgb, var(--down) 40%, var(--line)) }
+.btn.ghost { background:none; border-color:transparent }
+.btn.sm { padding:5px 9px; font-size:12.5px; border-radius:8px }
+.btn:disabled { opacity:.5; cursor:default }
+.iconbtn { width:34px; height:34px; display:grid; place-items:center; border-radius:9px; border:1px solid var(--line); background:var(--panel); cursor:pointer; flex:none }
+.iconbtn:hover { background:var(--hover) }
+.seg { display:inline-flex; background:var(--panel2); border-radius:10px; padding:3px; gap:2px; flex-wrap:wrap }
+.seg button { border:0; background:none; padding:6px 12px; border-radius:8px; cursor:pointer; color:var(--mute); font-weight:600; font-size:13px; display:inline-flex; gap:6px; align-items:center }
+.seg button.on { background:var(--panel); color:var(--fg); box-shadow:var(--shadow) }
+label.f { display:flex; flex-direction:column; gap:5px; font-size:12.5px; color:var(--mute); font-weight:500 }
+.f input, .f select, .f textarea { background:var(--panel); border:1px solid var(--line2); border-radius:9px; padding:9px 11px; color:var(--fg); font-size:14px; width:100% }
+.f textarea { min-height:90px; resize:vertical; line-height:1.45 }
+.f input:focus, .f select:focus, .f textarea:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft) }
+.check { display:flex; gap:9px; align-items:flex-start; font-size:13.5px; color:var(--fg) }
+.check input { margin-top:3px; accent-color:var(--accent) }
 
-  details.list summary { cursor:pointer; color:var(--fg); font-size:14px; list-style:none }
-  details.list summary::-webkit-details-marker { display:none }
-  details.list summary::after { content:" · show"; color:var(--mute) }
-  details.list[open] summary::after { content:" · hide" }
-  .checks { list-style:none; margin:8px 0 0; padding:0; display:flex; flex-direction:column; gap:6px; font-size:13.5px }
-  .checks li { display:grid; grid-template-columns:52px 1fr; gap:8px }
-  .ok { color:var(--up); font-weight:600 } .no { color:var(--down); font-weight:600 }
-  .checks em { color:var(--mute); font-style:normal; display:block }
+/* ---------- surfaces ---------- */
+.card { background:var(--panel); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); min-width:0 }
+.card > header { display:flex; align-items:center; gap:10px; padding:16px 18px 0; flex-wrap:wrap }
+.card > header h2 { font-size:15px; margin:0; font-weight:600 }
+.card > header .hint { color:var(--dim); font-size:12.5px }
+.card > header .r { margin-left:auto; display:flex; gap:8px; align-items:center }
+.card .body { padding:14px 18px 18px }
+.grid2 { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); gap:20px }
+.grid3 { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:20px }
 
-  .scores { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:8px }
-  .score { background:var(--panel2); border-radius:12px; padding:10px; text-align:center }
-  .score b { font-family:'Space Grotesk', Inter, sans-serif; font-size:24px; display:block }
-  .score span { font-size:12px; color:var(--mute) }
-  .g { color:var(--up) } .m { color:var(--slow) } .p { color:var(--down) }
+.kpis { display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); gap:12px }
+.kpi { padding:15px 16px; display:flex; flex-direction:column; gap:4px; position:relative; overflow:hidden }
+.kpi .label { color:var(--mute); font-size:12.5px; font-weight:500 }
+.kpi .num { font-size:25px; font-weight:600; line-height:1.15; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.kpi .meta { font-size:12px; color:var(--dim); display:flex; gap:6px; align-items:center; flex-wrap:wrap }
+.delta { font-weight:600; font-size:12px }
+.delta.pos { color:var(--up) } .delta.neg { color:var(--down) } .delta.flat { color:var(--dim) }
+.kpi svg.spark { position:absolute; right:10px; bottom:10px; width:70px; height:26px; opacity:.9 }
 
-  .bars { display:flex; gap:3px; align-items:flex-end; height:40px }
-  .bars i { flex:1; background:var(--accent); border-radius:2px 2px 0 0; min-height:2px; opacity:.85 }
-  .bars i.zero { background:var(--line) }
-  .recent { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px; font-size:13.5px }
-  .recent li { display:flex; gap:8px; min-width:0 }
-  .recent time { color:var(--mute); flex:none; width:74px }
-  .recent q { quotes:none; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0 }
-  .tag { font-size:11px; font-weight:600; padding:1px 7px; border-radius:999px; background:#1f8f4e; color:#fff; flex:none }
-  .err { color:var(--down) }
-  .empty { color:var(--mute) }
-  footer { color:var(--dim); font-size:13px; margin-top:28px; max-width:70ch }
+.pill { display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:600; padding:3px 9px; border-radius:999px; white-space:nowrap; background:var(--panel2); color:var(--mute) }
+.pill .d { width:7px; height:7px; border-radius:50%; background:currentColor }
+.pill.up { background:var(--up-soft); color:var(--up) } .pill.slow { background:var(--slow-soft); color:var(--slow) } .pill.down { background:var(--down-soft); color:var(--down) }
+.pill.blue { background:var(--blue-soft); color:var(--blue) } .pill.violet { background:var(--violet-soft); color:var(--violet) } .pill.accent { background:var(--accent-soft); color:var(--accent) }
+.st-Lead { background:var(--panel2); color:var(--mute) } .st-Concept { background:var(--violet-soft); color:var(--violet) } .st-Pitched { background:var(--blue-soft); color:var(--blue) }
+.st-Won { background:var(--up-soft); color:var(--up) } .st-Building { background:var(--slow-soft); color:var(--slow) } .st-Live { background:var(--accent-soft); color:var(--accent) } .st-Lost { background:var(--down-soft); color:var(--down) }
+.dot { width:8px; height:8px; border-radius:50%; display:inline-block; flex:none }
+.dot.up { background:var(--up) } .dot.slow { background:var(--slow) } .dot.down { background:var(--down) } .dot.none { background:var(--line2) }
 
-  @media (max-width:900px) { .grid { grid-template-columns:1fr } .summary { grid-template-columns:repeat(2, minmax(0,1fr)) } }
-  @media (max-width:420px) { .scores { grid-template-columns:repeat(2, minmax(0,1fr)) } }
+/* attention */
+.att { list-style:none; margin:0; padding:0; display:flex; flex-direction:column }
+.att li { display:grid; grid-template-columns:30px minmax(0,1fr) auto; gap:12px; align-items:center; padding:11px 0; border-top:1px solid var(--line) }
+.att li:first-child { border-top:0; padding-top:2px }
+.ic { width:30px; height:30px; border-radius:9px; display:grid; place-items:center; flex:none }
+.ic.high { background:var(--down-soft); color:var(--down) } .ic.mid { background:var(--slow-soft); color:var(--slow) } .ic.low { background:var(--blue-soft); color:var(--blue) } .ic.good { background:var(--up-soft); color:var(--up) }
+.att b { font-weight:600; display:block }
+.att span.s { color:var(--mute); font-size:13px }
+.allclear { display:flex; gap:12px; align-items:center; color:var(--mute); padding:8px 0 }
+
+/* feed */
+.feed { list-style:none; margin:0; padding:0; display:flex; flex-direction:column }
+.feed li { display:grid; grid-template-columns:22px minmax(0,1fr) auto; gap:10px; padding:9px 0; align-items:start; border-top:1px solid var(--line) }
+.feed li:first-child { border-top:0 }
+.feed .t { color:var(--dim); font-size:12px; white-space:nowrap }
+.feed .ty { width:22px; height:22px; border-radius:7px; display:grid; place-items:center; background:var(--panel2); color:var(--mute) }
+.feed .ty.alert { background:var(--down-soft); color:var(--down) } .feed .ty.stage { background:var(--up-soft); color:var(--up) } .feed .ty.note { background:var(--blue-soft); color:var(--blue) }
+.feed .who { color:var(--mute); font-size:12.5px }
+
+/* pipeline strip */
+.strip { display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); gap:8px }
+.strip button { text-align:left; background:var(--panel2); border:1px solid transparent; border-radius:11px; padding:11px 12px; cursor:pointer; display:flex; flex-direction:column; gap:2px; min-width:0 }
+.strip button:hover { border-color:var(--line2) }
+.strip .pill { align-self:flex-start }
+.strip .n { font-family:'Space Grotesk', sans-serif; font-size:22px; font-weight:600 }
+.strip .v { color:var(--mute); font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100% }
+.bar { height:4px; border-radius:4px; margin-top:6px }
+
+/* board */
+.board { display:grid; grid-auto-flow:column; grid-auto-columns:minmax(220px, 1fr); gap:14px; overflow-x:auto; padding-bottom:8px; align-items:start }
+.col { background:var(--panel2); border-radius:14px; padding:10px; display:flex; flex-direction:column; gap:8px; min-height:160px; border:1px dashed transparent }
+.col.over { border-color:var(--accent); background:var(--accent-soft) }
+.col h3 { margin:2px 4px 4px; font-size:13px; display:flex; align-items:center; gap:8px; font-family:Inter, sans-serif; font-weight:600 }
+.col h3 small { color:var(--dim); font-weight:500; margin-left:auto; white-space:nowrap }
+.deal { background:var(--panel); border:1px solid var(--line); border-radius:11px; padding:11px 12px; cursor:pointer; display:flex; flex-direction:column; gap:6px; box-shadow:0 1px 1px rgba(0,0,0,.03) }
+.deal:hover { border-color:var(--line2); box-shadow:var(--shadow) }
+.deal.dragging { opacity:.4 }
+.deal b { font-size:14px }
+.deal .sub { color:var(--mute); font-size:12.5px }
+.deal .row { display:flex; gap:8px; align-items:center; justify-content:space-between; font-size:12.5px }
+.deal .val { font-weight:600 }
+.emptycol { color:var(--dim); font-size:12.5px; padding:10px 6px; text-align:center }
+
+/* tables */
+.tablewrap { overflow-x:auto }
+table.t { width:100%; border-collapse:collapse; font-size:13.5px }
+.t th { text-align:left; font-weight:600; color:var(--mute); font-size:12px; padding:10px 14px; border-bottom:1px solid var(--line); white-space:nowrap; background:var(--panel) }
+.t td { padding:12px 14px; border-bottom:1px solid var(--line); vertical-align:middle }
+.t tr:last-child td { border-bottom:0 }
+.t tbody tr { cursor:pointer }
+.t tbody tr:hover td { background:var(--hover) }
+.t .host b { display:block; font-weight:600 }
+.t .host span { color:var(--mute); font-size:12.5px }
+.t .r { text-align:right }
+.nowrap { white-space:nowrap }
+.miniscore { font-family:'Space Grotesk', sans-serif; font-weight:600 }
+.g { color:var(--up) } .m { color:var(--slow) } .p { color:var(--down) } .muted { color:var(--dim) }
+svg.ups { width:90px; height:20px; display:block }
+
+/* chats */
+.inbox { display:grid; grid-template-columns:340px minmax(0,1fr); min-height:560px; overflow:hidden }
+.inbox .list { border-right:1px solid var(--line); display:flex; flex-direction:column; min-width:0 }
+.inbox .filters { display:flex; gap:8px; padding:12px; border-bottom:1px solid var(--line); flex-wrap:wrap; align-items:center }
+.inbox .items { overflow-y:auto; max-height:640px }
+.conv { display:flex; flex-direction:column; gap:3px; padding:12px 14px; border:0; border-bottom:1px solid var(--line); cursor:pointer; background:none; border-left:3px solid transparent; text-align:left; width:100% }
+.conv:hover { background:var(--hover) }
+.conv.on { background:var(--hover); border-left-color:var(--accent) }
+.conv .l1 { display:flex; gap:8px; align-items:center; font-size:12px; color:var(--dim) }
+.conv .l1 .grow { flex:1 }
+.conv .first { font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap }
+.thread { display:flex; flex-direction:column; min-width:0 }
+.thread header { padding:14px 18px; border-bottom:1px solid var(--line); display:flex; gap:10px; align-items:center; flex-wrap:wrap }
+.thread header b { font-size:15px }
+.msgs { padding:18px; display:flex; flex-direction:column; gap:10px; overflow-y:auto; max-height:620px }
+.msg { max-width:78%; padding:10px 13px; border-radius:14px; white-space:pre-line; word-wrap:break-word; font-size:14px }
+.msg.user { align-self:flex-end; background:var(--accent); color:var(--accent-ink); border-bottom-right-radius:5px }
+.msg.assistant { align-self:flex-start; background:var(--panel2); border-bottom-left-radius:5px }
+.msg small { display:block; margin-top:6px; font-size:11.5px; opacity:.8 }
+.placeholder { display:grid; place-items:center; color:var(--dim); padding:40px; text-align:center; min-height:300px }
+.placeholder p { max-width:34ch }
+
+/* drawer */
+.scrim { position:fixed; inset:0; background:rgba(10,11,14,.42); z-index:40; animation:fade .15s }
+.drawer { position:fixed; top:0; right:0; bottom:0; width:min(560px, 100vw); background:var(--bg); z-index:41; display:flex; flex-direction:column;
+  box-shadow:-20px 0 60px rgba(0,0,0,.25); animation:slide .2s ease-out; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px) }
+@keyframes slide { from { transform:translateX(30px); opacity:.4 } }
+@keyframes fade { from { opacity:0 } }
+.drawer > header { display:flex; align-items:flex-start; gap:12px; padding:20px 22px 14px; border-bottom:1px solid var(--line); background:var(--panel) }
+.drawer > header h2 { margin:0; font-size:20px; overflow-wrap:anywhere }
+.drawer > header .sub { color:var(--mute); font-size:13px }
+.drawer .tabs { display:flex; gap:4px; padding:0 22px; border-bottom:1px solid var(--line); background:var(--panel) }
+.drawer .tabs button { background:none; border:0; padding:11px 10px; cursor:pointer; color:var(--mute); font-weight:600; border-bottom:2px solid transparent; margin-bottom:-1px }
+.drawer .tabs button.on { color:var(--fg); border-bottom-color:var(--accent) }
+.drawer .dbody { flex:1; overflow-y:auto; padding:20px 22px; display:flex; flex-direction:column; gap:16px }
+.drawer footer { border-top:1px solid var(--line); padding:12px 22px; display:flex; gap:8px; align-items:center; background:var(--panel); flex-wrap:wrap }
+.drawer footer .grow { flex:1 }
+.form2 { display:grid; grid-template-columns:1fr 1fr; gap:12px }
+.form2 .wide { grid-column:1 / -1 }
+.quick { display:flex; gap:8px; flex-wrap:wrap }
+.sitecard { border:1px solid var(--line); border-radius:12px; padding:12px 14px; background:var(--panel); display:flex; flex-direction:column; gap:6px }
+.sitecard .row { display:flex; gap:10px; align-items:center; flex-wrap:wrap }
+.sitecard .row .grow { flex:1 }
+.stats { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:10px }
+.stat { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:11px 12px; min-width:0 }
+.stat .num { font-size:19px; font-weight:600; display:block; white-space:nowrap }
+.stat span { color:var(--mute); font-size:12px }
+.checks { list-style:none; margin:0; padding:0; display:flex; flex-direction:column }
+.checks li { display:grid; grid-template-columns:48px minmax(0,1fr); gap:10px; padding:8px 0; border-top:1px solid var(--line); font-size:13.5px }
+.checks li:first-child { border-top:0 }
+.checks em { display:block; color:var(--mute); font-style:normal; font-size:12.5px; overflow-wrap:anywhere }
+.ok { color:var(--up); font-weight:700 } .no { color:var(--down); font-weight:700 }
+.scores { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:10px }
+.ring { display:flex; flex-direction:column; align-items:center; gap:6px; background:var(--panel2); border-radius:12px; padding:12px 6px }
+.ring span { font-size:12px; color:var(--mute); text-align:center }
+.note { color:var(--mute); font-size:13px; margin:0 }
+.sect { font-size:12px; font-weight:600; color:var(--mute); margin:4px 0 -6px }
+.confirm { display:flex; gap:8px; align-items:center; background:var(--down-soft); color:var(--down); padding:8px 10px; border-radius:10px; font-size:13px; font-weight:600; flex-wrap:wrap }
+pre.code { white-space:pre-wrap; word-break:break-all; background:var(--panel2); padding:10px 12px; border-radius:9px; font-size:12.5px; margin:8px 0 0 }
+
+/* login + toast */
+.login { min-height:100vh; display:grid; place-items:center; padding:20px }
+.login .card { width:min(400px, 100%); padding:28px; display:flex; flex-direction:column; gap:14px }
+.login h1 { margin:6px 0 0; font-size:24px }
+.err { color:var(--down); font-size:13px; margin:0 }
+.toast { position:fixed; left:50%; bottom:calc(20px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); background:var(--fg); color:var(--bg); padding:10px 16px; border-radius:10px; font-weight:600; z-index:60; box-shadow:var(--shadow); animation:fade .2s; max-width:calc(100vw - 32px) }
+.loading { color:var(--mute); padding:40px 28px }
+.chart { width:100%; height:180px; display:block; margin-top:8px }
+.legend { display:flex; gap:14px; font-size:12px; color:var(--mute); flex-wrap:wrap }
+.legend i { display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:6px; vertical-align:-1px }
+
+/* responsive */
+@media (max-width:1280px) { .kpis { grid-template-columns:repeat(3, minmax(0,1fr)) } }
+@media (max-width:1080px) { .grid2, .grid3 { grid-template-columns:minmax(0,1fr) } .strip { grid-template-columns:repeat(3, minmax(0,1fr)) } }
+@media (max-width:860px) {
+  .app { grid-template-columns:minmax(0,1fr) }
+  .side { position:fixed; z-index:50; left:0; top:0; width:260px; transform:translateX(-100%); transition:transform .2s }
+  .side.open { transform:none; box-shadow:20px 0 60px rgba(0,0,0,.4) }
+  .iconbtn.menu-btn, .menu-btn { display:grid }
+  .top { padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px)); flex-wrap:wrap }
+  .search { order:5; width:100% }
+  .content { padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px)) }
+  .hide-sm { display:none !important }
+  .inbox { grid-template-columns:minmax(0,1fr) }
+  .inbox .list { border-right:0 }
+  .inbox.reading .list { display:none }
+  .inbox:not(.reading) .thread { display:none }
+}
+@media (max-width:560px) { .kpis { grid-template-columns:repeat(2, minmax(0,1fr)) !important } .strip { grid-template-columns:repeat(2, minmax(0,1fr)) } .stats, .scores { grid-template-columns:repeat(2, minmax(0,1fr)) } .form2 { grid-template-columns:1fr } .kpi svg.spark { display:none } .kpi .num { font-size:21px } }
+@media (prefers-reduced-motion:reduce) { * { animation:none !important; transition:none !important } }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <div>
-      <h1>Client dashboard</h1>
-      <p class="when" id="when">Arcwise Studios · site health, SEO and Front Desk</p>
+<div id="root"></div>
+<script type="module">
+import { html, render, useState, useEffect, useRef, useCallback } from 'https://unpkg.com/htm@3.1.1/preact/standalone.module.js';
+
+/* ---------- helpers ---------- */
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+  set(k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} },
+};
+const DAY = 86400000;
+const ago = t => {
+  if (!t) return 'never';
+  const s = (Date.now() - t) / 1000;
+  if (s < 60) return 'just now';
+  if (s < 3600) return Math.floor(s / 60) + 'm ago';
+  if (s < 86400) return Math.floor(s / 3600) + 'h ago';
+  if (s < 86400 * 30) return Math.floor(s / 86400) + 'd ago';
+  return new Date(t).toLocaleDateString();
+};
+const dateStr = t => t ? new Date(t).toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' }) : '–';
+function money(n, cur) {
+  if (n == null) return '–';
+  if (cur === 'IDR') {
+    if (n >= 1e9) return 'Rp ' + +(n / 1e9).toFixed(1) + ' M';
+    if (n >= 1e6) return 'Rp ' + +(n / 1e6).toFixed(1) + ' jt';
+    return 'Rp ' + n.toLocaleString('id-ID');
+  }
+  try { return new Intl.NumberFormat(undefined, { style: 'currency', currency: cur, maximumFractionDigits: 0 }).format(n); } catch (e) { return cur + ' ' + n; }
+}
+const sumBy = (list, f) => { const m = {}; list.forEach(x => { const v = f(x); if (v != null && v > 0) m[x.currency] = (m[x.currency] || 0) + v; }); return m; };
+const fmtSums = m => { const k = Object.keys(m).sort((a, b) => (a === 'IDR' ? -1 : b === 'IDR' ? 1 : 0)); return k.length ? k.map(c => money(m[c], c)).join(' · ') : '–'; };
+const grade = v => v == null ? 'muted' : v >= 90 ? 'g' : v >= 50 ? 'm' : 'p';
+const waLink = n => {
+  let d = String(n || '').replace(/[^\d+]/g, '');
+  if (!d) return null;
+  if (d.startsWith('+')) d = d.slice(1); else if (d.startsWith('0')) d = '62' + d.slice(1);
+  return 'https://wa.me/' + d.replace(/\D/g, '');
+};
+const PAYING = ['Won', 'Building', 'Live'];
+const OPEN = ['Lead', 'Concept', 'Pitched'];
+
+/* ---------- icons ---------- */
+const P = {
+  home: 'M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z',
+  users: 'M16 19v-1a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v1M9 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 19v-1a4 4 0 0 0-3-3.9M16 2.1a4 4 0 0 1 0 7.8',
+  globe: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20',
+  link: 'M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7',
+  chat: 'M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-6.4A8 8 0 1 1 21 12z',
+  pulse: 'M3 12h4l3-8 4 16 3-8h4',
+  plus: 'M12 5v14M5 12h14',
+  refresh: 'M21 12a9 9 0 1 1-2.6-6.4L21 8M21 3v5h-5',
+  search: 'M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.3-4.3',
+  x: 'M6 6l12 12M18 6 6 18',
+  ext: 'M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5',
+  sun: 'M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4',
+  moon: 'M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z',
+  lock: 'M5 11h14v10H5zM8 11V7a4 4 0 0 1 8 0v4',
+  trash: 'M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14',
+  bolt: 'M13 2 3 14h9l-1 8 10-12h-9z',
+  alert: 'M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z',
+  check: 'M20 6 9 17l-5-5',
+  menu: 'M3 6h18M3 12h18M3 18h18',
+  wa: 'M3 21l1.7-5A9 9 0 1 1 8 19.3z',
+  note: 'M4 4h16v12H8l-4 4z',
+  arrow: 'M5 12h14M13 6l6 6-6 6',
+  back: 'M19 12H5M11 18l-6-6 6-6',
+  board: 'M4 4h5v16H4zM10 4h5v10h-5zM16 4h4v13h-4z',
+  list: 'M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01',
+  clock: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 6v6l4 2',
+  edit: 'M12 20h9M16.5 3.5a2.1 2.1 0 1 1 3 3L7 19l-4 1 1-4z',
+};
+const I = ({ n, s = 18, w = 1.8 }) => html`<svg width=${s} height=${s} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=${w} stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d=${P[n]} /></svg>`;
+const Mark = () => html`<span class="mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#101217" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M4 18a8 8 0 0 1 16 0"/><circle cx="12" cy="18" r="1.6" fill="#101217" stroke="none"/></svg></span>`;
+
+/* ---------- api ---------- */
+function useApi(key) {
+  return useCallback(async (path, opts = {}) => {
+    const r = await fetch('/api/workspace' + path, {
+      method: opts.body ? 'POST' : 'GET',
+      headers: { 'x-inbox-key': key, ...(opts.body ? { 'content-type': 'application/json' } : {}) },
+      body: opts.body ? JSON.stringify(opts.body) : undefined,
+    });
+    const d = await r.json().catch(() => ({ error: 'server_error' }));
+    if (!r.ok || d.error) throw Object.assign(new Error(d.error || 'error'), { code: d.error, status: r.status });
+    return d;
+  }, [key]);
+}
+const ERR = {
+  wrong_password: 'Wrong password.', no_password_set: 'No password set. Add INBOX_PASSWORD in Vercel, then redeploy.',
+  no_store: 'Storage isn’t connected. Add Upstash Redis in Vercel Storage.', bad_url: 'That website address doesn’t look right.',
+  name_required: 'Give the client a name.', duplicate_url: 'That website is already in your workspace.', cannot_delete_own: 'Your own agency can’t be deleted.',
+  server_error: 'Something went wrong. Try again.',
+};
+const errText = e => ERR[e.code] || ERR[e.message] || 'Something went wrong. Try again.';
+
+/* ---------- small charts ---------- */
+function Spark({ values, color = 'var(--accent)' }) {
+  if (!values || values.length < 2 || !values.some(Boolean)) return null;
+  const max = Math.max(...values, 1), w = 70, h = 26;
+  const pts = values.map((v, i) => [i * (w / (values.length - 1)), h - 2 - (v / max) * (h - 4)]);
+  const d = 'M' + pts.map(p => p.map(n => n.toFixed(1)).join(',')).join('L');
+  return html`<svg class="spark" viewBox="0 0 ${w} ${h}" aria-hidden="true"><path d=${d + `L${w},${h}L0,${h}Z`} fill=${color} opacity=".12"/><path d=${d} fill="none" stroke=${color} stroke-width="1.6" stroke-linejoin="round"/></svg>`;
+}
+function Uptime({ history }) {
+  if (!history || !history.length) return html`<span class="muted">–</span>`;
+  const h = history.slice(-30), w = 90 / 30;
+  return html`<svg class="ups" viewBox="0 0 90 20" role="img" aria-label=${'Last ' + h.length + ' checks: ' + h.filter(x => x.s === 'down').length + ' down'}>
+    ${h.map((x, i) => html`<rect x=${(30 - h.length + i) * w + .5} y="2" width=${Math.max(w - 1, 1)} height="16" rx="1" fill=${x.s === 'down' ? 'var(--down)' : x.s === 'slow' ? 'var(--slow)' : 'var(--up)'} />`)}
+  </svg>`;
+}
+function Ring({ v, label }) {
+  const r = 22, c = 2 * Math.PI * r, col = v == null ? 'var(--line2)' : v >= 90 ? 'var(--up)' : v >= 50 ? 'var(--slow)' : 'var(--down)';
+  return html`<div class="ring"><svg width="56" height="56" viewBox="0 0 56 56" role="img" aria-label=${label + ': ' + (v == null ? 'not tested' : v + ' out of 100')}>
+    <circle cx="28" cy="28" r=${r} fill="none" stroke="var(--line)" stroke-width="5"/>
+    <circle cx="28" cy="28" r=${r} fill="none" stroke=${col} stroke-width="5" stroke-linecap="round" stroke-dasharray=${c} stroke-dashoffset=${v == null ? c : c * (1 - v / 100)} transform="rotate(-90 28 28)"/>
+    <text x="28" y="33" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="15" font-weight="600" fill="var(--fg)">${v == null ? '–' : v}</text>
+  </svg><span>${label}</span></div>`;
+}
+function ChatChart({ days }) {
+  if (!days || !days.length) return null;
+  const W = 600, H = 180, pad = 14, max = Math.max(4, ...days.map(d => d.chats));
+  const x = i => pad + i * ((W - pad * 2) / (days.length - 1)), y = v => H - pad - (v / max) * (H - pad * 2);
+  const line = days.map((d, i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ',' + y(d.chats).toFixed(1)).join('');
+  const bw = Math.max(3, (W - pad * 2) / days.length - 8);
+  return html`<svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label=${'Chats per day for 30 days: ' + days.reduce((n, d) => n + d.chats, 0) + ' chats, ' + days.reduce((n, d) => n + d.leads, 0) + ' leads'}>
+    ${[0, .5, 1].map(t => html`<line x1=${pad} x2=${W - pad} y1=${y(max * t)} y2=${y(max * t)} stroke="var(--line)" stroke-width="1" vector-effect="non-scaling-stroke"/>`)}
+    ${days.map((d, i) => d.leads ? html`<rect x=${x(i) - bw / 2} y=${y(d.leads)} width=${bw} height=${H - pad - y(d.leads)} rx="2" fill="var(--up)" opacity=".85"/>` : null)}
+    <path d=${line + `L${x(days.length - 1)},${H - pad}L${x(0)},${H - pad}Z`} fill="var(--accent)" opacity=".1"/>
+    <path d=${line} fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+  </svg>`;
+}
+
+/* ---------- derived data ---------- */
+function derive(d) {
+  const sites = d.sites, clients = d.clients;
+  const byClient = Object.fromEntries(clients.map(c => [c.id, c]));
+  const siteState = s => s && s.health ? s.health.state : 'none';
+  const desks = Object.values(d.desks || {});
+  const deskSum = k => desks.reduce((n, x) => n + (x[k] || 0), 0);
+  const days = Array.from({ length: 30 }, (_, i) => ({
+    chats: desks.reduce((n, x) => n + (x.days[i]?.chats || 0), 0), leads: desks.reduce((n, x) => n + (x.days[i]?.leads || 0), 0),
+  }));
+  const domainFor = s => d.domains.find(x => x.host === s.host);
+  const attention = [];
+  sites.forEach(s => {
+    const c = byClient[s.clientId], h = s.health;
+    if (!h) return;
+    if (h.state === 'down') attention.push({ sev: 'high', icon: 'alert', title: `${s.host} is down`, sub: `${c?.name} · ${h.error || 'error ' + h.status}`, go: { type: 'site', id: s.id } });
+    else if (h.state === 'slow') attention.push({ sev: 'mid', icon: 'clock', title: `${s.host} is slow`, sub: `${c?.name} · ${h.ms} ms to respond`, go: { type: 'site', id: s.id } });
+    if (s.indexable && h.state !== 'down' && !h.indexable) attention.push({ sev: 'high', icon: 'search', title: `${s.host} is hidden from Google`, sub: `${c?.name} · it should be visible`, go: { type: 'site', id: s.id } });
+    if (s.indexable && h.seo && h.state !== 'down' && h.seo.passed < 7) attention.push({ sev: 'mid', icon: 'search', title: `SEO setup needs work on ${s.host}`, sub: `${h.seo.passed} of ${h.seo.total} checks pass`, go: { type: 'site', id: s.id } });
+    if (s.frontDesk && h.state !== 'down' && !h.frontDeskInstalled && c && PAYING.includes(c.stage)) attention.push({ sev: 'low', icon: 'chat', title: `Front Desk isn’t on ${s.host} yet`, sub: `${c.name} · add the chat script`, go: { type: 'site', id: s.id } });
+  });
+  d.domains.forEach(x => {
+    if (x.kind === 'custom' && x.expires) {
+      const left = Math.round((x.expires - Date.now()) / DAY);
+      if (left < 45) attention.push({ sev: left < 14 ? 'high' : 'mid', icon: 'link', title: `${x.apex} renews in ${left} days`, sub: x.registrar || 'Check the registrar', go: { type: 'page', id: 'domains' } });
+    }
+  });
+  clients.filter(c => PAYING.includes(c.stage) && !c.internal && !c.sites.some(s => s.frontDesk)).forEach(c =>
+    attention.push({ sev: 'low', icon: 'bolt', title: `Offer Front Desk to ${c.name}`, sub: 'Paying client without the AI receptionist: an easy monthly add-on', go: { type: 'client', id: c.id } }));
+  clients.filter(c => ['Won', 'Pitched', 'Building'].includes(c.stage) && !c.contact?.whatsapp && !c.contact?.email).forEach(c =>
+    attention.push({ sev: 'low', icon: 'users', title: `Add contact details for ${c.name}`, sub: 'No WhatsApp or email saved', go: { type: 'client', id: c.id } }));
+  const order = { high: 0, mid: 1, low: 2 };
+  attention.sort((a, b) => order[a.sev] - order[b.sev]);
+  const live = sites.filter(s => s.health && s.health.state !== 'down');
+  return {
+    byClient, siteState, domainFor, attention, days,
+    up: sites.filter(s => siteState(s) === 'up' || siteState(s) === 'slow').length,
+    down: sites.filter(s => siteState(s) === 'down').length,
+    avgMs: live.length ? live.reduce((n, s) => n + s.health.ms, 0) / live.length : 0,
+    chats7: deskSum('chats7'), chatsPrev7: deskSum('chatsPrev7'), leads7: deskSum('leads7'), leadsPrev7: deskSum('leadsPrev7'),
+    chats30: deskSum('chats30'), leads30: deskSum('leads30'),
+    expiring: d.domains.filter(x => x.kind === 'custom' && x.expires && x.expires - Date.now() < 45 * DAY).length,
+    real: clients.filter(c => !c.internal),
+  };
+}
+const Delta = ({ now, prev }) => {
+  if (prev == null) return null;
+  const diff = now - prev;
+  if (!diff) return html`<span class="delta flat">same as last week</span>`;
+  return html`<span class=${'delta ' + (diff > 0 ? 'pos' : 'neg')}>${diff > 0 ? '+' : ''}${diff} vs last week</span>`;
+};
+
+/* ---------- pages ---------- */
+function Overview({ d, x, go, openSite, openClient }) {
+  const real = x.real;
+  const open = real.filter(c => OPEN.includes(c.stage)), paying = real.filter(c => PAYING.includes(c.stage));
+  const counts = d.stages.filter(s => s !== 'Lost').map(s => ({ s, list: real.filter(c => c.stage === s) }));
+  const maxN = Math.max(1, ...counts.map(c => c.list.length));
+  const stageColor = { Lead: 'var(--dim)', Concept: 'var(--violet)', Pitched: 'var(--blue)', Won: 'var(--up)', Building: 'var(--slow)', Live: 'var(--accent)' };
+  return html`
+    <section class="kpis" aria-label="Key numbers">
+      <div class="card kpi"><span class="label">Open pipeline</span><span class="num">${fmtSums(sumBy(open, c => c.value))}</span><span class="meta">${open.length} deals in progress</span></div>
+      <div class="card kpi"><span class="label">Won revenue</span><span class="num">${fmtSums(sumBy(paying, c => c.value))}</span><span class="meta">${paying.length} paying ${paying.length === 1 ? 'client' : 'clients'}</span></div>
+      <div class="card kpi"><span class="label">Monthly recurring</span><span class="num">${fmtSums(sumBy(paying, c => c.monthly))}</span><span class="meta">+ ${fmtSums(sumBy(open, c => c.monthly))} if open deals close</span></div>
+      <div class="card kpi"><span class="label">Websites online</span><span class="num">${x.up} / ${d.sites.length}</span><span class="meta">${x.down ? html`<span class="delta neg">${x.down} down</span>` : 'all responding'} · avg ${Math.round(x.avgMs)} ms</span></div>
+      <div class="card kpi"><span class="label">Front Desk chats, 7 days</span><span class="num">${x.chats7}</span><span class="meta"><${Delta} now=${x.chats7} prev=${x.chatsPrev7} /></span><${Spark} values=${x.days.slice(-14).map(v => v.chats)} /></div>
+      <div class="card kpi"><span class="label">WhatsApp leads, 7 days</span><span class="num">${x.leads7}</span><span class="meta"><${Delta} now=${x.leads7} prev=${x.leadsPrev7} /></span><${Spark} values=${x.days.slice(-14).map(v => v.leads)} color="var(--up)" /></div>
+    </section>
+
+    <div class="grid2">
+      <section class="card">
+        <header><h2>Needs attention</h2><span class="hint">${x.attention.length ? x.attention.length + (x.attention.length === 1 ? ' item' : ' items') : ''}</span></header>
+        <div class="body">
+          ${x.attention.length ? html`<ul class="att">${x.attention.slice(0, 8).map(a => html`
+            <li><span class=${'ic ' + a.sev}><${I} n=${a.icon} s="16" /></span>
+              <div><b>${a.title}</b><span class="s">${a.sub}</span></div>
+              <button class="btn sm" onClick=${() => a.go.type === 'site' ? openSite(a.go.id) : a.go.type === 'client' ? openClient(a.go.id) : go(a.go.id)}>Open</button></li>`)}</ul>`
+          : html`<div class="allclear"><span class="ic good"><${I} n="check" s="16" /></span>All sites are up and nothing needs you right now.</div>`}
+        </div>
+      </section>
+      <section class="card">
+        <header><h2>Front Desk, last 30 days</h2><span class="r"><button class="btn sm" onClick=${() => go('frontdesk')}>Open chats</button></span></header>
+        <div class="body">
+          <div class="legend"><span><i style="background:var(--accent)"></i>Chats ${x.chats30}</span><span><i style="background:var(--up)"></i>WhatsApp leads ${x.leads30}</span></div>
+          <${ChatChart} days=${x.days} />
+        </div>
+      </section>
     </div>
-    <div class="row" style="gap:8px">
-      <a class="btn ghost" href="/inbox">Open inbox</a>
-      <button type="button" id="refresh" hidden>Check again</button>
+
+    <section class="card">
+      <header><h2>Pipeline</h2><span class="hint">${real.length} clients</span><span class="r"><button class="btn sm" onClick=${() => go('clients')}>Open board</button></span></header>
+      <div class="body"><div class="strip">
+        ${counts.map(({ s, list }) => html`<button onClick=${() => go('clients')}>
+          <span class=${'pill st-' + s}>${s}</span><span class="n">${list.length}</span>
+          <span class="v">${fmtSums(sumBy(list, c => c.value))}</span>
+          <span class="bar" style=${`background:${stageColor[s]};width:${list.length ? Math.max(8, list.length / maxN * 100) : 3}%`}></span></button>`)}
+      </div></div>
+    </section>
+
+    <div class="grid2">
+      <section class="card">
+        <header><h2>Websites</h2><span class="r"><button class="btn sm" onClick=${() => go('websites')}>All websites</button></span></header>
+        <div class="tablewrap" style="margin-top:8px"><${SiteTable} x=${x} sites=${d.sites.slice(0, 6)} openSite=${openSite} compact /></div>
+      </section>
+      <section class="card">
+        <header><h2>Recent activity</h2><span class="r"><button class="btn sm" onClick=${() => go('activity')}>All activity</button></span></header>
+        <div class="body"><${Feed} items=${d.activity.slice(0, 8)} x=${x} /></div>
+      </section>
+    </div>`;
+}
+
+function Feed({ items, x }) {
+  if (!items.length) return html`<p class="note">Nothing yet. New clients, stage moves, notes and site alerts show up here.</p>`;
+  const icon = { alert: 'alert', stage: 'arrow', note: 'note', client: 'users', site: 'globe', system: 'bolt' };
+  return html`<ul class="feed">${items.map(a => html`<li>
+    <span class=${'ty ' + a.type}><${I} n=${icon[a.type] || 'note'} s="13" /></span>
+    <div>${a.text}${a.clientId && x.byClient[a.clientId] && a.type === 'note' ? html`<div class="who">${x.byClient[a.clientId].name}</div>` : null}</div>
+    <span class="t">${ago(a.t)}</span></li>`)}</ul>`;
+}
+
+function SiteTable({ x, sites, openSite, compact }) {
+  if (!sites.length) return html`<p class="note" style="padding:16px 18px">No websites match.</p>`;
+  return html`<table class="t"><thead><tr>
+    <th>Website</th><th>Status</th>${compact ? html`<th class="r">Response</th>` : html`<th class="r">Response</th><th>Uptime</th><th class="r">SEO</th><th class="r">Speed</th><th>Front Desk</th>`}<th class="r">Checked</th></tr></thead>
+    <tbody>${sites.map(s => {
+      const h = s.health, st = x.siteState(s);
+      return html`<tr onClick=${() => openSite(s.id)} tabindex="0" onKeyDown=${e => e.key === 'Enter' && openSite(s.id)}>
+        <td class="host"><b>${s.host}</b><span>${s.clientName} · ${s.label}</span></td>
+        <td><span class=${'pill ' + (st === 'none' ? '' : st)}><span class="d"></span>${st === 'up' ? 'Up' : st === 'slow' ? 'Slow' : st === 'down' ? 'Down' : 'Not checked'}</span></td>
+        <td class="r nowrap">${h && h.state !== 'down' ? h.ms + ' ms' : '–'}</td>
+        ${compact ? null : html`
+        <td><div style="display:flex;gap:8px;align-items:center"><${Uptime} history=${s.history} /><span class="muted nowrap">${s.uptime == null ? '' : s.uptime + '%'}</span></div></td>
+        <td class="r"><span class="miniscore">${h && h.seo && h.state !== 'down' ? h.seo.passed + '/' + h.seo.total : '–'}</span></td>
+        <td class="r"><span class=${'miniscore ' + grade(s.psi?.scores?.performance)}>${s.psi?.scores?.performance ?? '–'}</span></td>
+        <td>${s.frontDesk ? html`<span class=${'pill ' + (h?.frontDeskInstalled ? 'up' : 'slow')}>${h?.frontDeskInstalled ? 'Installed' : 'Not installed'}</span>` : html`<span class="muted">–</span>`}</td>`}
+        <td class="r nowrap muted">${h ? ago(h.checkedAt) : '–'}</td></tr>`;
+    })}</tbody></table>`;
+}
+
+function Clients({ d, x, q, openClient, saveStage, newClient }) {
+  const [view, setView] = useState(store.get('ws-clients-view') || 'board');
+  const [over, setOver] = useState(null);
+  const drag = useRef(null);
+  const list = x.real.filter(c => !q || (c.name + ' ' + c.business + ' ' + c.location + ' ' + c.notes).toLowerCase().includes(q));
+  const setV = v => { setView(v); store.set('ws-clients-view', v); };
+  const status = c => {
+    const st = c.sites.map(s => x.siteState(d.sites.find(y => y.id === s.id)));
+    return st.includes('down') ? 'down' : st.includes('slow') ? 'slow' : st.includes('up') ? 'up' : 'none';
+  };
+  return html`
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <div class="seg" aria-label="View"><button class=${view === 'board' ? 'on' : ''} onClick=${() => setV('board')}><${I} n="board" s="14" /> Board</button><button class=${view === 'table' ? 'on' : ''} onClick=${() => setV('table')}><${I} n="list" s="14" /> Table</button></div>
+      <span class="note hide-sm">${view === 'board' ? 'Drag a client card to another stage. On a phone, change the stage inside the client.' : ''}</span>
+      <span style="flex:1"></span>
+      <button class="btn primary" onClick=${newClient}><${I} n="plus" s="16" /> New client</button>
     </div>
-  </header>
+    ${view === 'board' ? html`<div class="board">${d.stages.map(stg => {
+      const col = list.filter(c => c.stage === stg);
+      return html`<div class=${'col' + (over === stg ? ' over' : '')}
+        onDragOver=${e => { e.preventDefault(); if (over !== stg) setOver(stg); }} onDragLeave=${e => { if (!e.currentTarget.contains(e.relatedTarget)) setOver(null); }}
+        onDrop=${e => { e.preventDefault(); setOver(null); const id = drag.current; drag.current = null; if (id) saveStage(id, stg); }}>
+        <h3><span class=${'pill st-' + stg}>${stg}</span><small>${col.length}${col.some(c => c.value) ? ' · ' + fmtSums(sumBy(col, c => c.value)) : ''}</small></h3>
+        ${col.length ? col.map(c => html`<div class="deal" draggable="true" tabindex="0"
+            onDragStart=${e => { drag.current = c.id; e.dataTransfer.effectAllowed = 'move'; try { e.dataTransfer.setData('text/plain', c.id); } catch (_) {} e.currentTarget.classList.add('dragging'); }}
+            onDragEnd=${e => e.currentTarget.classList.remove('dragging')}
+            onClick=${() => openClient(c.id)} onKeyDown=${e => e.key === 'Enter' && openClient(c.id)}>
+          <b>${c.name}</b><span class="sub">${[c.business, c.location].filter(Boolean).join(' · ') || '–'}</span>
+          <div class="row"><span class="val">${c.value ? money(c.value, c.currency) : html`<span class="muted">No value yet</span>`}${c.monthly ? html` <span class="muted">+ ${money(c.monthly, c.currency)}/mo</span>` : null}</span>
+            <span title=${'Websites: ' + status(c)}><span class=${'dot ' + status(c)}></span></span></div>
+          ${c.sites.some(s => s.frontDesk) ? html`<span class="pill accent" style="align-self:flex-start">Front Desk</span>` : null}
+        </div>`) : html`<div class="emptycol">Drop a client here</div>`}
+      </div>`;
+    })}</div>` : html`<section class="card"><div class="tablewrap"><table class="t"><thead><tr><th>Client</th><th>Stage</th><th class="r">Deal value</th><th class="r">Monthly</th><th>Websites</th><th>Contact</th></tr></thead>
+      <tbody>${list.map(c => html`<tr onClick=${() => openClient(c.id)} tabindex="0" onKeyDown=${e => e.key === 'Enter' && openClient(c.id)}>
+        <td class="host"><b>${c.name}</b><span>${[c.business, c.location].filter(Boolean).join(' · ')}</span></td>
+        <td><span class=${'pill st-' + c.stage}>${c.stage}</span></td>
+        <td class="r nowrap">${money(c.value, c.currency)}</td><td class="r nowrap">${c.monthly ? money(c.monthly, c.currency) : '–'}</td>
+        <td><span style="display:inline-flex;gap:6px;align-items:center"><span class=${'dot ' + status(c)}></span>${c.sites.length}</span></td>
+        <td class="muted">${c.contact?.whatsapp || c.contact?.email || '–'}</td></tr>`)}</tbody></table></div></section>`}`;
+}
 
-  <form class="login" id="login">
-    <input id="pw" type="password" placeholder="Dashboard password (same as the inbox)" autocomplete="current-password" aria-label="Dashboard password">
-    <button type="submit">Open</button>
-  </form>
+function Websites({ d, x, q, openSite, addSite }) {
+  const [f, setF] = useState('all');
+  const issues = s => ['down', 'slow'].includes(x.siteState(s));
+  let list = d.sites.filter(s => !q || (s.host + ' ' + s.clientName + ' ' + s.label).toLowerCase().includes(q));
+  if (f === 'up') list = list.filter(s => x.siteState(s) === 'up');
+  if (f === 'issues') list = list.filter(issues);
+  if (f === 'desk') list = list.filter(s => s.frontDesk);
+  return html`
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <div class="seg">${[['all', 'All ' + d.sites.length], ['up', 'Up ' + d.sites.filter(s => x.siteState(s) === 'up').length], ['issues', 'Issues ' + d.sites.filter(issues).length], ['desk', 'With Front Desk ' + d.sites.filter(s => s.frontDesk).length]].map(([k, l]) => html`<button class=${f === k ? 'on' : ''} onClick=${() => setF(k)}>${l}</button>`)}</div>
+      <span style="flex:1"></span>
+      <button class="btn primary" onClick=${() => addSite()}><${I} n="plus" s="16" /> Add website</button>
+    </div>
+    <section class="card"><div class="tablewrap"><${SiteTable} x=${x} sites=${list} openSite=${openSite} /></div></section>
+    <p class="note">Every website is checked when you open the workstation (at most every 15 minutes) and once a day automatically. Speed scores come from Google’s own test: open a website to run it.</p>`;
+}
 
-  <div id="out"></div>
+function Domains({ d, x, q, openSite }) {
+  const rows = d.sites.filter(s => !q || (s.host + ' ' + s.clientName).toLowerCase().includes(q)).map(s => ({ s, dm: x.domainFor(s) || { kind: 'vercel' } }));
+  const custom = rows.filter(r => r.dm.kind === 'custom').length;
+  return html`
+    <div class="grid3">
+      <div class="card kpi"><span class="label">Domains</span><span class="num">${rows.length}</span><span class="meta">${custom} custom · ${rows.length - custom} free addresses</span></div>
+      <div class="card kpi"><span class="label">Renewing within 45 days</span><span class="num">${x.expiring}</span><span class="meta">${x.expiring ? 'renew before they lapse' : 'nothing due'}</span></div>
+      <div class="card kpi"><span class="label">Secure and reachable</span><span class="num">${rows.filter(r => r.s.health && r.s.health.state !== 'down' && r.s.url.startsWith('https')).length} / ${rows.length}</span><span class="meta">answering over https</span></div>
+    </div>
+    <section class="card"><div class="tablewrap"><table class="t"><thead><tr><th>Domain</th><th>Client</th><th>Type</th><th>Registrar</th><th>Registered</th><th>Expires</th><th>Status</th></tr></thead>
+      <tbody>${rows.map(({ s, dm }) => {
+        const left = dm.expires ? Math.round((dm.expires - Date.now()) / DAY) : null, st = x.siteState(s);
+        return html`<tr onClick=${() => openSite(s.id)} tabindex="0" onKeyDown=${e => e.key === 'Enter' && openSite(s.id)}>
+          <td class="host"><b>${s.host}</b><span>${dm.kind === 'custom' ? dm.apex : 'Free address on Vercel'}</span></td>
+          <td class="nowrap">${s.clientName}</td>
+          <td>${dm.kind === 'custom' ? html`<span class="pill blue">Custom</span>` : html`<span class="pill">Vercel subdomain</span>`}</td>
+          <td class="muted">${dm.kind === 'custom' ? dm.registrar || (dm.error ? 'Lookup failed' : '–') : 'Not needed'}</td>
+          <td class="nowrap muted">${dm.kind === 'custom' ? dateStr(dm.registered) : '–'}</td>
+          <td class="nowrap">${dm.kind !== 'custom' ? html`<span class="muted">Never expires</span>` : left == null ? html`<span class="muted">Unknown</span>` :
+            html`${dateStr(dm.expires)} <span class=${'pill ' + (left < 14 ? 'down' : left < 45 ? 'slow' : 'up')}>${left} days</span>`}</td>
+          <td><span class=${'pill ' + (st === 'none' ? '' : st)}><span class="d"></span>${st === 'down' ? 'Not reachable' : st === 'none' ? 'Not checked' : 'Live, https'}</span></td></tr>`;
+      })}</tbody></table></div></section>
+    <section class="card"><header><h2>Moving a client to their own domain</h2></header><div class="body"><p class="note">Free vercel.app addresses never expire, but a client’s own name looks more professional and is what Google ranks. When a client pays: buy the domain in their name, connect it in Vercel (Project → Domains), then add it here with “Add website”. Custom domains show their registrar and expiry date automatically, and you’re warned 45 days before renewal.</p></div></section>`;
+}
 
-  <footer>
-    Health is checked every time you open this page and once a day automatically. The SEO checklist reads each page’s setup; the speed test uses Google PageSpeed Insights on mobile.
-    Concept links are hidden from Google on purpose, so they have no Google ranking yet. Real rankings start once a site is on the client’s own domain and connected to Google Search Console.
-  </footer>
-</div>
+function FrontDesk({ d, api, q, toast }) {
+  const [desk, setDesk] = useState(Object.keys(d.desks || {})[0] || d.frontDeskClients[0]?.id);
+  const [f, setF] = useState('all');
+  const [convs, setConvs] = useState(null);
+  const [sel, setSel] = useState(null);
+  useEffect(() => {
+    if (!desk) return; setConvs(null); setSel(null);
+    api('?view=chats&desk=' + encodeURIComponent(desk)).then(r => setConvs(r.conversations)).catch(e => { setConvs([]); toast(errText(e)); });
+  }, [desk]);
+  const cur = d.desks?.[desk];
+  let list = (convs || []).filter(c => f === 'all' || c.lead);
+  if (q) list = list.filter(c => c.messages.some(m => m.text.toLowerCase().includes(q)));
+  const conv = list.find(c => c.sid === sel);
+  const users = c => c.messages.filter(m => m.role === 'user');
+  const siteFor = d.sites.find(s => s.frontDesk === desk);
+  return html`
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <div class="seg" aria-label="Front Desk">${d.frontDeskClients.map(c => html`<button class=${desk === c.id ? 'on' : ''} onClick=${() => setDesk(c.id)}>${c.name}${d.desks?.[c.id]?.leads7 ? html`<span class="pill up" style="padding:0 6px">${d.desks[c.id].leads7}</span>` : null}</button>`)}</div>
+      <span style="flex:1"></span>
+      ${siteFor ? html`<span class=${'pill ' + (siteFor.health?.frontDeskInstalled ? 'up' : 'slow')}>${siteFor.health?.frontDeskInstalled ? 'Live on ' + siteFor.host : 'Demo only, not on ' + siteFor.host + ' yet'}</span>` : null}
+    </div>
+    <section class="kpis" style="grid-template-columns:repeat(5,minmax(0,1fr))">
+      <div class="card kpi"><span class="label">Chats, 7 days</span><span class="num">${cur?.chats7 ?? 0}</span><span class="meta"><${Delta} now=${cur?.chats7 || 0} prev=${cur?.chatsPrev7} /></span></div>
+      <div class="card kpi"><span class="label">WhatsApp leads, 7 days</span><span class="num">${cur?.leads7 ?? 0}</span><span class="meta"><${Delta} now=${cur?.leads7 || 0} prev=${cur?.leadsPrev7} /></span></div>
+      <div class="card kpi"><span class="label">Chat to lead, 30 days</span><span class="num">${cur?.leadRate30 == null ? '–' : cur.leadRate30 + '%'}</span><span class="meta">${cur?.leads30 || 0} of ${cur?.chats30 || 0} chats</span></div>
+      <div class="card kpi"><span class="label">Messages per chat</span><span class="num">${cur?.avgMessages30 ?? '–'}</span><span class="meta">average, 30 days</span></div>
+      <div class="card kpi"><span class="label">Answered by AI</span><span class="num">${cur?.aiShare == null ? '–' : cur.aiShare + '%'}</span><span class="meta">rest from built-in answers</span></div>
+    </section>
+    <section class=${'card inbox' + (conv ? ' reading' : '')}>
+      <div class="list">
+        <div class="filters">
+          <div class="seg"><button class=${f === 'all' ? 'on' : ''} onClick=${() => setF('all')}>All chats</button><button class=${f === 'leads' ? 'on' : ''} onClick=${() => setF('leads')}>Leads only</button></div>
+          <span class="note">${convs ? list.length + ' shown' : ''}</span>
+        </div>
+        <div class="items">
+          ${convs == null ? html`<p class="note" style="padding:16px">Loading chats…</p>` : !list.length ? html`<p class="note" style="padding:16px">${f === 'leads' ? 'No leads yet.' : 'No chats yet. They appear the moment someone uses the chat.'}</p>` :
+            list.map(c => html`<button class=${'conv' + (c.sid === sel ? ' on' : '')} onClick=${() => setSel(c.sid)}>
+              <span class="l1"><span>${ago(c.updated)}</span><span class="grow"></span>${c.country ? html`<span>${c.country}</span>` : null}<span>${users(c).length} ${users(c).length === 1 ? 'message' : 'messages'}</span>${c.lead ? html`<span class="pill up" style="padding:1px 7px">Lead</span>` : null}</span>
+              <span class="first">${users(c)[0]?.text || '(no message)'}</span></button>`)}
+        </div>
+      </div>
+      <div class="thread">
+        ${conv ? html`
+          <header><button class="iconbtn menu-btn" onClick=${() => setSel(null)} aria-label="Back to chats"><${I} n="back" s="16" /></button>
+            <b>${new Date(conv.updated).toLocaleString()}</b>
+            ${conv.lead ? html`<span class="pill up">Got the WhatsApp button</span>` : html`<span class="pill">Browsed only</span>`}
+            <span class="note">${[conv.country, conv.page].filter(Boolean).join(' · ')}</span></header>
+          <div class="msgs">${conv.messages.map(m => html`<div class=${'msg ' + m.role}>${m.text}${m.actions && m.actions.length ? html`<small>Button shown: ${m.actions.join(', ')}</small>` : null}</div>`)}</div>`
+        : html`<div class="placeholder"><div><${I} n="chat" s="28" /><p>Pick a chat to read it. Visitors who tap the WhatsApp button message you directly on WhatsApp.</p></div></div>`}
+      </div>
+    </section>`;
+}
 
-<script>
-(function () {
-  var pw = document.getElementById('pw'), out = document.getElementById('out'), refresh = document.getElementById('refresh');
-  var data = null;
-  try { pw.value = localStorage.getItem('fd-inbox-pw') || ''; } catch (e) {}
+function Activity({ d, x, q }) {
+  const [f, setF] = useState('all');
+  let list = d.activity.filter(a => f === 'all' || a.type === f || (f === 'site' && a.type === 'alert'));
+  if (q) list = list.filter(a => a.text.toLowerCase().includes(q));
+  const groups = {};
+  list.forEach(a => { const k = new Date(a.t).toDateString(); (groups[k] = groups[k] || []).push(a); });
+  const label = k => k === new Date().toDateString() ? 'Today' : k === new Date(Date.now() - DAY).toDateString() ? 'Yesterday' : new Date(k).toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long' });
+  return html`
+    <div class="seg">${[['all', 'Everything'], ['note', 'Notes'], ['stage', 'Stage moves'], ['site', 'Websites'], ['client', 'Clients']].map(([k, l]) => html`<button class=${f === k ? 'on' : ''} onClick=${() => setF(k)}>${l}</button>`)}</div>
+    ${Object.keys(groups).length ? Object.entries(groups).map(([day, items]) => html`<section class="card"><header><h2>${label(day)}</h2><span class="hint">${items.length}</span></header><div class="body"><${Feed} items=${items} x=${x} /></div></section>`)
+      : html`<p class="note">Nothing here yet.</p>`}`;
+}
 
-  var ERRORS = {
-    wrong_password: 'Wrong password.',
-    no_password_set: 'No password set yet. Add INBOX_PASSWORD in Vercel settings, then redeploy.',
-    no_store: 'Storage isn’t connected. Add Upstash Redis in Vercel Storage, then redeploy.',
+/* ---------- drawers ---------- */
+function ClientDrawer({ d, x, client, api, close, refresh, toast, openSite, addSite }) {
+  const isNew = !client;
+  const [tab, setTab] = useState('details');
+  const blank = { name: '', business: '', location: '', stage: 'Lead', value: '', monthly: '', currency: 'IDR', notes: '', contact: { name: '', whatsapp: '', email: '', instagram: '' }, sites: [] };
+  const [f, setF] = useState(() => client ? JSON.parse(JSON.stringify(client)) : blank);
+  const [busy, setBusy] = useState(false);
+  const [confirm, setConfirm] = useState(false);
+  const [note, setNote] = useState('');
+  const set = (k, v) => setF(o => ({ ...o, [k]: v }));
+  const setC = (k, v) => setF(o => ({ ...o, contact: { ...o.contact, [k]: v } }));
+  const save = async () => {
+    setBusy(true);
+    try {
+      const r = await api('', { body: { action: 'saveClient', client: { ...f, sites: undefined, stageChangedFrom: client?.stage } } });
+      toast(isNew ? 'Client added' : 'Saved'); await refresh(); if (isNew) close(r.client.id);
+    } catch (e) { toast(errText(e)); } finally { setBusy(false); }
+  };
+  const del = async () => { setBusy(true); try { await api('', { body: { action: 'deleteClient', id: client.id } }); toast('Client removed'); close(); refresh(); } catch (e) { toast(errText(e)); setBusy(false); } };
+  const addNote = async () => { if (!note.trim()) return; try { await api('', { body: { action: 'note', clientId: client.id, text: note } }); setNote(''); toast('Note added'); refresh(); } catch (e) { toast(errText(e)); } };
+  const sites = client ? d.sites.filter(s => s.clientId === client.id) : [];
+  const timeline = client ? d.activity.filter(a => a.clientId === client.id) : [];
+  const wa = waLink(f.contact.whatsapp);
+  return html`<div class="scrim" onClick=${() => close()}></div>
+  <aside class="drawer" role="dialog" aria-modal="true" aria-label=${isNew ? 'New client' : client.name}>
+    <header><div style="flex:1;min-width:0"><h2>${isNew ? 'New client' : client.name}</h2><div class="sub">${isNew ? 'Add a business you’re talking to' : [client.business, client.location].filter(Boolean).join(' · ')}</div></div>
+      ${!isNew ? html`<span class=${'pill st-' + client.stage}>${client.stage}</span>` : null}
+      <button class="iconbtn" onClick=${() => close()} aria-label="Close"><${I} n="x" s="16" /></button></header>
+    ${!isNew ? html`<nav class="tabs">${[['details', 'Details'], ['sites', 'Websites ' + sites.length], ['timeline', 'Timeline ' + timeline.length]].map(([k, l]) => html`<button class=${tab === k ? 'on' : ''} onClick=${() => setTab(k)}>${l}</button>`)}</nav>` : null}
+    <div class="dbody">
+      ${tab === 'details' ? html`
+        ${!isNew && (wa || f.contact.email || f.contact.instagram || sites[0]) ? html`<div class="quick">
+          ${wa ? html`<a class="btn" href=${wa} target="_blank" rel="noopener"><${I} n="wa" s="15" /> WhatsApp</a>` : null}
+          ${f.contact.email ? html`<a class="btn" href=${'mailto:' + f.contact.email}>Email</a>` : null}
+          ${f.contact.instagram ? html`<a class="btn" href=${'https://instagram.com/' + f.contact.instagram.replace(/^@/, '')} target="_blank" rel="noopener">Instagram</a>` : null}
+          ${sites[0] ? html`<a class="btn" href=${sites[0].url} target="_blank" rel="noopener"><${I} n="ext" s="14" /> Website</a>` : null}</div>` : null}
+        <div class="form2">
+          <label class="f wide">Business name<input value=${f.name} onInput=${e => set('name', e.target.value)} placeholder="e.g. Gentology Barbershop" /></label>
+          <label class="f">What they do<input value=${f.business} onInput=${e => set('business', e.target.value)} placeholder="Barbershop, 3 branches" /></label>
+          <label class="f">Location<input value=${f.location} onInput=${e => set('location', e.target.value)} placeholder="Jakarta" /></label>
+          <label class="f">Stage<select value=${f.stage} onChange=${e => set('stage', e.target.value)}>${d.stages.map(s => html`<option value=${s}>${s}</option>`)}</select></label>
+          <label class="f">Currency<select value=${f.currency} onChange=${e => set('currency', e.target.value)}>${['IDR', 'MYR', 'SGD', 'USD', 'EUR', 'GBP', 'PKR'].map(c => html`<option value=${c}>${c}</option>`)}</select></label>
+          <label class="f">Deal value (one-off)<input inputmode="numeric" value=${f.value ?? ''} onInput=${e => set('value', e.target.value)} placeholder="3000000" /></label>
+          <label class="f">Monthly fee<input inputmode="numeric" value=${f.monthly ?? ''} onInput=${e => set('monthly', e.target.value)} placeholder="Front Desk, hosting, care" /></label>
+        </div>
+        <p class="sect">Contact</p>
+        <div class="form2">
+          <label class="f">Contact person<input value=${f.contact.name} onInput=${e => setC('name', e.target.value)} /></label>
+          <label class="f">WhatsApp<input value=${f.contact.whatsapp} onInput=${e => setC('whatsapp', e.target.value)} placeholder="+62 812…" inputmode="tel" /></label>
+          <label class="f">Email<input type="email" value=${f.contact.email} onInput=${e => setC('email', e.target.value)} /></label>
+          <label class="f">Instagram<input value=${f.contact.instagram} onInput=${e => setC('instagram', e.target.value)} placeholder="@handle" /></label>
+          <label class="f wide">Notes<textarea value=${f.notes} onInput=${e => set('notes', e.target.value)} placeholder="What they want, what you quoted, the next step…"></textarea></label>
+        </div>
+        ${isNew ? html`<p class="note">Add their websites after saving, from the Websites tab.</p>` : null}` : null}
+      ${tab === 'sites' ? html`
+        ${sites.length ? sites.map(s => html`<div class="sitecard"><div class="row">
+          <span class=${'dot ' + x.siteState(s)}></span><b>${s.host}</b><span class="muted">${s.label}</span><span class="grow"></span>
+          <button class="btn sm" onClick=${() => openSite(s.id)}>Details</button></div>
+          <div class="row note">${s.health ? (s.health.state === 'down' ? 'Down' : s.health.ms + ' ms') : 'Not checked yet'} · uptime ${s.uptime == null ? '–' : s.uptime + '%'} · SEO ${s.health?.seo && s.health.state !== 'down' ? s.health.seo.passed + '/' + s.health.seo.total : '–'}${s.frontDesk ? ' · Front Desk' : ''}</div></div>`)
+          : html`<p class="note">No websites yet for this client.</p>`}
+        <button class="btn" style="align-self:flex-start" onClick=${() => addSite(client.id)}><${I} n="plus" s="15" /> Add a website</button>` : null}
+      ${tab === 'timeline' ? html`
+        <label class="f">Add a note<textarea value=${note} onInput=${e => setNote(e.target.value)} placeholder="Called the owner, sending the quote on Friday…"></textarea></label>
+        <button class="btn primary" style="align-self:flex-start" onClick=${addNote} disabled=${!note.trim()}>Add note</button>
+        <${Feed} items=${timeline} x=${x} />` : null}
+    </div>
+    ${tab === 'details' ? html`<footer>
+      ${!isNew && !client.internal ? (confirm ? html`<span class="confirm">Delete ${client.name} and its websites? <button class="btn sm danger" onClick=${del} disabled=${busy}>Delete</button><button class="btn sm" onClick=${() => setConfirm(false)}>Keep</button></span>`
+        : html`<button class="btn ghost danger" onClick=${() => setConfirm(true)}><${I} n="trash" s="15" /> Delete</button>`) : null}
+      <span class="grow"></span>
+      <button class="btn" onClick=${() => close()}>Cancel</button>
+      <button class="btn primary" onClick=${save} disabled=${busy || !f.name.trim()}>${isNew ? 'Add client' : 'Save changes'}</button></footer>` : null}
+  </aside>`;
+}
+
+function SiteDrawer({ d, x, site, clientId, api, close, refresh, toast }) {
+  const isNew = !site;
+  const [edit, setEdit] = useState(isNew);
+  const [f, setF] = useState(() => site ? { ...site, frontDesk: site.frontDesk || '' } : { url: '', label: 'Website', frontDesk: '', indexable: false, clientId: clientId || x.real[0]?.id || d.clients[0]?.id });
+  const [busy, setBusy] = useState(false);
+  const [confirm, setConfirm] = useState(false);
+  const [psiBusy, setPsiBusy] = useState(false);
+  const [psiMsg, setPsiMsg] = useState('');
+  const set = (k, v) => setF(o => ({ ...o, [k]: v }));
+  const owner = site ? site.clientId : f.clientId;
+  const save = async () => {
+    setBusy(true);
+    try { await api('', { body: { action: 'saveSite', clientId: owner, site: { id: site?.id, url: f.url, label: f.label, frontDesk: f.frontDesk || null, indexable: f.indexable } } });
+      toast(isNew ? 'Website added and checked' : 'Saved'); await refresh(); if (isNew) close(); else setEdit(false); }
+    catch (e) { toast(errText(e)); } finally { setBusy(false); }
+  };
+  const remove = async () => { setBusy(true); try { await api('', { body: { action: 'removeSite', clientId: owner, siteId: site.id } }); toast('Website removed'); close(); refresh(); } catch (e) { toast(errText(e)); setBusy(false); } };
+  const runPsi = async () => {
+    setPsiBusy(true); setPsiMsg('Running Google’s speed test on mobile. This takes about 30 seconds.');
+    try {
+      const q = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed?strategy=mobile&url=' + encodeURIComponent(site.url) + '&category=performance&category=seo&category=accessibility&category=best-practices';
+      const j = await (await fetch(q)).json();
+      const c = j.lighthouseResult?.categories;
+      if (!c) throw new Error(j.error?.message || 'no result');
+      const sc = k => c[k]?.score != null ? Math.round(c[k].score * 100) : null;
+      await api('', { body: { action: 'psi', siteId: site.id, scores: { performance: sc('performance'), seo: sc('seo'), accessibility: sc('accessibility'), bestPractices: sc('best-practices') }, lcp: j.lighthouseResult.audits?.['largest-contentful-paint']?.numericValue } });
+      setPsiMsg(''); toast('Speed test saved'); refresh();
+    } catch (e) { setPsiMsg(/quota|rate|429/i.test(String(e.message)) ? 'Google’s free test is busy. Try again in a minute.' : 'The test didn’t finish. Try again.'); }
+    finally { setPsiBusy(false); }
+  };
+  const h = site?.health, dm = site ? x.domainFor(site) : null, psi = site?.psi;
+  const snippet = site?.frontDesk ? `<script src="https://arcwise-front-desk.vercel.app/widget.js" data-client="${site.frontDesk}" defer></` + `script>` : '';
+  return html`<div class="scrim" onClick=${() => close()}></div>
+  <aside class="drawer" role="dialog" aria-modal="true" aria-label=${isNew ? 'Add website' : site.host}>
+    <header><div style="flex:1;min-width:0"><h2>${isNew ? 'Add website' : site.host}</h2><div class="sub">${isNew ? 'It’s checked straight away, then every day' : site.clientName + ' · ' + site.label}</div></div>
+      ${!isNew && h ? html`<span class=${'pill ' + h.state}><span class="d"></span>${h.state === 'up' ? 'Up' : h.state === 'slow' ? 'Slow' : 'Down'}</span>` : null}
+      <button class="iconbtn" onClick=${() => close()} aria-label="Close"><${I} n="x" s="16" /></button></header>
+    <div class="dbody">
+      ${edit ? html`<div class="form2">
+          ${isNew ? html`<label class="f wide">Client<select value=${f.clientId} onChange=${e => set('clientId', e.target.value)}>${d.clients.map(c => html`<option value=${c.id}>${c.name}</option>`)}</select></label>` : null}
+          <label class="f wide">Website address<input value=${f.url} onInput=${e => set('url', e.target.value)} placeholder="https://clientname.com" inputmode="url" autocapitalize="off" /></label>
+          <label class="f">Label<input value=${f.label} onInput=${e => set('label', e.target.value)} placeholder="Website, Concept site, Shop" /></label>
+          <label class="f">Front Desk chat<select value=${f.frontDesk || ''} onChange=${e => set('frontDesk', e.target.value)}><option value="">None</option>${d.frontDeskClients.map(c => html`<option value=${c.id}>${c.name}</option>`)}</select></label>
+          <label class="check wide"><input type="checkbox" checked=${f.indexable} onChange=${e => set('indexable', e.target.checked)} /><span>This site should be on Google<br/><span class="muted">Leave it off for concept links you keep hidden. When on, you’re warned if the site gets hidden by mistake.</span></span></label>
+        </div>` : html`
+        <div class="quick"><a class="btn" href=${site.url} target="_blank" rel="noopener"><${I} n="ext" s="14" /> Open site</a><button class="btn" onClick=${() => setEdit(true)}><${I} n="edit" s="14" /> Edit</button></div>
+        <div class="stats">
+          <div class="stat"><span class="num">${h && h.state !== 'down' ? h.ms + ' ms' : '–'}</span><span>response time</span></div>
+          <div class="stat"><span class="num">${site.uptime == null ? '–' : site.uptime + '%'}</span><span>uptime, ${site.checks} checks</span></div>
+          <div class="stat"><span class="num">${h ? h.sizeKb + ' KB' : '–'}</span><span>page size</span></div>
+          <div class="stat"><span class="num">${h ? ago(h.checkedAt) : '–'}</span><span>last checked</span></div>
+        </div>
+        <section class="card"><header><h2>Uptime history</h2><span class="hint">last ${Math.min(30, site.history.length)} checks</span></header><div class="body"><${Uptime} history=${site.history} /></div></section>
+        <section class="card"><header><h2>Google speed test</h2><span class="hint">${psi ? 'mobile · ' + ago(psi.at) : 'not run yet'}</span><span class="r"><button class="btn sm" onClick=${runPsi} disabled=${psiBusy}><${I} n="bolt" s="14" /> ${psiBusy ? 'Testing…' : psi ? 'Run again' : 'Run test'}</button></span></header>
+          <div class="body"><div class="scores"><${Ring} v=${psi?.scores?.performance} label="Speed" /><${Ring} v=${psi?.scores?.seo} label="SEO" /><${Ring} v=${psi?.scores?.accessibility} label="Accessibility" /><${Ring} v=${psi?.scores?.bestPractices} label="Best practice" /></div>
+          ${psiMsg ? html`<p class="note" style="margin-top:10px">${psiMsg}</p>` : psi?.lcp ? html`<p class="note" style="margin-top:10px">Main content appears in ${(psi.lcp / 1000).toFixed(1)} s on a phone.</p>` : null}
+          ${h && !h.indexable && h.state !== 'down' ? html`<p class="note" style="margin-top:6px">This site is hidden from Google, so Google’s SEO score is lower on purpose. It rises once the site launches on its own domain.</p>` : null}</div></section>
+        ${h && h.seo && h.state !== 'down' ? html`<section class="card"><header><h2>SEO checklist</h2><span class="hint">${h.seo.passed} of ${h.seo.total} pass · ${h.indexable ? 'visible to Google' : 'hidden from Google'}</span></header><div class="body"><ul class="checks">
+          ${h.seo.checks.map(k => html`<li><span class=${k.pass ? 'ok' : 'no'}>${k.pass ? 'Pass' : 'Fix'}</span><span>${k.label}<em>${k.detail}</em></span></li>`)}</ul></div></section>` : null}
+        <section class="card"><header><h2>Domain</h2></header><div class="body">
+          ${dm && dm.kind === 'custom' ? html`<p class="note">${dm.apex} · ${dm.registrar || 'registrar unknown'} · ${dm.expires ? 'expires ' + dateStr(dm.expires) : 'expiry unknown'}</p>` : html`<p class="note">Free Vercel address. It never expires. Move the client to their own domain when they pay.</p>`}</div></section>
+        ${site.frontDesk ? html`<section class="card"><header><h2>Front Desk</h2><span class="hint">${h?.frontDeskInstalled ? 'live on this site' : 'not on this site yet'}</span></header><div class="body">
+          <p class="note">${h?.frontDeskInstalled ? 'The AI receptionist is live on this site. Its chats are in Front Desk.' : 'Paste this line before </body> on the site to switch the chat on:'}</p>
+          ${!h?.frontDeskInstalled ? html`<pre class="code">${snippet}</pre>` : null}</div></section>` : null}`}
+    </div>
+    <footer>
+      ${!isNew ? (confirm ? html`<span class="confirm">Remove this website? <button class="btn sm danger" onClick=${remove} disabled=${busy}>Remove</button><button class="btn sm" onClick=${() => setConfirm(false)}>Keep</button></span>`
+        : html`<button class="btn ghost danger" onClick=${() => setConfirm(true)}><${I} n="trash" s="15" /> Remove</button>`) : null}
+      <span class="grow"></span>
+      ${edit ? html`<button class="btn" onClick=${() => isNew ? close() : setEdit(false)}>Cancel</button><button class="btn primary" onClick=${save} disabled=${busy || !String(f.url).trim()}>${busy ? 'Checking…' : isNew ? 'Add website' : 'Save'}</button>` : html`<button class="btn" onClick=${() => close()}>Close</button>`}
+    </footer>
+  </aside>`;
+}
+
+/* ---------- app ---------- */
+const PAGES = [
+  ['overview', 'Overview', 'home'], ['clients', 'Clients', 'users'], ['websites', 'Websites', 'globe'],
+  ['domains', 'Domains', 'link'], ['frontdesk', 'Front Desk', 'chat'], ['activity', 'Activity', 'pulse'],
+];
+const SUBS = {
+  overview: 'Everything across your clients at a glance', clients: 'Your pipeline, from first chat to live site', websites: 'Health, uptime, SEO and speed for every site',
+  domains: 'Addresses, registrars and renewals', frontdesk: 'Every conversation with your AI receptionists', activity: 'What changed, newest first',
+};
+
+function App() {
+  const [key, setKey] = useState(store.get('fd-inbox-pw') || '');
+  const [authed, setAuthed] = useState(false);
+  const [trying, setTrying] = useState(!!store.get('fd-inbox-pw'));
+  const [loginErr, setLoginErr] = useState('');
+  const [data, setData] = useState(null);
+  const [page, setPage] = useState((location.hash || '#overview').slice(1));
+  const [drawer, setDrawer] = useState(null);
+  const [q, setQ] = useState('');
+  const [msg, setMsg] = useState('');
+  const [checking, setChecking] = useState(false);
+  const [menu, setMenu] = useState(false);
+  const [theme, setTheme] = useState(store.get('ws-theme') || '');
+  const api = useApi(key);
+  const toastT = useRef();
+  const toast = t => { setMsg(t); clearTimeout(toastT.current); toastT.current = setTimeout(() => setMsg(''), 2600); };
+
+  useEffect(() => { if (theme) document.documentElement.dataset.theme = theme; else delete document.documentElement.dataset.theme; }, [theme]);
+  useEffect(() => { const f = () => { setPage((location.hash || '#overview').slice(1)); setQ(''); }; addEventListener('hashchange', f); return () => removeEventListener('hashchange', f); }, []);
+  useEffect(() => { const f = e => { if (e.key === 'Escape') setDrawer(null); if (e.key === '/' && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) { e.preventDefault(); document.getElementById('q')?.focus(); } }; addEventListener('keydown', f); return () => removeEventListener('keydown', f); }, []);
+
+  const load = async check => {
+    try { const d = await api(check ? '?check=1' : ''); setData(d); setAuthed(true); store.set('fd-inbox-pw', key); return d; }
+    catch (e) { if (e.code === 'wrong_password' || e.code === 'no_password_set') { setAuthed(false); setLoginErr(errText(e)); } else { setLoginErr(errText(e)); toast(errText(e)); } }
+    finally { setTrying(false); }
+  };
+  useEffect(() => { if (key) load(); }, []);
+  useEffect(() => { if (!authed) return; const t = setInterval(() => load(), 5 * 60 * 1000); return () => clearInterval(t); }, [authed, key]);
+
+  const go = p => { location.hash = p; setMenu(false); };
+  const checkAll = async () => { setChecking(true); await load(true); setChecking(false); toast('All websites checked'); };
+  const saveStage = async (id, stage) => {
+    const c = data.clients.find(x => x.id === id);
+    if (!c || c.stage === stage) return;
+    setData(d => ({ ...d, clients: d.clients.map(x => x.id === id ? { ...x, stage } : x) }));
+    try { await api('', { body: { action: 'saveClient', client: { ...c, sites: undefined, stage, stageChangedFrom: c.stage } } }); toast(`${c.name} moved to ${stage}`); load(); }
+    catch (e) { toast(errText(e)); load(); }
   };
 
-  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
-  function ago(t) {
-    if (!t) return 'never';
-    var s = (Date.now() - t) / 1000;
-    if (s < 60) return 'just now';
-    if (s < 3600) return Math.floor(s / 60) + ' min ago';
-    if (s < 86400) return Math.floor(s / 3600) + ' h ago';
-    return Math.floor(s / 86400) + ' d ago';
-  }
-  function grade(v) { return v == null ? '' : v >= 90 ? 'g' : v >= 50 ? 'm' : 'p'; }
-  function kv(value, label) { var d = el('div', 'kv'); d.appendChild(el('b', null, value)); d.appendChild(el('span', null, label)); return d; }
-  function slug(s) { return String(s).toLowerCase().replace(/[^a-z]+/g, '-'); }
+  if (!authed) return html`<div class="login"><form class="card" onSubmit=${e => { e.preventDefault(); setLoginErr(''); setTrying(true); load(); }}>
+    <${Mark} /><h1>Arcwise Workstation</h1><p class="note">Clients, websites, domains and Front Desk in one place.</p>
+    <label class="f">Password<input type="password" value=${key} onInput=${e => setKey(e.target.value)} autocomplete="current-password" autofocus /></label>
+    ${loginErr ? html`<p class="err">${loginErr}</p>` : null}
+    <button class="btn primary" type="submit" style="justify-content:center" disabled=${trying}>${trying ? 'Opening…' : 'Open workstation'}</button></form></div>`;
 
-  function message(text, cls) { out.textContent = ''; out.appendChild(el('p', cls, text)); }
+  const x = derive(data);
+  const ql = q.trim().toLowerCase();
+  const openSite = id => setDrawer({ type: 'site', id });
+  const openClient = id => setDrawer({ type: 'client', id });
+  const addSite = clientId => setDrawer({ type: 'newSite', clientId });
+  const highs = x.attention.filter(a => a.sev === 'high').length;
+  const counts = {
+    overview: highs ? { n: highs, cls: 'alert' } : null,
+    clients: { n: x.real.length }, websites: x.down ? { n: x.down, cls: 'alert' } : { n: data.sites.length },
+    domains: x.expiring ? { n: x.expiring, cls: 'alert' } : null, frontdesk: x.leads7 ? { n: x.leads7, cls: 'good' } : null,
+  };
+  const title = PAGES.find(p => p[0] === page) || PAGES[0];
+  const cur = title[0];
+  const dSite = drawer && drawer.type === 'site' ? data.sites.find(s => s.id === drawer.id) : null;
+  const dClient = drawer && drawer.type === 'client' ? data.clients.find(c => c.id === drawer.id) : null;
+  const props = { d: data, x, q: ql, api, toast, go, openSite, openClient, addSite };
 
-  function load() {
-    message('Checking all sites… this takes a few seconds.', 'empty');
-    refresh.disabled = true;
-    fetch('/api/dashboard', { headers: { 'x-inbox-key': pw.value } })
-      .then(function (r) { return r.json(); })
-      .then(function (d) {
-        refresh.disabled = false;
-        if (d.error) return message(ERRORS[d.error] || d.error, 'err');
-        try { localStorage.setItem('fd-inbox-pw', pw.value); } catch (e) {}
-        document.getElementById('login').hidden = true;
-        refresh.hidden = false;
-        data = d; render();
-      })
-      .catch(function () { refresh.disabled = false; message('Couldn’t load. Check your connection and try again.', 'err'); });
-  }
+  return html`<div class="app">
+    <aside class=${'side' + (menu ? ' open' : '')} aria-label="Navigation">
+      <div class="brand"><${Mark} /><div><b>Arcwise</b><small>Workstation</small></div></div>
+      <nav class="nav">${PAGES.map(([k, l, ic]) => html`<a href=${'#' + k} class=${cur === k ? 'on' : ''} onClick=${() => setMenu(false)} aria-current=${cur === k ? 'page' : null}><${I} n=${ic} s="17" />${l}${counts[k] ? html`<span class=${'count ' + (counts[k].cls || '')}>${counts[k].n}</span>` : null}</a>`)}</nav>
+      <div class="grow"></div>
+      <div class="sidefoot">
+        <button onClick=${() => { const n = theme === '' ? 'dark' : theme === 'dark' ? 'light' : ''; setTheme(n); store.set('ws-theme', n || null); }}><${I} n=${theme === 'light' ? 'sun' : 'moon'} s="17" />${theme === 'dark' ? 'Dark theme' : theme === 'light' ? 'Light theme' : 'System theme'}</button>
+        <button onClick=${() => { store.set('fd-inbox-pw', null); setKey(''); setAuthed(false); setData(null); setLoginErr(''); }}><${I} n="lock" s="17" />Lock</button>
+        <div class="synced"><span class="pulse"></span>Updated ${ago(data.generatedAt)}</div>
+      </div>
+    </aside>
+    ${menu ? html`<div class="scrim" style="z-index:45" onClick=${() => setMenu(false)}></div>` : null}
+    <main class="main">
+      <div class="top">
+        <button class="iconbtn menu-btn" onClick=${() => setMenu(true)} aria-label="Open menu"><${I} n="menu" s="18" /></button>
+        <div style="min-width:0"><h1>${title[1]}</h1><div class="sub hide-sm">${SUBS[cur]}</div></div>
+        <span class="spacer"></span>
+        <label class="search"><${I} n="search" s="16" /><input id="q" value=${q} onInput=${e => setQ(e.target.value)} placeholder=${'Search ' + title[1].toLowerCase() + '  ( / )'} aria-label="Search" /></label>
+        <button class="btn hide-sm" onClick=${checkAll} disabled=${checking}><${I} n="refresh" s="15" />${checking ? 'Checking…' : 'Check sites'}</button>
+        <button class="btn primary" onClick=${() => setDrawer({ type: 'newClient' })} aria-label="New client"><${I} n="plus" s="16" /><span class="hide-sm">New client</span></button>
+      </div>
+      <div class="content">
+        ${cur === 'overview' ? html`<${Overview} ...${props} />` : null}
+        ${cur === 'clients' ? html`<${Clients} ...${props} saveStage=${saveStage} newClient=${() => setDrawer({ type: 'newClient' })} />` : null}
+        ${cur === 'websites' ? html`<${Websites} ...${props} />` : null}
+        ${cur === 'domains' ? html`<${Domains} ...${props} />` : null}
+        ${cur === 'frontdesk' ? html`<${FrontDesk} ...${props} />` : null}
+        ${cur === 'activity' ? html`<${Activity} ...${props} />` : null}
+      </div>
+    </main>
+    ${drawer && ((drawer.type === 'client' && dClient) || drawer.type === 'newClient') ? html`<${ClientDrawer} key=${drawer.id || 'new'} ...${props} client=${dClient}
+      close=${id => setDrawer(id ? { type: 'client', id } : null)} refresh=${() => load()} />` : null}
+    ${drawer && ((drawer.type === 'site' && dSite) || drawer.type === 'newSite') ? html`<${SiteDrawer} key=${drawer.id || 'newsite'} ...${props} site=${dSite} clientId=${drawer.clientId}
+      close=${() => setDrawer(null)} refresh=${() => load()} />` : null}
+    ${msg ? html`<div class="toast" role="status">${msg}</div>` : null}
+  </div>`;
+}
 
-  function sparkline(hist) {
-    var NS = 'http://www.w3.org/2000/svg';
-    var svg = document.createElementNS(NS, 'svg');
-    svg.setAttribute('class', 'spark'); svg.setAttribute('viewBox', '0 0 300 34'); svg.setAttribute('preserveAspectRatio', 'none');
-    svg.setAttribute('role', 'img');
-    var max = Math.max.apply(null, hist.map(function (h) { return h.ms || 0; }).concat([1000]));
-    var w = 300 / Math.max(hist.length, 1);
-    svg.setAttribute('aria-label', 'Response time for the last ' + hist.length + ' checks');
-    hist.forEach(function (h, i) {
-      var r = document.createElementNS(NS, 'rect');
-      var hh = h.s === 'down' ? 34 : Math.max(2, (h.ms / max) * 34);
-      r.setAttribute('x', i * w + 1); r.setAttribute('width', Math.max(w - 2, 1));
-      r.setAttribute('y', 34 - hh); r.setAttribute('height', hh); r.setAttribute('rx', 1.5);
-      r.setAttribute('fill', h.s === 'down' ? '#E5604D' : h.s === 'slow' ? '#E0A93B' : '#3FB27F');
-      svg.appendChild(r);
-    });
-    return svg;
-  }
-
-  function render() {
-    out.textContent = '';
-    document.getElementById('when').textContent = 'Checked ' + new Date(data.generatedAt).toLocaleString();
-    var ps = data.projects;
-    var up = ps.filter(function (p) { return p.health.state !== 'down'; }).length;
-    var desks = ps.filter(function (p) { return p.desk; });
-    var chats = desks.reduce(function (n, p) { return n + p.desk.chats7; }, 0);
-    var leads = desks.reduce(function (n, p) { return n + p.desk.leads7; }, 0);
-    var seo = Math.round(ps.reduce(function (n, p) { return n + p.health.seo.passed / p.health.seo.total; }, 0) / ps.length * 100);
-
-    var sum = el('div', 'summary');
-    [[up + ' / ' + ps.length, 'sites up'], [chats, 'Front Desk chats, 7 days'], [leads, 'WhatsApp leads, 7 days'], [seo + '%', 'SEO checklist, average']].forEach(function (s) {
-      var d = el('div', 'stat'); d.appendChild(el('div', 'num', String(s[0]))); d.appendChild(el('span', null, s[1])); sum.appendChild(d);
-    });
-    out.appendChild(sum);
-
-    var grid = el('div', 'grid');
-    ps.forEach(function (p) { grid.appendChild(card(p)); });
-    out.appendChild(grid);
-  }
-
-  function card(p) {
-    var c = el('article', 'card');
-    var top = el('div', 'top');
-    var t = el('div'); t.appendChild(el('h2', null, p.name)); t.appendChild(el('small', null, p.kind)); top.appendChild(t);
-    top.appendChild(el('span', 'pill ' + slug(p.stage), p.stage));
-    c.appendChild(top);
-    var u = el('div', 'url'); var a = el('a', null, p.url.replace(/^https:\/\//, '').replace(/\/$/, '')); a.href = p.url; a.target = '_blank'; a.rel = 'noopener'; u.appendChild(a); c.appendChild(u);
-
-    // Health
-    var h = p.health, s = el('section', 'sec');
-    s.appendChild(el('h3', null, 'Health'));
-    var row = el('div', 'row');
-    var st = el('span', 'state ' + h.state); st.appendChild(el('span', 'dot'));
-    st.appendChild(document.createTextNode(h.state === 'up' ? 'Up' : h.state === 'slow' ? 'Slow' : 'Down' + (h.error ? ' (' + h.error + ')' : h.status ? ' (error ' + h.status + ')' : '')));
-    row.appendChild(st);
-    row.appendChild(kv(h.ms + ' ms', 'response time'));
-    row.appendChild(kv(p.uptime == null ? '–' : p.uptime + '%', 'uptime, last ' + p.checks + ' checks'));
-    row.appendChild(kv(h.sizeKb + ' KB', 'page size'));
-    s.appendChild(row);
-    if (p.history.length > 1) s.appendChild(sparkline(p.history));
-    c.appendChild(s);
-
-    // Google & SEO
-    var g = el('section', 'sec');
-    g.appendChild(el('h3', null, 'Google & SEO'));
-    if (h.state === 'down') { g.appendChild(el('p', 'note', 'Couldn’t read the page, so there’s no SEO check this time.')); c.appendChild(g); }
-    var gr = el('div', 'row');
-    if (h.state === 'down') gr.hidden = true;
-    gr.appendChild(kv(h.indexable ? 'Yes' : 'No', h.indexable ? 'visible to Google' : (p.indexable ? 'hidden from Google: fix this' : 'hidden on purpose (concept link)')));
-    gr.appendChild(kv(h.seo.passed + ' / ' + h.seo.total, 'SEO checklist'));
-    g.appendChild(gr);
-    var det = el('details', 'list'); det.appendChild(el('summary', null, 'Checklist'));
-    var ul = el('ul', 'checks');
-    h.seo.checks.forEach(function (k) {
-      var li = el('li'); li.appendChild(el('span', k.pass ? 'ok' : 'no', k.pass ? 'Pass' : 'Fix'));
-      var tx = el('span', null, k.label); tx.appendChild(el('em', null, k.detail)); li.appendChild(tx); ul.appendChild(li);
-    });
-    det.appendChild(ul); if (h.state !== 'down') g.appendChild(det);
-
-    // Speed test
-    var sp = el('div', 'scores'), psi = p.psi;
-    [['performance', 'Speed'], ['seo', 'SEO'], ['accessibility', 'Accessibility'], ['bestPractices', 'Best practice']].forEach(function (k) {
-      var v = psi && psi.scores ? psi.scores[k[0]] : null;
-      var d = el('div', 'score'); d.appendChild(el('b', grade(v), v == null ? '–' : String(v))); d.appendChild(el('span', null, k[1])); sp.appendChild(d);
-    });
-    g.appendChild(sp);
-    var tr = el('div', 'row');
-    var note = el('p', 'note', psi ? 'Google speed test, mobile · ' + ago(psi.at) + (psi.lcp ? ' · main content shows in ' + (psi.lcp / 1000).toFixed(1) + ' s' : '') : 'No speed test yet.');
-    var run = el('button', 'ghost', psi ? 'Run again' : 'Run speed test'); run.type = 'button';
-    run.addEventListener('click', function () { runPsi(p, run, note); });
-    tr.appendChild(run); tr.appendChild(note); g.appendChild(tr);
-    if (!h.indexable) g.appendChild(el('p', 'note', 'Google’s SEO score counts the hidden-from-Google setting against concept links. It goes up once the site launches on its real domain.'));
-    c.appendChild(g);
-
-    // Front Desk
-    var f = el('section', 'sec');
-    f.appendChild(el('h3', null, 'Arcwise Front Desk'));
-    if (!p.desk) {
-      f.appendChild(el('p', 'note', 'Not added yet. An AI receptionist is an easy monthly add-on for this client.'));
-    } else {
-      var d = p.desk, fr = el('div', 'row');
-      fr.appendChild(kv(String(d.chats7), 'chats, 7 days'));
-      fr.appendChild(kv(String(d.leads7), 'WhatsApp leads, 7 days'));
-      fr.appendChild(kv(d.leadRate30 == null ? '–' : d.leadRate30 + '%', 'chats that became leads, 30 days'));
-      fr.appendChild(kv(d.aiShare == null ? '–' : d.aiShare + '%', 'answered by AI'));
-      f.appendChild(fr);
-      var bars = el('div', 'bars'); bars.setAttribute('role', 'img');
-      var mx = Math.max.apply(null, d.days.map(function (x) { return x.chats; }).concat([1]));
-      bars.setAttribute('aria-label', 'Chats per day, last 14 days: ' + d.days.map(function (x) { return x.chats; }).join(', '));
-      d.days.forEach(function (x) { var i = el('i', x.chats ? '' : 'zero'); i.style.height = Math.max(4, (x.chats / mx) * 100) + '%'; i.title = x.chats + ' chats'; bars.appendChild(i); });
-      f.appendChild(bars);
-      f.appendChild(el('p', 'note', 'Chats per day, last 14 days · last chat ' + ago(d.lastChat) + ' · ' + (h.frontDeskInstalled ? 'installed on this site' : 'not on this site yet (demo only)')));
-      if (d.recent.length) {
-        var rl = el('ul', 'recent');
-        d.recent.forEach(function (r) {
-          var li = el('li'); var tm = el('time', null, ago(r.updated)); li.appendChild(tm);
-          li.appendChild(el('q', null, r.first || '(no message)')); if (r.lead) li.appendChild(el('span', 'tag', 'WhatsApp'));
-          rl.appendChild(li);
-        });
-        f.appendChild(rl);
-      }
-    }
-    c.appendChild(f);
-    return c;
-  }
-
-  function runPsi(p, btn, note) {
-    btn.disabled = true; note.textContent = 'Running Google’s test… about 30 seconds.';
-    var q = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed?strategy=mobile&url=' + encodeURIComponent(p.url) +
-      '&category=performance&category=seo&category=accessibility&category=best-practices';
-    fetch(q).then(function (r) { return r.json(); }).then(function (j) {
-      var c = j.lighthouseResult && j.lighthouseResult.categories;
-      if (!c) throw new Error((j.error && j.error.message) || 'no result');
-      var sc = function (k) { return c[k] && c[k].score != null ? Math.round(c[k].score * 100) : null; };
-      var body = { id: p.id, scores: { performance: sc('performance'), seo: sc('seo'), accessibility: sc('accessibility'), bestPractices: sc('best-practices') },
-        lcp: j.lighthouseResult.audits && j.lighthouseResult.audits['largest-contentful-paint'] && j.lighthouseResult.audits['largest-contentful-paint'].numericValue };
-      return fetch('/api/dashboard', { method: 'POST', headers: { 'content-type': 'application/json', 'x-inbox-key': pw.value }, body: JSON.stringify(body) })
-        .then(function () { p.psi = { scores: body.scores, lcp: body.lcp, at: Date.now() }; render(); });
-    }).catch(function (e) {
-      btn.disabled = false;
-      note.textContent = /quota|rate|429/i.test(String(e && e.message)) ? 'Google’s free test limit is busy. Try again in a minute.' : 'The test didn’t finish. Try again.';
-    });
-  }
-
-  document.getElementById('login').addEventListener('submit', function (e) { e.preventDefault(); load(); });
-  refresh.addEventListener('click', load);
-  if (pw.value) load();
-})();
+render(html`<${App} />`, document.getElementById('root'));
 </script>
 </body>
 </html>

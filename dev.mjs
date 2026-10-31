@@ -5,11 +5,12 @@ import { extname, join } from 'node:path';
 import chat from './api/chat.js';
 import config from './api/config.js';
 import inbox from './api/inbox.js';
-import dashboard from './api/dashboard.js';
+import workspace from './api/workspace.js';
+import cron from './api/cron.js';
 
 const port = Number(process.argv[2] || 4321);
 const types = { '.html': 'text/html', '.js': 'text/javascript', '.json': 'application/json' };
-const routes = { '/api/chat': chat, '/api/config': config, '/api/inbox': inbox, '/api/dashboard': dashboard };
+const routes = { '/api/chat': chat, '/api/config': config, '/api/inbox': inbox, '/api/workspace': workspace, '/api/cron': cron };
 
 http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
