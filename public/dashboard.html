@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Arcwise Client Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg:#0F1115; --panel:#161920; --panel2:#1C2028; --line:#272B35; --fg:#F4F1EA; --mute:#9A9EA7; --dim:#6C717B;
+    --accent:#FF6A2B; --up:#3FB27F; --slow:#E0A93B; --down:#E5604D; color-scheme:dark;
+  }
+  * { box-sizing:border-box }
+  [hidden] { display:none !important }
+  body { margin:0; background:var(--bg); color:var(--fg); font:15px/1.5 Inter, system-ui, -apple-system, "Segoe UI", sans-serif }
+  .wrap { max-width:1180px; margin:0 auto; padding-block:28px 80px; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px)) }
+  h1, h2, .num { font-family:'Space Grotesk', Inter, system-ui, sans-serif }
+  header { display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap; margin-bottom:24px }
+  h1 { font-size:28px; margin:0; letter-spacing:-.01em }
+  .when { color:var(--mute); font-size:14px; margin:4px 0 0 }
+  .login { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px }
+  input { flex:1; min-width:200px; font:inherit; padding:10px 12px; border-radius:10px; border:1px solid var(--line); background:var(--panel); color:var(--fg) }
+  button, .btn { font:600 14px Inter, system-ui, sans-serif; border-radius:10px; padding:10px 14px; cursor:pointer; border:0; background:var(--accent); color:#0F1115; text-decoration:none; display:inline-block }
+  .ghost { background:transparent; color:var(--fg); border:1px solid var(--line) }
+  button:disabled { opacity:.55; cursor:default }
+  button:focus-visible, a:focus-visible, summary:focus-visible, input:focus-visible { outline:2px solid var(--accent); outline-offset:2px }
+
+  .summary { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px; margin-bottom:24px }
+  .stat { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px }
+  .stat .num { font-size:30px; font-weight:600; line-height:1.1 }
+  .stat span { color:var(--mute); font-size:13px }
+
+  .grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px; display:flex; flex-direction:column; gap:16px; min-width:0 }
+  .top { display:flex; justify-content:space-between; align-items:flex-start; gap:12px }
+  .top h2 { margin:0; font-size:21px; font-weight:600 }
+  .top small { color:var(--mute) }
+  .pill { font-size:12px; font-weight:600; padding:4px 10px; border-radius:999px; background:var(--panel2); border:1px solid var(--line); white-space:nowrap }
+  .pill.won, .pill.live { border-color:var(--up); color:var(--up) }
+  .pill.meeting-set { border-color:var(--slow); color:var(--slow) }
+  .url { color:var(--mute); font-size:13px; word-break:break-all }
+  .url a { color:var(--mute) }
+
+  .sec { border-top:1px solid var(--line); padding-top:14px; display:flex; flex-direction:column; gap:10px }
+  .sec h3 { margin:0; font-size:13px; font-weight:600; color:var(--mute); letter-spacing:.02em }
+  .row { display:flex; gap:18px; flex-wrap:wrap; align-items:baseline }
+  .kv b { font-family:'Space Grotesk', Inter, sans-serif; font-size:20px; font-weight:600; display:block; line-height:1.2 }
+  .kv span { color:var(--mute); font-size:12.5px }
+  .state { display:inline-flex; align-items:center; gap:8px; font-weight:600 }
+  .dot { width:10px; height:10px; border-radius:50% }
+  .up .dot { background:var(--up) } .slow .dot { background:var(--slow) } .down .dot { background:var(--down) }
+  .note { color:var(--mute); font-size:13px; margin:0 }
+  .spark { display:block; width:100%; height:34px }
+
+  details.list summary { cursor:pointer; color:var(--fg); font-size:14px; list-style:none }
+  details.list summary::-webkit-details-marker { display:none }
+  details.list summary::after { content:" · show"; color:var(--mute) }
+  details.list[open] summary::after { content:" · hide" }
+  .checks { list-style:none; margin:8px 0 0; padding:0; display:flex; flex-direction:column; gap:6px; font-size:13.5px }
+  .checks li { display:grid; grid-template-columns:52px 1fr; gap:8px }
+  .ok { color:var(--up); font-weight:600 } .no { color:var(--down); font-weight:600 }
+  .checks em { color:var(--mute); font-style:normal; display:block }
+
+  .scores { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:8px }
+  .score { background:var(--panel2); border-radius:12px; padding:10px; text-align:center }
+  .score b { font-family:'Space Grotesk', Inter, sans-serif; font-size:24px; display:block }
+  .score span { font-size:12px; color:var(--mute) }
+  .g { color:var(--up) } .m { color:var(--slow) } .p { color:var(--down) }
+
+  .bars { display:flex; gap:3px; align-items:flex-end; height:40px }
+  .bars i { flex:1; background:var(--accent); border-radius:2px 2px 0 0; min-height:2px; opacity:.85 }
+  .bars i.zero { background:var(--line) }
+  .recent { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px; font-size:13.5px }
+  .recent li { display:flex; gap:8px; min-width:0 }
+  .recent time { color:var(--mute); flex:none; width:74px }
+  .recent q { quotes:none; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0 }
+  .tag { font-size:11px; font-weight:600; padding:1px 7px; border-radius:999px; background:#1f8f4e; color:#fff; flex:none }
+  .err { color:var(--down) }
+  .empty { color:var(--mute) }
+  footer { color:var(--dim); font-size:13px; margin-top:28px; max-width:70ch }
+
+  @media (max-width:900px) { .grid { grid-template-columns:1fr } .summary { grid-template-columns:repeat(2, minmax(0,1fr)) } }
+  @media (max-width:420px) { .scores { grid-template-columns:repeat(2, minmax(0,1fr)) } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Client dashboard</h1>
+      <p class="when" id="when">Arcwise Studios · site health, SEO and Front Desk</p>
+    </div>
+    <div class="row" style="gap:8px">
+      <a class="btn ghost" href="/inbox">Open inbox</a>
+      <button type="button" id="refresh" hidden>Check again</button>
+    </div>
+  </header>
+
+  <form class="login" id="login">
+    <input id="pw" type="password" placeholder="Dashboard password (same as the inbox)" autocomplete="current-password" aria-label="Dashboard password">
+    <button type="submit">Open</button>
+  </form>
+
+  <div id="out"></div>
+
+  <footer>
+    Health is checked every time you open this page and once a day automatically. The SEO checklist reads each page’s setup; the speed test uses Google PageSpeed Insights on mobile.
+    Concept links are hidden from Google on purpose, so they have no Google ranking yet. Real rankings start once a site is on the client’s own domain and connected to Google Search Console.
+  </footer>
+</div>
+
+<script>
+(function () {
+  var pw = document.getElementById('pw'), out = document.getElementById('out'), refresh = document.getElementById('refresh');
+  var data = null;
+  try { pw.value = localStorage.getItem('fd-inbox-pw') || ''; } catch (e) {}
+
+  var ERRORS = {
+    wrong_password: 'Wrong password.',
+    no_password_set: 'No password set yet. Add INBOX_PASSWORD in Vercel settings, then redeploy.',
+    no_store: 'Storage isn’t connected. Add Upstash Redis in Vercel Storage, then redeploy.',
+  };
+
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function ago(t) {
+    if (!t) return 'never';
+    var s = (Date.now() - t) / 1000;
+    if (s < 60) return 'just now';
+    if (s < 3600) return Math.floor(s / 60) + ' min ago';
+    if (s < 86400) return Math.floor(s / 3600) + ' h ago';
+    return Math.floor(s / 86400) + ' d ago';
+  }
+  function grade(v) { return v == null ? '' : v >= 90 ? 'g' : v >= 50 ? 'm' : 'p'; }
+  function kv(value, label) { var d = el('div', 'kv'); d.appendChild(el('b', null, value)); d.appendChild(el('span', null, label)); return d; }
+  function slug(s) { return String(s).toLowerCase().replace(/[^a-z]+/g, '-'); }
+
+  function message(text, cls) { out.textContent = ''; out.appendChild(el('p', cls, text)); }
+
+  function load() {
+    message('Checking all sites… this takes a few seconds.', 'empty');
+    refresh.disabled = true;
+    fetch('/api/dashboard', { headers: { 'x-inbox-key': pw.value } })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        refresh.disabled = false;
+        if (d.error) return message(ERRORS[d.error] || d.error, 'err');
+        try { localStorage.setItem('fd-inbox-pw', pw.value); } catch (e) {}
+        document.getElementById('login').hidden = true;
+        refresh.hidden = false;
+        data = d; render();
+      })
+      .catch(function () { refresh.disabled = false; message('Couldn’t load. Check your connection and try again.', 'err'); });
+  }
+
+  function sparkline(hist) {
+    var NS = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('class', 'spark'); svg.setAttribute('viewBox', '0 0 300 34'); svg.setAttribute('preserveAspectRatio', 'none');
+    svg.setAttribute('role', 'img');
+    var max = Math.max.apply(null, hist.map(function (h) { return h.ms || 0; }).concat([1000]));
+    var w = 300 / Math.max(hist.length, 1);
+    svg.setAttribute('aria-label', 'Response time for the last ' + hist.length + ' checks');
+    hist.forEach(function (h, i) {
+      var r = document.createElementNS(NS, 'rect');
+      var hh = h.s === 'down' ? 34 : Math.max(2, (h.ms / max) * 34);
+      r.setAttribute('x', i * w + 1); r.setAttribute('width', Math.max(w - 2, 1));
+      r.setAttribute('y', 34 - hh); r.setAttribute('height', hh); r.setAttribute('rx', 1.5);
+      r.setAttribute('fill', h.s === 'down' ? '#E5604D' : h.s === 'slow' ? '#E0A93B' : '#3FB27F');
+      svg.appendChild(r);
+    });
+    return svg;
+  }
+
+  function render() {
+    out.textContent = '';
+    document.getElementById('when').textContent = 'Checked ' + new Date(data.generatedAt).toLocaleString();
+    var ps = data.projects;
+    var up = ps.filter(function (p) { return p.health.state !== 'down'; }).length;
+    var desks = ps.filter(function (p) { return p.desk; });
+    var chats = desks.reduce(function (n, p) { return n + p.desk.chats7; }, 0);
+    var leads = desks.reduce(function (n, p) { return n + p.desk.leads7; }, 0);
+    var seo = Math.round(ps.reduce(function (n, p) { return n + p.health.seo.passed / p.health.seo.total; }, 0) / ps.length * 100);
+
+    var sum = el('div', 'summary');
+    [[up + ' / ' + ps.length, 'sites up'], [chats, 'Front Desk chats, 7 days'], [leads, 'WhatsApp leads, 7 days'], [seo + '%', 'SEO checklist, average']].forEach(function (s) {
+      var d = el('div', 'stat'); d.appendChild(el('div', 'num', String(s[0]))); d.appendChild(el('span', null, s[1])); sum.appendChild(d);
+    });
+    out.appendChild(sum);
+
+    var grid = el('div', 'grid');
+    ps.forEach(function (p) { grid.appendChild(card(p)); });
+    out.appendChild(grid);
+  }
+
+  function card(p) {
+    var c = el('article', 'card');
+    var top = el('div', 'top');
+    var t = el('div'); t.appendChild(el('h2', null, p.name)); t.appendChild(el('small', null, p.kind)); top.appendChild(t);
+    top.appendChild(el('span', 'pill ' + slug(p.stage), p.stage));
+    c.appendChild(top);
+    var u = el('div', 'url'); var a = el('a', null, p.url.replace(/^https:\/\//, '').replace(/\/$/, '')); a.href = p.url; a.target = '_blank'; a.rel = 'noopener'; u.appendChild(a); c.appendChild(u);
+
+    // Health
+    var h = p.health, s = el('section', 'sec');
+    s.appendChild(el('h3', null, 'Health'));
+    var row = el('div', 'row');
+    var st = el('span', 'state ' + h.state); st.appendChild(el('span', 'dot'));
+    st.appendChild(document.createTextNode(h.state === 'up' ? 'Up' : h.state === 'slow' ? 'Slow' : 'Down' + (h.error ? ' (' + h.error + ')' : h.status ? ' (error ' + h.status + ')' : '')));
+    row.appendChild(st);
+    row.appendChild(kv(h.ms + ' ms', 'response time'));
+    row.appendChild(kv(p.uptime == null ? '–' : p.uptime + '%', 'uptime, last ' + p.checks + ' checks'));
+    row.appendChild(kv(h.sizeKb + ' KB', 'page size'));
+    s.appendChild(row);
+    if (p.history.length > 1) s.appendChild(sparkline(p.history));
+    c.appendChild(s);
+
+    // Google & SEO
+    var g = el('section', 'sec');
+    g.appendChild(el('h3', null, 'Google & SEO'));
+    if (h.state === 'down') { g.appendChild(el('p', 'note', 'Couldn’t read the page, so there’s no SEO check this time.')); c.appendChild(g); }
+    var gr = el('div', 'row');
+    if (h.state === 'down') gr.hidden = true;
+    gr.appendChild(kv(h.indexable ? 'Yes' : 'No', h.indexable ? 'visible to Google' : (p.indexable ? 'hidden from Google: fix this' : 'hidden on purpose (concept link)')));
+    gr.appendChild(kv(h.seo.passed + ' / ' + h.seo.total, 'SEO checklist'));
+    g.appendChild(gr);
+    var det = el('details', 'list'); det.appendChild(el('summary', null, 'Checklist'));
+    var ul = el('ul', 'checks');
+    h.seo.checks.forEach(function (k) {
+      var li = el('li'); li.appendChild(el('span', k.pass ? 'ok' : 'no', k.pass ? 'Pass' : 'Fix'));
+      var tx = el('span', null, k.label); tx.appendChild(el('em', null, k.detail)); li.appendChild(tx); ul.appendChild(li);
+    });
+    det.appendChild(ul); if (h.state !== 'down') g.appendChild(det);
+
+    // Speed test
+    var sp = el('div', 'scores'), psi = p.psi;
+    [['performance', 'Speed'], ['seo', 'SEO'], ['accessibility', 'Accessibility'], ['bestPractices', 'Best practice']].forEach(function (k) {
+      var v = psi && psi.scores ? psi.scores[k[0]] : null;
+      var d = el('div', 'score'); d.appendChild(el('b', grade(v), v == null ? '–' : String(v))); d.appendChild(el('span', null, k[1])); sp.appendChild(d);
+    });
+    g.appendChild(sp);
+    var tr = el('div', 'row');
+    var note = el('p', 'note', psi ? 'Google speed test, mobile · ' + ago(psi.at) + (psi.lcp ? ' · main content shows in ' + (psi.lcp / 1000).toFixed(1) + ' s' : '') : 'No speed test yet.');
+    var run = el('button', 'ghost', psi ? 'Run again' : 'Run speed test'); run.type = 'button';
+    run.addEventListener('click', function () { runPsi(p, run, note); });
+    tr.appendChild(run); tr.appendChild(note); g.appendChild(tr);
+    if (!h.indexable) g.appendChild(el('p', 'note', 'Google’s SEO score counts the hidden-from-Google setting against concept links. It goes up once the site launches on its real domain.'));
+    c.appendChild(g);
+
+    // Front Desk
+    var f = el('section', 'sec');
+    f.appendChild(el('h3', null, 'Arcwise Front Desk'));
+    if (!p.desk) {
+      f.appendChild(el('p', 'note', 'Not added yet. An AI receptionist is an easy monthly add-on for this client.'));
+    } else {
+      var d = p.desk, fr = el('div', 'row');
+      fr.appendChild(kv(String(d.chats7), 'chats, 7 days'));
+      fr.appendChild(kv(String(d.leads7), 'WhatsApp leads, 7 days'));
+      fr.appendChild(kv(d.leadRate30 == null ? '–' : d.leadRate30 + '%', 'chats that became leads, 30 days'));
+      fr.appendChild(kv(d.aiShare == null ? '–' : d.aiShare + '%', 'answered by AI'));
+      f.appendChild(fr);
+      var bars = el('div', 'bars'); bars.setAttribute('role', 'img');
+      var mx = Math.max.apply(null, d.days.map(function (x) { return x.chats; }).concat([1]));
+      bars.setAttribute('aria-label', 'Chats per day, last 14 days: ' + d.days.map(function (x) { return x.chats; }).join(', '));
+      d.days.forEach(function (x) { var i = el('i', x.chats ? '' : 'zero'); i.style.height = Math.max(4, (x.chats / mx) * 100) + '%'; i.title = x.chats + ' chats'; bars.appendChild(i); });
+      f.appendChild(bars);
+      f.appendChild(el('p', 'note', 'Chats per day, last 14 days · last chat ' + ago(d.lastChat) + ' · ' + (h.frontDeskInstalled ? 'installed on this site' : 'not on this site yet (demo only)')));
+      if (d.recent.length) {
+        var rl = el('ul', 'recent');
+        d.recent.forEach(function (r) {
+          var li = el('li'); var tm = el('time', null, ago(r.updated)); li.appendChild(tm);
+          li.appendChild(el('q', null, r.first || '(no message)')); if (r.lead) li.appendChild(el('span', 'tag', 'WhatsApp'));
+          rl.appendChild(li);
+        });
+        f.appendChild(rl);
+      }
+    }
+    c.appendChild(f);
+    return c;
+  }
+
+  function runPsi(p, btn, note) {
+    btn.disabled = true; note.textContent = 'Running Google’s test… about 30 seconds.';
+    var q = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed?strategy=mobile&url=' + encodeURIComponent(p.url) +
+      '&category=performance&category=seo&category=accessibility&category=best-practices';
+    fetch(q).then(function (r) { return r.json(); }).then(function (j) {
+      var c = j.lighthouseResult && j.lighthouseResult.categories;
+      if (!c) throw new Error((j.error && j.error.message) || 'no result');
+      var sc = function (k) { return c[k] && c[k].score != null ? Math.round(c[k].score * 100) : null; };
+      var body = { id: p.id, scores: { performance: sc('performance'), seo: sc('seo'), accessibility: sc('accessibility'), bestPractices: sc('best-practices') },
+        lcp: j.lighthouseResult.audits && j.lighthouseResult.audits['largest-contentful-paint'] && j.lighthouseResult.audits['largest-contentful-paint'].numericValue };
+      return fetch('/api/dashboard', { method: 'POST', headers: { 'content-type': 'application/json', 'x-inbox-key': pw.value }, body: JSON.stringify(body) })
+        .then(function () { p.psi = { scores: body.scores, lcp: body.lcp, at: Date.now() }; render(); });
+    }).catch(function (e) {
+      btn.disabled = false;
+      note.textContent = /quota|rate|429/i.test(String(e && e.message)) ? 'Google’s free test limit is busy. Try again in a minute.' : 'The test didn’t finish. Try again.';
+    });
+  }
+
+  document.getElementById('login').addEventListener('submit', function (e) { e.preventDefault(); load(); });
+  refresh.addEventListener('click', load);
+  if (pw.value) load();
+})();
+</script>
+</body>
+</html>
