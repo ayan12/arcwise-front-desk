@@ -9,6 +9,10 @@ export default async function handler(req) {
   const origin = req.headers.get('origin') || '';
   const host = req.headers.get('host') || new URL(req.url).host;
 
+  // Browser permission check before a cross-site POST. It carries no client id; the POST
+  // itself is still checked against the client's allowed sites below.
+  if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: origin ? cors(origin) : {} });
+
   let body = {};
   if (req.method === 'POST') {
     try { body = await req.json(); } catch { return json({ error: 'bad_json' }, 400); }
@@ -19,7 +23,6 @@ export default async function handler(req) {
   if (!originAllowed(client, origin, host, env)) return json({ error: 'origin_not_allowed' }, 403);
   const h = cors(origin);
 
-  if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: h });
   if (req.method !== 'POST') return json({ error: 'method' }, 405, h);
 
   const messages = Array.isArray(body.messages) ? body.messages.slice(-20) : [];
