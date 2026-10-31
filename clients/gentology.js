@@ -31,7 +31,14 @@ export default {
   id: 'gentology',
   name: 'Gentology Barbershop',
   assistant: 'Gentology Front Desk',
-  theme: { accent: '#B4873A', ink: '#17150F', paper: '#F6F0E4', onAccent: '#17150F' },
+  theme: { accent: '#C9A15A', ink: '#15130E', paper: '#F3EBDC', onAccent: '#15130E', mode: 'dark' },
+  tagline: { en: 'Roaring 20s barbershop', id: 'Barbershop ala Roaring 20s' },
+  teaser: { en: 'Skip the phone call: join today’s waiting list here.', id: 'Gak perlu telepon: masuk waiting list hari ini di sini.' },
+  tiles: [
+    { icon: 'queue', title: { en: 'Join the waiting list', id: 'Masuk waiting list' }, sub: { en: 'Cideng, Tanjung Duren or Cipete', id: 'Cideng, Tanjung Duren atau Cipete' }, send: { en: 'I want to join the waiting list', id: 'Saya mau masuk waiting list' } },
+    { icon: 'tag', title: { en: 'Prices', id: 'Harga' }, sub: { en: 'Haircuts from IDR 80k', id: 'Haircut mulai IDR 80k' }, send: { en: 'What are your prices?', id: 'Berapa harganya?' } },
+    { icon: 'pin', title: { en: 'Branches and hours', id: 'Cabang dan jam buka' }, sub: { en: 'Addresses and opening times', id: 'Alamat dan jam buka' }, send: { en: 'Where are your branches and when are you open?', id: 'Cabangnya di mana dan jam berapa buka?' } },
+  ],
   greeting: {
     en: 'Hi, welcome to Gentology. I can tell you our prices and hours, or put you on the waiting list at Cideng, Tanjung Duren or Cipete.',
     id: 'Halo, selamat datang di Gentology. Saya bisa bantu info harga, jam buka, atau masuk waiting list di Cideng, Tanjung Duren atau Cipete.',

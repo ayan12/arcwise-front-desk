@@ -9,7 +9,14 @@ export default {
   id: 'arcwise',
   name: 'Arcwise Studios',
   assistant: 'Arcwise Studios',
-  theme: { accent: '#FF6A2B', ink: '#0F1115', paper: '#F4F1EA', onAccent: '#0F1115' },
+  theme: { accent: '#FF6A2B', ink: '#0F1115', paper: '#F4F1EA', onAccent: '#0F1115', mode: 'dark' },
+  tagline: { en: 'Websites, AI and marketing', id: 'Website, AI dan marketing' },
+  teaser: { en: 'Want to see a free concept for your business?', id: 'Mau lihat konsep gratis untuk usaha kamu?' },
+  tiles: [
+    { icon: 'spark', title: { en: 'Get a free concept', id: 'Minta konsep gratis' }, sub: { en: 'A live preview before you pay', id: 'Lihat hasilnya dulu sebelum bayar' }, send: { en: 'I want a free concept for my business', id: 'Saya mau konsep gratis untuk usaha saya' } },
+    { icon: 'layers', title: { en: 'What we build', id: 'Apa yang kami buat' }, sub: { en: 'Websites, AI assistants, marketing', id: 'Website, AI assistant, marketing' }, send: { en: 'What do you build?', id: 'Bisa bikin apa saja?' } },
+    { icon: 'tag', title: { en: 'Pricing', id: 'Harga' }, sub: { en: 'Fixed, written quotes', id: 'Penawaran tetap dan tertulis' }, send: { en: 'How much does it cost?', id: 'Berapa biayanya?' } },
+  ],
   greeting: {
     en: 'Hi! I can tell you what we build, how it works and what it costs, or start your free concept. What does your business do?',
     id: 'Halo! Saya bisa jelaskan apa yang kami buat, cara kerjanya dan biayanya, atau mulai konsep gratis kamu. Usaha kamu di bidang apa?',

@@ -13,5 +13,6 @@ export function publicConfig(c) {
   return {
     id: c.id, name: c.name, assistant: c.assistant, theme: c.theme,
     greeting: c.greeting, quickReplies: c.quickReplies,
+    tagline: c.tagline || null, teaser: c.teaser || null, tiles: c.tiles || [],
   };
 }
