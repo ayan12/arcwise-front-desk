@@ -9,7 +9,7 @@ export default {
   id: 'arcwise',
   name: 'Arcwise Studios',
   assistant: 'Arcwise Studios',
-  theme: { accent: '#D4A85A', ink: '#14130F', paper: '#F4EFE6', onAccent: '#14130F' },
+  theme: { accent: '#FF6A2B', ink: '#0F1115', paper: '#F4F1EA', onAccent: '#0F1115' },
   greeting: {
     en: 'Hi! I can tell you what we build, how it works and what it costs, or start your free concept. What does your business do?',
     id: 'Halo! Saya bisa jelaskan apa yang kami buat, cara kerjanya dan biayanya, atau mulai konsep gratis kamu. Usaha kamu di bidang apa?',
