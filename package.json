@@ -1,0 +1,6 @@
+{
+  "name": "arcwise-front-desk",
+  "private": true,
+  "type": "module",
+  "description": "Arcwise Front Desk: an AI receptionist chat that installs on any website with one script tag."
+}
