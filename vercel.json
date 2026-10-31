@@ -29,8 +29,16 @@
       ]
     },
     {
-      "source": "/inbox",
+      "source": "/dashboard",
       "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://www.googleapis.com; frame-ancestors 'none'; base-uri 'none'; form-action 'self'; object-src 'none'"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
         {
           "key": "X-Robots-Tag",
           "value": "noindex, nofollow"
@@ -38,19 +46,31 @@
         {
           "key": "Cache-Control",
           "value": "no-store"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=()"
+        },
+        {
+          "key": "Cross-Origin-Opener-Policy",
+          "value": "same-origin"
         }
       ]
     },
     {
-      "source": "/dashboard",
+      "source": "/api/(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",
-          "value": "noindex, nofollow"
+          "value": "noindex"
         },
         {
-          "key": "Cache-Control",
-          "value": "no-store"
+          "key": "X-Frame-Options",
+          "value": "DENY"
         }
       ]
     }
@@ -59,6 +79,13 @@
     {
       "path": "/api/cron",
       "schedule": "17 1 * * *"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/inbox",
+      "destination": "/dashboard#frontdesk",
+      "permanent": false
     }
   ]
 }

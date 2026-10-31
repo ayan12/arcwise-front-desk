@@ -98,7 +98,7 @@ async function overview(env, force) {
 export default async function handler(req) {
   const env = globalThis.process?.env || {};
   const denied = await checkKey(req, env);
-  if (denied) return json({ error: denied }, denied === 'wrong_password' ? 401 : 503);
+  if (denied) return json({ error: denied }, denied === 'signed_out' ? 401 : denied === 'bad_origin' ? 403 : 503);
   if (!storeEnabled(env)) return json({ error: 'no_store' }, 503);
   const url = new URL(req.url);
 

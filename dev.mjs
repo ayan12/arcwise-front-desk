@@ -4,13 +4,13 @@ import { readFile } from 'node:fs/promises';
 import { extname, join } from 'node:path';
 import chat from './api/chat.js';
 import config from './api/config.js';
-import inbox from './api/inbox.js';
 import workspace from './api/workspace.js';
+import session from './api/session.js';
 import cron from './api/cron.js';
 
 const port = Number(process.argv[2] || 4321);
 const types = { '.html': 'text/html', '.js': 'text/javascript', '.json': 'application/json' };
-const routes = { '/api/chat': chat, '/api/config': config, '/api/inbox': inbox, '/api/workspace': workspace, '/api/cron': cron };
+const routes = { '/api/chat': chat, '/api/config': config, '/api/workspace': workspace, '/api/session': session, '/api/cron': cron };
 
 http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);

@@ -1,6 +1,6 @@
 import { getClient } from '../clients/index.js';
 import { reply, limited, originAllowed, cors, json, offlineReply, detectLang } from '../lib/engine.js';
-import { saveConversation } from '../lib/store.js';
+import { saveConversation, hit } from '../lib/store.js';
 
 export const config = { runtime: 'edge' };
 
@@ -29,8 +29,18 @@ export default async function handler(req) {
   const ip = req.headers.get('x-real-ip') || req.headers.get('cf-connecting-ip') ||
     (req.headers.get('x-forwarded-for') || '').split(',')[0].trim() || 'anon';
 
+  // Limits that protect the AI bill: per visitor per hour and per client per day.
+  // Kept in the database when it's connected; falls back to in-memory limits otherwise.
+  let over = false;
+  try {
+    const hour = Math.floor(Date.now() / 3600000), day = new Date().toISOString().slice(0, 10);
+    const [perIp, perDay] = await Promise.all([hit(env, `fd:rl:ip:${ip}:${hour}`, 3700), hit(env, `fd:rl:day:${client.id}:${day}`, 90000)]);
+    if (perIp == null) over = !!limited(client, ip);
+    else over = perIp > 40 || perDay > (client.dailyCap || 300);
+  } catch { over = !!limited(client, ip); }
+
   let out;
-  if (limited(client, ip)) {
+  if (over) {
     // Over a limit: still help, without spending on AI.
     const last = [...messages].reverse().find(m => m && m.role === 'user');
     out = offlineReply(client, last?.text, detectLang(last?.text));
