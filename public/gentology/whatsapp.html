@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0B141A">
+<title>Gentology on WhatsApp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;1,6..96,500&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root { --ink:#15130E; --gold:#C9A15A; --paper:#F3EBDC; --mute:#A39A88;
+  --wa-bg:#0B141A; --wa-head:#1F2C34; --wa-in:#202C33; --wa-out:#005C4B; --wa-text:#E9EDEF; --wa-sub:#8696A0; --wa-link:#53BDEB; --wa-green:#00A884; color-scheme:dark }
+* { box-sizing:border-box; margin:0 }
+html, body { height:100% }
+body { background:radial-gradient(1200px 700px at 20% 10%, #2a2417 0%, var(--ink) 55%); color:var(--paper); font:15px/1.45 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing:antialiased }
+.stage { min-height:100%; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:56px; align-items:center; max-width:1120px; margin:0 auto;
+  padding-block:40px; padding-left:max(24px, env(safe-area-inset-left,0px)); padding-right:max(24px, env(safe-area-inset-right,0px)) }
+.pitch h1 { font-family:'Bodoni Moda', Georgia, serif; font-weight:500; font-size:clamp(38px, 5vw, 62px); line-height:1.02; letter-spacing:-.01em; text-wrap:balance }
+.pitch h1 i { color:var(--gold) }
+.pitch p { color:var(--mute); max-width:46ch; margin-top:18px; font-size:16.5px }
+.steps { list-style:none; padding:0; margin-top:28px; display:flex; flex-direction:column; gap:14px; max-width:46ch }
+.steps li { display:grid; grid-template-columns:30px 1fr; gap:12px; align-items:start }
+.steps b { width:30px; height:30px; border-radius:50%; border:1px solid var(--gold); color:var(--gold); display:grid; place-items:center; font-size:13px }
+.steps span { color:var(--paper) } .steps small { display:block; color:var(--mute); font-size:13.5px }
+.links { display:flex; gap:10px; flex-wrap:wrap; margin-top:30px }
+.links a { text-decoration:none; padding:11px 16px; border-radius:12px; font-weight:600; font-size:14px; border:1px solid #3a3426; color:var(--paper) }
+.links a.primary { background:var(--gold); color:var(--ink); border-color:var(--gold) }
+.as { margin-top:22px; display:flex; gap:10px; align-items:center; color:var(--mute); font-size:13.5px }
+.as input { background:transparent; border:1px solid #3a3426; color:var(--paper); border-radius:10px; padding:8px 10px; width:150px; font:inherit }
+
+.phone { width:390px; height:min(800px, calc(100vh - 60px)); border-radius:46px; padding:12px; background:#05070a; box-shadow:0 0 0 2px #2b2b2b, 0 40px 100px rgba(0,0,0,.6); position:relative }
+.screen { width:100%; height:100%; border-radius:36px; overflow:hidden; background:var(--wa-bg); display:flex; flex-direction:column; color:var(--wa-text); position:relative }
+.head { background:var(--wa-head); display:flex; align-items:center; gap:10px; padding:44px 12px 10px }
+.head .back { color:var(--wa-text); opacity:.9 }
+.av { width:38px; height:38px; border-radius:50%; background:var(--ink); color:var(--gold); display:grid; place-items:center; font-family:'Bodoni Moda', serif; font-size:19px; border:1px solid #3a3426; flex:none }
+.who { flex:1; min-width:0 }
+.who b { font-weight:600; font-size:15.5px; display:flex; align-items:center; gap:5px }
+.who small { color:var(--wa-sub); font-size:12.5px }
+.chat { flex:1; overflow-y:auto; padding:12px 10px 8px; display:flex; flex-direction:column; gap:4px;
+  background-color:var(--wa-bg); background-image:radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px); background-size:18px 18px }
+.day { align-self:center; background:#182229; color:var(--wa-sub); font-size:12px; padding:5px 10px; border-radius:8px; margin:6px 0 }
+.note { align-self:center; background:#182229; color:#FFD279; font-size:12px; padding:8px 12px; border-radius:8px; margin:2px 10px 8px; text-align:center; max-width:90% }
+.msg { max-width:84%; padding:7px 9px 6px; border-radius:8px; font-size:14.5px; position:relative; white-space:pre-line; word-wrap:break-word; animation:pop .18s ease-out }
+@keyframes pop { from { transform:scale(.96); opacity:0 } }
+.msg.bot { align-self:flex-start; background:var(--wa-in); border-top-left-radius:0 }
+.msg.me { align-self:flex-end; background:var(--wa-out); border-top-right-radius:0 }
+.msg .t { float:right; font-size:11px; color:rgba(233,237,239,.6); margin:6px 0 -4px 10px }
+.msg a { color:var(--wa-link); word-break:break-all }
+.acts { align-self:flex-start; width:84%; display:flex; flex-direction:column; gap:2px; margin-top:-2px }
+.acts button { background:var(--wa-in); border:0; color:var(--wa-link); font:500 14.5px Inter, sans-serif; padding:10px; border-radius:8px; cursor:pointer; display:flex; gap:8px; align-items:center; justify-content:center }
+.acts button:hover { background:#26343d }
+.acts button:disabled { color:var(--wa-sub); cursor:default }
+.typing { align-self:flex-start; background:var(--wa-in); border-radius:8px; border-top-left-radius:0; padding:12px 14px; display:flex; gap:4px }
+.typing i { width:7px; height:7px; border-radius:50%; background:var(--wa-sub); animation:b 1s infinite } .typing i:nth-child(2) { animation-delay:.15s } .typing i:nth-child(3) { animation-delay:.3s }
+@keyframes b { 30% { transform:translateY(-3px); opacity:1 } 0%, 60%, 100% { opacity:.4 } }
+.bar { display:flex; gap:8px; padding:8px 8px calc(10px + env(safe-area-inset-bottom,0px)); align-items:center; background:var(--wa-bg) }
+.bar input { flex:1; min-width:0; background:var(--wa-head); border:0; color:var(--wa-text); border-radius:22px; padding:11px 16px; font:inherit; font-size:16px; outline:none }
+.bar input::placeholder { color:var(--wa-sub) }
+.bar button { width:44px; height:44px; border-radius:50%; background:var(--wa-green); border:0; color:#0B141A; display:grid; place-items:center; cursor:pointer; flex:none }
+.sheet-bg { position:absolute; inset:0; background:rgba(0,0,0,.5); display:flex; align-items:flex-end; z-index:5; animation:fade .15s }
+@keyframes fade { from { opacity:0 } }
+.sheet { width:100%; background:var(--wa-head); border-radius:16px 16px 0 0; padding:8px 0 calc(14px + env(safe-area-inset-bottom,0px)); animation:up .2s ease-out; max-height:75%; overflow-y:auto }
+@keyframes up { from { transform:translateY(40px) } }
+.sheet .grab { width:36px; height:4px; border-radius:4px; background:#3b4a54; margin:4px auto 10px }
+.sheet h3 { font-size:16px; font-weight:600; padding:4px 20px 10px; display:flex; justify-content:space-between }
+.sheet h3 button { background:none; border:0; color:var(--wa-sub); font:inherit; cursor:pointer }
+.sheet .opt { width:100%; text-align:left; background:none; border:0; color:var(--wa-text); padding:12px 20px; display:grid; grid-template-columns:1fr 22px; gap:10px; align-items:center; cursor:pointer; font:inherit }
+.sheet .opt:hover { background:#26343d }
+.sheet .opt small { display:block; color:var(--wa-sub); font-size:13px }
+.sheet .opt i { width:20px; height:20px; border-radius:50%; border:2px solid #8696A0 }
+button:focus-visible, a:focus-visible, input:focus-visible { outline:2px solid var(--wa-green); outline-offset:2px }
+
+@media (max-width:900px) {
+  .stage { grid-template-columns:1fr; padding:0; gap:0; min-height:100% }
+  .pitch { display:none }
+  .phone { width:100%; height:100dvh; border-radius:0; padding:0; box-shadow:none; background:var(--wa-bg) }
+  .screen { border-radius:0 }
+  .head { padding-top:calc(10px + env(safe-area-inset-top,0px)) }
+}
+@media (prefers-reduced-motion:reduce) { * { animation:none !important } }
+</style>
+</head>
+<body>
+<div class="stage">
+  <section class="pitch">
+    <h1>Book a cut <i>on WhatsApp.</i><br>No phone calls, no paper.</h1>
+    <p>This is Gentology’s own WhatsApp number with the booking assistant switched on. Try it on the phone: join a queue, then watch your number appear on the branch tablet.</p>
+    <ol class="steps">
+      <li><b>1</b><span>Send “Bang, antri di Cipete dong”<small>or just say hi and tap the buttons</small></span></li>
+      <li><b>2</b><span>Pick a service and confirm your name<small>you get a queue number and a live tracking link</small></span></li>
+      <li><b>3</b><span>Open the branch tablet<small>staff tap Start and Done; you get “almost your turn” and a thank-you</small></span></li>
+    </ol>
+    <div class="links"><a class="primary" href="/gentology/branch" target="_blank" rel="noopener">Open branch tablet</a><a href="#" id="restart">Start over</a></div>
+    <label class="as">Chatting as <input id="name" maxlength="24" value="Rizky" aria-label="Your WhatsApp name"></label>
+  </section>
+  <div class="phone"><div class="screen" id="screen">
+    <div class="head">
+      <svg class="back" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+      <div class="av" aria-hidden="true">G</div>
+      <div class="who"><b>Gentology Barbershop <svg width="15" height="15" viewBox="0 0 24 24" aria-label="Verified business"><path fill="#00A884" d="M12 1l2.6 2.2 3.4-.4 1 3.3 3 1.7-1 3.2 1 3.2-3 1.7-1 3.3-3.4-.4L12 23l-2.6-2.2-3.4.4-1-3.3-3-1.7 1-3.2-1-3.2 3-1.7 1-3.3 3.4.4z"/><path d="M8 12.5l2.6 2.5L16 9.5" stroke="#0B141A" stroke-width="2" fill="none"/></svg></b><small id="status">online</small></div>
+    </div>
+    <div class="chat" id="chat" role="log" aria-live="polite"></div>
+    <form class="bar" id="form"><input id="input" placeholder="Message" autocomplete="off" aria-label="Message"><button aria-label="Send"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 20.5 21 12 3 3.5 3 10l12 2-12 2z"/></svg></button></form>
+  </div></div>
+</div>
+<script src="/gentology/whatsapp.js" type="module"></script>
+</body>
+</html>

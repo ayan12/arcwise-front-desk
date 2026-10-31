@@ -7,10 +7,12 @@ import config from './api/config.js';
 import workspace from './api/workspace.js';
 import session from './api/session.js';
 import cron from './api/cron.js';
+import queue from './api/queue.js';
+import whatsapp from './api/whatsapp.js';
 
 const port = Number(process.argv[2] || 4321);
 const types = { '.html': 'text/html', '.js': 'text/javascript', '.json': 'application/json' };
-const routes = { '/api/chat': chat, '/api/config': config, '/api/workspace': workspace, '/api/session': session, '/api/cron': cron };
+const routes = { '/api/chat': chat, '/api/config': config, '/api/workspace': workspace, '/api/session': session, '/api/cron': cron, '/api/queue': queue, '/api/whatsapp': whatsapp };
 
 http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
