@@ -14,6 +14,12 @@
     ((navigator.language || '').toLowerCase().indexOf('id') === 0 ? 'id' : 'en');
   var KEY = 'arcwise-fd:' + CLIENT;
   var cfg = null, history = [], busy = false, sent = 0;
+  var SID = (function () {
+    var k = KEY + ':sid', v = null;
+    try { v = sessionStorage.getItem(k); } catch (e) {}
+    if (!v) { v = Math.random().toString(36).slice(2, 12) + Date.now().toString(36); try { sessionStorage.setItem(k, v); } catch (e) {} }
+    return v;
+  })();
 
   function load() { try { return JSON.parse(sessionStorage.getItem(KEY) || '[]'); } catch (e) { return []; } }
   function save() { try { sessionStorage.setItem(KEY, JSON.stringify(history.slice(-30))); } catch (e) {} }
@@ -178,7 +184,7 @@
     fetch(API + '/api/chat', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ client: CLIENT, messages: history.map(function (m) { return { role: m.role, text: m.text }; }) }),
+      body: JSON.stringify({ client: CLIENT, sid: SID, page: location.host + location.pathname, messages: history.map(function (m) { return { role: m.role, text: m.text }; }) }),
     }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(function (d) { history.push({ role: 'assistant', text: d.text, actions: d.actions || [], replies: d.replies || [] }); })
       .catch(function () { history.push({ role: 'assistant', text: t('error'), replies: (cfg.quickReplies || {})[LANG] || [] }); })

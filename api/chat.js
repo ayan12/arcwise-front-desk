@@ -1,5 +1,6 @@
 import { getClient } from '../clients/index.js';
-import { reply, limited, originAllowed, cors, json, ruleReply, detectLang } from '../lib/engine.js';
+import { reply, limited, originAllowed, cors, json, offlineReply, detectLang } from '../lib/engine.js';
+import { saveConversation } from '../lib/store.js';
 
 export const config = { runtime: 'edge' };
 
@@ -25,11 +26,15 @@ export default async function handler(req) {
   const ip = req.headers.get('x-real-ip') || req.headers.get('cf-connecting-ip') ||
     (req.headers.get('x-forwarded-for') || '').split(',')[0].trim() || 'anon';
 
-  const hit = limited(client, ip);
-  if (hit) {
+  let out;
+  if (limited(client, ip)) {
     // Over a limit: still help, without spending on AI.
     const last = [...messages].reverse().find(m => m && m.role === 'user');
-    return json({ ...ruleReply(client, last?.text || '', detectLang(last?.text)), source: 'rules' }, 200, h);
+    out = offlineReply(client, last?.text, detectLang(last?.text));
+  } else {
+    out = await reply(client, messages, env);
   }
-  return json(await reply(client, messages, env), 200, h);
+  const country = req.headers.get('x-vercel-ip-country') || req.headers.get('cf-ipcountry') || '';
+  await saveConversation(env, client, String(body.sid || ''), body.page, messages, out, { country });
+  return json(out, 200, h);
 }
