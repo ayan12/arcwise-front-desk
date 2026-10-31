@@ -1,6 +1,7 @@
 /*! Arcwise Front Desk widget. Add to any site:
  *  <script src="https://YOUR-ENGINE/widget.js" data-client="gentology" defer></script>
- *  Optional: data-lang="id|en", data-open="true"
+ *  Optional: data-lang="id|en", data-open="true",
+ *  data-mobile-bottom="84" data-mobile-at="860" (lift the button above a site's own bottom bar on phones)
  */
 (function () {
   'use strict';
@@ -74,7 +75,14 @@
       '.by{text-align:center;font-size:11px;color:#8a8275;padding:0 0 8px;background:#fff}.by a{color:inherit}' +
       '@media (max-width:520px){.pn{right:0;bottom:0;width:100vw;max-width:100vw;height:100%;max-height:100%;border-radius:0;' +
       'padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}.hd{padding-left:max(16px,env(safe-area-inset-left,0px))}}' +
+      liftCss() +
       '@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}';
+  }
+
+  function liftCss() {
+    var b = parseInt(me.getAttribute('data-mobile-bottom'), 10), at = parseInt(me.getAttribute('data-mobile-at'), 10) || 760;
+    if (!(b > 0 && b < 400)) return '';
+    return '@media (max-width:' + at + 'px){.btn{bottom:calc(' + b + 'px + env(safe-area-inset-bottom,0px))}}';
   }
 
   var ICON_CHAT = '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.2 3.6c-.5.4-1.3.1-1.3-.6V16A2.5 2.5 0 0 1 4 13.5v-8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.5 9.5h7M8.5 12.5h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
