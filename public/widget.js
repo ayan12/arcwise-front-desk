@@ -2,6 +2,7 @@
  *  <script src="https://arcwise-front-desk.vercel.app/widget.js" data-client="gentology" defer></script>
  *  Optional: data-lang="id|en", data-open="true", data-teaser="false",
  *  data-mobile-bottom="84" data-mobile-at="860" (lift the button above a site's own bottom bar on phones)
+ *  data-mobile-launcher="off" (hide the floating button on phones when the site has its own chat button; open with the arcwise:open event)
  */
 (function () {
   'use strict';
@@ -50,7 +51,8 @@
     var bg = dark ? th.ink : th.paper, fg = dark ? th.paper : th.ink;
     var lift = (function () {
       var b = parseInt(me.getAttribute('data-mobile-bottom'), 10), at = parseInt(me.getAttribute('data-mobile-at'), 10) || 760;
-      return b > 0 && b < 400 ? '@media (max-width:' + at + 'px){.dock{bottom:calc(' + b + 'px + env(safe-area-inset-bottom,0px))}}' : '';
+      var off = me.getAttribute('data-mobile-launcher') === 'off' ? '@media (max-width:' + at + 'px){.dock{display:none!important}}' : '';
+      return off + (b > 0 && b < 400 ? '@media (max-width:' + at + 'px){.dock{bottom:calc(' + b + 'px + env(safe-area-inset-bottom,0px))}}' : '');
     })();
     return '' +
       ':host{all:initial}*{box-sizing:border-box;font-family:inherit;margin:0}' +

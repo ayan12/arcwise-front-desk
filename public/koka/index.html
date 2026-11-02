@@ -22,7 +22,7 @@
 }
 * { box-sizing:border-box; margin:0 }
 [hidden] { display:none !important }
-html { scroll-behavior:smooth; -webkit-text-size-adjust:100% }
+html { scroll-behavior:smooth; -webkit-text-size-adjust:100%; overflow-x:clip }
 body { background:var(--night); color:var(--wall); font:17px/1.6 var(--sans); -webkit-font-smoothing:antialiased; overflow-x:hidden }
 img { max-width:100%; display:block }
 a { color:inherit }
@@ -80,6 +80,49 @@ h1, h2, h3 { font-family:var(--display); font-weight:400; line-height:.95; lette
 .js .hero .copy > * { opacity:0; transform:translateY(16px); animation:rise .9s ease-out forwards }
 .js .hero .copy > :nth-child(2) { animation-delay:1.45s } .js .hero .copy > :nth-child(3) { animation-delay:1.55s } .js .hero .copy > :nth-child(4) { animation-delay:1.65s } .js .hero .copy > :nth-child(5) { animation-delay:1.75s } .js .hero .copy > :first-child { animation-delay:1.3s }
 @keyframes rise { to { opacity:1; transform:none } }
+
+
+/* stencil -> ink comparison */
+.sx { touch-action:pan-y; user-select:none }
+.sx .stencil { position:absolute; inset:0; clip-path:inset(0 0 0 var(--x)); background:#F0DCC8 }
+.sx .stencil img { filter:url(#stencil) }
+.sx .needle { position:absolute; top:0; bottom:0; left:var(--x); width:2px; margin-left:-1px; background:var(--gold-hi); box-shadow:0 0 12px rgba(233,207,140,.8); pointer-events:none }
+.sx .needle span { position:absolute; top:50%; left:50%; width:46px; height:46px; margin:-23px 0 0 -23px; border-radius:50%; background:var(--night); box-shadow:0 0 0 2px var(--gold-hi), 0 8px 20px rgba(0,0,0,.5);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E9CF8C' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 6l-6 6 6 6M15 6l6 6-6 6'/%3E%3C/svg%3E"); background-size:22px; background-repeat:no-repeat; background-position:center }
+.sxr { position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:ew-resize; margin:0 }
+.sx .tag { position:absolute; bottom:12px; font-size:12px; font-weight:700; padding:5px 9px; background:rgba(18,13,11,.75); color:var(--wall); pointer-events:none; transition:opacity .3s }
+.sx .tag.l { left:12px; } .sx .tag.r { right:12px }
+.sx.sweep .needle span { animation:buzz .08s linear infinite }
+@keyframes buzz { 50% { transform:translateX(.6px) } }
+
+/* plan your piece */
+.plan { background:var(--night2); padding:110px 0; border-top:1px solid rgba(200,162,83,.15) }
+.plan .wrap { display:grid; grid-template-columns:minmax(0, 1.1fr) minmax(0, .9fr); gap:56px; align-items:start }
+.plan h2 { font-size:clamp(50px, 6.5vw, 88px) }
+.plan .sub { margin-top:14px; color:var(--soft); max-width:46ch }
+.q { margin-top:34px }
+.q > p { font-weight:700; margin-bottom:12px; font-size:16px; color:var(--wall) }
+.opts { display:flex; flex-wrap:wrap; gap:8px }
+.opt { padding:12px 16px; box-shadow:inset 0 0 0 1px rgba(233,207,140,.32); border-radius:2px; font-weight:600; font-size:15px; color:#E6DAC6; transition:background .2s, color .2s, box-shadow .2s }
+.opt:hover { box-shadow:inset 0 0 0 1px var(--gold-hi) }
+.opt[aria-pressed="true"] { background:var(--gold); color:var(--night); box-shadow:none }
+.idea { margin-top:12px; width:100%; min-height:84px; resize:vertical; background:var(--night); color:var(--wall); border:0; box-shadow:inset 0 0 0 1px rgba(233,207,140,.32); padding:14px 16px; font:inherit; font-size:16px; border-radius:2px }
+.idea:focus { outline:none; box-shadow:inset 0 0 0 1.5px var(--gold-hi) }
+.slip { position:sticky; top:96px; background:var(--wall); color:var(--ink); padding:26px; box-shadow:0 30px 60px rgba(0,0,0,.4) }
+.slip .ex { display:grid; grid-template-columns:96px 1fr; gap:16px; align-items:center; padding-bottom:18px; border-bottom:2px dashed #CDBFA5 }
+.slip .ex img { width:96px; height:128px; object-fit:cover; box-shadow:0 0 0 4px #C8A253, 0 0 0 5px #7A5C24; transition:opacity .25s }
+.slip .ex small { display:block; color:var(--muted); font-size:13px }
+.slip .ex b { font-size:17px; line-height:1.3 }
+.slip pre { margin:18px 0; white-space:pre-wrap; font:500 15.5px/1.55 var(--sans); color:#3B3027; min-height:7.5em }
+.slip .btn { width:100% } .slip .btn + .btn { margin-top:10px }
+.slip .btn.line { color:var(--ink); box-shadow:inset 0 0 0 1px #B9A47E }
+.slip .note { margin-top:10px; font-size:13px; color:var(--muted); text-align:center }
+
+/* gallery lamp: a soft light follows the pointer across a frame */
+@media (hover:hover) {
+  .piece .in::after { content:""; position:absolute; inset:0; background:radial-gradient(220px circle at var(--lx, 50%) var(--ly, 30%), rgba(255,230,180,.22), transparent 60%); opacity:0; transition:opacity .3s; pointer-events:none }
+  .piece button:hover .in::after { opacity:1 }
+}
 
 /* tour */
 .tour { background:var(--velvet); position:relative; overflow:hidden }
@@ -179,7 +222,8 @@ footer .wrap { display:flex; justify-content:space-between; gap:20px; flex-wrap:
 .reveal.on { opacity:1; transform:none }
 
 @media (max-width:980px) {
-  .hero .stage, .tour .wrap, .artist .wrap, .faq .wrap { grid-template-columns:1fr }
+  .hero .stage, .tour .wrap, .artist .wrap, .faq .wrap, .plan .wrap { grid-template-columns:1fr }
+  .slip { position:static }
   .hero .stage { padding-top:100px; gap:36px }
   .hero .frame { max-width:360px }
   .salon { columns:2; column-gap:16px } .piece { margin-bottom:28px } .piece.small .frame { margin:0 } .piece.small .card { margin-left:0; margin-right:0 }
@@ -192,6 +236,15 @@ footer .wrap { display:flex; justify-content:space-between; gap:20px; flex-wrap:
   .hero h1 { font-size:clamp(84px, 30vw, 140px) }
   .hero .ctas .btn { flex:1 1 100% }
   .ticket { padding:26px 22px } .ticket hr { margin:20px -22px }
+  .price { font-size:48px } .price small { display:block; margin-top:6px }
+  .ticket dl { grid-template-columns:1fr; gap:2px } .ticket dd { margin-bottom:10px }
+  .hero .proof { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:12px; font-size:12.5px; line-height:1.35 } .hero .proof b { font-size:22px }
+  .hero .stage { padding-bottom:40px }
+  .lock .dates { font-size:17px }
+  .plan, .artist, .gallery, .process { padding:80px 0 } .faq { padding:70px 0 } .final { padding:90px 0 100px }
+  .slip { padding:20px } .slip .ex { grid-template-columns:76px 1fr } .slip .ex img { width:76px; height:100px }
+  .final .ctas .btn { flex:1 1 100% }
+  .honour { grid-template-columns:44px 1fr; gap:12px } .honour .medal { width:44px; height:44px; font-size:17px }
   .salon { column-gap:12px } .piece .frame { padding:7px } .piece .frame::before { inset:3px }
   .card { padding:9px 10px; font-size:13px } .card b { font-size:14.5px }
   .steps { grid-template-columns:1fr }
@@ -209,7 +262,7 @@ footer .wrap { display:flex; justify-content:space-between; gap:20px; flex-wrap:
 <header class="top" id="top">
   <div class="wrap">
     <a class="mark" href="#">KOKA<small>Tattoo · Bali</small></a>
-    <nav aria-label="Main"><a href="#tour">Jakarta tour</a><a href="#work">The work</a><a href="#artist">The artist</a><a href="#faq">Questions</a></nav>
+    <nav aria-label="Main"><a href="#tour">Jakarta tour</a><a href="#work">The work</a><a href="#plan">Plan your piece</a><a href="#artist">The artist</a><a href="#faq">Questions</a></nav>
     <a class="btn gold" href="https://ig.me/m/kokatattoo_" target="_blank" rel="noopener" data-book>Book a session</a>
   </div>
 </header>
@@ -225,17 +278,30 @@ footer .wrap { display:flex; justify-content:space-between; gap:20px; flex-wrap:
         <p class="lede">Full backs, sleeves and legs in black &amp; grey realism and Japanese colour, by Gede Adi Muliana. Award-winning in Bali, in Jakarta for 10 sessions only.</p>
         <div class="ctas">
           <a class="btn gold" href="#tour">Claim a Jakarta session</a>
-          <a class="btn line" href="#work">See the work</a>
+          <a class="btn line" href="#plan">Plan your piece</a>
         </div>
         <div class="proof">
-          <div><b>1st place</b>Best Colour, Amplitude comp</div>
-          <div><b>7K+</b>followers on Instagram</div>
-          <div><b>Since 2023</b>and winning already</div>
+          <div><b>1st place</b>Best Colour award</div>
+          <div><b>7K+</b>Instagram followers</div>
+          <div><b>2023</b>started, already winning</div>
         </div>
       </div>
       <figure class="reveal on">
-        <div class="frame"><div class="in"><img src="/koka/img/tiger-back.webp" width="542" height="722" alt="Black and grey realism tiger covering a client's full back" fetchpriority="high"></div></div>
-        <figcaption class="plate">Tiger · full back · black &amp; grey</figcaption>
+        <div class="frame"><div class="in sx" id="sx" style="--x:100%">
+          <img src="/koka/img/tiger-back.webp" width="542" height="722" alt="Black and grey realism tiger covering a client's full back" fetchpriority="high">
+          <div class="stencil" aria-hidden="true"><img src="/koka/img/tiger-back.webp" width="542" height="722" alt=""></div>
+          <div class="needle" aria-hidden="true"><span></span></div>
+          <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="stencil" color-interpolation-filters="sRGB">
+            <feColorMatrix type="saturate" values="0"/>
+            <feGaussianBlur stdDeviation=".5"/>
+            <feConvolveMatrix order="3" kernelMatrix="-1 -1 -1 -1 8 -1 -1 -1 -1" preserveAlpha="true"/>
+            <feComponentTransfer><feFuncR type="linear" slope="-4.2" intercept="1"/><feFuncG type="linear" slope="-4.2" intercept="1"/><feFuncB type="linear" slope="-4.2" intercept="1"/></feComponentTransfer>
+            <feColorMatrix type="matrix" values=".635 0 0 0 .306  0 .616 0 0 .247  0 0 .133 0 .651  0 0 0 1 0"/>
+          </filter></svg>
+          <input class="sxr" type="range" min="0" max="100" value="100" aria-label="Drag to compare the stencil with the finished tattoo">
+          <span class="tag l" aria-hidden="true">Finished</span><span class="tag r" aria-hidden="true">Stencil</span>
+        </div></div>
+        <figcaption class="plate">Drag the needle · stencil to finished tiger</figcaption>
       </figure>
     </div>
   </section>
@@ -278,6 +344,33 @@ footer .wrap { display:flex; justify-content:space-between; gap:20px; flex-wrap:
         <button type="button" aria-pressed="false" data-f="back">Full backs</button>
       </div>
       <div class="salon" id="salon"></div>
+    </div>
+  </section>
+
+
+  <section class="plan" id="plan" aria-labelledby="pl-h">
+    <div class="wrap">
+      <div>
+        <h2 id="pl-h" class="reveal">Plan your piece</h2>
+        <p class="sub reveal">Four taps and your request is ready for Koka. Clear requests get answered first.</p>
+        <div class="q"><p>Where on your body?</p><div class="opts" data-q="place">
+          <button type="button" class="opt" data-v="Full back">Full back</button><button type="button" class="opt" data-v="Sleeve">Sleeve</button><button type="button" class="opt" data-v="Leg">Leg</button><button type="button" class="opt" data-v="Chest">Chest</button><button type="button" class="opt" data-v="Somewhere else">Somewhere else</button>
+        </div></div>
+        <div class="q"><p>Which style?</p><div class="opts" data-q="style">
+          <button type="button" class="opt" data-v="Black &amp; grey realism">Black &amp; grey realism</button><button type="button" class="opt" data-v="Japanese colour">Japanese colour</button><button type="button" class="opt" data-v="Not sure yet">Not sure yet</button>
+        </div></div>
+        <div class="q"><p>Where do you want it done?</p><div class="opts" data-q="where">
+          <button type="button" class="opt" data-v="Jakarta tour (3–13 Nov)">Jakarta tour, 3–13 Nov</button><button type="button" class="opt" data-v="Bali">In Bali</button>
+        </div></div>
+        <div class="q"><p>Your idea, in a few words</p><textarea class="idea" id="idea" maxlength="240" placeholder="e.g. a tiger and a samurai, dark and dramatic"></textarea></div>
+      </div>
+      <aside class="slip reveal" aria-live="polite">
+        <div class="ex"><img id="exImg" src="/koka/img/tiger-samurai-back.webp" alt=""><div><small>Like this one he did</small><b id="exTxt">Tiger &amp; samurai, full back</b></div></div>
+        <pre id="msg"></pre>
+        <button class="btn gold" type="button" id="sendChat">Send to Koka’s assistant</button>
+        <a class="btn line" id="sendDm" href="https://ig.me/m/kokatattoo_" target="_blank" rel="noopener">Copy &amp; DM on Instagram</a>
+        <p class="note" id="copied">Your request is copied when you open Instagram.</p>
+      </aside>
     </div>
   </section>
 
@@ -417,12 +510,74 @@ footer .wrap { display:flex; justify-content:space-between; gap:20px; flex-wrap:
   else if (now < end) st.textContent = 'On now · ' + days(end - now) + (days(end - now) === 1 ? ' day' : ' days') + ' left · only 10 sessions';
   else { st.textContent = 'This tour has ended · book Koka in Bali'; document.querySelector('.hero .ctas .btn.gold').textContent = 'Book in Bali'; }
 
+
+  // stencil -> finished: sweeps once after the curtain opens, then follows the visitor's drag
+  var sx = document.getElementById('sx'), rng = sx.querySelector('.sxr');
+  var setX = function (v) { sx.style.setProperty('--x', v + '%'); };
+  rng.addEventListener('input', function () { stop = true; sx.classList.remove('sweep'); setX(rng.value); });
+  var stop = false;
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    setX(0); rng.value = 0;
+    setTimeout(function () {
+      var t0 = performance.now(), dur = 2600; sx.classList.add('sweep');
+      (function step(now) {
+        if (stop) return;
+        var k = Math.min(1, (now - t0) / dur), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2, v = Math.round(e * 62);
+        setX(v); rng.value = v;
+        if (k < 1) requestAnimationFrame(step); else sx.classList.remove('sweep');
+      })(t0);
+    }, 2100);
+  } else { setX(50); rng.value = 50; }
+
+  // plan your piece
+  var EX = {
+    'Full back|Black & grey realism': ['tiger-samurai-back', 'Tiger & samurai, full back'], 'Full back|Japanese colour': ['dragon-samurai-back', 'Dragon & ronin, full back'],
+    'Sleeve|Black & grey realism': ['samurai-sleeve', 'Samurai, full sleeve'], 'Sleeve|Japanese colour': ['koi-sleeve', 'Koi & chrysanthemum, full arm'],
+    'Leg|Black & grey realism': ['skull-leg', 'Pharaoh skull, full leg'], 'Leg|Japanese colour': ['hannya-leg', 'Hannya & koi, full leg'],
+    'Full back|': ['lion-back', 'Lion, full back'], 'Sleeve|': ['koi-sleeve', 'Koi & chrysanthemum, full arm'], 'Leg|': ['phoenix-leg', 'Phoenix & foo dog, full leg'],
+    '|Japanese colour': ['phoenix-leg', 'Phoenix & foo dog, full leg'], '|Black & grey realism': ['oni-snake-back', 'Oni & serpent, full back']
+  };
+  var pick = { place: '', style: '', where: '' };
+  var msgEl = document.getElementById('msg'), idea = document.getElementById('idea');
+  function compose() {
+    var l = ['Hi Koka, I want to book a tattoo.'];
+    if (pick.place) l.push('Placement: ' + pick.place);
+    if (pick.style) l.push('Style: ' + pick.style);
+    if (pick.where) l.push('Where: ' + pick.where);
+    if (idea.value.trim()) l.push('Idea: ' + idea.value.trim());
+    return l.join('\n');
+  }
+  function update() {
+    msgEl.textContent = compose();
+    var st = pick.style === 'Not sure yet' ? '' : pick.style;
+    var ex = EX[pick.place + '|' + st] || EX[pick.place + '|'] || EX['|' + st];
+    if (ex) { var im = document.getElementById('exImg'); if (im.getAttribute('src').indexOf(ex[0]) < 0) { im.style.opacity = 0; setTimeout(function () { im.src = '/koka/img/' + ex[0] + '.webp'; im.style.opacity = 1; }, 180); } document.getElementById('exTxt').textContent = ex[1]; }
+  }
+  document.querySelectorAll('.opts').forEach(function (g) {
+    g.addEventListener('click', function (e) {
+      var b = e.target.closest('.opt'); if (!b) return;
+      g.querySelectorAll('.opt').forEach(function (o) { o.setAttribute('aria-pressed', o === b); });
+      pick[g.dataset.q] = b.dataset.v; update();
+    });
+  });
+  idea.addEventListener('input', update); update();
+  document.getElementById('sendChat').addEventListener('click', function () { document.dispatchEvent(new CustomEvent('arcwise:open', { detail: { text: compose() } })); });
+  document.getElementById('sendDm').addEventListener('click', function () {
+    try { navigator.clipboard.writeText(compose()); document.getElementById('copied').textContent = 'Copied. Paste it in the DM.'; } catch (e) {}
+  });
+
+  // gallery lamp
+  document.addEventListener('pointermove', function (e) {
+    var f = e.target.closest && e.target.closest('.piece .in'); if (!f) return;
+    var r = f.getBoundingClientRect(); f.style.setProperty('--lx', (e.clientX - r.left) + 'px'); f.style.setProperty('--ly', (e.clientY - r.top) + 'px');
+  });
+
   // 'Ask' buttons open the booking assistant
   document.querySelectorAll('[data-chat]').forEach(function (b) {
     b.addEventListener('click', function () { document.dispatchEvent(new CustomEvent('arcwise:open', { detail: { text: b.dataset.chat || '' } })); });
   });
 })();
 </script>
-<script src="/widget.js" data-client="koka" data-mobile-bottom="88" data-mobile-at="980" defer></script>
+<script src="/widget.js" data-client="koka" data-mobile-bottom="88" data-mobile-at="980" data-mobile-launcher="off" defer></script>
 </body>
 </html>
