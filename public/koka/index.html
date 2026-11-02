@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Koka Tattoo · Large-scale tattoos by Gede Adi Muliana</title>
+<meta name="description" content="Award-winning black & grey realism and Japanese colour by Koka (Gede Adi Muliana), Bali. Jakarta tattoo tour 3–13 November 2026, Green Lake City, only 10 sessions.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#120D0B">
+<meta property="og:title" content="Koka Tattoo · Jakarta tour 3–13 November">
+<meta property="og:description" content="Full backs, sleeves and legs by an award-winning Bali artist. 10 sessions only.">
+<meta property="og:image" content="/koka/img/tiger-back.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Figtree:wght@400;500;600;700&family=Pinyon+Script&display=swap">
+<style>
+:root {
+  --night:#120D0B; --night2:#1C1411; --velvet:#6E1216; --velvet-hi:#A3242A; --wall:#EFE5D3; --wall2:#E4D7C0;
+  --gold:#C8A253; --gold-hi:#E9CF8C; --gold-lo:#7A5C24; --ink:#1A1310; --muted:#7D6E5E; --soft:#B9AA94;
+  --display:'Anton', Impact, 'Arial Narrow', sans-serif; --script:'Pinyon Script', 'Snell Roundhand', cursive; --sans:'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --gut:max(20px, env(safe-area-inset-left, 0px));
+}
+* { box-sizing:border-box; margin:0 }
+[hidden] { display:none !important }
+html { scroll-behavior:smooth; -webkit-text-size-adjust:100% }
+body { background:var(--night); color:var(--wall); font:17px/1.6 var(--sans); -webkit-font-smoothing:antialiased; overflow-x:hidden }
+img { max-width:100%; display:block }
+a { color:inherit }
+button { font:inherit; color:inherit; cursor:pointer; border:0; background:none }
+:focus-visible { outline:2px solid var(--gold-hi); outline-offset:3px; border-radius:4px }
+.wrap { width:min(1200px, 100%); margin:0 auto; padding-left:var(--gut); padding-right:max(20px, env(safe-area-inset-right, 0px)) }
+h1, h2, h3 { font-family:var(--display); font-weight:400; line-height:.95; letter-spacing:.005em; text-wrap:balance }
+.btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:16px 26px; border-radius:2px; font-weight:700; font-size:16px; text-decoration:none; transition:transform .2s, background .2s, box-shadow .2s }
+.btn.gold { background:linear-gradient(180deg, var(--gold-hi), var(--gold) 55%, #A9853C); color:var(--night); box-shadow:0 0 0 1px var(--gold-lo) inset, 0 10px 30px rgba(200,162,83,.25) }
+.btn.gold:hover { transform:translateY(-2px); box-shadow:0 0 0 1px var(--gold-lo) inset, 0 16px 40px rgba(200,162,83,.35) }
+.btn.line { box-shadow:inset 0 0 0 1px rgba(233,207,140,.5); color:var(--gold-hi) }
+.btn.line:hover { background:rgba(233,207,140,.08) }
+.btn svg { width:20px; height:20px }
+
+/* header */
+.top { position:fixed; inset:0 0 auto; z-index:50; padding-top:env(safe-area-inset-top, 0px); transition:background .3s, box-shadow .3s }
+.top.solid { background:rgba(18,13,11,.92); backdrop-filter:blur(10px); box-shadow:0 1px 0 rgba(200,162,83,.18) }
+.top .wrap { display:flex; align-items:center; gap:28px; height:72px }
+.mark { font-family:var(--display); font-size:26px; letter-spacing:.06em; text-decoration:none; color:var(--wall) }
+.mark small { font-family:var(--sans); font-size:12px; letter-spacing:.02em; color:var(--soft); margin-left:8px; font-weight:500 }
+.top nav { display:flex; gap:26px; margin-left:auto; font-size:15px; font-weight:500 }
+.top nav a { text-decoration:none; color:var(--soft) } .top nav a:hover { color:var(--wall) }
+.top .btn { padding:11px 18px; font-size:14px }
+
+/* hero: the curtain opens on the work */
+.hero { position:relative; min-height:100svh; display:grid; place-items:center; overflow:hidden; isolation:isolate;
+  background:radial-gradient(60% 55% at 50% 40%, #3A0B0E 0%, #1A0807 60%, var(--night) 100%) }
+.hero .stage { position:relative; width:min(1200px, 100%); padding:110px var(--gut) 70px; display:grid; grid-template-columns:minmax(0, 1.05fr) minmax(0, .95fr); gap:48px; align-items:center }
+.spot { position:absolute; inset:-20% 10% auto; height:90%; background:radial-gradient(closest-side, rgba(255,214,150,.16), transparent 70%); z-index:-1; pointer-events:none }
+.hero h1 { font-size:clamp(84px, 14vw, 200px); color:var(--wall); line-height:.82 }
+.hero h1 span { display:block; font-size:.32em; color:var(--gold); letter-spacing:.02em; margin-top:.25em; line-height:1 }
+.hero .lede { margin-top:26px; font-size:19px; color:#D8CBB6; max-width:34ch }
+.hero .ctas { display:flex; gap:14px; flex-wrap:wrap; margin-top:30px }
+.hero .proof { display:flex; gap:22px; flex-wrap:wrap; margin-top:34px; font-size:14px; color:var(--soft) }
+.hero .proof b { display:block; font-family:var(--display); font-size:30px; color:var(--wall); font-weight:400; letter-spacing:.02em; line-height:1.1 }
+
+.frame { position:relative; padding:18px; background:linear-gradient(135deg, #8A6A2C, #E9CF8C 18%, #A78138 35%, #F2DDA0 52%, #8C6B2B 70%, #D9BC74 88%, #7A5C24);
+  box-shadow:0 0 0 1px #4A3713, 0 30px 80px rgba(0,0,0,.6), inset 0 0 0 1px rgba(255,240,200,.5) }
+.frame::before { content:""; position:absolute; inset:9px; border:1px solid rgba(60,40,10,.55); pointer-events:none }
+.frame .in { position:relative; background:#0b0807; box-shadow:inset 0 0 0 3px #3a2a0f, inset 0 0 30px rgba(0,0,0,.8); overflow:hidden }
+.frame img { width:100%; height:auto; aspect-ratio:3 / 4; object-fit:cover }
+.hero .frame { max-width:430px; justify-self:center; width:100% }
+.plate { margin:14px auto 0; width:fit-content; background:linear-gradient(180deg, #E9CF8C, #B48E43); color:#2A1E0B; font-size:12.5px; font-weight:700; padding:6px 14px; letter-spacing:.04em; box-shadow:0 2px 6px rgba(0,0,0,.4) }
+
+.curtain { position:absolute; top:0; bottom:0; width:51%; z-index:20; pointer-events:none;
+  background:repeating-linear-gradient(90deg, #4E0B0E 0 14px, #8E1B20 22px, #B22A30 28px, #7A151A 36px, #4E0B0E 50px), #6E1216;
+  box-shadow:inset 0 -60px 80px rgba(0,0,0,.6) }
+.curtain::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.45), transparent 20%, transparent 70%, rgba(0,0,0,.55)) }
+.curtain.l { left:0; transform-origin:left } .curtain.r { right:0; transform-origin:right }
+.js .curtain.l { animation:openL 1.6s cubic-bezier(.7, 0, .2, 1) .35s forwards } .js .curtain.r { animation:openR 1.6s cubic-bezier(.7, 0, .2, 1) .35s forwards }
+@keyframes openL { to { transform:translateX(-96%) scaleX(.35) } }
+@keyframes openR { to { transform:translateX(96%) scaleX(.35) } }
+.valance { position:absolute; inset:0 0 auto; height:56px; z-index:21; background:repeating-linear-gradient(90deg, #5C0E12 0 30px, #8E1B20 45px, #5C0E12 60px); box-shadow:0 10px 24px rgba(0,0,0,.55); border-bottom:3px solid var(--gold-lo); pointer-events:none }
+.valance::after { content:""; position:absolute; left:0; right:0; bottom:-14px; height:14px; background:radial-gradient(12px 14px at 30px 0, #6E1216 98%, transparent) 0 0 / 60px 14px repeat-x }
+.js .hero .copy > * { opacity:0; transform:translateY(16px); animation:rise .9s ease-out forwards }
+.js .hero .copy > :nth-child(2) { animation-delay:1.45s } .js .hero .copy > :nth-child(3) { animation-delay:1.55s } .js .hero .copy > :nth-child(4) { animation-delay:1.65s } .js .hero .copy > :nth-child(5) { animation-delay:1.75s } .js .hero .copy > :first-child { animation-delay:1.3s }
+@keyframes rise { to { opacity:1; transform:none } }
+
+/* tour */
+.tour { background:var(--velvet); position:relative; overflow:hidden }
+.tour::before { content:""; position:absolute; inset:0; background:repeating-linear-gradient(90deg, rgba(0,0,0,.18) 0 18px, rgba(255,255,255,.035) 28px, rgba(0,0,0,.12) 46px); pointer-events:none }
+.tour .wrap { position:relative; padding-top:90px; padding-bottom:90px; display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1fr); gap:56px; align-items:center }
+.lock .script { font-family:var(--script); font-size:clamp(70px, 9vw, 128px); color:var(--gold-hi); line-height:.8; display:block; margin-bottom:-.12em; margin-left:-.04em }
+.lock h2 { font-size:clamp(64px, 9vw, 120px); color:var(--wall) }
+.lock .dates { margin-top:16px; font-size:20px; font-weight:600; color:var(--wall) }
+.status { display:inline-flex; align-items:center; gap:10px; margin-top:22px; padding:9px 14px; background:rgba(0,0,0,.28); box-shadow:inset 0 0 0 1px rgba(233,207,140,.35); font-weight:600; font-size:15px }
+.status i { width:9px; height:9px; border-radius:50%; background:#F2C14E; box-shadow:0 0 0 0 rgba(242,193,78,.6); animation:pulse 1.8s infinite }
+@keyframes pulse { 70% { box-shadow:0 0 0 10px rgba(242,193,78,0) } }
+.ticket { background:var(--wall); color:var(--ink); padding:34px; position:relative; box-shadow:0 30px 60px rgba(0,0,0,.35) }
+.ticket::before, .ticket::after { content:""; position:absolute; left:-12px; top:50%; width:24px; height:24px; border-radius:50%; background:var(--velvet); transform:translateY(-50%) }
+.ticket::after { left:auto; right:-12px }
+.ticket dl { display:grid; grid-template-columns:auto 1fr; gap:14px 22px; font-size:16px }
+.ticket dt { color:var(--muted); font-weight:500 } .ticket dd { font-weight:700 }
+.price { font-family:var(--display); font-size:64px; line-height:1; letter-spacing:.01em; margin:4px 0 2px }
+.price small { font-family:var(--sans); font-size:16px; font-weight:600; color:var(--muted); letter-spacing:0 }
+.deal { margin:18px 0 22px; padding:14px 16px; background:#F7EBC9; border-left:4px solid var(--gold); font-size:15.5px }
+.ticket hr { border:0; border-top:2px dashed #CDBFA5; margin:22px -34px }
+.ticket .btn { width:100% }
+.ticket .fine { margin-top:12px; font-size:13.5px; color:var(--muted); text-align:center }
+
+/* gallery wall */
+.gallery { background:var(--wall); color:var(--ink); padding:110px 0 120px; background-image:radial-gradient(70% 50% at 50% 0%, #F8F0E1, transparent 70%) }
+.head { display:flex; align-items:end; justify-content:space-between; gap:30px; flex-wrap:wrap; margin-bottom:46px }
+.head h2 { font-size:clamp(54px, 7vw, 96px) }
+.head p { max-width:44ch; color:var(--muted) }
+.filters { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:40px }
+.filters button { padding:10px 16px; box-shadow:inset 0 0 0 1px #CDBFA5; font-weight:600; font-size:14.5px; color:var(--ink); border-radius:2px }
+.filters button[aria-pressed="true"] { background:var(--ink); color:var(--wall); box-shadow:none }
+.salon { columns:3; column-gap:36px }
+.piece { break-inside:avoid; margin:0 0 44px; transition:opacity .3s }
+.piece.small .frame { margin:0 8% } .piece.small .card { margin-left:8%; margin-right:8% }
+.piece button { display:block; width:100%; text-align:left }
+.piece .frame { padding:12px } .piece .frame::before { inset:6px }
+.piece img { transition:transform .6s ease }
+.piece button:hover img { transform:scale(1.04) }
+.card { margin-top:14px; background:#F8F2E6; padding:12px 14px; box-shadow:0 1px 0 #D8CAB0, 0 6px 14px rgba(60,40,10,.08); font-size:14px; line-height:1.45 }
+.card b { display:block; font-size:16px }
+.card span { color:var(--muted) }
+.piece.out { display:none }
+.piece.color-award img, .piece img[src*="color-award"] { object-position:center }
+
+dialog { border:0; padding:0; background:transparent; max-width:min(92vw, 640px); max-height:92vh }
+dialog::backdrop { background:rgba(10,6,5,.9) }
+dialog .frame img { max-height:76vh; width:auto; margin:0 auto; aspect-ratio:auto }
+dialog .card { margin-top:12px }
+dialog .x { position:absolute; top:-46px; right:0; color:var(--wall); font-size:15px; font-weight:600; padding:8px }
+
+/* artist */
+.artist { padding:120px 0; background:linear-gradient(180deg, var(--night), var(--night2)) }
+.artist .wrap { display:grid; grid-template-columns:minmax(0, .85fr) minmax(0, 1.15fr); gap:64px; align-items:center }
+.artist .frame img { aspect-ratio:3 / 4 }
+.artist h2 { font-size:clamp(54px, 7vw, 92px) }
+.artist .story { margin-top:24px; font-size:18.5px; color:#D8CBB6; max-width:52ch; display:grid; gap:16px }
+.artist blockquote { margin-top:30px; padding:20px 24px; border-left:3px solid var(--gold); background:rgba(200,162,83,.07); font-size:19px; color:var(--wall) }
+.artist blockquote cite { display:block; margin-top:8px; font-style:normal; font-size:14px; color:var(--soft) }
+.honours { margin-top:34px; display:grid; gap:12px }
+.honour { display:grid; grid-template-columns:52px 1fr; gap:16px; align-items:center; padding:14px 16px; background:var(--night); box-shadow:inset 0 0 0 1px rgba(200,162,83,.25) }
+.honour .medal { width:52px; height:52px; border-radius:50%; background:radial-gradient(circle at 35% 30%, #F6E2A6, #C8A253 45%, #7A5C24); display:grid; place-items:center; color:#2A1E0B; font-family:var(--display); font-size:20px; box-shadow:inset 0 0 0 3px rgba(255,240,200,.45) }
+.honour b { display:block; font-size:16.5px } .honour span { color:var(--soft); font-size:14.5px }
+
+/* process */
+.process { background:var(--wall); color:var(--ink); padding:110px 0 }
+.steps { display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:26px; margin-top:44px; counter-reset:s }
+.step { padding-top:22px; border-top:2px solid var(--ink) }
+.step::before { counter-increment:s; content:counter(s); font-family:var(--display); font-size:54px; line-height:1; color:var(--gold-lo) }
+.step h3 { font-family:var(--sans); font-weight:700; font-size:20px; margin:10px 0 8px; line-height:1.25 }
+.step p { color:var(--muted); font-size:16px }
+
+/* faq */
+.faq { background:var(--wall2); color:var(--ink); padding:100px 0 }
+.faq .wrap { display:grid; grid-template-columns:minmax(0, .8fr) minmax(0, 1.2fr); gap:56px }
+.faq h2 { font-size:clamp(50px, 6vw, 80px) }
+details { border-bottom:1px solid #C7B89C; padding:20px 0 }
+summary { cursor:pointer; font-weight:700; font-size:18.5px; list-style:none; display:flex; justify-content:space-between; gap:16px }
+summary::-webkit-details-marker { display:none }
+summary::after { content:"+"; font-family:var(--display); font-size:26px; line-height:1; color:var(--gold-lo); transition:transform .2s }
+details[open] summary::after { transform:rotate(45deg) }
+details p { margin-top:10px; color:#4E4236; max-width:60ch }
+
+/* final */
+.final { position:relative; padding:130px 0 140px; text-align:center; overflow:hidden; background:radial-gradient(55% 70% at 50% 100%, #4A0E11, var(--night) 70%) }
+.final h2 { font-size:clamp(60px, 10vw, 150px); color:var(--wall) }
+.final h2 em { font-style:normal; color:var(--gold) }
+.final p { margin:22px auto 34px; max-width:46ch; color:#D8CBB6; font-size:19px }
+.final .ctas { display:flex; gap:14px; justify-content:center; flex-wrap:wrap }
+footer { padding:34px 0 calc(34px + env(safe-area-inset-bottom, 0px)); background:var(--night); color:var(--soft); font-size:14px; border-top:1px solid rgba(200,162,83,.15) }
+footer .wrap { display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap }
+
+/* mobile booking bar */
+.bar { position:fixed; left:0; right:0; bottom:0; z-index:40; display:none; gap:10px; padding:10px max(14px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(14px, env(safe-area-inset-left, 0px)); background:rgba(18,13,11,.95); backdrop-filter:blur(10px); box-shadow:0 -1px 0 rgba(200,162,83,.25) }
+.bar .btn { flex:1; padding:14px 12px; font-size:15px }
+
+.reveal { opacity:0; transform:translateY(24px); transition:opacity .8s ease, transform .8s ease }
+.reveal.on { opacity:1; transform:none }
+
+@media (max-width:980px) {
+  .hero .stage, .tour .wrap, .artist .wrap, .faq .wrap { grid-template-columns:1fr }
+  .hero .stage { padding-top:100px; gap:36px }
+  .hero .frame { max-width:360px }
+  .salon { columns:2; column-gap:16px } .piece { margin-bottom:28px } .piece.small .frame { margin:0 } .piece.small .card { margin-left:0; margin-right:0 }
+  .steps { grid-template-columns:repeat(2, minmax(0, 1fr)) }
+  .top nav { display:none } .top .btn { margin-left:auto }
+  .bar { display:flex } footer { padding-bottom:110px }
+}
+@media (max-width:560px) {
+  body { font-size:16px }
+  .hero h1 { font-size:clamp(84px, 30vw, 140px) }
+  .hero .ctas .btn { flex:1 1 100% }
+  .ticket { padding:26px 22px } .ticket hr { margin:20px -22px }
+  .salon { column-gap:12px } .piece .frame { padding:7px } .piece .frame::before { inset:3px }
+  .card { padding:9px 10px; font-size:13px } .card b { font-size:14.5px }
+  .steps { grid-template-columns:1fr }
+  .top .btn { display:none }
+}
+@media (prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto } .curtain { display:none } .js .hero .copy > * { animation:none; opacity:1; transform:none }
+  .reveal { opacity:1; transform:none; transition:none } .status i { animation:none }
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="mark" href="#">KOKA<small>Tattoo · Bali</small></a>
+    <nav aria-label="Main"><a href="#tour">Jakarta tour</a><a href="#work">The work</a><a href="#artist">The artist</a><a href="#faq">Questions</a></nav>
+    <a class="btn gold" href="https://ig.me/m/kokatattoo_" target="_blank" rel="noopener" data-book>Book a session</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="h1">
+    <div class="valance" aria-hidden="true"></div>
+    <div class="curtain l" aria-hidden="true"></div><div class="curtain r" aria-hidden="true"></div>
+    <div class="spot" aria-hidden="true"></div>
+    <div class="stage">
+      <div class="copy">
+        <h1 id="h1">KOKA<span>Large-scale tattoo artist</span></h1>
+        <p class="lede">Full backs, sleeves and legs in black &amp; grey realism and Japanese colour, by Gede Adi Muliana. Award-winning in Bali, in Jakarta for 10 sessions only.</p>
+        <div class="ctas">
+          <a class="btn gold" href="#tour">Claim a Jakarta session</a>
+          <a class="btn line" href="#work">See the work</a>
+        </div>
+        <div class="proof">
+          <div><b>1st place</b>Best Colour, Amplitude comp</div>
+          <div><b>7K+</b>followers on Instagram</div>
+          <div><b>Since 2023</b>and winning already</div>
+        </div>
+      </div>
+      <figure class="reveal on">
+        <div class="frame"><div class="in"><img src="/koka/img/tiger-back.webp" width="542" height="722" alt="Black and grey realism tiger covering a client's full back" fetchpriority="high"></div></div>
+        <figcaption class="plate">Tiger · full back · black &amp; grey</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="tour" id="tour" aria-labelledby="tour-h">
+    <div class="wrap">
+      <div class="lock reveal">
+        <span class="script" aria-hidden="true">Jakarta</span>
+        <h2 id="tour-h"><span class="vh" style="position:absolute;left:-9999px">Jakarta </span>Tattoo Tour</h2>
+        <p class="dates">3–13 November 2026 · Green Lake City, America Cluster</p>
+        <p class="status" id="status"><i aria-hidden="true"></i><span>Only 10 sessions on this tour</span></p>
+      </div>
+      <div class="ticket reveal" aria-label="Tour session details">
+        <p style="font-weight:600;color:var(--muted)">One session with Koka</p>
+        <p class="price">Rp 8.999K <small>per session</small></p>
+        <p class="deal"><b>First 2 bookings save Rp 1,500,000 per session.</b> Ask in DM if it’s still open.</p>
+        <dl>
+          <dt>Where</dt><dd>Green Lake City, America Cluster, Jakarta</dd>
+          <dt>When</dt><dd>3–13 November 2026</dd>
+          <dt>Spots</dt><dd>10 sessions in total</dd>
+          <dt>Best for</dt><dd>Backpieces, sleeves, legs and big statement work</dd>
+        </dl>
+        <hr>
+        <a class="btn gold" href="https://ig.me/m/kokatattoo_" target="_blank" rel="noopener" data-book="I want to book a Jakarta tour session">Claim my session</a>
+        <p class="fine">Tell us your idea and placement. Koka confirms dates in DM.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery" id="work" aria-labelledby="work-h">
+    <div class="wrap">
+      <div class="head reveal">
+        <h2 id="work-h">The collection</h2>
+        <p>Every piece below was designed and tattooed by Koka. Tap any piece to see it larger.</p>
+      </div>
+      <div class="filters" role="group" aria-label="Filter the work">
+        <button type="button" aria-pressed="true" data-f="all">All work</button>
+        <button type="button" aria-pressed="false" data-f="bg">Black &amp; grey</button>
+        <button type="button" aria-pressed="false" data-f="color">Colour</button>
+        <button type="button" aria-pressed="false" data-f="back">Full backs</button>
+      </div>
+      <div class="salon" id="salon"></div>
+    </div>
+  </section>
+
+  <section class="artist" id="artist" aria-labelledby="ar-h">
+    <div class="wrap">
+      <figure class="reveal">
+        <div class="frame"><div class="in"><img src="/koka/img/koka-portrait-tall.webp" width="600" height="800" alt="Portrait of Gede Adi Muliana, known as Koka" loading="lazy"></div></div>
+        <figcaption class="plate">Gede Adi Muliana · “Koka”</figcaption>
+      </figure>
+      <div class="reveal">
+        <h2 id="ar-h">The hand behind the work</h2>
+        <div class="story">
+          <p>Koka is a Bali tattoo artist who started tattooing in 2023 and has been winning awards at the conventions he enters ever since.</p>
+          <p>His favourite is black &amp; grey realism: tigers, lions, dragons and samurai at full-back scale. His Japanese colour work, hannya, phoenix and koi, is bold enough to win best colour.</p>
+          <p>He co-founded Blustereast Tattoo Studio in Bali, and now brings his chair to Jakarta.</p>
+        </div>
+        <blockquote>“Koka has only been tattooing since 2023 and is already winning awards at every convention he attends.”<cite>Bali Butter, naming him Artist of the Month</cite></blockquote>
+        <div class="honours">
+          <div class="honour"><span class="medal">1st</span><div><b>Best Colour, 1st place</b><span>Amplitude Skatepark 10th anniversary tattoo competition</span></div></div>
+          <div class="honour"><span class="medal">★</span><div><b>Artist of the Month</b><span>Bali Butter</span></div></div>
+          <div class="honour"><span class="medal">26</span><div><b>Guest artist</b><span>Denpasar Tattoo Fest 2026</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="process" aria-labelledby="pr-h">
+    <div class="wrap">
+      <h2 id="pr-h" class="reveal" style="font-size:clamp(50px,6vw,84px)">From idea to masterpiece</h2>
+      <div class="steps">
+        <div class="step reveal"><h3>Send your idea</h3><p>The subject, placement and rough size. Reference photos help.</p></div>
+        <div class="step reveal"><h3>Koka designs it</h3><p>A custom design that follows the shape of your back, arm or leg.</p></div>
+        <div class="step reveal"><h3>Lock your session</h3><p>Pick your date on the Jakarta tour or come to Bali.</p></div>
+        <div class="step reveal"><h3>Wear the work</h3><p>Big pieces are built over sessions. Koka guides you through healing.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq" aria-labelledby="fq-h">
+    <div class="wrap">
+      <h2 id="fq-h" class="reveal">Before you book</h2>
+      <div>
+        <details><summary>How much is a session?</summary><p>On the Jakarta tour, Rp 8.999K per session. The first 2 people to book save Rp 1,500,000 per session. In Bali, Koka quotes each piece in DM.</p></details>
+        <details><summary>Where is the Jakarta tour?</summary><p>Green Lake City, America Cluster, Jakarta, from 3 to 13 November 2026. There are only 10 sessions.</p></details>
+        <details><summary>What styles does Koka do?</summary><p>Black &amp; grey realism is his favourite, and he also does Japanese colour. He specialises in large work: full backs, full sleeves and full legs.</p></details>
+        <details><summary>How many sessions does a full back take?</summary><p>It depends on the design and how you sit. One Japanese full back was finished in 3 days back to back. Koka will plan it with you in DM.</p></details>
+        <details><summary>How do I book?</summary><p>Send Koka a DM on Instagram with your idea, placement and size, or let the booking assistant on this page get your message ready.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="final" aria-labelledby="fn-h">
+    <div class="wrap">
+      <h2 id="fn-h" class="reveal">Your skin. <em>His next piece.</em></h2>
+      <p class="reveal">10 sessions in Jakarta, 3–13 November. When they’re gone, the next chance is in Bali.</p>
+      <div class="ctas reveal">
+        <a class="btn gold" href="https://ig.me/m/kokatattoo_" target="_blank" rel="noopener" data-book="I want to book a Jakarta tour session">Book on Instagram</a>
+        <button class="btn line" type="button" data-chat>Ask the booking assistant</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Koka Tattoo · Gede Adi Muliana · Bali, Indonesia · <a href="https://www.instagram.com/kokatattoo_/" target="_blank" rel="noopener">@kokatattoo_</a></span>
+    <span>Concept website by Arcwise Studios</span>
+  </div>
+</footer>
+
+<div class="bar" aria-label="Book">
+  <a class="btn gold" href="https://ig.me/m/kokatattoo_" target="_blank" rel="noopener" data-book="I want to book a Jakarta tour session">Book a session</a>
+  <button class="btn line" type="button" data-chat>Ask us</button>
+</div>
+
+<dialog id="lb" aria-label="Tattoo">
+  <button class="x" type="button" id="lbx">Close ✕</button>
+  <div class="frame"><div class="in"><img id="lbimg" alt=""></div></div>
+  <p class="card" id="lbcard"></p>
+</dialog>
+
+<script>
+(function () {
+  var W = [
+    ['tiger-samurai-back', 'Tiger & samurai', 'Full back · black & grey realism', 'bg back', 'big'],
+    ['hannya-leg', 'Hannya & koi', 'Full leg · Japanese colour', 'color', 'small'],
+    ['dragon-samurai-back', 'Dragon & ronin', 'Full back · black & grey', 'bg back', 'tall'],
+    ['phoenix-leg', 'Phoenix & foo dog', 'Full leg · Japanese colour', 'color', ''],
+    ['lion-back', 'Lion', 'Full back · black & grey realism', 'bg back', ''],
+    ['samurai-sleeve', 'Samurai', 'Full sleeve · black & grey', 'bg', 'small'],
+    ['oni-snake-back', 'Oni & serpent', 'Full back · black & grey', 'bg back', 'big'],
+    ['color-award', 'Skater girl', '1st place Best Colour · Amplitude competition', 'color', 'small'],
+    ['koi-sleeve', 'Koi & chrysanthemum', 'Full arm · Japanese colour', 'color', ''],
+    ['skull-leg', 'Pharaoh skull', 'Full leg · black & grey', 'bg', 'small'],
+    ['reaper-back', 'The reaper', 'Full back · black & grey', 'bg back', ''],
+    ['foo-dog-leg', 'Foo dog', 'Leg · black & grey with colour', 'color', 'small']
+  ];
+  var salon = document.getElementById('salon');
+  W.forEach(function (w, i) {
+    var f = document.createElement('figure'); f.className = 'piece reveal ' + w[4]; f.dataset.tags = w[3];
+    f.innerHTML = '<button type="button"><div class="frame"><div class="in"><img loading="lazy" width="542" height="722"></div></div><p class="card"><b></b><span></span></p></button>';
+    var img = f.querySelector('img'); img.src = '/koka/img/' + w[0] + '.webp'; img.alt = w[1] + ', ' + w[2];
+    f.querySelector('b').textContent = w[1]; f.querySelector('.card span').textContent = w[2];
+    f.querySelector('button').addEventListener('click', function () { open(w); });
+    salon.appendChild(f);
+  });
+  document.querySelectorAll('.filters button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('.filters button').forEach(function (o) { o.setAttribute('aria-pressed', o === b); });
+      document.querySelectorAll('.piece').forEach(function (p) { p.classList.toggle('out', b.dataset.f !== 'all' && p.dataset.tags.split(' ').indexOf(b.dataset.f) < 0); });
+    });
+  });
+
+  var lb = document.getElementById('lb');
+  function open(w) {
+    var img = document.getElementById('lbimg'); img.src = '/koka/img/' + w[0] + '.webp'; img.alt = w[1] + ', ' + w[2];
+    var c = document.getElementById('lbcard'); c.innerHTML = '<b></b><span></span>'; c.querySelector('b').textContent = w[1]; c.querySelector('span').textContent = w[2];
+    if (lb.showModal) lb.showModal(); else lb.setAttribute('open', '');
+  }
+  document.getElementById('lbx').addEventListener('click', function () { lb.close(); });
+  lb.addEventListener('click', function (e) { if (e.target === lb) lb.close(); });
+
+  // header turns solid after the hero
+  var top = document.getElementById('top');
+  var onScroll = function () { top.classList.toggle('solid', scrollY > 60); };
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // reveal on scroll
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }); }, { threshold: .12 }) : null;
+  document.querySelectorAll('.reveal').forEach(function (el) { io ? io.observe(el) : el.classList.add('on'); });
+
+  // tour status, by Jakarta time
+  var start = Date.UTC(2026, 10, 2, 17), end = Date.UTC(2026, 10, 13, 17), now = Date.now();
+  var st = document.querySelector('#status span');
+  var days = function (ms) { return Math.ceil(ms / 864e5); };
+  if (now < start) st.textContent = 'Starts in ' + days(start - now) + (days(start - now) === 1 ? ' day' : ' days') + ' · only 10 sessions';
+  else if (now < end) st.textContent = 'On now · ' + days(end - now) + (days(end - now) === 1 ? ' day' : ' days') + ' left · only 10 sessions';
+  else { st.textContent = 'This tour has ended · book Koka in Bali'; document.querySelector('.hero .ctas .btn.gold').textContent = 'Book in Bali'; }
+
+  // 'Ask' buttons open the booking assistant
+  document.querySelectorAll('[data-chat]').forEach(function (b) {
+    b.addEventListener('click', function () { document.dispatchEvent(new CustomEvent('arcwise:open', { detail: { text: b.dataset.chat || '' } })); });
+  });
+})();
+</script>
+<script src="/widget.js" data-client="koka" data-mobile-bottom="88" data-mobile-at="980" defer></script>
+</body>
+</html>

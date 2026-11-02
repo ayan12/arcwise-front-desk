@@ -1,8 +1,9 @@
 import gentology from './gentology.js';
 import arcwise from './arcwise.js';
+import koka from './koka.js';
 
 // One line per client. The key is what goes in data-client="..." on their site.
-export const CLIENTS = { gentology, arcwise };
+export const CLIENTS = { gentology, arcwise, koka };
 
 export function getClient(id) {
   return Object.prototype.hasOwnProperty.call(CLIENTS, id) ? CLIENTS[id] : null;
