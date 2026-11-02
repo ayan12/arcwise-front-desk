@@ -159,6 +159,8 @@ button { cursor:pointer; border:0; background:none }
 .toast button { background:var(--ink); color:var(--gold); padding:8px 14px; border-radius:10px; font-weight:700 }
 @media (max-width:700px) { .who-big .no { font-size:40px; min-width:54px } .help ol { flex-direction:column; gap:6px } .sum { gap:14px } }
 
+.btn.seatwalk { background:transparent; box-shadow:none; border:1.5px dashed var(--gold); color:var(--gold) }
+.btn.seatwalk small { color:var(--mute); opacity:1 }
 /* guided walkthrough */
 .tour { position:fixed; inset:0; z-index:40 }
 .tour .dim { position:absolute; inset:0; background:rgba(0,0,0,.72) }
@@ -176,6 +178,6 @@ button { cursor:pointer; border:0; background:none }
 </head>
 <body>
 <div id="root"></div>
-<script type="module" src="/gentology/branch.js"></script>
+<script type="module" src="/gentology/branch.js?v=3"></script>
 </body>
 </html>

@@ -41,7 +41,7 @@ const L = {
     waiting: 'menunggu', wait: 'tunggu', none: 'tidak ada antrian', served: 'selesai hari ini', chairs: 'Kursi',
     chair: 'Kursi', free: 'Kosong', callNext: 'Panggil berikutnya', nobody: 'Belum ada yang menunggu', done: 'Selesai',
     queue: 'Antrian', walkin: '+ Walk-in', emptyQ: 'Antrian kosong. Booking WhatsApp masuk ke sini otomatis.', tapRow: 'Tekan nama untuk pilihan lain',
-    finished: 'Selesai hari ini', noshow: 'tidak datang', cancelled: 'batal', wa: 'WhatsApp', walk: 'Walk-in',
+    finished: 'Selesai hari ini', noshow: 'tidak datang', cancelled: 'batal', seatWalk: '+ Tamu langsung duduk', wa: 'WhatsApp', walk: 'Walk-in',
     seatNow: 'Dudukkan sekarang', notHere: 'Tidak datang', cancel: 'Batalkan antrian', close: 'Tutup',
     newGuest: 'Tamu walk-in', name: 'Nama (boleh kosong)', add: 'Masukkan antrian', giveNo: 'Berikan nomor ini ke tamu', ok: 'Oke',
     undo: 'Batalkan', tSeat: (t, c) => `#${t.no} ${t.name} duduk di kursi ${c}`, tDone: t => `#${t.no} selesai · terima kasih terkirim`,
@@ -52,7 +52,7 @@ const L = {
     waiting: 'waiting', wait: 'wait', none: 'no wait', served: 'served today', chairs: 'Chairs',
     chair: 'Chair', free: 'Free', callNext: 'Call next', nobody: 'Nobody waiting yet', done: 'Done',
     queue: 'Queue', walkin: '+ Walk-in', emptyQ: 'Queue is empty. WhatsApp bookings appear here on their own.', tapRow: 'Tap a name for more options',
-    finished: 'Finished today', noshow: 'no-show', cancelled: 'cancelled', wa: 'WhatsApp', walk: 'Walk-in',
+    finished: 'Finished today', noshow: 'no-show', cancelled: 'cancelled', seatWalk: '+ Seat a walk-in', wa: 'WhatsApp', walk: 'Walk-in',
     seatNow: 'Seat now', notHere: 'Not here', cancel: 'Cancel booking', close: 'Close',
     newGuest: 'Walk-in customer', name: 'Name (optional)', add: 'Add to queue', giveNo: 'Give the customer this number', ok: 'OK',
     undo: 'Undo', tSeat: (t, c) => `#${t.no} ${t.name} is in chair ${c}`, tDone: t => `#${t.no} done · thank-you sent`,
@@ -112,10 +112,10 @@ function Board({ bd, t, hide, onAct, onWalkIn, onBarbers, onRow }) {
           <div class="who-big"><span class="no">${tk.no}</span><div><b>${tk.name}</b><span>${svcOf(tk.service).name}</span></div></div>
           <button class="btn done lg" type="button" onClick=${() => onAct(tk, 'done')}>✓ ${t.done}</button></article>`; }
       return html`<article class="seat"><header>${t.chair} ${i + 1}<span>${t.free}</span></header>
-        ${next ? html`<button class="btn go xl" type="button" onClick=${() => onAct(next, 'start')}>${t.callNext}<small>#${next.no} ${next.name}</small></button>` : html`<p class="empty">${t.nobody}</p>`}</article>`;
+        ${next ? html`<button class="btn go xl" type="button" onClick=${() => onAct(next, 'start')}>${t.callNext}<small>#${next.no} ${next.name}</small></button>` : html`<button class="btn xl seatwalk" type="button" onClick=${() => onWalkIn(true)}>${t.seatWalk}<small>${t.nobody}</small></button>`}</article>`;
     })}</section>
     <section class="queue">
-      <h2>${t.queue} <span class="n">${waiting.length}</span><span class="grow"></span><button class="add" type="button" onClick=${onWalkIn}>${t.walkin}</button></h2>
+      <h2>${t.queue} <span class="n">${waiting.length}</span><span class="grow"></span><button class="add" type="button" onClick=${() => onWalkIn(false)}>${t.walkin}</button></h2>
       ${waiting.length ? html`<p class="hint">${t.tapRow}</p>${waiting.map((x, i) => html`<button type="button" class=${'qrow' + (i === 0 ? ' first' : '')} onClick=${() => onRow(x)}>
           <span class="no">${x.no}</span><span class="who"><b>${x.name}</b><span>${svcOf(x.service).name} · <span class=${'src' + (x.source === 'walkin' ? ' walk' : '')}>${x.source === 'walkin' ? t.walk : t.wa}</span></span></span>
           <span class="eta">${x.waitMins > 0 ? '~' + x.waitMins + ' ' + t.min : '→'}</span></button>`)}` : html`<p class="empty">${t.emptyQ}</p>`}
@@ -275,9 +275,9 @@ function App() {
     </header>
     <main class="main">
       ${view === 'all' ? (all ? html`<${Owner} boards=${all} open=${go} />` : html`<p class="empty">Loading…</p>`)
-        : bd ? html`<${Board} bd=${bd} t=${t} hide=${pend?.tk.id} onAct=${onAct} onRow=${setRow} onWalkIn=${() => setWalk(true)} onBarbers=${n => post({ action: 'barbers', n })} />` : html`<p class="empty">Loading…</p>`}
+        : bd ? html`<${Board} bd=${bd} t=${t} hide=${pend?.tk.id} onAct=${onAct} onRow=${setRow} onWalkIn=${seat => setWalk(seat ? 'seat' : 'queue')} onBarbers=${n => post({ action: 'barbers', n })} />` : html`<p class="empty">Loading…</p>`}
     </main>
-    ${walk ? html`<${WalkIn} t=${t} services=${me.services} close=${() => setWalk(false)} add=${async (name, service) => { setWalk(false); const r = await post({ action: 'walkin', name: name || (lang === 'id' ? 'Tamu' : 'Guest'), service }); if (r?.ticket) setIssued(r.ticket); }} />` : null}
+    ${walk ? html`<${WalkIn} t=${t} services=${me.services} close=${() => setWalk(false)} add=${async (name, service) => { setWalk(false); const r = await post({ action: 'walkin', name: name || (lang === 'id' ? 'Tamu' : 'Guest'), service }); if (!r?.ticket) return; if (walk === 'seat') onAct(r.ticket, 'start'); else setIssued(r.ticket); }} />` : null}
     ${row ? html`<${Sheet} t=${t} tk=${row} close=${() => setRow(null)} act=${onAct} />` : null}
     ${issued ? html`<${Issued} t=${t} ticket=${issued} close=${() => setIssued(null)} />` : null}
     ${tour && bd && view !== 'all' ? html`<${Tour} lang=${lang} close=${endTour} />` : null}
