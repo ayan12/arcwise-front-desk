@@ -41,7 +41,7 @@ const L = {
     waiting: 'menunggu', wait: 'tunggu', none: 'tidak ada antrian', served: 'selesai hari ini', chairs: 'Kursi',
     chair: 'Kursi', free: 'Kosong', callNext: 'Panggil berikutnya', nobody: 'Belum ada yang menunggu', done: 'Selesai',
     queue: 'Antrian', walkin: '+ Walk-in', emptyQ: 'Antrian kosong. Booking WhatsApp masuk ke sini otomatis.', tapRow: 'Tekan nama untuk pilihan lain',
-    finished: 'Selesai hari ini', noshow: 'tidak datang', cancelled: 'batal', seatWalk: '+ Tamu langsung duduk', wa: 'WhatsApp', walk: 'Walk-in',
+    finished: 'Selesai hari ini', noshow: 'tidak datang', cancelled: 'batal', seatWalk: '+ Walk-in duduk', wa: 'WhatsApp', walk: 'Walk-in',
     seatNow: 'Dudukkan sekarang', notHere: 'Tidak datang', cancel: 'Batalkan antrian', close: 'Tutup',
     newGuest: 'Tamu walk-in', name: 'Nama (boleh kosong)', add: 'Masukkan antrian', giveNo: 'Berikan nomor ini ke tamu', ok: 'Oke',
     undo: 'Batalkan', tSeat: (t, c) => `#${t.no} ${t.name} duduk di kursi ${c}`, tDone: t => `#${t.no} selesai · terima kasih terkirim`,

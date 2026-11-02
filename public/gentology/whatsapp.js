@@ -1,3 +1,5 @@
+const EMBED = /[?&]embed/.test(location.search);
+if (EMBED) document.documentElement.classList.add('embed');
 // WhatsApp simulator for the Gentology booking demo. Talks to the same bot as real WhatsApp.
 const $ = s => document.querySelector(s);
 const chat = $('#chat'), input = $('#input'), screen = $('#screen'), nameEl = $('#name');
@@ -16,7 +18,7 @@ function rich(el, text) {
   String(text || '').split(/(\*[^*\n]+\*|https?:\/\/\S+)/g).forEach(part => {
     if (!part) return;
     if (/^\*[^*]+\*$/.test(part)) { const b = document.createElement('b'); b.textContent = part.slice(1, -1); el.appendChild(b); }
-    else if (/^https?:\/\//.test(part)) { const a = document.createElement('a'); a.href = part; a.textContent = part.replace(/^https?:\/\//, ''); a.target = '_blank'; a.rel = 'noopener'; el.appendChild(a); }
+    else if (/^https?:\/\//.test(part)) { const a = document.createElement('a'); a.href = part; a.textContent = part.replace(/^https?:\/\//, ''); a.target = EMBED ? 'gq-view' : '_blank'; a.rel = 'noopener'; el.appendChild(a); }
     else el.appendChild(document.createTextNode(part));
   });
 }
