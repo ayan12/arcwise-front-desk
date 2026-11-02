@@ -36,8 +36,7 @@ export default {
     for (const r of REDIRECTS) if (r.re.test(path)) return Response.redirect(new URL(r.to, url), r.code);
     const fn = routes[path];
     if (fn) return withHeaders(await fn(req), path);
-    let res = await env.ASSETS.fetch(req);
-    return withHeaders(res, path);
+    return env.ASSETS.fetch(req);
   },
   async scheduled(event, env, ctx) {
     useEnv(env);

@@ -1,0 +1,37 @@
+# Response headers for Cloudflare (kept in step with vercel.json).
+/widget.js
+  Cache-Control: public, max-age=300
+  Access-Control-Allow-Origin: *
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+/dashboard
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://www.googleapis.com; frame-ancestors 'none'; base-uri 'none'; form-action 'self'; object-src 'none'
+  X-Frame-Options: DENY
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
+  Referrer-Policy: no-referrer
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Cross-Origin-Opener-Policy: same-origin
+/api/*
+  X-Robots-Tag: noindex
+  X-Frame-Options: DENY
+/gentology/branch
+  X-Robots-Tag: noindex, nofollow
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: no-referrer
+/gentology/whatsapp
+  X-Robots-Tag: noindex, nofollow
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: no-referrer
+/ticket
+  X-Robots-Tag: noindex, nofollow
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: no-referrer
+/review
+  X-Robots-Tag: noindex, nofollow
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: no-referrer
+/gentology/demo
+  X-Robots-Tag: noindex, nofollow
+  Referrer-Policy: no-referrer

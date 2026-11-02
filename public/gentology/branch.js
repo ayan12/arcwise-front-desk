@@ -232,7 +232,7 @@ function App() {
       else setBd(await api('?action=board&branch=' + view));
     } catch (e) { if (e.status === 401) setRole(null); }
   };
-  useEffect(() => { if (!role) return; refresh(); const t = setInterval(refresh, 3000); return () => clearInterval(t); }, [role, view]);
+  useEffect(() => { if (!role) return; refresh(); const t = setInterval(refresh, document.hidden ? 15000 : 5000); return () => clearInterval(t); }, [role, view]);
   useEffect(() => { const t = setInterval(() => setNow(Date.now()), 15000); return () => clearInterval(t); }, []);
   useEffect(() => { if (role && bd && view !== 'all' && store.get('gq-tour') !== '1') setTour(true); }, [role, !!bd]);
   const endTour = () => { setTour(false); store.set('gq-tour', '1'); store.set('gq-help', '0'); };
