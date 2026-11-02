@@ -104,7 +104,7 @@ function Board({ bd, t, hide, onAct, onWalkIn, onBarbers, onRow }) {
   const next = waiting[0];
   return html`
     ${help ? html`<section class="help"><ol>${t.help.map(h => html`<li dangerouslySetInnerHTML=${{ __html: h }}></li>`)}</ol><button class="btn" type="button" onClick=${() => { setHelp(false); store.set('gq-help', '0'); }}>${t.gotIt}</button></section>` : null}
-    <section class="sum"><span><b>${waiting.length}</b> ${t.waiting}</span><span><b>${bd.stats.nextWait ? '~' + bd.stats.nextWait + ' ' + t.min : '0'}</b> ${bd.stats.nextWait ? t.wait : t.none}</span><span><b>${bd.stats.done}</b> ${t.served}</span>
+    <section class="sum"><span><b>${waiting.length}</b> ${t.waiting}</span><span><b>${bd.stats.nextWait ? '~' + bd.stats.nextWait : '0'} ${t.min}</b> ${t.wait}</span><span><b>${bd.stats.done}</b> ${t.served}</span>
       <span class="grow"></span><span class="step">${t.chairs}<button type="button" onClick=${() => onBarbers(bd.barbers - 1)} aria-label="−">−</button><b>${bd.barbers}</b><button type="button" onClick=${() => onBarbers(bd.barbers + 1)} aria-label="+">+</button></span></section>
     <section class="seats" aria-label=${t.chairs}>${seats.map((tk, i) => {
       if (tk) { const el = Date.now() - (tk.startAt || Date.now()), over = mins(el) > svcOf(tk.service).mins;
@@ -121,6 +121,76 @@ function Board({ bd, t, hide, onAct, onWalkIn, onBarbers, onRow }) {
           <span class="eta">${x.waitMins > 0 ? '~' + x.waitMins + ' ' + t.min : '→'}</span></button>`)}` : html`<p class="empty">${t.emptyQ}</p>`}
     </section>
     <details class="fin"><summary>${t.finished} (${finished.length})</summary><div class="donelist">${finished.slice(0, 40).map(x => html`<div><span class="k">${x.no}</span><span>${x.name}</span><span class=${'s' + (x.status === 'done' ? '' : ' ns')}>${x.status === 'done' ? hhmm(x.doneAt) : x.status === 'noshow' ? t.noshow : t.cancelled}</span></div>`)}</div></details>`;
+}
+
+
+const TOUR = {
+  id: [
+    [null, 'Selamat datang 👋', 'Layar ini menggantikan buku antrian. Kamu cukup pakai 3 tombol. Panduan ini cuma 1 menit.'],
+    ['.seat', 'Ini kursi barber', 'Satu kotak untuk setiap kursi. Abu-abu artinya kosong, hijau artinya ada pelanggan sedang dipotong.'],
+    ['.seat .btn.xl, .seat', '1. Kursi kosong? Panggil berikutnya', 'Tekan tombol emas ini. Pelanggan nomor berikutnya langsung duduk di kursi ini. Panggil nomornya dengan suara.'],
+    ['.seat.busy .btn.done, .seat', '2. Potong selesai? Tekan Selesai', 'Tekan tombol hijau saat potong rambut selesai. Pelanggan otomatis dapat ucapan terima kasih dan link review di WhatsApp. Timer jadi oranye kalau lewat waktu.'],
+    ['.queue', 'Antrian', 'Booking dari WhatsApp masuk ke sini sendiri, kamu tidak perlu mencatat apa pun. Nomor paling atas yang dipanggil berikutnya.'],
+    ['.queue .add', '3. Tamu datang langsung? + Walk-in', 'Tekan ini, pilih layanan, nama boleh kosong. Nomor besar muncul: sebutkan nomornya ke tamu.'],
+    ['.qrow, .queue', 'Pilihan lain', 'Tekan nama di antrian untuk: dudukkan duluan, tandai tidak datang, atau batalkan antrian.'],
+    [null, 'Salah tekan? Tenang', 'Setelah menekan, muncul tombol <b>Batalkan</b> di bawah selama 5 detik. WhatsApp ke pelanggan baru terkirim setelah itu, jadi salah tekan tidak pernah sampai ke pelanggan.'],
+    ['.sum .step', 'Jumlah kursi', 'Ubah hanya kalau ada barber masuk atau pulang. Waktu tunggu dihitung dari angka ini.'],
+    ['.tour-btn', 'Selesai!', 'Lupa caranya? Tekan <b>Panduan</b> di atas kapan saja untuk melihat ini lagi.'],
+  ],
+  en: [
+    [null, 'Welcome 👋', 'This screen replaces the paper queue book. You only need 3 buttons. This guide takes 1 minute.'],
+    ['.seat', 'These are the barber chairs', 'One box per chair. Grey means free, green means someone is getting a cut.'],
+    ['.seat .btn.xl, .seat', '1. Chair free? Call next', 'Tap this gold button. The next customer is seated in this chair right away. Call their number out loud.'],
+    ['.seat.busy .btn.done, .seat', '2. Cut finished? Tap Done', 'Tap the green button when the cut is finished. The customer automatically gets a thank-you and a review link on WhatsApp. The timer turns orange if a cut runs long.'],
+    ['.queue', 'The queue', 'WhatsApp bookings appear here on their own, you never write anything down. The top number is called next.'],
+    ['.queue .add', '3. Someone walked in? + Walk-in', 'Tap this, pick the service, the name is optional. A big number appears: tell the customer their number.'],
+    ['.qrow, .queue', 'More options', 'Tap a name in the queue to seat them first, mark them as not here, or cancel their spot.'],
+    [null, 'Wrong tap? No problem', 'After a tap, an <b>Undo</b> button shows at the bottom for 5 seconds. The customer’s WhatsApp is only sent after that, so a wrong tap never reaches them.'],
+    ['.sum .step', 'Number of chairs', 'Only change this when a barber starts or ends a shift. Waiting times are worked out from it.'],
+    ['.tour-btn', 'All done!', 'Forgot something? Tap <b>Guide</b> at the top any time to see this again.'],
+  ],
+};
+
+const pick = sel => sel && sel.split(',').map(x => document.querySelector(x.trim())).find(Boolean);
+function Tour({ lang, close }) {
+  const steps = TOUR[lang];
+  const [i, setI] = useState(0);
+  const [rect, setRect] = useState(null);
+  const [sel, title, body] = steps[i];
+  useEffect(() => {
+    const place = () => {
+      const el = pick(sel);
+      if (!el) return setRect(null);
+      const r = el.getBoundingClientRect();
+      setRect({ x: r.left - 8, y: r.top - 8, w: r.width + 16, h: r.height + 16 });
+    };
+    const el = pick(sel);
+    if (el) el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    place(); const t = setTimeout(place, 450);
+    addEventListener('resize', place); addEventListener('scroll', place, true);
+    return () => { clearTimeout(t); removeEventListener('resize', place); removeEventListener('scroll', place, true); };
+  }, [i]);
+  useEffect(() => { const f = e => { if (e.key === 'Escape') close(); if (e.key === 'ArrowRight') go(1); if (e.key === 'ArrowLeft') go(-1); }; addEventListener('keydown', f); return () => removeEventListener('keydown', f); });
+  const go = d => { const n = i + d; if (n >= steps.length) return close(); if (n >= 0) setI(n); };
+  const vh = innerHeight, below = rect && rect.y + rect.h + 230 < vh;
+  const cardStyle = !rect ? 'top:50%;left:50%;transform:translate(-50%,-50%)'
+    : innerWidth < 640 ? `left:12px;right:12px;${below ? 'top:' + (rect.y + rect.h + 12) : 'bottom:' + (vh - rect.y + 12)}px`
+    : `left:${Math.min(Math.max(12, rect.x), innerWidth - 392)}px;${below ? 'top:' + (rect.y + rect.h + 12) : 'top:' + Math.max(12, rect.y - 232)}px`;
+  const last = i === steps.length - 1;
+  return html`<div class="tour" role="dialog" aria-modal="true" aria-label=${title}>
+    ${rect ? html`<div class="spot" style=${`left:${rect.x}px;top:${rect.y}px;width:${rect.w}px;height:${rect.h}px`}></div>` : html`<div class="dim"></div>`}
+    <div class="tcard" style=${cardStyle}>
+      <div class="tprog">${steps.map((_, k) => html`<i class=${k <= i ? 'on' : ''}></i>`)}</div>
+      <h3>${title}</h3>
+      <p dangerouslySetInnerHTML=${{ __html: body }}></p>
+      <div class="trow">
+        <button type="button" class="ghost" onClick=${close}>${lang === 'id' ? 'Lewati' : 'Skip'}</button>
+        <span class="grow"></span>
+        ${i > 0 ? html`<button type="button" class="btn" onClick=${() => go(-1)}>${lang === 'id' ? 'Kembali' : 'Back'}</button>` : null}
+        <button type="button" class="btn go" onClick=${() => go(1)}>${last ? (lang === 'id' ? 'Mulai kerja' : 'Start working') : (lang === 'id' ? 'Lanjut' : 'Next')} (${i + 1}/${steps.length})</button>
+      </div>
+    </div>
+  </div>`;
 }
 
 function Owner({ boards, open }) {
@@ -148,6 +218,7 @@ function App() {
   const [row, setRow] = useState(null);
   const [issued, setIssued] = useState(null);
   const [pend, setPend] = useState(null);
+  const [tour, setTour] = useState(false);
   const t = L[lang];
   const [msg, setMsg] = useState('');
   const [now, setNow] = useState(Date.now());
@@ -163,6 +234,8 @@ function App() {
   };
   useEffect(() => { if (!role) return; refresh(); const t = setInterval(refresh, 3000); return () => clearInterval(t); }, [role, view]);
   useEffect(() => { const t = setInterval(() => setNow(Date.now()), 15000); return () => clearInterval(t); }, []);
+  useEffect(() => { if (role && bd && view !== 'all' && store.get('gq-tour') !== '1') setTour(true); }, [role, !!bd]);
+  const endTour = () => { setTour(false); store.set('gq-tour', '1'); store.set('gq-help', '0'); };
 
   if (!me) return html`<p class="empty">Loading…</p>`;
   if (!role) return html`<${Pin} demo=${me.demo} onDone=${r => setRole(r)} />`;
@@ -196,6 +269,7 @@ function App() {
       <span class="grow"></span>
       <span class="clock">${new Date(now).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
       ${role === 'owner' && view !== 'all' && me.demo ? html`<button class="ghost" type="button" onClick=${() => post({ action: 'reset' }, 'Today’s queue cleared')}>Reset demo</button>` : null}
+      ${view !== 'all' ? html`<button class="ghost tour-btn" type="button" onClick=${() => setTour(true)}>? ${lang === 'id' ? 'Panduan' : 'Guide'}</button>` : null}
       <button class="ghost" type="button" onClick=${flip}>${lang === 'id' ? 'EN' : 'ID'}</button>
       <button class="ghost" type="button" onClick=${async () => { await api('', { action: 'logout' }).catch(() => {}); setRole(null); }}>${lang === 'id' ? 'Kunci' : 'Lock'}</button>
     </header>
@@ -206,6 +280,7 @@ function App() {
     ${walk ? html`<${WalkIn} t=${t} services=${me.services} close=${() => setWalk(false)} add=${async (name, service) => { setWalk(false); const r = await post({ action: 'walkin', name: name || (lang === 'id' ? 'Tamu' : 'Guest'), service }); if (r?.ticket) setIssued(r.ticket); }} />` : null}
     ${row ? html`<${Sheet} t=${t} tk=${row} close=${() => setRow(null)} act=${onAct} />` : null}
     ${issued ? html`<${Issued} t=${t} ticket=${issued} close=${() => setIssued(null)} />` : null}
+    ${tour && bd && view !== 'all' ? html`<${Tour} lang=${lang} close=${endTour} />` : null}
     ${msg ? html`<div class="toast" role="status"><span>${msg.text}</span>${msg.undo ? html`<button type="button" onClick=${() => { const u = msg.undo; setMsg(''); u(); }}>${t.undo}</button>` : null}</div>` : null}`;
 }
 

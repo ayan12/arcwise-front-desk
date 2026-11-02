@@ -158,6 +158,19 @@ button { cursor:pointer; border:0; background:none }
 .toast { display:flex; gap:14px; align-items:center }
 .toast button { background:var(--ink); color:var(--gold); padding:8px 14px; border-radius:10px; font-weight:700 }
 @media (max-width:700px) { .who-big .no { font-size:40px; min-width:54px } .help ol { flex-direction:column; gap:6px } .sum { gap:14px } }
+
+/* guided walkthrough */
+.tour { position:fixed; inset:0; z-index:40 }
+.tour .dim { position:absolute; inset:0; background:rgba(0,0,0,.72) }
+.tour .spot { position:absolute; border-radius:22px; box-shadow:0 0 0 2px var(--gold), 0 0 0 9999px rgba(0,0,0,.72); transition:all .3s ease; pointer-events:none }
+.tcard { position:absolute; width:380px; max-width:calc(100vw - 24px); background:var(--paper); color:var(--ink); border-radius:20px; padding:18px 18px 14px; display:flex; flex-direction:column; gap:10px; box-shadow:0 24px 60px rgba(0,0,0,.5) }
+.tcard h3 { font-family:'Bodoni Moda', serif; font-size:24px; font-weight:600; line-height:1.15 }
+.tcard p { font-size:16px; line-height:1.5; color:#3b352a }
+.tcard .ghost { color:#6b6252 } .tcard .btn { background:#e6dcc8; box-shadow:none } .tcard .btn.go { background:var(--ink); color:var(--gold) }
+.tprog { display:flex; gap:4px } .tprog i { flex:1; height:4px; border-radius:4px; background:#d9cdb5 } .tprog i.on { background:var(--gold) }
+.trow { display:flex; gap:8px; align-items:center; margin-top:4px }
+.tour-btn { color:var(--gold) !important; font-weight:600 }
+@media (max-width:640px) { .tcard { width:auto } }
 @media (prefers-reduced-motion:reduce) { * { animation:none !important } }
 </style>
 </head>
