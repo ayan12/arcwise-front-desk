@@ -26,7 +26,7 @@ ${font('Bodoni Moda', 'bodoni-moda/files/bodoni-moda-latin-400-italic.woff2', 40
 ${font('Poiret One', 'poiret-one/files/poiret-one-latin-400-normal.woff2', 400)}
 @page{size:A4;margin:0}
 *{box-sizing:border-box;margin:0}
-:root{--wall:#10261F;--brass:#C6A15A;--hi:#E3C886;--ivory:#ECE2C9;--dim:#BDB39C;--fd-hair:#2a1d14;--fd-skin:#d9b996}
+:root{--wall:#10261F;--brass:#C6A15A;--hi:#E3C886;--ivory:#ECE2C9;--dim:#BDB39C;--fd-hair:#C6A15A;--fd-skin:#1E3A31}
 body{font-family:"Bodoni Moda",serif;color:var(--ivory);background:var(--wall);-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .page{width:210mm;height:297mm;position:relative;overflow:hidden;padding:20mm 17mm 16mm;page-break-after:always;
   background:radial-gradient(ellipse 80% 50% at 50% 0%,#1d3a30,transparent 70%),var(--wall)}
