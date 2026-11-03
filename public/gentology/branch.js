@@ -41,7 +41,7 @@ const L = {
     waiting: 'menunggu', wait: 'tunggu', none: 'tidak ada antrian', served: 'selesai hari ini', chairs: 'Kursi',
     chair: 'Kursi', free: 'Kosong', callNext: 'Panggil berikutnya', nobody: 'Belum ada yang menunggu', done: 'Selesai',
     queue: 'Antrian', walkin: '+ Walk-in', emptyQ: 'Antrian kosong. Booking WhatsApp masuk ke sini otomatis.', tapRow: 'Tekan nama untuk pilihan lain',
-    finished: 'Selesai hari ini', noshow: 'tidak datang', cancelled: 'batal', seatWalk: '+ Walk-in duduk', wa: 'WhatsApp', walk: 'Walk-in',
+    finished: 'Selesai hari ini', noshow: 'tidak datang', cancelled: 'batal', phone: 'No. WhatsApp untuk kartu loyalty (opsional)', freeT: 'GRATIS', freeLong: 'Potongan ini GRATIS: kartunya sudah penuh', card: 'Kartu', paper: 'Punya kartu kertas? Set jumlah cap', stamped: n => `Kartu diatur: ${n}/5 cap`, tDoneFree: t => `#${t.no} selesai · potongan gratis dipakai`, tDoneCard: (t, n) => `#${t.no} selesai · kartu ${n}/5`, seatWalk: '+ Walk-in duduk', wa: 'WhatsApp', walk: 'Walk-in',
     seatNow: 'Dudukkan sekarang', notHere: 'Tidak datang', cancel: 'Batalkan antrian', close: 'Tutup',
     newGuest: 'Tamu walk-in', name: 'Nama (boleh kosong)', add: 'Masukkan antrian', giveNo: 'Berikan nomor ini ke tamu', ok: 'Oke',
     undo: 'Batalkan', tSeat: (t, c) => `#${t.no} ${t.name} duduk di kursi ${c}`, tDone: t => `#${t.no} selesai · terima kasih terkirim`,
@@ -52,23 +52,26 @@ const L = {
     waiting: 'waiting', wait: 'wait', none: 'no wait', served: 'served today', chairs: 'Chairs',
     chair: 'Chair', free: 'Free', callNext: 'Call next', nobody: 'Nobody waiting yet', done: 'Done',
     queue: 'Queue', walkin: '+ Walk-in', emptyQ: 'Queue is empty. WhatsApp bookings appear here on their own.', tapRow: 'Tap a name for more options',
-    finished: 'Finished today', noshow: 'no-show', cancelled: 'cancelled', seatWalk: '+ Seat a walk-in', wa: 'WhatsApp', walk: 'Walk-in',
+    finished: 'Finished today', noshow: 'no-show', cancelled: 'cancelled', phone: 'WhatsApp number for the loyalty card (optional)', freeT: 'FREE', freeLong: 'This cut is FREE: their card is full', card: 'Card', paper: 'Has a paper card? Set the stamps', stamped: n => `Card set to ${n}/5 stamps`, tDoneFree: t => `#${t.no} done · free cut used`, tDoneCard: (t, n) => `#${t.no} done · card ${n}/5`, seatWalk: '+ Seat a walk-in', wa: 'WhatsApp', walk: 'Walk-in',
     seatNow: 'Seat now', notHere: 'Not here', cancel: 'Cancel booking', close: 'Close',
     newGuest: 'Walk-in customer', name: 'Name (optional)', add: 'Add to queue', giveNo: 'Give the customer this number', ok: 'OK',
     undo: 'Undo', tSeat: (t, c) => `#${t.no} ${t.name} is in chair ${c}`, tDone: t => `#${t.no} done · thank-you sent`,
     tNo: t => `#${t.no} marked not here`, tCancel: t => `#${t.no} cancelled`, tBack: t => `#${t.no} back in the queue`, err: 'Didn’t work. Try again.', min: 'min', over: 'over time',
   },
 };
+const dots = c => c ? html`<span class=${'loy' + (c.free ? ' free' : '')} title="Loyalty">${c.free ? '🎁' : [0, 1, 2, 3, 4].map(i => html`<i class=${i < c.stamps ? 'on' : ''}></i>`)}</span>` : null;
 const svcOf = k => (window.__services || []).find(s => s.key === k) || { name: k, mins: 35 };
 
 function WalkIn({ services, close, add, t }) {
   const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
   const [svc, setSvc] = useState('signature');
   return html`<div class="modal-bg" onClick=${e => e.target === e.currentTarget && close()}>
-    <form class="modal" role="dialog" aria-label=${t.newGuest} onSubmit=${e => { e.preventDefault(); add(name.trim(), svc); }}>
+    <form class="modal" role="dialog" aria-label=${t.newGuest} onSubmit=${e => { e.preventDefault(); add(name.trim(), svc, phone.trim()); }}>
       <h3>${t.newGuest}</h3>
       <div class="chips big">${services.map(s => html`<button type="button" class=${'chip' + (svc === s.key ? ' on' : '')} onClick=${() => setSvc(s.key)}>${s.name}<small>${s.mins} ${t.min}</small></button>`)}</div>
       <input value=${name} onInput=${e => setName(e.target.value)} placeholder=${t.name} maxlength="40" aria-label=${t.name} />
+      <input value=${phone} onInput=${e => setPhone(e.target.value)} placeholder=${t.phone} inputmode="tel" maxlength="18" aria-label=${t.phone} />
       <div class="row"><button type="button" class="btn" onClick=${close}>${t.close}</button><button class="btn go lg" type="submit">${t.add}</button></div>
     </form></div>`;
 }
@@ -79,10 +82,11 @@ function Issued({ ticket, close, t }) {
     <button class="btn go lg" type="button" onClick=${close}>${t.ok}</button></div></div>`;
 }
 
-function Sheet({ tk, close, act, t }) {
+function Sheet({ tk, close, act, t, stamp }) {
   return html`<div class="modal-bg" onClick=${e => e.target === e.currentTarget && close()}><div class="modal sheet" role="dialog" aria-label=${'#' + tk.no}>
     <div class="who-big"><span class="no">${tk.no}</span><div><b>${tk.name}</b><span>${svcOf(tk.service).name} · ${tk.source === 'walkin' ? t.walk : t.wa}</span></div></div>
     <button class="btn go lg" type="button" onClick=${() => act(tk, 'start')}>${t.seatNow}</button>
+    ${tk.card ? html`<div class="paper"><p>${t.paper}</p><div class="chips">${[0, 1, 2, 3, 4, 5].map(n => html`<button type="button" class=${'chip' + (tk.card.stamps === n ? ' on' : '')} onClick=${() => stamp(tk, n)}>${n}</button>`)}</div></div>` : null}
     <button class="btn lg warn" type="button" onClick=${() => act(tk, 'noshow')}>${t.notHere}</button>
     <button class="btn lg warn" type="button" onClick=${() => act(tk, 'cancel')}>${t.cancel}</button>
     <button class="btn lg" type="button" onClick=${close}>${t.close}</button>
@@ -109,7 +113,8 @@ function Board({ bd, t, hide, onAct, onWalkIn, onBarbers, onRow }) {
     <section class="seats" aria-label=${t.chairs}>${seats.map((tk, i) => {
       if (tk) { const el = Date.now() - (tk.startAt || Date.now()), over = mins(el) > svcOf(tk.service).mins;
         return html`<article class="seat busy"><header>${t.chair} ${i + 1}<span class=${'timer' + (over ? ' over' : '')}>${mmss(el)}${over ? ' · ' + t.over : ''}</span></header>
-          <div class="who-big"><span class="no">${tk.no}</span><div><b>${tk.name}</b><span>${svcOf(tk.service).name}</span></div></div>
+          <div class="who-big"><span class="no">${tk.no}</span><div><b>${tk.name}</b><span>${svcOf(tk.service).name} ${dots(tk.card)}</span></div></div>
+          ${tk.card?.free ? html`<p class="freebar">🎁 ${t.freeLong}</p>` : null}
           <button class="btn done lg" type="button" onClick=${() => onAct(tk, 'done')}>✓ ${t.done}</button></article>`; }
       return html`<article class="seat"><header>${t.chair} ${i + 1}<span>${t.free}</span></header>
         ${next ? html`<button class="btn go xl" type="button" onClick=${() => onAct(next, 'start')}>${t.callNext}<small>#${next.no} ${next.name}</small></button>` : html`<button class="btn xl seatwalk" type="button" onClick=${() => onWalkIn(true)}>${t.seatWalk}<small>${t.nobody}</small></button>`}</article>`;
@@ -117,7 +122,7 @@ function Board({ bd, t, hide, onAct, onWalkIn, onBarbers, onRow }) {
     <section class="queue">
       <h2>${t.queue} <span class="n">${waiting.length}</span><span class="grow"></span><button class="add" type="button" onClick=${() => onWalkIn(false)}>${t.walkin}</button></h2>
       ${waiting.length ? html`<p class="hint">${t.tapRow}</p>${waiting.map((x, i) => html`<button type="button" class=${'qrow' + (i === 0 ? ' first' : '')} onClick=${() => onRow(x)}>
-          <span class="no">${x.no}</span><span class="who"><b>${x.name}</b><span>${svcOf(x.service).name} · <span class=${'src' + (x.source === 'walkin' ? ' walk' : '')}>${x.source === 'walkin' ? t.walk : t.wa}</span></span></span>
+          <span class="no">${x.no}</span><span class="who"><b>${x.name}${x.card?.free ? html` <span class="freetag">${t.freeT}</span>` : null}</b><span>${svcOf(x.service).name} · <span class=${'src' + (x.source === 'walkin' ? ' walk' : '')}>${x.source === 'walkin' ? t.walk : t.wa}</span> ${dots(x.card)}</span></span>
           <span class="eta">${x.waitMins > 0 ? '~' + x.waitMins + ' ' + t.min : '→'}</span></button>`)}` : html`<p class="empty">${t.emptyQ}</p>`}
     </section>
     <details class="fin"><summary>${t.finished} (${finished.length})</summary><div class="donelist">${finished.slice(0, 40).map(x => html`<div><span class="k">${x.no}</span><span>${x.name}</span><span class=${'s' + (x.status === 'done' ? '' : ' ns')}>${x.status === 'done' ? hhmm(x.doneAt) : x.status === 'noshow' ? t.noshow : t.cancelled}</span></div>`)}</div></details>`;
@@ -133,6 +138,7 @@ const TOUR = {
     ['.queue', 'Antrian', 'Booking dari WhatsApp masuk ke sini sendiri, kamu tidak perlu mencatat apa pun. Nomor paling atas yang dipanggil berikutnya.'],
     ['.queue .add', '3. Tamu datang langsung? + Walk-in', 'Tekan ini, pilih layanan, nama boleh kosong. Nomor besar muncul: sebutkan nomornya ke tamu.'],
     ['.qrow, .queue', 'Pilihan lain', 'Tekan nama di antrian untuk: dudukkan duluan, tandai tidak datang, atau batalkan antrian.'],
+    ['.loy, .seat', 'Kartu loyalty otomatis', 'Titik-titik ini kartu loyalty pelanggan: 5 potongan, ke-6 gratis. Cap ditambah otomatis saat kamu tekan Selesai. Kalau muncul 🎁 GRATIS, jangan tagih potongan itu. Punya kartu kertas? Tekan nama pelanggan lalu set jumlah capnya.'],
     [null, 'Salah tekan? Tenang', 'Setelah menekan, muncul tombol <b>Batalkan</b> di bawah selama 5 detik. WhatsApp ke pelanggan baru terkirim setelah itu, jadi salah tekan tidak pernah sampai ke pelanggan.'],
     ['.sum .step', 'Jumlah kursi', 'Ubah hanya kalau ada barber masuk atau pulang. Waktu tunggu dihitung dari angka ini.'],
     ['.tour-btn', 'Selesai!', 'Lupa caranya? Tekan <b>Panduan</b> di atas kapan saja untuk melihat ini lagi.'],
@@ -145,6 +151,7 @@ const TOUR = {
     ['.queue', 'The queue', 'WhatsApp bookings appear here on their own, you never write anything down. The top number is called next.'],
     ['.queue .add', '3. Someone walked in? + Walk-in', 'Tap this, pick the service, the name is optional. A big number appears: tell the customer their number.'],
     ['.qrow, .queue', 'More options', 'Tap a name in the queue to seat them first, mark them as not here, or cancel their spot.'],
+    ['.loy, .seat', 'Automatic loyalty card', 'These dots are the customer’s loyalty card: 5 cuts, the 6th is free. A stamp is added automatically when you tap Done. If you see 🎁 FREE, don’t charge for that cut. Paper card? Tap the customer’s name and set their stamps.'],
     [null, 'Wrong tap? No problem', 'After a tap, an <b>Undo</b> button shows at the bottom for 5 seconds. The customer’s WhatsApp is only sent after that, so a wrong tap never reaches them.'],
     ['.sum .step', 'Number of chairs', 'Only change this when a barber starts or ends a shift. Waiting times are worked out from it.'],
     ['.tour-btn', 'All done!', 'Forgot something? Tap <b>Guide</b> at the top any time to see this again.'],
@@ -255,7 +262,7 @@ function App() {
     const p = { tk, op };
     p.timer = setTimeout(() => commit(p), 5000);
     setPend(p);
-    toast(op === 'done' ? t.tDone(tk) : op === 'noshow' ? t.tNo(tk) : t.tCancel(tk), () => { clearTimeout(p.timer); setPend(null); });
+    toast(op === 'done' ? (tk.card?.free ? t.tDoneFree(tk) : tk.card ? t.tDoneCard(tk, tk.card.stamps + 1) : t.tDone(tk)) : op === 'noshow' ? t.tNo(tk) : t.tCancel(tk), () => { clearTimeout(p.timer); setPend(null); });
   };
   const flip = () => { const l = lang === 'id' ? 'en' : 'id'; setLang(l); store.set('gq-staff-lang', l); };
 
@@ -277,8 +284,8 @@ function App() {
       ${view === 'all' ? (all ? html`<${Owner} boards=${all} open=${go} />` : html`<p class="empty">Loading…</p>`)
         : bd ? html`<${Board} bd=${bd} t=${t} hide=${pend?.tk.id} onAct=${onAct} onRow=${setRow} onWalkIn=${seat => setWalk(seat ? 'seat' : 'queue')} onBarbers=${n => post({ action: 'barbers', n })} />` : html`<p class="empty">Loading…</p>`}
     </main>
-    ${walk ? html`<${WalkIn} t=${t} services=${me.services} close=${() => setWalk(false)} add=${async (name, service) => { setWalk(false); const r = await post({ action: 'walkin', name: name || (lang === 'id' ? 'Tamu' : 'Guest'), service }); if (!r?.ticket) return; if (walk === 'seat') onAct(r.ticket, 'start'); else setIssued(r.ticket); }} />` : null}
-    ${row ? html`<${Sheet} t=${t} tk=${row} close=${() => setRow(null)} act=${onAct} />` : null}
+    ${walk ? html`<${WalkIn} t=${t} services=${me.services} close=${() => setWalk(false)} add=${async (name, service, phone) => { setWalk(false); const r = await post({ action: 'walkin', name: name || (lang === 'id' ? 'Tamu' : 'Guest'), service, phone }); if (!r?.ticket) return; if (walk === 'seat') onAct(r.ticket, 'start'); else setIssued(r.ticket); }} />` : null}
+    ${row ? html`<${Sheet} t=${t} tk=${row} close=${() => setRow(null)} act=${onAct} stamp=${async (tk, n) => { setRow(null); await post({ action: 'stamps', id: tk.id, stamps: n }, t.stamped(n)); }} />` : null}
     ${issued ? html`<${Issued} t=${t} ticket=${issued} close=${() => setIssued(null)} />` : null}
     ${tour && bd && view !== 'all' ? html`<${Tour} lang=${lang} close=${endTour} />` : null}
     ${msg ? html`<div class="toast" role="status"><span>${msg.text}</span>${msg.undo ? html`<button type="button" onClick=${() => { const u = msg.undo; setMsg(''); u(); }}>${t.undo}</button>` : null}</div>` : null}`;

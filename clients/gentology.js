@@ -64,6 +64,7 @@ export default {
     },
   },
   knowledge: `
+Loyalty card: 5 haircuts, the 6th is free. It is digital: staff stamp it automatically when the cut is finished (customers give their WhatsApp number; WhatsApp bookings are stamped automatically). Customers can type "kartu" or "card" on WhatsApp to see their card. Paper cards can be moved onto the digital card at the counter.
 Gentology Barbershop is a Roaring 20s style gentlemen's barbershop in Jakarta, founded by Ricky Andi Wardana and Bob Christoper.
 Every haircut includes hair vitamin, hot towel, massage and pomade styling.
 The signature haircut starts with a head-reading, then detailed hair-crafting. Fades can be low, mid or high.

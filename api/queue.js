@@ -2,7 +2,7 @@
 import { json } from '../lib/engine.js';
 import { clientIp } from '../lib/auth.js';
 import { hit, storeEnabled } from '../lib/store.js';
-import { SHOP, branchOf, board, addTicket, act, getTicket, setBarbers, resetDay, reviewUrl, logReview } from '../lib/queue.js';
+import { SHOP, branchOf, board, addTicket, act, getTicket, setBarbers, resetDay, reviewUrl, logReview, cardKey, getCard, setStamps, normPhone } from '../lib/queue.js';
 import { draftReview, POINTS } from '../lib/review.js';
 import { handle, notifyAfterChange } from '../lib/bot.js';
 import { simPush, simRead } from '../lib/channels.js';
@@ -52,7 +52,8 @@ export default async function handler(req) {
       const a = url.searchParams.get('action');
       if (a === 'ticket') {
         const t = await getTicket(env, url.searchParams.get('id'));
-        return t ? json(publicTicket(t)) : json({ error: 'not_found' }, 404);
+        if (!t) return json({ error: 'not_found' }, 404);
+        return json({ ...publicTicket(t), card: await getCard(env, cardKey(t.ticket)) });
       }
       if (a === 'review-info') {
         const br = branchOf(url.searchParams.get('b') || '');
@@ -130,13 +131,25 @@ export default async function handler(req) {
     if (!branchOf(br)) return json({ error: 'bad_branch' }, 400);
 
     if (b.action === 'walkin') {
-      const t = await addTicket(env, br, { name: b.name, service: b.service, source: 'walkin' });
+      const t = await addTicket(env, br, { name: b.name, service: b.service, source: 'walkin', phone: b.phone });
       return json({ ok: true, ticket: t, board: await board(env, br) });
     }
     if (b.action === 'ticket') {
       const t = await act(env, br, String(b.id || ''), String(b.op || ''));
       await notifyAfterChange(env, br, t, base(req));
       return json({ ok: true, board: await board(env, br) });
+    }
+    if (b.action === 'stamps') {
+      // staff move a customer's paper punch card onto the digital card
+      const t = b.id ? (await board(env, br)).tickets.find(x => x.id === b.id) : null;
+      const key = t ? cardKey(t) : normPhone(b.phone);
+      if (!key) return json({ error: 'no_card' }, 400);
+      const card = await setStamps(env, key, b.stamps);
+      return json({ ok: true, card, board: await board(env, br) });
+    }
+    if (b.action === 'card') {
+      const key = normPhone(b.phone);
+      return key ? json({ ok: true, card: await getCard(env, key) }) : json({ error: 'bad_phone' }, 400);
     }
     if (b.action === 'barbers') {
       await setBarbers(env, br, b.n);
