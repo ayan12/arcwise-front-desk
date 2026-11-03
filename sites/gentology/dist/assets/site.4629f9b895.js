@@ -173,23 +173,4 @@ document.querySelectorAll('.reveal').forEach(el=>{if(el.getBoundingClientRect().
   new IntersectionObserver(([e],o)=>{if(e.isIntersecting){run();o.disconnect()}},{threshold:.25}).observe(sec);
 })();
 
-/* the barber's book: build an order to show the barber */
-(function(){
-  const box=$('book'),d=$('bk-data');if(!box||!d)return;
-  const D=JSON.parse(d.textContent),pick={style:'',side:'',neck:'',beard:''};
-  const dd=k=>box.querySelector('#bkOrder dd[data-k="'+k+'"]'),pairs=$('bkPairs');
-  const empty={style:'Choose a style',side:'Barber’s advice',neck:'Barber’s advice',beard:'None'};
-  const paint=changed=>{Object.keys(pick).forEach(k=>{const el=dd(k);el.textContent=pick[k]||empty[k];el.classList.toggle('unset',!pick[k]);if(k===changed&&!reduce){el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop')}})};
-  const press=(g,v)=>box.querySelectorAll('.bk-o[data-g="'+g+'"]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===v));
-  box.querySelectorAll('.bk-t').forEach(t=>t.addEventListener('click',()=>{box.querySelectorAll('.bk-t').forEach(o=>o.setAttribute('aria-pressed',o===t));box.querySelectorAll('.bk-list').forEach(l=>l.hidden=l.dataset.len!==t.dataset.len)}));
-  box.addEventListener('click',e=>{const b=e.target.closest('.bk-o');if(!b)return;const g=b.dataset.g,v=b.dataset.v;
-    if(g==='fav'){const f=D.fav[v];pick.style=f.name;press('fav',v);press('style',f.name);pairs.hidden=false;pairs.textContent='Usually paired with: '+f.pairs.join(', ')+'.';paint('style');return}
-    if(g==='style'){press('fav','');pairs.hidden=true}
-    pick[g]=(pick[g]===v&&g!=='beard')?'':v;press(g,pick[g]);paint(g)});
-  const order=()=>'My Gentology order: '+(pick.style||'style to discuss')+(pick.side?', '+pick.side.toLowerCase():'')+(pick.neck?', '+pick.neck.toLowerCase()+' neckline':'')+(pick.beard?', '+pick.beard.toLowerCase()+' beard':'')+'.';
-  const cp=$('bkCopy');cp.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(order());cp.textContent='Copied'}catch(e){cp.textContent='Copy failed'}setTimeout(()=>cp.textContent='Copy my order',2200)});
-  $('bkAsk').addEventListener('click',()=>document.dispatchEvent(new CustomEvent('arcwise:open',{detail:{text:order()+' Is this a good choice, and which haircut is it on the tariff?'}})));
-  paint();
-})();
-
 ;(function(){var s=document.createElement("script");s.src="https://arcwise-front-desk.vercel.app/widget.js";s.defer=true;s.setAttribute("data-client","gentology");s.setAttribute("data-mobile-at","560");s.setAttribute("data-mobile-size","sm");s.setAttribute("data-quiet","true");s.setAttribute("data-reveal","#waiting-list,#visit");document.body.appendChild(s)})();
