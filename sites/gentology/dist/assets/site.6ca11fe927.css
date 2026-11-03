@@ -478,7 +478,7 @@ footer{padding-bottom:110px}
 @media (prefers-reduced-motion:reduce){.ticket.printing,.ticket .tel.flash,.branches.pulse button{animation:none}}
 
 /* the barber's book */
-.bk{--fd-hair:#C6A15A;--fd-skin:#1E3A31;padding-bottom:clamp(60px,7vw,96px)}
+.bk{--fd-hair:#2a1d14;--fd-skin:#d9b996;padding-bottom:clamp(60px,7vw,96px)}
 .bk-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:44px;align-items:start}
 .bk-steps{display:flex;flex-direction:column;gap:40px;min-width:0}
 .bk-n{font-family:var(--deco);letter-spacing:.14em;text-transform:uppercase;color:var(--brass-hi);font-size:15px;display:flex;align-items:center;gap:12px;margin-bottom:14px}
