@@ -352,16 +352,9 @@ const ICON = {
   razor: '<path d="M3 17l9-9 4 4-9 9H3zM12 8l3-3a2 2 0 0 1 3 0l1 1a2 2 0 0 1 0 3l-3 3M6 18l2-2"/>',
   coin: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="5.5"/><path d="M12 9v6M10.5 10.5h2.2a1 1 0 0 1 0 2h-1.4a1 1 0 0 0 0 2H13.5"/>',
 };
-function gauge(r) {
-  // a brass dial from 1 to 5 stars; the needle swings to the rating when it scrolls into view
-  const ticks = Array.from({ length: 41 }, (_, k) => {
-    const a = Math.PI * (1 - k / 40), big = k % 10 === 0, r0 = big ? 62 : 68;
-    return `<line x1="${(80 + Math.cos(a) * r0).toFixed(1)}" y1="${(84 - Math.sin(a) * r0).toFixed(1)}" x2="${(80 + Math.cos(a) * 74).toFixed(1)}" y2="${(84 - Math.sin(a) * 74).toFixed(1)}"${big ? ' class="big"' : ''}/>`;
-  }).join('');
-  const nums = [1, 2, 3, 4, 5].map((n, k) => { const a = Math.PI * (1 - k / 4); return `<text x="${(80 + Math.cos(a) * 50).toFixed(1)}" y="${(88 - Math.sin(a) * 50).toFixed(1)}">${n}</text>`; }).join('');
-  const deg = ((r.rating - 1) / 4) * 180 - 90;
-  return `<svg class="dial" viewBox="0 0 160 96" aria-hidden="true"><path class="arc" d="M6 84a74 74 0 0 1 148 0"/><g class="ticks">${ticks}</g><g class="nums">${nums}</g>
-    <g class="needle" style="--deg:${deg.toFixed(1)}deg"><path d="M80 84L78 30l2-8 2 8z"/></g><circle cx="80" cy="84" r="6" class="hub"/></svg>`;
+function pole() {
+  // a little barber's pole: brass caps, glass tube, red, white and navy stripes that turn
+  return `<span class="pole" aria-hidden="true"><span class="cap"></span><span class="tube"><span class="stripes"></span></span><span class="cap b"></span></span>`;
 }
 function reviews() {
   const total = RATINGS.reduce((n, r) => n + r.count, 0);
@@ -383,10 +376,12 @@ function reviews() {
     </div>
     <div class="dials">
       ${RATINGS.map((r, k) => `<a class="dialcard reveal" style="--d:${k * 0.15}s" href="https://search.google.com/local/reviews?placeid=${r.placeId}" target="_blank" rel="noopener">
-        ${gauge(r)}
-        <span class="dc-score">${r.rating.toFixed(1)}</span>
-        <span class="dc-name">${esc(r.name)}</span>
-        <span class="dc-count">${r.count.toLocaleString('en-US')} reviews <span aria-hidden="true">↗</span><span class="vh"> (opens Google)</span></span>
+        ${pole()}
+        <span class="dc-body">
+          <span class="dc-name">${esc(r.name)}</span>
+          <span class="dc-score">${r.rating.toFixed(1)}<span class="dc-stars" style="--r:${r.rating}" aria-hidden="true">★★★★★</span></span>
+          <span class="dc-count">${r.count.toLocaleString('en-US')} Google reviews <span aria-hidden="true">↗</span><span class="vh"> (opens Google)</span></span>
+        </span>
       </a>`).join('\n      ')}
     </div>
     <h3 class="rvx-h3 reveal">What they write about, again and again</h3>
