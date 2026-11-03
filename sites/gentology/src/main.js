@@ -29,6 +29,12 @@ const $=id=>document.getElementById(id);
   requestAnimationFrame(loop);
 })();
 
+/* header: underline the section you're reading, so the menu reads as navigation */
+(function(){const links=[...document.querySelectorAll('.top nav a[href*="#"]')];if(!links.length||!('IntersectionObserver' in window))return;
+  const map=new Map();links.forEach(a=>{const id=a.getAttribute('href').split('#')[1];const s=id&&document.getElementById(id);if(s)map.set(s,a)});
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('on'));map.get(e.target).classList.add('on')}}),{rootMargin:'-45% 0px -50% 0px'});
+  map.forEach((_,s)=>io.observe(s))})();
+
 /* reveal */
 document.documentElement.classList.add('js');
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.remove('pre');io.unobserve(e.target)}}),{threshold:.12});

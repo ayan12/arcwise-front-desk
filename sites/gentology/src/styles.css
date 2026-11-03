@@ -36,12 +36,16 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .mark{display:flex;align-items:center;gap:12px;text-decoration:none}
 .mark svg{width:30px;height:38px}
 .mark span{font-family:var(--deco);font-size:20px;letter-spacing:.3em;color:var(--brass-hi)}
-.top nav{display:flex;gap:30px;font-size:16px}
-.top nav a{text-decoration:none;color:var(--ivory-dim);transition:color .2s}
-.top nav a:hover{color:var(--brass-hi)}
+.top nav{display:flex;align-items:center;gap:6px;font-size:16px}
+.top nav a{position:relative;text-decoration:none;color:var(--ivory);padding:8px 12px;border:1px solid transparent;transition:color .2s,border-color .2s,background .2s;cursor:pointer}
+.top nav a::after{content:"";position:absolute;left:12px;right:12px;bottom:4px;height:1px;background:var(--brass-hi);transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.2,.7,.1,1)}
+.top nav a:hover{color:var(--brass-hi);border-color:rgba(198,161,90,.35);background:rgba(198,161,90,.07)}
+.top nav a:hover::after,.top nav a.on::after{transform:scaleX(1)}
+.top nav a.on{color:var(--brass-hi)}
+.top nav a + a::before{content:"";position:absolute;left:-4px;top:50%;width:3px;height:3px;background:var(--brass);transform:translateY(-50%) rotate(45deg);opacity:.7}
 .call{font-size:15px;text-decoration:none;border:1px solid var(--brass);color:var(--brass-hi);padding:8px 16px;transition:background .2s,color .2s}
 .call:hover{background:var(--brass);color:var(--wall)}
-@media (max-width:880px){.top .wrap{flex-wrap:wrap;height:auto;min-height:64px;padding-top:10px;row-gap:4px}.top nav{order:3;width:100%;overflow-x:auto;gap:22px;padding:2px 0 10px;scrollbar-width:none}.top nav a{white-space:nowrap;padding:8px 0}.top nav::-webkit-scrollbar{display:none}}
+@media (max-width:880px){.top .wrap{flex-wrap:wrap;height:auto;min-height:64px;padding-top:10px;row-gap:4px}.top nav{order:3;width:100%;overflow-x:auto;gap:22px;padding:2px 0 10px;scrollbar-width:none}.top nav a{white-space:nowrap;padding:8px 10px}.top nav::-webkit-scrollbar{display:none}}
 
 /* ---------- HERO ---------- */
 .hero{position:relative;min-height:min(calc(88svh - 64px),760px);display:grid;place-items:center;overflow:hidden;isolation:isolate;
