@@ -46,6 +46,7 @@ export default {
   quickReplies,
   allowedOrigins: [
     'https://gentology-concept.vercel.app',
+    'https://gentology-site.vercel.app',
     'https://arcwise-front-desk.vercel.app',
   ],
   contacts,

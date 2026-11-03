@@ -1,0 +1,6 @@
+{
+  "framework": null,
+  "installCommand": "",
+  "buildCommand": "SITE_URL=https://gentology-site.vercel.app node build.mjs",
+  "outputDirectory": "dist"
+}
