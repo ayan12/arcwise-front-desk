@@ -77,7 +77,7 @@ main { flex:1; min-height:0; display:grid; grid-template-columns:380px minmax(0,
   var hint = '<body style="margin:0;height:100vh;display:grid;place-items:center;background:#1D1A14;color:#A39A88;font:15px/1.5 Inter,system-ui,sans-serif;text-align:center;padding:28px">'
     + '<div><div style="font:600 22px Georgia,serif;color:#F3EBDC;margin-bottom:10px">The customer’s live ticket</div>'
     + 'Book a cut in the WhatsApp chat, then tap the ticket link in the reply.<br>It opens here and updates by itself as the queue moves.</div></body>';
-  var pages = { ticket: null, review: '/review?b=cideng', site: 'https://gentology-concept.vercel.app/' };
+  var pages = { ticket: null, review: '/review?b=cideng', site: 'https://gentology-site.vercel.app/' };
   function show(k) {
     document.querySelectorAll('.tabs button').forEach(function (b) { b.classList.toggle('on', b.dataset.v === k); });
     if (pages[k]) { view.removeAttribute('srcdoc'); view.src = pages[k]; } else { view.removeAttribute('src'); view.srcdoc = hint; }
