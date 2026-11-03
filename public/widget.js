@@ -2,7 +2,8 @@
  *  <script src="https://arcwise-front-desk.vercel.app/widget.js" data-client="gentology" defer></script>
  *  Optional: data-lang="id|en", data-open="true", data-teaser="false",
  *  data-mobile-bottom="84" data-mobile-at="860" (lift the button above a site's own bottom bar on phones)
- *  data-mobile-launcher="off" (hide the floating button on phones when the site has its own chat button; open with the arcwise:open event)
+ *  data-quiet="true" (no pulsing ring; the teaser shows once and fades), data-reveal="#section,#other" (show the button when a section is reached),
+ *  data-mobile-size="sm" (smaller button on phones), data-mobile-launcher="off" (hide the floating button on phones when the site has its own chat button; open with the arcwise:open event)
  */
 (function () {
   'use strict';
@@ -52,6 +53,8 @@
     var lift = (function () {
       var b = parseInt(me.getAttribute('data-mobile-bottom'), 10), at = parseInt(me.getAttribute('data-mobile-at'), 10) || 760;
       var off = me.getAttribute('data-mobile-launcher') === 'off' ? '@media (max-width:' + at + 'px){.dock{display:none!important}}' : '';
+      var sm = me.getAttribute('data-mobile-size') === 'sm' ? '@media (max-width:' + at + 'px){.btn{width:50px;height:50px}.btn svg{width:22px;height:22px}.btn .live{width:11px;height:11px;top:2px;right:2px}.dock{right:calc(14px + env(safe-area-inset-right,0px));gap:8px}.teaser{font-size:13px;max-width:min(240px,calc(100vw - 96px))}}' : '';
+      off += sm;
       return off + (b > 0 && b < 400 ? '@media (max-width:' + at + 'px){.dock{bottom:calc(' + b + 'px + env(safe-area-inset-bottom,0px))}}' : '');
     })();
     return '' +
@@ -64,7 +67,10 @@
       ':focus-visible{outline:2px solid var(--a);outline-offset:2px;border-radius:10px}' +
 
       /* dock: launcher + teaser */
-      '.dock{position:fixed;right:calc(20px + env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:2147483000;display:flex;flex-direction:column;align-items:flex-end;gap:12px}' +
+      '.dock{position:fixed;right:calc(20px + env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:2147483000;display:flex;flex-direction:column;align-items:flex-end;gap:12px;transition:opacity .5s,transform .5s}' +
+      '.dock.wait{opacity:0;transform:translateY(16px);pointer-events:none;visibility:hidden}' +
+      '.quiet .btn .ring{display:none}.quiet .teaser{box-shadow:0 0 0 1px var(--line),0 8px 20px rgba(0,0,0,.25)}' +
+      ':focus-visible{outline:3px solid var(--a);outline-offset:3px}' +
       '.btn{position:relative;width:62px;height:62px;border-radius:50%;background:var(--bg);color:var(--a);display:grid;place-items:center;' +
       'box-shadow:0 0 0 1px var(--line),0 12px 32px rgba(0,0,0,.32),0 0 0 6px var(--glow);transition:transform .25s cubic-bezier(.2,.9,.3,1.2),box-shadow .25s}' +
       '.btn:hover{transform:translateY(-2px) scale(1.04)}' +
@@ -186,17 +192,40 @@
     el.teaser.addEventListener('click', function (e) { if (e.target.closest('.tx')) { hideTeaser(true); return; } toggle(true); });
     el.teaser.addEventListener('keydown', function (e) { if (e.key === 'Enter') toggle(true); });
 
+    // data-quiet="true": no pulsing ring, the teaser shows once and fades away.
+    // data-reveal="#a,#b": the launcher stays hidden until one of those sections is on screen,
+    // or the visitor has been scrolling around the page for a few seconds.
+    var quiet = me.getAttribute('data-quiet') === 'true';
+    if (quiet) el.w.classList.add('quiet');
+    var revealSel = me.getAttribute('data-reveal'), revealed = !revealSel, waiters = [];
+    var onReveal = function (fn) { if (revealed) fn(); else waiters.push(fn); };
+    if (revealSel) {
+      var dock = q('.dock'); dock.classList.add('wait');
+      var t0 = Date.now(), show = function () {
+        if (revealed) return; revealed = true; dock.classList.remove('wait');
+        removeEventListener('scroll', onScroll); if (io) io.disconnect();
+        waiters.splice(0).forEach(function (f) { f(); });
+      };
+      var onScroll = function () { if (scrollY > innerHeight * 0.9 && Date.now() - t0 > 4000) show(); };
+      addEventListener('scroll', onScroll, { passive: true });
+      var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) { if (es.some(function (e) { return e.isIntersecting; })) show(); }, { threshold: 0.15 }) : null;
+      var targets = []; try { targets = [].slice.call(document.querySelectorAll(revealSel)); } catch (e) {}
+      if (io && targets.length) targets.forEach(function (t) { io.observe(t); }); else if (!targets.length) show();
+      document.addEventListener('arcwise:open', show);
+    }
     history = load();
     render();
     document.body.appendChild(host);
     if (me.getAttribute('data-open') === 'true') toggle(true);
     else if (cfg.teaser && me.getAttribute('data-teaser') !== 'false' && !ss(KEY + ':teased') && !history.some(function (m) { return m.role === 'user'; })) {
-      setTimeout(function () {
+      var tease = function () {
         if (!el.pn.hidden) return;
         q('.teaser b').textContent = cfg.assistant || cfg.name;
         q('.teaser .tt').textContent = L(cfg.teaser);
         el.teaser.hidden = false; ss(KEY + ':teased', '1');
-      }, 7000);
+        if (quiet) setTimeout(function () { hideTeaser(); }, 9000);   // quiet mode: the note fades away by itself
+      };
+      if (quiet) onReveal(function () { setTimeout(tease, 6000); }); else setTimeout(tease, 7000);
     }
   }
 

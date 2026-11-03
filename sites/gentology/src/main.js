@@ -5,7 +5,7 @@ const $=id=>document.getElementById(id);
 (function(){
   const hero=$('hero');if(!hero)return;
   const NS='http://www.w3.org/2000/svg',cx=600,cy=700;
-  hero.querySelectorAll('h1 span').forEach((el,i)=>el.style.setProperty('--i',i));
+  hero.querySelectorAll('h1 .l').forEach((el,i)=>el.style.setProperty('--i',i));
   const N=37,mid=(N-1)/2;
   const steps=[[620,250],[760,200],[900,150]];
   function stepPath(w,ty){const l=cx-w/2,r=cx+w/2,s=26;return `M${l} 700 V${ty+3*s} H${l+s} V${ty+2*s} H${l+2*s} V${ty+s} H${l+3*s} V${ty} H${r-3*s} V${ty+s} H${r-2*s} V${ty+2*s} H${r-s} V${ty+3*s} H${r} V700`}
@@ -41,13 +41,27 @@ document.querySelectorAll('.reveal').forEach(el=>{if(el.getBoundingClientRect().
   function show(i){
     const b=B[i],fill=()=>{ticket.classList.remove('blank');
       $('tBr').textContent=b.name;$('tAddr').textContent=b.address;
-      const tel=$('tTel');tel.textContent=b.tel;tel.href='tel:'+b.e164;tel.removeAttribute('tabindex');tel.removeAttribute('aria-hidden')};
+      const tel=$('tTel');tel.textContent=b.tel;tel.href='tel:'+b.e164;tel.removeAttribute('tabindex');tel.removeAttribute('aria-hidden');
+      const call=$('tCall'),cp=$('tCopy');if(call){call.href='tel:'+b.e164;call.textContent='Call '+b.name;call.removeAttribute('tabindex');call.removeAttribute('aria-hidden')}
+      if(cp){cp.dataset.tel=b.tel;cp.textContent='Copy number';cp.removeAttribute('tabindex');cp.removeAttribute('aria-hidden')}
+      if(!reduce){tel.classList.remove('flash');void tel.offsetWidth;tel.classList.add('flash');ticket.classList.add('printing');setTimeout(()=>ticket.classList.remove('printing'),900)}};
     if(ticket.classList.contains('out')&&!reduce){ticket.classList.remove('out');setTimeout(()=>{fill();ticket.classList.add('out')},700)}
     else{fill();requestAnimationFrame(()=>ticket.classList.add('out'))}
   }
-  document.querySelectorAll('.branches button').forEach(btn=>btn.addEventListener('click',()=>{
+  // copy the number (works on desktop, where tel: links do nothing)
+  const cp=$('tCopy');if(cp)cp.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(cp.dataset.tel||'');cp.textContent='Copied'}catch(e){cp.textContent=cp.dataset.tel||''}setTimeout(()=>{cp.textContent='Copy number'},2200)});
+  // nudge the branch buttons once when the card is still blank and comes into view
+  const br=document.querySelector('.branches');if(br&&!reduce)new IntersectionObserver(([e],o)=>{if(e.isIntersecting){if(ticket.classList.contains('blank'))br.classList.add('pulse');o.disconnect()}},{threshold:.6}).observe(br);
+  document.querySelectorAll('.branches button').forEach(btn=>btn.addEventListener('click',()=>{br&&br.classList.remove('pulse');
     document.querySelectorAll('.branches button').forEach(o=>o.setAttribute('aria-pressed',o===btn));show(+btn.dataset.b)}));
 })();
+
+/* copy button on branch pages (static card) */
+(function(){const cp=$('tCopy');if(!cp||$('branch-data'))return;cp.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(cp.dataset.tel||'');cp.textContent='Copied'}catch(e){cp.textContent=cp.dataset.tel||''}setTimeout(()=>{cp.textContent='Copy number'},2200)})})();
+
+/* when are you coming: a soft guide built from the opening hours */
+(function(){const box=$('when'),d=$('when-data');if(!box||!d)return;const N=JSON.parse(d.textContent),a=$('whenA');
+  box.querySelectorAll('.when-o button').forEach(b=>b.addEventListener('click',()=>{box.querySelectorAll('.when-o button').forEach(o=>o.setAttribute('aria-pressed',o===b));a.textContent=N[b.dataset.k]}))})();
 
 /* loyalty card: demo only, nothing is stored */
 (function(){
@@ -82,6 +96,9 @@ document.querySelectorAll('.reveal').forEach(el=>{if(el.getBoundingClientRect().
   else if(t<o)now.innerHTML=`<b>Closed</b> right now. We open at ${fmt(o)} today.`;
   else{const n=(wd+1)%7;now.innerHTML=`<b>Closed</b> for the night. Tomorrow we open at ${fmt(H[n][0])}.`}
 })();
+
+/* phones: keep the radio tucked away until the visitor scrolls past the hero, so the first screen stays clear */
+(function(){const tr=$('tray');if(!tr)return;const mq=matchMedia('(max-width:560px)');const f=()=>tr.classList.toggle('tucked',mq.matches&&scrollY<innerHeight*.6&&!document.documentElement.classList.contains('music-on'));f();addEventListener('scroll',f,{passive:true});mq.addEventListener&&mq.addEventListener('change',f)})();
 
 /* parlour radio: original 1920s-style tunes synthesised with Web Audio (no audio files) */
 (function(){
@@ -133,9 +150,10 @@ document.querySelectorAll('.reveal').forEach(el=>{if(el.getBoundingClientRect().
   const box=$('fade');if(!box)return;
   const imgs=[...box.querySelectorAll('.fade-stage img')],btns=[...box.querySelectorAll('.fade-steps button')],range=$('fadeRange');
   let i=0,timer=null,touched=false;
-  const now=$('fadeNow');const show=n=>{i=n;imgs.forEach((im,k)=>im.classList.toggle('on',k===n));btns.forEach((b,k)=>b.setAttribute('aria-selected',k===n));range.value=n;if(now){const b=btns[n];now.innerHTML='';const t=document.createElement('b');t.textContent=(n+1)+'. '+b.querySelector('b').textContent;now.append(t,' '+b.querySelector('b + span').textContent)}};
+  const now=$('fadeNow');const show=n=>{i=n;imgs.forEach((im,k)=>im.classList.toggle('on',k===n));btns.forEach((b,k)=>b.setAttribute('aria-pressed',k===n));range.value=n;range.setAttribute('aria-valuetext','Step '+(n+1)+' of '+imgs.length+': '+btns[n].querySelector('b').textContent);if(now){const b=btns[n];now.innerHTML='';const t=document.createElement('b');t.textContent=(n+1)+'. '+b.querySelector('b').textContent;now.append(t,' '+b.querySelector('b + span').textContent)}};
   const stop=()=>{touched=true;clearInterval(timer);timer=null};
   btns.forEach(b=>b.addEventListener('click',()=>{stop();show(+b.dataset.i)}));
+  box.addEventListener('focusin',stop);
   range.addEventListener('input',()=>{stop();show(+range.value)});
   if(!reduce)new IntersectionObserver(([e])=>{if(touched)return;if(e.isIntersecting&&!timer)timer=setInterval(()=>show((i+1)%imgs.length),2200);else if(!e.isIntersecting){clearInterval(timer);timer=null}},{threshold:.4}).observe(box);
 })();
@@ -149,4 +167,4 @@ document.querySelectorAll('.reveal').forEach(el=>{if(el.getBoundingClientRect().
   new IntersectionObserver(([e],o)=>{if(e.isIntersecting){run();o.disconnect()}},{threshold:.25}).observe(sec);
 })();
 
-;(function(){var s=document.createElement("script");s.src="https://arcwise-front-desk.vercel.app/widget.js";s.defer=true;s.setAttribute("data-client","gentology");s.setAttribute("data-mobile-bottom","84");s.setAttribute("data-mobile-at","560");document.body.appendChild(s)})();
+;(function(){var s=document.createElement("script");s.src="https://arcwise-front-desk.vercel.app/widget.js";s.defer=true;s.setAttribute("data-client","gentology");s.setAttribute("data-mobile-at","560");s.setAttribute("data-mobile-size","sm");s.setAttribute("data-quiet","true");s.setAttribute("data-reveal","#waiting-list,#visit");document.body.appendChild(s)})();

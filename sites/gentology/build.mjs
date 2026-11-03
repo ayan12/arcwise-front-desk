@@ -55,6 +55,8 @@ const hoursSpec = () => {
   }
   return [...groups.values()];
 };
+// Coordinates from each branch's Google Maps listing (checked 2026-11-03).
+const GEO = { cideng: [-6.1789869, 106.8130900], 'tanjung-duren': [-6.1841638, 106.7874163], cipete: [-6.2782120, 106.8108172] };
 const shopNode = (b) => ({
   '@type': 'BarberShop',
   '@id': `${pageUrl(b.slug)}#barbershop`,
@@ -63,6 +65,12 @@ const shopNode = (b) => ({
   telephone: b.e164,
   email: EMAIL,
   image: `${SITE}/media/og.jpg`,
+  priceRange: 'IDR 30k–90k',
+  currenciesAccepted: 'IDR',
+  areaServed: 'Jakarta',
+  hasMap: b.maps,
+  geo: GEO[b.slug] ? { '@type': 'GeoCoordinates', latitude: GEO[b.slug][0], longitude: GEO[b.slug][1] } : undefined,
+  sameAs: [SOCIAL.instagram, SOCIAL.facebook],
   address: { '@type': 'PostalAddress', streetAddress: addr(b), addressLocality: 'Jakarta', addressRegion: 'DKI Jakarta', postalCode: b.postal, addressCountry: 'ID' },
   openingHoursSpecification: hoursSpec(),
   parentOrganization: { '@id': ORG_ID },
@@ -192,14 +200,34 @@ function callCard(b) {
         <div class="ticket-clip">
           <div class="ticket out${b ? '' : ' blank'}" id="ticket" aria-live="polite">
             <p class="tag">Gentology · Waiting list by phone</p>
-            <p class="br" id="tBr">${b ? esc(b.name) : 'Choose a branch'}</p>
-            <p class="addr" id="tAddr">${b ? esc(addr(b)) : 'and its phone number will appear here'}</p>
+            <p class="br" id="tBr">${b ? esc(b.name) : 'Choose a branch above'}</p>
+            <p class="addr" id="tAddr">${b ? esc(addr(b)) : 'Its phone number will print here'}</p>
             <div class="perf"></div>
             <p class="ring">Ring for your number and estimated time</p>
             <a class="tel" id="tTel" href="${b ? `tel:${b.e164}` : '#'}"${b ? '' : ' tabindex="-1" aria-hidden="true"'}>${b ? telText(b) : '—'}</a>
+            <div class="t-acts"><a class="t-call" id="tCall" href="${b ? `tel:${b.e164}` : '#'}"${b ? '' : ' tabindex="-1" aria-hidden="true"'}>Call now</a><button type="button" class="t-copy" id="tCopy"${b ? ` data-tel="${telText(b)}"` : ' tabindex="-1" aria-hidden="true"'}>Copy number</button></div>
             <p class="fine">This card is not a queue ticket. Numbers are only given by the store manager on the call.</p>
           </div>
         </div>
+      </div>`;
+}
+// A rough guide built from the published opening hours. Not live data: the store manager gives the real wait.
+function whenNote() {
+  const H = Object.fromEntries(HOURS.map((h) => [h.d, h]));
+  const t = (x) => { const h = +x.slice(0, 2); return h === 12 ? '12pm' : h > 12 ? `${h - 12}pm` : `${h}am`; };
+  const last = (h) => t(String(+h.close.slice(0, 2) - 1).padStart(2, '0') + ':00');
+  const N = [
+    ['day', 'Weekday daytime', `Weekday afternoons tend to be calmer than evenings and weekends. Doors open at ${t(H[1].open)}.`],
+    ['eve', 'After work', `After-work evenings fill up quickly. Ring in the afternoon to get your name down; last order is ${last(H[1])}.`],
+    ['fri', 'Friday', `Friday opens later, at ${t(H[5].open)}, so the list starts filling as soon as the doors open.`],
+    ['wkd', 'Weekend', `Weekends are popular. Saturday opens at ${t(H[6].open)} and closes at ${t(H[6].close)}, so ring in the morning.`],
+  ];
+  return `<div class="when" id="when">
+        <p class="when-q">When are you thinking of coming?</p>
+        <div class="when-o" role="group" aria-label="When are you coming">${N.map(([k, l], i) => `<button type="button" data-k="${k}" aria-pressed="${i === 0}">${l}</button>`).join('')}</div>
+        <p class="when-a" id="whenA" aria-live="polite">${N[0][2]}</p>
+        <script type="application/json" id="when-data">${json(Object.fromEntries(N.map(([k, , v]) => [k, v])))}</script>
+        <p class="when-f">A rough guide from the opening hours, not live data. The store manager tells you the real wait when you ring.</p>
       </div>`;
 }
 function waitingList(branch) {
@@ -219,6 +247,7 @@ function waitingList(branch) {
     <div class="reveal">
       ${picker}
       ${callCard(branch)}
+      ${whenNote()}
     </div>
   </div>
 </section>`;
@@ -287,10 +316,10 @@ function work() {
       </figure>
       <p class="fade-now" id="fadeNow" aria-live="polite"><b>1. ${esc(FADE[0][1])}</b> ${esc(FADE[0][2])}</p>
       <div class="fade-side">
-        <ol class="fade-steps" role="tablist" aria-label="Fade steps">
-          ${FADE.map(([, t, d], i) => `<li><button type="button" role="tab" aria-selected="${i === 0}" data-i="${i}"><span class="n">${i + 1}</span><span><b>${esc(t)}</b><span>${esc(d)}</span></span></button></li>`).join('\n          ')}
+        <ol class="fade-steps" aria-label="Fade steps">
+          ${FADE.map(([, t, d], i) => `<li><button type="button" aria-pressed="${i === 0}" aria-label="Step ${i + 1}: ${esc(t)}" data-i="${i}"><span class="n">${i + 1}</span><span><b>${esc(t)}</b><span>${esc(d)}</span></span></button></li>`).join('\n          ')}
         </ol>
-        <label class="fade-scrub"><span class="vh">Scrub through the fade</span><input type="range" min="0" max="${FADE.length - 1}" step="1" value="0" id="fadeRange"></label>
+        <label class="fade-scrub"><span class="vh">Scrub through the fade</span><input type="range" min="0" max="${FADE.length - 1}" step="1" value="0" id="fadeRange" aria-valuetext="Step 1 of ${FADE.length}: ${esc(FADE[0][1])}"></label>
         <div class="fade-also">
           <img src="/media/barber-at-work.webp" alt="A Gentology barber in waistcoat and hat working a taper with clippers" width="477" height="596" loading="lazy">
           <p>Waistcoats, ties and a proper taper. Every barber works to the same standard at all three branches.</p>
@@ -383,13 +412,14 @@ ${header({ home: true })}
   ${svgDeco}
   <div class="hero-in">
     <svg class="emblem" aria-hidden="true"><use href="#emblem"/></svg>
-    <h1 id="hero-h"><span class="vh">Gentology Barbershop</span><span aria-hidden="true">G</span><span aria-hidden="true">e</span><span aria-hidden="true">n</span><span aria-hidden="true">t</span><span aria-hidden="true">o</span><span aria-hidden="true">l</span><span aria-hidden="true">o</span><span aria-hidden="true">g</span><span aria-hidden="true">y</span></h1>
+    <h1 id="hero-h" class="htitle"><span class="l">G</span><span class="l">e</span><span class="l">n</span><span class="l">t</span><span class="l">o</span><span class="l">l</span><span class="l">o</span><span class="l">g</span><span class="l">y</span><span class="vh"> Barbershop</span></h1>
     <p class="sub">The craftsmanship of British barbering tradition, kept in a 1920s parlour.</p>
     <p class="meta">Fade specialists. Detail oriented. Three branches across Jakarta: <a href="/cideng/">Cideng</a>, <a href="/tanjung-duren/">Tanjung Duren</a> and <a href="/cipete/">Silverhawk Cipete</a>.</p>
     <div class="ctas">
       <a class="btn" href="#waiting-list">Ring to join the waiting list</a>
       <a class="btn line" href="#tariff">Read the tariff</a>
     </div>
+    <a class="peek" href="#tariff">Signature haircuts from IDR 80k, with hot towel and massage included <span aria-hidden="true">↓</span></a>
   </div>
 </section>
 ${tariff()}
