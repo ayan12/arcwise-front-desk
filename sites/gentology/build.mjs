@@ -308,37 +308,63 @@ const RATINGS = [
   { name: 'Silverhawk Cipete', rating: 4.7, count: 35, placeId: 'ChIJJ2xw3I_vaS4RR59d7Dqo4SY' },
 ];
 const THEMES = [
-  ['The room', 'An authentic British parlour: wood, leather chairs and old music, “a step back in time”.'],
-  ['The fade', 'Clean, sharp fades and a barber who takes his time over the detail.'],
-  ['The extras', 'Hair wash, hot towel and head massage included, even on the basic cut.'],
-  ['The barbers', 'Friendly, professional, and every one of them in a suit or waistcoat.'],
-  ['The shave', 'Straight-razor shaves that handle thick beards properly.'],
-  ['The price', 'Less than you would pay in the mall nearby, for more care.'],
+  ['chair', 'The room', 'An authentic British parlour: wood, leather chairs and old music. “A step back in time.”'],
+  ['clipper', 'The fade', 'Clean, sharp fades, and a barber who takes his time over the detail.'],
+  ['towel', 'The extras', 'Hair wash, hot towel and head massage, included even on the basic cut.'],
+  ['vest', 'The barbers', 'Friendly, professional, and every one of them in a suit or waistcoat.'],
+  ['razor', 'The shave', 'Straight-razor shaves that handle thick beards properly.'],
+  ['coin', 'The price', 'Less than the mall nearby, with far more care.'],
 ];
+const ICON = {
+  chair: '<path d="M7 3h10v7H7zM5 10h14v3H5zM7 13v5M17 13v5M5 21h4M15 21h4M9 18h6"/>',
+  clipper: '<path d="M8 3h8l1 5H7zM7 8h10v11a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2zM10 12v5M14 12v5M8 3v2M11 3v2M14 3v2"/>',
+  towel: '<path d="M4 6c0-1.7 1.3-3 3-3h10v14H7a3 3 0 0 1-3-3zM4 14V6M17 3a3 3 0 0 1 3 3v11h-3M8 21c2-1 6-1 8 0"/>',
+  vest: '<path d="M8 3l4 5 4-5M8 3L5 6v15h6V8M16 3l3 3v15h-6V8M12 13h.01M12 16h.01"/>',
+  razor: '<path d="M3 17l9-9 4 4-9 9H3zM12 8l3-3a2 2 0 0 1 3 0l1 1a2 2 0 0 1 0 3l-3 3M6 18l2-2"/>',
+  coin: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="5.5"/><path d="M12 9v6M10.5 10.5h2.2a1 1 0 0 1 0 2h-1.4a1 1 0 0 0 0 2H13.5"/>',
+};
+function gauge(r) {
+  // a brass dial from 1 to 5 stars; the needle swings to the rating when it scrolls into view
+  const ticks = Array.from({ length: 41 }, (_, k) => {
+    const a = Math.PI * (1 - k / 40), big = k % 10 === 0, r0 = big ? 62 : 68;
+    return `<line x1="${(80 + Math.cos(a) * r0).toFixed(1)}" y1="${(84 - Math.sin(a) * r0).toFixed(1)}" x2="${(80 + Math.cos(a) * 74).toFixed(1)}" y2="${(84 - Math.sin(a) * 74).toFixed(1)}"${big ? ' class="big"' : ''}/>`;
+  }).join('');
+  const nums = [1, 2, 3, 4, 5].map((n, k) => { const a = Math.PI * (1 - k / 4); return `<text x="${(80 + Math.cos(a) * 50).toFixed(1)}" y="${(88 - Math.sin(a) * 50).toFixed(1)}">${n}</text>`; }).join('');
+  const deg = ((r.rating - 1) / 4) * 180 - 90;
+  return `<svg class="dial" viewBox="0 0 160 96" aria-hidden="true"><path class="arc" d="M6 84a74 74 0 0 1 148 0"/><g class="ticks">${ticks}</g><g class="nums">${nums}</g>
+    <g class="needle" style="--deg:${deg.toFixed(1)}deg"><path d="M80 84L78 30l2-8 2 8z"/></g><circle cx="80" cy="84" r="6" class="hub"/></svg>`;
+}
 function reviews() {
   const total = RATINGS.reduce((n, r) => n + r.count, 0);
   const avg = (RATINGS.reduce((n, r) => n + r.rating * r.count, 0) / total).toFixed(1);
-  const stars = (r) => `<span class="stars" style="--r:${r}" aria-hidden="true">★★★★★</span>`;
-  return `<section class="sec panel" id="reviews" aria-labelledby="rv-h">
+  const star = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.4l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg>';
+  return `<section class="sec panel rvx" id="reviews" aria-labelledby="rv-h">
+  <div class="rvx-glow" aria-hidden="true"></div>
   <div class="wrap">
-    <div class="head reveal">
-      <p class="sign">What gentlemen say</p>
-      <h2 id="rv-h">${avg} stars from <em>${total.toLocaleString('en-US')} Google reviews.</em></h2>
-      <p>Since 2014, three parlours and more than 25,000 friends on Instagram. These are the things people write about again and again.</p>
-    </div>
-    <div class="rv reveal">
-      <ul class="rv-themes">
-        ${THEMES.map(([t, d]) => `<li><b>${esc(t)}</b><span>${esc(d)}</span></li>`).join('\n        ')}
-      </ul>
-      <div class="rv-branches">
-        ${RATINGS.map((r) => `<a class="rv-b" href="https://search.google.com/local/reviews?placeid=${r.placeId}" target="_blank" rel="noopener">
-          <span class="rv-name">${esc(r.name)}</span>
-          <span class="rv-score"><b>${r.rating.toFixed(1)}</b>${stars(r.rating)}</span>
-          <span class="rv-count">${r.count.toLocaleString('en-US')} reviews · read them on Google<span class="vh"> (opens Google)</span></span>
-        </a>`).join('\n        ')}
-        <p class="fine">Ratings from Google, November 2026.</p>
+    <p class="sign rvx-sign">What gentlemen say</p>
+    <div class="rvx-top">
+      <div class="medal reveal" role="img" aria-label="${avg} out of 5 stars from ${total} Google reviews">
+        <div class="medal-ring"><span class="medal-n">${avg}</span><span class="medal-stars">${star.repeat(5)}</span></div>
+        <p class="medal-c"><b class="odo" data-to="${total}">0</b> reviews on Google</p>
+      </div>
+      <div class="rvx-copy reveal">
+        <h2 id="rv-h">Twelve years of <em>gentlemen leaving happy.</em></h2>
+        <p>Since 2014, three parlours, more than 25,000 friends on Instagram, and one of the best-rated barbershops in Jakarta. Read every review yourself, then come and see why.</p>
       </div>
     </div>
+    <div class="dials">
+      ${RATINGS.map((r, k) => `<a class="dialcard reveal" style="--d:${k * 0.15}s" href="https://search.google.com/local/reviews?placeid=${r.placeId}" target="_blank" rel="noopener">
+        ${gauge(r)}
+        <span class="dc-score">${r.rating.toFixed(1)}</span>
+        <span class="dc-name">${esc(r.name)}</span>
+        <span class="dc-count">${r.count.toLocaleString('en-US')} reviews <span aria-hidden="true">↗</span><span class="vh"> (opens Google)</span></span>
+      </a>`).join('\n      ')}
+    </div>
+    <h3 class="rvx-h3 reveal">What they write about, again and again</h3>
+    <ul class="praise">
+      ${THEMES.map(([ic, t, d], k) => `<li class="reveal" style="--d:${(k % 3) * 0.1}s"><span class="pi"><svg viewBox="0 0 24 24" aria-hidden="true">${ICON[ic]}</svg></span><b>${esc(t)}</b><span>${esc(d)}</span></li>`).join('\n      ')}
+    </ul>
+    <p class="fine rvx-fine">Ratings from Google, November 2026. Themes summarised from customers’ Google reviews.</p>
   </div>
 </section>`;
 }

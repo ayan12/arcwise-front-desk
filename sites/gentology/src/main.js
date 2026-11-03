@@ -140,4 +140,13 @@ document.querySelectorAll('.reveal').forEach(el=>{if(el.getBoundingClientRect().
   if(!reduce)new IntersectionObserver(([e])=>{if(touched)return;if(e.isIntersecting&&!timer)timer=setInterval(()=>show((i+1)%imgs.length),2200);else if(!e.isIntersecting){clearInterval(timer);timer=null}},{threshold:.4}).observe(box);
 })();
 
+/* reviews: needles swing, stars fill and the count runs up once the section is in view */
+(function(){
+  const sec=$('reviews');if(!sec)return;
+  const odo=sec.querySelector('.odo'),to=+odo.dataset.to;
+  const run=()=>{sec.classList.add('lit');if(reduce){odo.textContent=to.toLocaleString('en-US');return}
+    const t0=performance.now(),dur=1600;(function f(now){const k=Math.min(1,(now-t0)/dur),e=1-Math.pow(1-k,3);odo.textContent=Math.round(e*to).toLocaleString('en-US');if(k<1)requestAnimationFrame(f)})(t0)};
+  new IntersectionObserver(([e],o)=>{if(e.isIntersecting){run();o.disconnect()}},{threshold:.25}).observe(sec);
+})();
+
 ;(function(){var s=document.createElement("script");s.src="https://arcwise-front-desk.vercel.app/widget.js";s.defer=true;s.setAttribute("data-client","gentology");s.setAttribute("data-mobile-bottom","84");s.setAttribute("data-mobile-at","560");document.body.appendChild(s)})();

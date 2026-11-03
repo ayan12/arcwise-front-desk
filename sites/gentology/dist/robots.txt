@@ -1,0 +1,3 @@
+# Concept build: not for indexing. Build with SITE_ENV=production to open it up.
+User-agent: *
+Disallow: /
