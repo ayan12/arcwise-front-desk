@@ -7,6 +7,7 @@ import { readFileSync, writeFileSync, mkdirSync, rmSync, cpSync } from 'node:fs'
 import { createHash } from 'node:crypto';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { FAVOURITES, LENGTHS, SIDES, NECKLINES, BEARDS, fadeSvg, neckSvg, NECK_DEFS } from './src/book.mjs';
 import { BRANCHES, HOURS, HAIRCUTS, HAIRCUT_INCLUDES, OTHER_SERVICES, SOCIAL, EMAIL, SOURCE, BRAND } from './src/content.mjs';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
@@ -87,7 +88,7 @@ const orgNode = () => ({
 });
 
 /* ---------- shared chrome ---------- */
-const NAV = [['tariff', 'Tariff'], ['work', 'The work'], ['waiting-list', 'Waiting list'], ['reviews', 'Reviews'], ['parlour', 'The parlour'], ['visit', 'Branches']];
+const NAV = [['tariff', 'Tariff'], ['book', 'Style book'], ['work', 'The work'], ['waiting-list', 'Waiting list'], ['reviews', 'Reviews'], ['parlour', 'The parlour'], ['visit', 'Branches']];
 function head({ title, description, slug, graph }) {
   const url = pageUrl(slug);
   return `<!doctype html>
@@ -182,6 +183,7 @@ function tariff() {
           ${OTHER_SERVICES.map(row).join('\n          ')}
         </ul>
       </div>
+      <p class="t-book"><a href="#book">Not sure what to ask for? Build your order in the Barber’s Book ↓</a></p>
       <p class="t-foot"><sup>*</sup> Gentology's services page lists IDR 90k and IDR 80k for the signature haircuts without marking which price belongs to which cut; they are shown here in the order published. The hair wash is listed there as "add 10k" on the signature haircuts only. Please confirm the price when you ring your branch.</p>
     </div>
   </div>
@@ -292,6 +294,63 @@ function visit(current) {
 </section>`;
 }
 
+
+
+/* ---------- the barber's book: build your order to show the barber ---------- */
+function book() {
+  const opt = (group, key, label, extra = '', pressed = false) => `<button type="button" class="bk-o" data-g="${group}" data-v="${esc(key)}" aria-pressed="${pressed}"${extra}>${label}</button>`;
+  return `<section class="sec bk" id="book" aria-labelledby="bk-h">
+  ${NECK_DEFS}
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="sign">The Barber’s Book</p>
+      <h2 id="bk-h">Not sure what to ask for? <em>Build your order.</em></h2>
+      <p>Gentology’s own style catalogue, in four quick choices. Show the result to your barber, who will read your head shape first and tell you honestly if it suits you.</p>
+    </div>
+    <div class="bk-grid">
+      <div class="bk-steps">
+        <div class="bk-step reveal">
+          <p class="bk-n"><span>I</span> The style</p>
+          <div class="bk-fav" role="group" aria-label="House favourites"><span class="bk-lab">House favourites</span>
+            ${FAVOURITES.map((f) => opt('fav', f.key, esc(f.name))).join('')}
+          </div>
+          <div class="bk-len" role="group" aria-label="Length on top">${LENGTHS.map((l, i) => `<button type="button" class="bk-t" data-len="${l.key}" aria-pressed="${i === 1}">${esc(l.name)}</button>`).join('')}</div>
+          ${LENGTHS.map((l, i) => `<div class="bk-list" data-len="${l.key}" role="group" aria-label="${esc(l.name)} styles"${i === 1 ? '' : ' hidden'}>${l.styles.map(([n, d]) => opt('style', n, `<b>${esc(n)}</b><span>${esc(d)}</span>`)).join('')}</div>`).join('\n          ')}
+        </div>
+        <div class="bk-step reveal">
+          <p class="bk-n"><span>II</span> The sides</p>
+          <div class="bk-pics" role="group" aria-label="Sides">${SIDES.map((x) => opt('side', x.name, `${fadeSvg(x, x.key)}<b>${esc(x.name)}</b><span>${esc(x.text)}</span>`)).join('')}</div>
+        </div>
+        <div class="bk-step reveal">
+          <p class="bk-n"><span>III</span> The neckline</p>
+          <div class="bk-pics nk-row" role="group" aria-label="Neckline">${NECKLINES.map((x) => opt('neck', x.name, `${neckSvg(x)}<b>${esc(x.name)}</b><span>${esc(x.text)}</span>`)).join('')}</div>
+        </div>
+        <div class="bk-step reveal">
+          <p class="bk-n"><span>IV</span> Beard <small>optional</small></p>
+          <div class="bk-chips" role="group" aria-label="Beard and moustache">${opt('beard', '', 'No beard work', '', true)}${BEARDS.map((b) => opt('beard', b, esc(b))).join('')}</div>
+        </div>
+      </div>
+      <aside class="bk-slip" aria-label="Your order">
+        <div class="bk-card">
+          <p class="sign">Gentology</p>
+          <p class="bk-ct">Your order for the barber</p>
+          <dl id="bkOrder">
+            <dt>Style</dt><dd data-k="style">Choose a style</dd>
+            <dt>Sides</dt><dd data-k="side">Barber’s advice</dd>
+            <dt>Neckline</dt><dd data-k="neck">Barber’s advice</dd>
+            <dt>Beard</dt><dd data-k="beard">None</dd>
+          </dl>
+          <p class="bk-pairs" id="bkPairs" hidden></p>
+          <p class="bk-fine">Show this screen in the chair. Your barber reads your head shape first and may suggest a small change.</p>
+          <div class="bk-acts"><button type="button" class="btn" id="bkCopy">Copy my order</button><button type="button" class="btn line" id="bkAsk">Ask the front desk</button></div>
+        </div>
+        <a class="bk-pdf" href="/media/gentology-barbers-book.pdf" target="_blank" rel="noopener">Download the full Barber’s Book <small>PDF · 6 pages</small></a>
+      </aside>
+    </div>
+    <script type="application/json" id="bk-data">${json({ fav: Object.fromEntries(FAVOURITES.map((f) => [f.key, { name: f.name, pairs: f.pairs }])) })}</script>
+  </div>
+</section>`;
+}
 
 /* ---------- the work: one fade, frame by frame (photos from Gentology's own "fade progress" story) ---------- */
 const FADE = [
@@ -418,6 +477,7 @@ ${header({ home: true })}
   </div>
 </section>
 ${tariff()}
+${book()}
 ${work()}
 ${waitingList()}
 ${reviews()}
