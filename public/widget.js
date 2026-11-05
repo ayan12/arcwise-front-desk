@@ -24,7 +24,7 @@
   var SID = ss(KEY + ':sid') || (function () { var v = Math.random().toString(36).slice(2, 12) + Date.now().toString(36); ss(KEY + ':sid', v); return v; })();
 
   var T = {
-    en: { open: 'Chat with us', close: 'Close chat', placeholder: 'Write a message\u2026', send: 'Send', status: 'Online \u00b7 replies in seconds', error: 'Couldn\u2019t reach us just now. Please try again.', by: 'AI receptionist by Arcwise', hi: 'How can we help?', or: 'or write your own question below', wa: 'Continue on WhatsApp', waSub: 'Your message is ready to send', sms: 'Text us', smsSub: 'Your message is ready to send', ig: 'Continue on Instagram', igSub: 'Your message is copied: paste it in the DM', dismiss: 'Dismiss', you: 'You' },
+    en: { open: 'Chat with us', close: 'Close chat', placeholder: 'Write a message\u2026', send: 'Send', status: 'Online \u00b7 replies in seconds', error: 'Couldn\u2019t reach us just now. Please try again.', by: 'AI receptionist by Arcwise', hi: 'How can we help?', or: 'or write your own question below', wa: 'Continue on WhatsApp', waSub: 'Your message is ready to send', ig: 'Continue on Instagram', igSub: 'Your message is copied: paste it in the DM', dismiss: 'Dismiss', you: 'You' },
     id: { open: 'Chat dengan kami', close: 'Tutup chat', placeholder: 'Tulis pesan\u2026', send: 'Kirim', status: 'Online \u00b7 balas dalam hitungan detik', error: 'Belum bisa terhubung. Coba lagi ya.', by: 'AI receptionist oleh Arcwise', hi: 'Ada yang bisa kami bantu?', or: 'atau tulis pertanyaan kamu di bawah', wa: 'Lanjut di WhatsApp', waSub: 'Pesan kamu sudah siap dikirim', ig: 'Lanjut di Instagram', igSub: 'Pesan kamu sudah tersalin: tempel di DM', dismiss: 'Tutup', you: 'Kamu' },
   };
   function t(k) { return (T[LANG] || T.en)[k]; }
@@ -40,7 +40,6 @@
     spark: '<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6.3 6.3l2.5 2.5M15.2 15.2l2.5 2.5M6.3 17.7l2.5-2.5M15.2 8.8l2.5-2.5"/>',
     layers: '<path d="M12 3 3 8l9 5 9-5z"/><path d="m3 13 9 5 9-5"/>',
     arrow: '<path d="M7 17 17 7M8 7h9v9"/>',
-    sms: '<path d="M4 5h16v11H9l-5 4z"/>',
     ig: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>',
     wa: '<path fill="currentColor" stroke="none" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.3Z"/>',
   };
@@ -127,7 +126,7 @@
       '.wa{display:grid;grid-template-columns:40px 1fr 18px;gap:12px;align-items:center;margin:4px 0 4px 34px;padding:12px 14px;border-radius:16px;text-decoration:none;' +
       'background:#128c4b;color:#fff;box-shadow:0 8px 22px rgba(18,140,75,.3);max-width:calc(100% - 34px);animation:rise .35s both;transition:transform .15s,background .15s}' +
       '.wa:hover{background:#0f7a41;transform:translateY(-1px)}' +
-      '.wa.sms{background:var(--a);color:var(--oa)}.wa.sms:hover{filter:brightness(1.08);background:var(--a)}.wa.ig{background:linear-gradient(120deg,#833ab4,#e1306c 55%,#f77737)}.wa.ig:hover{filter:brightness(1.08);background:linear-gradient(120deg,#833ab4,#e1306c 55%,#f77737)}' +
+      '.wa.ig{background:linear-gradient(120deg,#833ab4,#e1306c 55%,#f77737)}.wa.ig:hover{filter:brightness(1.08);background:linear-gradient(120deg,#833ab4,#e1306c 55%,#f77737)}' +
       '.wa .wi{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.16);display:grid;place-items:center}' +
       '.wa b{display:block;font-size:14px}.wa span{display:block;font-size:12px;opacity:.85}' +
       '.typ{display:flex;gap:4px;padding:13px 14px;background:var(--s1);box-shadow:inset 0 0 0 1px var(--line);border-radius:18px;border-bottom-left-radius:6px}' +
@@ -298,15 +297,12 @@
       var next = history[i + 1], prev = history[i - 1];
       el.ms.appendChild(row(m, !prev || prev.role !== m.role));
       (m.actions || []).forEach(function (a) {
-        if (!a) return;
         var ig = /^https:\/\/ig\.me\/m\/[\w.]+$/.test(a.url || '');
-        var sms = /^sms:\+\d{8,15}\?&body=/.test(a.url || '');
-        if (!ig && !sms && !/^https:\/\/wa\.me\//.test(a.url || '')) return;   // only WhatsApp, Instagram DM or text-message links
-        var k = ig ? 'ig' : sms ? 'sms' : 'wa';
-        var l = document.createElement('a'); l.className = 'wa' + (ig ? ' ig' : sms ? ' sms' : ''); l.href = a.url; if (!sms) { l.target = '_blank'; l.rel = 'noopener'; }
-        l.innerHTML = '<span class="wi">' + svg(k, 22) + '</span><span><b></b><span></span></span>' + svg('arrow', 18);
-        l.querySelector('b').textContent = ig ? t('ig') + ' \u00b7 ' + String(a.label || '') : sms ? t('sms') + ' \u00b7 ' + String(a.label || '') : t('wa') + ' \u00b7 ' + String(a.label || '').replace(/^WhatsApp\s*/, '');
-        l.querySelector('b + span').textContent = t(k + 'Sub');
+        if (!ig && !/^https:\/\/wa\.me\//.test(a.url || '')) return;   // only WhatsApp or Instagram DM links
+        var l = document.createElement('a'); l.className = 'wa' + (ig ? ' ig' : ''); l.href = a.url; l.target = '_blank'; l.rel = 'noopener';
+        l.innerHTML = '<span class="wi">' + svg(ig ? 'ig' : 'wa', 22) + '</span><span><b></b><span></span></span>' + svg('arrow', 18);
+        l.querySelector('b').textContent = ig ? t('ig') + ' \u00b7 ' + String(a.label || '') : t('wa') + ' \u00b7 ' + String(a.label || '').replace(/^WhatsApp\s*/, '');
+        l.querySelector('b + span').textContent = t(ig ? 'igSub' : 'waSub');
         if (ig && a.text) l.addEventListener('click', function () { try { navigator.clipboard.writeText(a.text); } catch (e) {} });
         el.ms.appendChild(l);
       });
