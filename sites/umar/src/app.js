@@ -124,4 +124,31 @@
     const w = window.open(url, '_blank', 'noopener,noreferrer');
     if (!w) location.href = url;
   });
+  // hero budget tool: live matches from Umar's current launches, then communities
+  const hx = $('#hx');
+  if (hx) {
+    const r = $('#hx-range'), amt = $('#hx-amt'), list = $('#hx-list'), visa = $('#hx-visa'), go = $('#hx-send');
+    let text = '';
+    const run = () => {
+      const b = +r.value, g = (hx.querySelector('input[name=hxgoal]:checked') || {}).value;
+      amt.textContent = b >= 15e6 ? 'AED 15,000,000+' : aed(b);
+      const rows = [];
+      D.launches.filter((l) => (l.from ? l.from <= b : b >= 5e6)).sort((x, y) => (y.goals.includes(g) ? 1 : 0) - (x.goals.includes(g) ? 1 : 0)).slice(0, 3).forEach((l) => rows.push([l.name, l.from ? 'From ' + aed(l.from) : 'Price on request', 'Launch']));
+      const tier = D.tiers.find(([, , mn, mx]) => b >= mn && b < mx);
+      D.areas.forEach((a) => { if (rows.length < 5 && tier && a.tiers.includes(tier[0]) && (!g || a.goals.includes(g))) rows.push([a.name, a.em, 'Community']); });
+      list.replaceChildren(...(rows.length ? rows.slice(0, 5).map(([n, m, k]) => { const li = el('li'); li.append(el('b', '', n), el('span', '', m), el('i', '', k)); return li; }) : [el('li', 'empty', 'Nothing fits exactly. Umar will suggest the closest options.')]));
+      visa.textContent = b >= 2e6 ? 'At this budget your property can qualify you for the 10-year Golden Visa.' : 'The Golden Visa starts at AED 2M in property. Umar can show you how to get there.';
+      visa.className = 'hx-visa' + (b >= 2e6 ? ' ok' : '');
+      const gl = (D.goals.find(([id]) => id === g) || [, ''])[1];
+      text = 'Hi Umar, my budget is ' + amt.textContent + (gl ? ' and my goal is ' + gl : '') + '. Interested in: ' + rows.slice(0, 5).map((x) => x[0]).join(', ') + '.';
+      go.href = D.wa ? waUrl(text) : igUrl;
+    };
+    hx.addEventListener('input', run); hx.addEventListener('change', run); hx.addEventListener('submit', (e) => e.preventDefault());
+    go.addEventListener('click', () => { if (!D.wa) copy(text, $('#hx-copied')); });
+    run();
+  }
+  document.querySelectorAll('[data-ask]').forEach((a) => {
+    const t = 'Hi Umar, please send me the brochure and payment plan for ' + a.dataset.ask + '.';
+    if (D.wa) a.href = waUrl(t); else a.addEventListener('click', () => copy(t));
+  });
 })();

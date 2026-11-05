@@ -38,10 +38,10 @@ function routeMap(areas, route) {
 }
 
 export function renderPage(c, assets) {
-  const { site, ledger, proof, goals, tiers, areas, route, plans, after, insights, faqs } = c;
+  const { site, ledger, launches, reels, proof, goals, tiers, areas, route, plans, after, insights, faqs } = c;
   const igUrl = 'https://ig.me/m/' + site.instagram;
   const contact = site.wa ? { href: 'https://wa.me/' + site.wa + '?text=INVEST', label: 'Message Umar on WhatsApp', icon: I.wa } : { href: igUrl, label: 'Message Umar on Instagram', icon: I.ig };
-  const data = { wa: site.wa, ig: site.instagram, goals, tiers: tiers.map(([id, label, min, max]) => [id, label, min, max === Infinity ? 1e12 : max]), areas, plans };
+  const data = { wa: site.wa, ig: site.instagram, launches, goals, tiers: tiers.map(([id, label, min, max]) => [id, label, min, max === Infinity ? 1e12 : max]), areas, plans };
   const json = JSON.stringify(data).replace(/</g, '\\u003c');
   const ld = JSON.stringify({ '@context': 'https://schema.org', '@type': 'RealEstateAgent', name: site.name, url: site.url, image: site.url + '/img/umar.webp', areaServed: ['Dubai', 'Abu Dhabi'], identifier: 'BRN ' + site.brn, sameAs: ['https://www.instagram.com/' + site.instagram, site.youtube] }).replace(/</g, '\\u003c');
   const title = 'Umar Sardar, property investment advisor in Dubai and Abu Dhabi';
@@ -82,27 +82,55 @@ export function renderPage(c, assets) {
 </header>
 
 <main id="main">
-<section class="lux-hero">
-  <div class="wrap lh-grid">
-    <div class="lh-copy">
-      <p class="role">Property investment advisor<br>Dubai and Abu Dhabi</p>
-      <h1 class="name">Umar<br>Sardar</h1>
-      <p class="lede">Off-plan and prime property for investors who want a Golden Visa, steady rental income or long-term growth. One advisor from the first shortlist to the keys, and after.</p>
-      <div class="ctas"><a class="btn btn-go" href="#match">Find where to buy</a><a class="btn btn-line" href="${esc(contact.href)}" target="_blank" rel="noopener">${contact.icon}<span>Message Umar</span></a></div>
+<section class="hx">
+  <div class="wrap hx-grid">
+    <div class="hx-copy">
+      <p class="role">Umar Sardar, property investment advisor. BRN ${esc(site.brn)}</p>
+      <h1>Invest in Dubai and Abu Dhabi with the advisor the developers award.</h1>
+      <p class="lede">Off-plan launches before they go public, honest numbers and one person from the first shortlist to the keys.</p>
+      <ul class="hx-proof">${ledger.slice(0, 3).map(([a, b]) => `<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join('')}</ul>
     </div>
-    <figure class="lh-photo">
-      <img src="/img/hero.webp" width="480" height="564" alt="Umar Sardar with his awards at the Aldar Elite Awards, Q3 2026" fetchpriority="high">
-      <figcaption>Aldar Elite Awards, Q3 2026<span>BRN ${esc(site.brn)}</span></figcaption>
-    </figure>
+    <form class="hx-tool" id="hx" aria-labelledby="hx-t">
+      <p class="hx-t" id="hx-t">What’s your budget?</p>
+      <output id="hx-amt" for="hx-range">AED 2,000,000</output>
+      <input id="hx-range" type="range" min="500000" max="15000000" step="50000" value="2000000" aria-label="Budget in AED">
+      <div class="hx-scale"><span>AED 500K</span><span>AED 15M+</span></div>
+      <fieldset><legend>Your goal</legend><div class="chips">${chips('hxgoal', goals.map(([id, l]) => [id, l]), 0, ' sm')}</div></fieldset>
+      <div class="hx-res" aria-live="polite"><p class="hx-visa" id="hx-visa"></p><ol id="hx-list"></ol></div>
+      <a class="btn btn-go" id="hx-send" href="${esc(contact.href)}" target="_blank" rel="noopener">${contact.icon}<span>Send me these options</span></a>
+      <p class="copied" id="hx-copied" hidden>Your options are copied. Paste them into the chat.</p>
+    </form>
   </div>
-  <div class="wrap"><ul class="ledger">${ledger.map(([a, b]) => `<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join('')}</ul></div>
-  <p class="wrap partners">Recognised by <b>Aldar</b> and <b>Majid Al Futtaim</b></p>
+  <figure class="hx-media"><img src="/img/difc.webp" width="820" height="860" alt="DIFC towers in Dubai at dusk" fetchpriority="high"></figure>
+</section>
+
+<section class="awards">
+  <div class="wrap">
+    <div class="aw-head"><h2>Awarded by the developers he sells for</h2><p class="lede">Three award nights in 2026, from Majid Al Futtaim, Aldar and the H1 Broker Awards with Emaar.</p></div>
+    <div class="aw-grid">
+      <figure><img src="/img/award-maf.webp" width="945" height="1269" alt="Umar Sardar holding the Majid Al Futtaim Top Sales Partner award" loading="lazy"><figcaption><b>Top Sales Partner</b>Majid Al Futtaim</figcaption></figure>
+      <figure><img src="/img/hero.webp" width="480" height="564" alt="Umar Sardar with four awards at the Aldar Elite Awards" loading="lazy"><figcaption><b>International Market Champion</b>Aldar Elite Awards Q3 2026, 4 awards in one day</figcaption></figure>
+      <figure><img src="/img/award-h1.webp" width="818" height="1456" alt="Umar Sardar at the H1 Broker Awards 2026 with Emaar" loading="lazy"><figcaption><b>H1 Broker Awards 2026</b>With Emaar</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec launches" id="launches">
+  <div class="wrap">
+    <div class="aw-head"><h2>Launches Umar is selling now</h2><p class="lede">Tap one to get the brochure, floor plans and payment plan from Umar directly.</p></div>
+    <ul class="ln-grid">${launches.map((l) => `<li class="ln${l.img ? '' : ' ln-text'}">
+      ${l.img ? `<img src="${esc(l.img)}" alt="" loading="lazy" width="820" height="1076">` : ''}
+      <div class="ln-body"><span class="ln-tag">${esc(l.tag)}</span><h3>${esc(l.name)}</h3><p class="ln-where">${esc(l.where)}</p><p>${esc(l.line)}</p>
+      <p class="ln-price">${l.from ? 'From AED ' + esc((l.from / 1e6).toFixed(1)) + 'M' : 'Price on request'}</p>
+      <a class="btn btn-line" href="${esc(contact.href)}" target="_blank" rel="noopener" data-ask="${esc(l.name)}">Get the brochure</a></div>
+    </li>`).join('')}</ul>
+  </div>
 </section>
 
 <section id="match" class="hero">
   <div class="wrap hero-top">
     <div class="hero-copy">
-      <p class="kicker">Where to buy</p>
+      <p class="kicker">Explore every community</p>
       <h2>From Saadiyat to Creek&nbsp;Harbour, matched to your goal.</h2>
       <p class="lede">Answer three questions and the map lights up the communities that fit your goal and budget. Send the shortlist and Umar replies with real units, prices and payment plans.</p>
     </div>
@@ -171,7 +199,8 @@ export function renderPage(c, assets) {
     </a>
     <div class="talk-copy">
       <h2>Straight answers, not brochures</h2>
-      <ul class="topics">${insights.map(([tag, h, d]) => `<li><h3>${esc(h)}</h3><p>${esc(d)}</p></li>`).join('')}</ul>
+      <ul class="reels">${reels.map(([id, t]) => `<li><a href="https://www.instagram.com/reel/${esc(id)}/" target="_blank" rel="noopener"><span class="play">${I.play}</span><span>${esc(t)}</span></a></li>`).join('')}</ul>
+      <ul class="topics" hidden>${insights.map(([tag, h, d]) => `<li><h3>${esc(h)}</h3><p>${esc(d)}</p></li>`).join('')}</ul>
       <a class="text-link" href="https://www.instagram.com/${esc(site.instagram)}/" target="_blank" rel="noopener">More market breakdowns on Instagram</a>
     </div>
   </div>
@@ -215,6 +244,7 @@ export function renderPage(c, assets) {
   </div>
   <p class="wrap fine">Figures on this page are a guide, not financial advice. Concept redesign by Arcwise Studios, not the official website.</p>
 </footer>
+<nav class="mbar" aria-label="Quick actions"><a class="btn btn-line" href="#hx">My budget</a><a class="btn btn-go" href="${esc(contact.href)}" target="_blank" rel="noopener">${contact.icon}<span>Message Umar</span></a></nav>
 <a class="fab" href="${esc(contact.href)}" target="_blank" rel="noopener" aria-label="${esc(contact.label)}">${contact.icon}</a>
 <script type="application/json" id="site-data">${json}</script>
 <script src="${assets.js}" defer></script>

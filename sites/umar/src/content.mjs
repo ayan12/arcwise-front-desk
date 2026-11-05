@@ -25,6 +25,22 @@ export const ledger = [
   ['29.6K', 'Investors follow his market breakdowns'],
 ];
 
+// Projects Umar has posted about (instagram.com/umarsardar_, Nov 2026). from = starting price in AED, null = on request.
+export const launches = [
+  { id: 'ghaf', name: 'Ghafwoods', where: 'Dubai', from: 1.1e6, img: '/img/ghafwoods.webp', goals: ['yield', 'growth', 'home'], line: 'A forest-concept community, planned to run about 5 degrees cooler than the city.', tag: 'New launch' },
+  { id: 'palm', name: 'Palm Springs by Nakheel', where: 'Jebel Ali, Dubai', from: 3.8e6, img: null, goals: ['growth', 'home', 'visa'], line: '3 and 4-bed townhouses, 4 and 5-bed villas facing Palm Jebel Ali, on Sheikh Zayed Road.', tag: 'Upcoming launch' },
+  { id: 'elysian', name: 'Elysian Mansions', where: 'Dubai', from: null, img: '/img/elysian.webp', goals: ['visa', 'home', 'growth'], line: 'Lagoon-front mansions at the very top of the Dubai market.', tag: 'Ultra-prime' },
+  { id: 'difc', name: 'DIFC and Zabeel District', where: 'Dubai', from: null, img: '/img/difc.webp', goals: ['visa', 'growth', 'yield'], line: 'DIFC 2.0: a government-backed master plan next to the city’s financial centre.', tag: 'Prime' },
+  { id: 'islande', name: 'Bay Villas, Island E', where: 'Dubai Islands', from: null, img: null, goals: ['growth', 'home'], line: 'Not the same project as Bay Estate. Umar breaks down the difference before you book.', tag: 'Off-plan' },
+];
+
+export const reels = [
+  ['DfXRzLFuOhL', 'Why Palm Springs launched at AED 3.8M'],
+  ['DcMQasmRYNq', 'Bay Estate vs Bay Villas: not the same project'],
+  ['DfNINDNOf5c', 'New launch in Ghafwoods from AED 1.1M'],
+  ['DerNelMj97k', 'Promised a Golden Visa, then the agent went silent'],
+];
+
 export const goals = [
   ['visa', 'Golden Visa', 'A 10-year residency through property'],
   ['yield', 'Rental income', 'Steady rent, high tenant demand'],
