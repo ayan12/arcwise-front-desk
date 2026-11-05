@@ -1,0 +1,215 @@
+// Builds one concept page per Miami med spa: public/miami/<slug>/index.html, plus an internal list at public/miami/index.html.
+// Run: node scripts/build-miami.mjs
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { SPAS, SAMPLE_MENU, digits } from '../clients/miami-data.js';
+
+const P = {
+  biscayne: { bg: '#EEF4F2', panel: '#FFFFFF', ink: '#0E2A2C', mute: '#4B6664', line: '#CFDEDA', accent: '#1F6F6B', on: '#FFFFFF', arch1: '#BFDCD6', arch2: '#8DC0B8', arch3: '#F3D9C4', dark: false },
+  deco: { bg: '#F7ECE4', panel: '#FFF8F3', ink: '#2A1D27', mute: '#6E5867', line: '#E6D3C7', accent: '#7D4A6E', on: '#FFFFFF', arch1: '#F0CFC0', arch2: '#D9A9B8', arch3: '#BFD7CF', dark: false },
+  night: { bg: '#0F171A', panel: '#162227', ink: '#E9EFEE', mute: '#9DB0AD', line: '#25363B', accent: '#B9D8CF', on: '#0F171A', arch1: '#1E3A3C', arch2: '#2F5A57', arch3: '#C9A98A', dark: true },
+  sage: { bg: '#F0F1E8', panel: '#FAFAF4', ink: '#20261C', mute: '#5B6453', line: '#D9DCCB', accent: '#55693F', on: '#FFFFFF', arch1: '#D7DEC2', arch2: '#B4C29A', arch3: '#EBCFB4', dark: false },
+};
+
+const SUB = {
+  booking: 'Pick a treatment and a time that suits you. Your request goes straight to the team.',
+  hours: 'Ask a question or request an appointment any time, even when we’re closed. We text you back.',
+  trust: 'Physician-led treatments, planned with you at a consultation first.',
+  bilingual: 'Physician-led care on SW 8th St. Hablamos español.',
+  refresh: 'Treatments, prices and booking, all in one place and easy on your phone.',
+  volume: 'A full team of providers. Ask anything and book in a minute.',
+  site: 'See the treatments, ask a question and request your appointment in a minute.',
+};
+
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const at = a => (/\b(St|Ave|Blvd|Hwy)\b/.test(a) ? 'on ' : 'in ') + a;
+const maps = s => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.name + ' ' + s.area + ' Miami FL')}`;
+
+function page(s) {
+  const p = P[s.palette];
+  const real = !!s.menu;
+  const menu = s.menu || SAMPLE_MENU;
+  const sms = s.phone ? '+1' + digits(s.phone) : '';
+  const who = s.lead ? `Led by ${s.lead}` : s.team ? `A team of ${s.team}` : s.since ? `${at(s.area)[0].toUpperCase() + at(s.area).slice(1)} since ${s.since}` : `Med spa ${at(s.area)}`;
+  const rating = s.rating ? `<a class="stars" href="${maps(s)}" target="_blank" rel="noopener"><span aria-hidden="true">★★★★★</span> <b>${s.rating}</b> from ${s.reviews} Google reviews</a>` : '';
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>${esc(s.name)} · Concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+:root{--bg:${p.bg};--panel:${p.panel};--ink:${p.ink};--mute:${p.mute};--line:${p.line};--a:${p.accent};--on:${p.on};--a1:${p.arch1};--a2:${p.arch2};--a3:${p.arch3};color-scheme:${p.dark ? 'dark' : 'light'}}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font:17px/1.6 Figtree,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--a);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.concept{background:var(--ink);color:var(--bg);font-size:13px;text-align:center;padding:8px 16px}
+.concept a{font-weight:600}
+header{border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:24px;min-height:72px}
+.logo{font-family:'Instrument Serif',Georgia,serif;font-size:26px;line-height:1;text-decoration:none;margin-right:auto}
+nav{display:flex;gap:26px;font-size:15px}
+nav a{text-decoration:none;color:var(--mute)} nav a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 24px;border-radius:999px;background:var(--a);color:var(--on);font:600 16px Figtree,sans-serif;text-decoration:none;border:0;cursor:pointer}
+.btn:hover{filter:brightness(1.07)}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn.ghost:hover{box-shadow:inset 0 0 0 1.5px var(--ink);filter:none}
+.btn.sm{min-height:40px;padding:0 18px;font-size:15px}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:56px;align-items:center;padding-block:72px 88px}
+.who{color:var(--mute);font-size:15px;margin-bottom:18px}
+h1{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(52px,8vw,104px);line-height:.95;letter-spacing:-.01em;text-wrap:balance}
+.lede{font-size:19px;color:var(--mute);max-width:34ch;margin:24px 0 32px}
+.acts{display:flex;flex-wrap:wrap;gap:12px}
+.stars{display:inline-flex;gap:6px;align-items:baseline;margin-top:28px;font-size:15px;color:var(--mute);text-decoration:none}
+.stars span{color:var(--a);letter-spacing:2px} .stars b{color:var(--ink)} .stars:hover{color:var(--ink)}
+/* the arch: a Miami Deco window, layered like a sunrise over the bay */
+.arch{position:relative;aspect-ratio:3/4;max-width:420px;width:100%;justify-self:end;border-radius:999px 999px 0 0;overflow:hidden;background:var(--a1)}
+.arch i{position:absolute;left:12%;right:12%;bottom:0;border-radius:999px 999px 0 0;display:block}
+.arch i:nth-child(1){top:14%;background:var(--a2)}
+.arch i:nth-child(2){top:34%;left:24%;right:24%;background:var(--a3)}
+.arch i:nth-child(3){top:56%;left:36%;right:36%;background:var(--bg)}
+.arch b{position:absolute;left:0;right:0;bottom:0;height:22%;background:repeating-linear-gradient(to bottom,var(--a) 0 2px,transparent 2px 14px);opacity:.35}
+section{padding-block:88px}
+section+section{border-top:1px solid var(--line)}
+h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(38px,5vw,56px);line-height:1.05;text-wrap:balance;margin-bottom:12px}
+.intro{color:var(--mute);max-width:52ch;margin-bottom:44px}
+.menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--line)}
+.menu div{padding:28px 32px 28px 0;border-bottom:1px solid var(--line)}
+.menu div:nth-child(odd){border-right:1px solid var(--line)}
+.menu div:nth-child(even){padding-left:32px}
+.menu h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:30px;line-height:1.1;margin-bottom:6px}
+.menu p{color:var(--mute)}
+.note{font-size:14px;color:var(--mute);margin-top:18px}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:40px;height:40px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--a);color:var(--a);font-weight:700;margin-bottom:16px}
+.steps h3{font-size:19px;margin-bottom:6px}
+.steps p{color:var(--mute)}
+.book .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px;align-items:start}
+form{background:var(--panel);border-radius:28px;padding:32px;box-shadow:0 0 0 1px var(--line);display:grid;gap:22px}
+fieldset{border:0;padding:0;display:grid;gap:10px;min-width:0}
+legend,label.l{font-weight:600;font-size:15px;margin-bottom:10px;padding:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips label{padding:10px 16px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--line);font-size:15px;cursor:pointer}
+.chips input:checked+label{background:var(--a);color:var(--on);box-shadow:none}
+.chips input:focus-visible+label{outline:2px solid var(--a);outline-offset:2px}
+input[type=text]{width:100%;min-height:50px;border-radius:14px;border:0;box-shadow:inset 0 0 0 1.5px var(--line);background:var(--bg);color:var(--ink);font:16px Figtree,sans-serif;padding:0 16px}
+input[type=text]:focus{outline:none;box-shadow:inset 0 0 0 2px var(--a)}
+.out{border-radius:16px;background:var(--bg);padding:16px 18px;font-size:15px;color:var(--mute)}
+.out b{display:block;color:var(--ink);margin-bottom:4px}
+.visit dl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.visit dt{font-size:14px;color:var(--mute);margin-bottom:6px}
+.visit dd{font-size:19px}
+.visit dd a{text-decoration-color:var(--line);text-underline-offset:4px}
+footer{border-top:1px solid var(--line);padding-block:32px 96px;font-size:14px;color:var(--mute)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between}
+@media (max-width:900px){
+  nav{display:none}
+  .hero .wrap,.book .wrap{grid-template-columns:1fr;gap:40px}
+  .hero .wrap{padding-block:44px 64px}
+  .arch{max-width:300px;justify-self:start;aspect-ratio:4/5}
+  .menu{grid-template-columns:1fr}
+  .menu div,.menu div:nth-child(odd),.menu div:nth-child(even){padding:22px 0;border-right:0}
+  .steps,.visit dl{grid-template-columns:1fr;gap:28px}
+  section{padding-block:64px}
+  form{padding:22px;border-radius:22px}
+}
+</style>
+</head>
+<body>
+<div class="concept">Concept website made for ${esc(s.name)} by <a href="https://arcwise-studios.vercel.app" target="_blank" rel="noopener">Arcwise Studios</a>${real ? '' : '. Treatments shown are examples.'}</div>
+<header><div class="wrap">
+  <a class="logo" href="#top">${esc(s.name)}</a>
+  <nav aria-label="Main"><a href="#treatments">Treatments</a><a href="#book">Book</a><a href="#visit">Visit</a></nav>
+  ${s.phone ? `<a class="btn sm ghost" href="tel:${sms}">${esc(s.phone)}</a>` : `<a class="btn sm" href="#book">Book</a>`}
+</div></header>
+<main id="top">
+<div class="hero"><div class="wrap">
+  <div>
+    <p class="who">${esc(who)}</p>
+    <h1>${esc(s.name)}</h1>
+    <p class="lede">${SUB[s.angle] || SUB.site}</p>
+    <div class="acts"><a class="btn" href="#book">Request an appointment</a><button class="btn ghost" type="button" data-ask="Hi, I have a question about a treatment">Ask a question</button></div>
+    ${rating}
+  </div>
+  <div class="arch" aria-hidden="true"><i></i><i></i><i></i><b></b></div>
+</div></div>
+
+<section id="treatments"><div class="wrap">
+  <h2>Treatments</h2>
+  <p class="intro">Every treatment starts with a consultation, so your plan, amount and price are set with your provider.</p>
+  <div class="menu">${menu.map(m => `<div><h3>${esc(m[0])}</h3><p>${esc(m[1])}</p></div>`).join('')}</div>
+  ${real ? '' : `<p class="note">Example menu. ${esc(s.name)}’s own treatments and prices go here, and the team can edit them from a phone.</p>`}
+</div></section>
+
+<section><div class="wrap">
+  <h2>How a visit works</h2>
+  <p class="intro">From your first message to your follow-up.</p>
+  <ol class="steps">
+    <li><h3>Send a request</h3><p>Choose a treatment and a time below, or ask the front desk in the chat. It answers day and night.</p></li>
+    <li><h3>Consultation</h3><p>Your provider looks at your goals and skin, then agrees the plan and price with you.</p></li>
+    <li><h3>Treatment and follow-up</h3><p>Most treatments take under an hour. The team checks in afterwards.</p></li>
+  </ol>
+</div></section>
+
+<section class="book" id="book"><div class="wrap">
+  <div>
+    <h2>Request an appointment</h2>
+    <p class="intro">Takes under a minute. ${s.phone ? `It opens a text message to ${esc(s.name)} with your request written out, so the team can confirm a time.` : 'Your request goes straight to the team, who confirm a time.'}</p>
+    ${s.hours ? `<p class="note">${esc(s.hours)} Requests sent after hours are answered the next working day.</p>` : ''}
+  </div>
+  <form id="req" novalidate>
+    <fieldset><legend>Treatment</legend><div class="chips">${menu.map((m, i) => `<input type="radio" name="t" id="t${i}" value="${esc(m[0])}"${i ? '' : ' checked'}><label for="t${i}">${esc(m[0])}</label>`).join('')}<input type="radio" name="t" id="tx" value="Not sure yet"><label for="tx">Not sure yet</label></div></fieldset>
+    <fieldset><legend>When suits you</legend><div class="chips">${['Weekday morning', 'Weekday afternoon', 'Weekday evening', 'Saturday'].map((d, i) => `<input type="radio" name="d" id="d${i}" value="${d}"${i ? '' : ' checked'}><label for="d${i}">${d}</label>`).join('')}</div></fieldset>
+    <div><label class="l" for="n">First name</label><input type="text" id="n" autocomplete="given-name" maxlength="40"></div>
+    <div class="out" aria-live="polite"><b>Your message</b><span id="msg"></span></div>
+    ${s.phone ? `<a class="btn" id="go" href="#">Text this request</a>` : `<button class="btn" type="submit">Send request</button>`}
+  </form>
+</div></section>
+
+<section class="visit" id="visit"><div class="wrap">
+  <h2>Visit</h2>
+  <p class="intro">${esc(s.name)}, ${esc(at(s.area))}, Miami.</p>
+  <dl>
+    <div><dt>Where</dt><dd><a href="${maps(s)}" target="_blank" rel="noopener">${esc(s.area)}, Miami</a></dd></div>
+    <div><dt>Call or text</dt><dd>${s.phone ? `<a href="tel:${sms}">${esc(s.phone)}</a>` : 'Number goes here'}</dd></div>
+    <div><dt>Hours</dt><dd>${esc(s.hours || 'Hours go here')}</dd></div>
+  </dl>
+</div></section>
+</main>
+<footer><div class="wrap"><span>${esc(s.name)}, ${esc(s.area)}, Miami FL</span><span>Concept redesign by Arcwise Studios</span></div></footer>
+<script>
+(function(){
+  var f=document.getElementById('req'),msg=document.getElementById('msg'),go=document.getElementById('go'),phone=${JSON.stringify(sms)},spa=${JSON.stringify(s.name)};
+  function val(n){var x=f.querySelector('input[name='+n+']:checked');return x?x.value:'';}
+  function text(){var n=document.getElementById('n').value.trim();var t=val('t');return 'Hi '+spa+', I\\u2019d like to book '+(t==='Not sure yet'?'a consultation':t.toLowerCase())+', '+val('d').toLowerCase()+' if possible.'+(n?' My name is '+n+'.':'');}
+  function upd(){var t=text();msg.textContent=t;if(go)go.href='sms:'+phone+'?&body='+encodeURIComponent(t);}
+  f.addEventListener('input',upd);f.addEventListener('change',upd);upd();
+  f.addEventListener('submit',function(e){e.preventDefault();msg.textContent='Sent. In the live site this goes straight to the team\\u2019s phone or booking system.';});
+  document.querySelectorAll('[data-ask]').forEach(function(b){b.addEventListener('click',function(){window.dispatchEvent(new CustomEvent('arcwise:open',{detail:{text:b.getAttribute('data-ask')}}));});});
+})();
+</script>
+<script src="/widget.js" data-client="miami-${s.slug}" data-lang="en" data-quiet="true" data-reveal="#treatments" defer></script>
+</body>
+</html>
+`;
+}
+
+for (const s of SPAS) {
+  mkdirSync(`public/miami/${s.slug}`, { recursive: true });
+  writeFileSync(`public/miami/${s.slug}/index.html`, page(s));
+}
+writeFileSync('public/miami/index.html', `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow"><title>Miami med spa concepts</title>
+<style>body{font:16px/1.6 system-ui,sans-serif;background:#F3F4F1;color:#1B1F1D;max-width:760px;margin:0 auto;padding:40px 20px}h1{font-size:28px}li{padding:6px 0}a{color:#1F6F6B;font-weight:600}span{color:#6B726E}</style></head><body>
+<h1>Miami med spa concepts</h1><p>Arcwise Studios. Internal list, ${SPAS.length} concept sites.</p><ol>
+${SPAS.map(s => `<li><a href="/miami/${s.slug}">${esc(s.name)}</a> <span>${esc(s.area)}${s.phone ? ', ' + esc(s.phone) : ''}</span></li>`).join('\n')}
+</ol></body></html>
+`);
+console.log('built', SPAS.length);
