@@ -1,0 +1,20 @@
+// Build: content + template -> dist/. Static, no runtime dependencies. Assets get content hashes.
+import { readFile, writeFile, mkdir, cp, rm } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import * as c from './src/content.mjs';
+import { renderPage } from './src/page.mjs';
+const hash = (s) => createHash('sha256').update(s).digest('hex').slice(0, 10);
+if (c.site.wa && !/^\d{8,15}$/.test(c.site.wa)) throw new Error('site.wa must be digits only');
+await rm('dist', { recursive: true, force: true });
+await mkdir('dist/assets', { recursive: true }); await mkdir('dist/fonts', { recursive: true });
+await cp('public', 'dist', { recursive: true });
+const F = { 'overpass-400': 'overpass/files/overpass-latin-400-normal', 'overpass-600': 'overpass/files/overpass-latin-600-normal', 'overpass-800': 'overpass/files/overpass-latin-800-normal', 'overpass-900': 'overpass/files/overpass-latin-900-normal' };
+await cp('node_modules/@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2', 'dist/fonts/archivo.woff2');
+for (const [k, f] of Object.entries(F)) await cp(`node_modules/@fontsource/${f}.woff2`, `dist/fonts/${k}.woff2`);
+const css = await readFile('src/styles.css', 'utf8'), js = await readFile('src/app.js', 'utf8');
+const assets = { css: `/assets/styles.${hash(css)}.css`, js: `/assets/app.${hash(js)}.js` };
+await writeFile('dist' + assets.css, css); await writeFile('dist' + assets.js, js);
+await writeFile('dist/index.html', renderPage(c, assets));
+await writeFile('dist/robots.txt', 'User-agent: *\nDisallow: /\n');
+await writeFile('dist/404.html', `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Page not found · Umar Sardar</title><meta name="robots" content="noindex"><link rel="stylesheet" href="${assets.css}"></head><body><main class="sec wrap"><p class="eyebrow">404</p><h2>Page not found</h2><p class="ctas"><a class="btn btn-line" href="/">Back to home</a></p></main></body></html>\n`);
+console.log('Built dist/', assets);

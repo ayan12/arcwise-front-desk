@@ -1,0 +1,1 @@
+{"name":"umar-sardar-concept","private":true,"type":"module","scripts":{"build":"node build.mjs"},"dependencies":{"@fontsource-variable/archivo":"^5.2.5","@fontsource/overpass":"5.2.5"},"engines":{"node":">=20"}}
