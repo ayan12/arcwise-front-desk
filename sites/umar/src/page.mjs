@@ -101,7 +101,11 @@ export function renderPage(c, assets) {
       <p class="copied" id="hx-copied" hidden>Your options are copied. Paste them into the chat.</p>
     </form>
   </div>
-  <figure class="hx-media"><img src="/img/difc.webp" width="820" height="860" alt="DIFC towers in Dubai at dusk" fetchpriority="high"></figure>
+  <div class="hx-media" aria-hidden="true">
+    <figure class="sl"><img src="/img/difc.webp" width="820" height="860" alt="" fetchpriority="high"><figcaption>DIFC, Dubai</figcaption></figure>
+    <figure class="sl"><img src="/img/elysian.webp" width="820" height="1076" alt="" loading="lazy"><figcaption>Elysian Mansions</figcaption></figure>
+    <figure class="sl"><img src="/img/ghafwoods.webp" width="820" height="1086" alt="" loading="lazy"><figcaption>Ghafwoods, new launch</figcaption></figure>
+  </div>
 </section>
 
 <section class="awards">

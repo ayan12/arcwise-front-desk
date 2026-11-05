@@ -146,6 +146,16 @@
     hx.addEventListener('input', run); hx.addEventListener('change', run); hx.addEventListener('submit', (e) => e.preventDefault());
     go.addEventListener('click', () => { if (!D.wa) copy(text, $('#hx-copied')); });
     run();
+    // glide the slider up to AED 2M once on load, so it reads as something to play with
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const end = +r.value, start = 500000, t0 = performance.now() + 900, dur = 1400;
+      r.value = start; run();
+      const step = (t) => { const k = Math.min(1, Math.max(0, (t - t0) / dur)), e = 1 - Math.pow(1 - k, 3);
+        if (!hx.dataset.touched) { r.value = Math.round((start + (end - start) * e) / 50000) * 50000; run(); }
+        if (k < 1 && !hx.dataset.touched) requestAnimationFrame(step); };
+      hx.addEventListener('pointerdown', () => { hx.dataset.touched = '1'; }, { once: true });
+      requestAnimationFrame(step);
+    }
   }
   document.querySelectorAll('[data-ask]').forEach((a) => {
     const t = 'Hi Umar, please send me the brochure and payment plan for ' + a.dataset.ask + '.';

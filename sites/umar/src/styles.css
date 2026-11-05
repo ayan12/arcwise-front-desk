@@ -323,7 +323,6 @@ h3{font-weight:600;font-stretch:100%;letter-spacing:-.01em}
 /* ===== Conversion layout ===== */
 .hx{position:relative;background:var(--ink);color:#f2f4f2;overflow:hidden}
 .hx-media{position:absolute;inset:0 0 0 auto;width:48%;margin:0}
-.hx-media img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
 .hx-media::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--ink) 0%,rgba(14,19,20,.55) 38%,rgba(14,19,20,.15) 100%)}
 .hx-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:clamp(32px,5vw,80px);align-items:center;padding-block:clamp(48px,7vw,104px)}
 .hx-copy{display:grid;gap:24px;max-width:600px}
@@ -405,3 +404,25 @@ h3{font-weight:600;font-stretch:100%;letter-spacing:-.01em}
   .fab{display:none}
   .foot{padding-bottom:96px}
 }
+
+/* hero motion: crossfading slides with a slow push-in, one entrance sequence on load */
+.hx-media{width:52%;z-index:0;overflow:hidden}
+.hx-media::before{z-index:2;background:linear-gradient(90deg,var(--ink) 0%,rgba(14,19,20,.7) 22%,rgba(14,19,20,.2) 70%,rgba(14,19,20,.1) 100%)}
+.sl{position:absolute;inset:0;margin:0;opacity:0;animation:slide 18s infinite}
+.sl:nth-child(2){animation-delay:6s}
+.sl:nth-child(3){animation-delay:12s}
+.sl img{width:100%;height:100%;object-fit:cover;object-position:center 35%;animation:push 18s infinite}
+.sl:nth-child(2) img{animation-delay:6s}
+.sl:nth-child(3) img{animation-delay:12s}
+.sl figcaption{position:absolute;z-index:3;right:24px;bottom:24px;font-size:13px;font-weight:600;color:#fff;background:rgba(14,19,20,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:7px 12px;border-radius:99px}
+@keyframes slide{0%{opacity:0}5%{opacity:1}33%{opacity:1}39%{opacity:0}100%{opacity:0}}
+@keyframes push{0%{transform:scale(1.12)}40%{transform:scale(1.02)}100%{transform:scale(1.02)}}
+.js .hx-copy>*,.js .hx-tool{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+.js .hx-copy>:nth-child(2){animation-delay:.08s}
+.js .hx-copy>:nth-child(3){animation-delay:.18s}
+.js .hx-copy>:nth-child(4){animation-delay:.28s}
+.js .hx-tool{animation-name:rise-r;animation-delay:.35s;animation-duration:1s}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes rise-r{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+@media (max-width:1000px){.hx-media{width:100%}.hx-media::before{background:linear-gradient(0deg,var(--ink) 0%,rgba(14,19,20,.15) 65%)}.sl figcaption{right:16px;top:16px;bottom:auto}.js .hx-tool{animation-name:rise}}
+@media (prefers-reduced-motion:reduce){.sl{animation:none}.sl:first-child{opacity:1}.sl img{animation:none}}
