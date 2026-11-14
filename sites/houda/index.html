@@ -66,7 +66,16 @@ legend{font-weight:600;font-size:14px;color:var(--mute);margin-bottom:9px;paddin
 .name:focus{outline:none;box-shadow:inset 0 0 0 2px var(--navy)}
 .msg{background:var(--stone);padding:13px 15px;font-size:15px;border-left:3px solid var(--gold)}
 .msg small{display:block;font-weight:600;color:var(--mute);font-size:12.5px;margin-bottom:3px}
-.book .btn{width:100%}
+.book{gap:18px}
+.chips.row{flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;margin:0 -28px;padding:2px 28px;-webkit-overflow-scrolling:touch}
+.chips.row::-webkit-scrollbar{display:none}
+.chips.row label{flex:none;scroll-snap-align:start;min-height:48px;display:grid;place-items:center;padding:0 18px;border-radius:999px;white-space:nowrap}
+.chips.d label{min-width:64px;min-height:64px;border-radius:14px;padding:6px 10px;line-height:1.15;text-align:center}
+.chips.d label small{display:block;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;opacity:.7}
+.chips.d label b{display:block;font-family:var(--disp);font-size:22px;font-weight:600}
+.chips.t label{min-width:68px;padding:0 12px}
+.sum{font-family:var(--disp);font-size:20px;font-weight:600;text-align:center;padding-top:16px;border-top:1px solid var(--line)}
+.book .btn{width:100%;min-height:58px;font-size:17px}
 .fine{font-size:13.5px;color:var(--mute);text-align:center}
 
 section{padding-block:clamp(64px,8vw,112px)}
@@ -125,7 +134,9 @@ footer a{text-decoration:none}
 @media (max-width:600px){
   .logo small{display:none}
   header .btn{display:none}
-  .book{padding:20px}
+  .book{padding:20px;gap:16px;margin:8px 8px 0}
+  .chips.row{margin:0 -20px;padding:2px 20px}
+  .book h2{font-size:28px}
   .mirrors{gap:10px}
   .bar{display:grid;grid-template-columns:1fr auto;gap:8px;position:fixed;z-index:30;left:0;right:0;bottom:0;padding:10px max(12px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:rgba(251,250,247,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 -1px 0 var(--line)}
   .bar .btn{min-height:50px}
@@ -157,8 +168,8 @@ footer a{text-decoration:none}
   </div>
 
   <form class="book" id="book" novalidate>
-    <h2>Book in under a minute</h2>
-    <fieldset><legend>What do you need?</legend><div class="chips" id="svc">
+    <h2>Book a chair</h2>
+    <fieldset><legend>Service</legend><div class="chips row" id="svc">
       <input type="radio" name="s" id="s1" value="a haircut" checked><label for="s1">Haircut</label>
       <input type="radio" name="s" id="s2" value="a skin fade"><label for="s2">Skin fade</label>
       <input type="radio" name="s" id="s3" value="a haircut and beard trim"><label for="s3">Haircut + beard</label>
@@ -167,12 +178,11 @@ footer a{text-decoration:none}
       <input type="radio" name="s" id="s6" value="a face mask"><label for="s6">Face mask</label>
       <input type="radio" name="s" id="s7" value="a kids’ cut"><label for="s7">Kids’ cut</label>
     </div></fieldset>
-    <fieldset><legend>Which day?</legend><div class="chips" id="days"></div></fieldset>
-    <fieldset><legend>What time?</legend><div class="chips t" id="times"></div></fieldset>
-    <label><span class="fine" style="display:block;text-align:left;font-weight:600;margin-bottom:9px;font-size:14px">Your name</span><input class="name" id="n" autocomplete="given-name" maxlength="40"></label>
-    <p class="msg" aria-live="polite"><small>Your message</small><span id="out"></span></p>
-    <a class="btn btn-red" id="go" href="https://wa.me/60162367408" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.6 2 1.1 1 2.1 1.3 2.4 1.4.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>Send on WhatsApp</a>
-    <p class="fine">Opens WhatsApp with this message. The shop confirms your time.</p>
+    <fieldset><legend>Day</legend><div class="chips row d" id="days"></div></fieldset>
+    <fieldset><legend>Time</legend><div class="chips row t" id="times"></div></fieldset>
+    <p class="sum" aria-live="polite"><span id="out"></span></p>
+    <a class="btn btn-red" id="go" href="https://wa.me/60162367408" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.6 2 1.1 1 2.1 1.3 2.4 1.4.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>Book on WhatsApp</a>
+    <p class="fine">Opens WhatsApp with your request ready to send.</p>
   </form>
 </div></section>
 
@@ -254,9 +264,10 @@ footer a{text-decoration:none}
   var days=document.getElementById('days'),times=document.getElementById('times'),f=document.getElementById('book');
   var todayLeft=h<CLOSE-1;
   var fmt=new Intl.DateTimeFormat('en-GB',{timeZone:TZ,weekday:'short',day:'numeric',month:'short'});
+  var wd=new Intl.DateTimeFormat('en-GB',{timeZone:TZ,weekday:'short'}),dn=new Intl.DateTimeFormat('en-GB',{timeZone:TZ,day:'numeric'});
   var list=[];
-  for(var i=0;i<5;i++){var d=new Date(Date.now()+i*864e5);if(i===0&&!todayLeft)continue;list.push({i:i,label:i===0?'Today':i===1?'Tomorrow':fmt.format(d),say:i===0?'today':i===1?'tomorrow':'on '+fmt.format(d)});}
-  list.forEach(function(d,k){days.insertAdjacentHTML('beforeend','<input type="radio" name="d" id="d'+k+'" value="'+d.say+'" data-i="'+d.i+'"'+(k?'':' checked')+'><label for="d'+k+'">'+d.label+'</label>');});
+  for(var i=0;i<7;i++){var d=new Date(Date.now()+i*864e5);if(i===0&&!todayLeft)continue;list.push({i:i,top:i===0?'Today':wd.format(d),num:dn.format(d),say:i===0?'today':i===1?'tomorrow':'on '+fmt.format(d),short:i===0?'Today':i===1?'Tomorrow':fmt.format(d)});}
+  list.forEach(function(d,k){days.insertAdjacentHTML('beforeend','<input type="radio" name="d" id="d'+k+'" value="'+d.say+'" data-i="'+d.i+'" data-short="'+d.short+'"'+(k?'':' checked')+'><label for="d'+k+'"><small>'+d.top+'</small><b>'+d.num+'</b></label>');});
   function hr(x){return (x%12||12)+(x<12?'am':'pm');}
   function drawTimes(){
     var di=+f.querySelector('input[name=d]:checked').dataset.i,from=di===0?Math.max(OPEN,h+1):OPEN,html='';
@@ -265,14 +276,14 @@ footer a{text-decoration:none}
   }
   function val(n){var x=f.querySelector('input[name='+n+']:checked');return x?x.value:'';}
   function upd(){
-    var n=document.getElementById('n').value.trim();
-    var t='Hi Houda’s, I’d like to book '+val('s')+' '+val('d')+' at '+val('t')+'.'+(n?' My name is '+n+'.':'')+' Is that time free?';
-    document.getElementById('out').textContent=t;
+    var sv=f.querySelector('input[name=s]:checked'),dv=f.querySelector('input[name=d]:checked');
+    var t='Hi Houda’s, I’d like to book '+val('s')+' '+val('d')+' at '+val('t')+'. Is that time free?';
+    document.getElementById('out').textContent=f.querySelector('label[for='+sv.id+']').textContent+', '+dv.dataset.short+', '+val('t');
     document.getElementById('go').href='https://wa.me/'+WA+'?text='+encodeURIComponent(t);
   }
   drawTimes();upd();
-  f.addEventListener('change',function(e){if(e.target.name==='d')drawTimes();upd();});
-  f.addEventListener('input',upd);f.addEventListener('submit',function(e){e.preventDefault();});
+  f.addEventListener('change',function(e){if(e.target.name==='d')drawTimes();upd();var l=f.querySelector('label[for="'+e.target.id+'"]');if(l&&l.scrollIntoView)l.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});});
+  f.addEventListener('submit',function(e){e.preventDefault();});
   document.querySelectorAll('[data-pick]').forEach(function(b){b.addEventListener('click',function(){document.getElementById(b.dataset.pick).checked=true;upd();f.scrollIntoView({behavior:'smooth',block:'start'});});});
 })();
 </script>
