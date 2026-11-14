@@ -6,240 +6,121 @@
 <title>Houda's Barbers & Grooming | Bukit Bintang, Kuala Lumpur</title>
 <meta name="description" content="Fades, haircuts and beard trims in Bukit Bintang, Kuala Lumpur. Open every day, 11am to 11pm. Book your chair on WhatsApp in under a minute.">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#fbfaf7">
+<meta name="theme-color" content="#0b1830">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Figtree:wght@400;500;600&display=swap">
 <style>
-:root{--paper:#fbfaf7;--card:#fff;--navy:#132c55;--navy-2:#0c1f3f;--gold:#c8a24c;--gold-d:#a8842f;--stone:#e9e6e0;--mute:#5a6478;--line:#dcd8cf;--ok:#12805c;--disp:"Playfair Display","Times New Roman",serif;--body:Figtree,system-ui,sans-serif;color-scheme:light}
+:root{--ink:#0b1830;--navy:#132c55;--navy-2:#0c1f3f;--gold:#c8a24c;--gold-hi:#e3c77c;--gold-d:#a8842f;--paper:#f7f5f0;--stone:#e8e5df;--mute:#5a6478;--line:#dcd8cf;--ok:#12805c;--disp:"Playfair Display","Times New Roman",serif;--body:Figtree,system-ui,sans-serif;color-scheme:light}
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth}
-body{background:var(--paper);color:var(--navy);font:17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+body{background:var(--paper);color:var(--ink);font:17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit}
-:focus-visible{outline:3px solid var(--gold-d);outline-offset:3px;border-radius:4px}
-.wrap{max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
 h1,h2,h3{font-family:var(--disp);font-weight:600;letter-spacing:-.01em;line-height:1.02;text-wrap:balance}
-h2{font-size:clamp(38px,5.4vw,64px)}
+h2{font-size:clamp(38px,5vw,64px)}
+.eyebrow{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-d);margin-bottom:16px}
+.eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
 .lede{color:var(--mute);font-size:18px;max-width:46ch}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 26px;border-radius:2px;font:600 16px var(--body);letter-spacing:.02em;text-decoration:none;border:0;cursor:pointer}
-.btn svg{width:22px;height:22px;flex:none}
-.btn-red{background:var(--navy);color:#fff}.btn-red:hover{background:var(--navy-2)}
-.btn-line{box-shadow:inset 0 0 0 1.5px var(--navy);background:transparent;color:var(--navy)}.btn-line:hover{background:var(--navy);color:#fff}
-.concept{background:var(--navy-2);color:#aab6cf;font-size:13px;text-align:center;padding:7px 16px}
-.pole{height:9px;border-top:3px solid var(--navy);border-bottom:1px solid var(--navy);background:var(--paper)}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 28px;font:600 15px var(--body);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border:0;cursor:pointer;transition:background .25s,color .25s,box-shadow .25s}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-gold{background:var(--gold);color:var(--ink)}.btn-gold:hover{background:var(--gold-hi)}
+.btn-ghost{box-shadow:inset 0 0 0 1px rgba(255,255,255,.55);color:#fff;background:transparent}.btn-ghost:hover{background:#fff;color:var(--ink)}
+.btn-red{background:var(--navy);color:#fff}.btn-red:hover{background:var(--ink)}
+.btn-line{box-shadow:inset 0 0 0 1px var(--ink);background:transparent;color:var(--ink)}.btn-line:hover{background:var(--ink);color:#fff}
+.concept{background:#050c19;color:#8b97b0;font-size:12.5px;text-align:center;padding:6px 16px;position:relative;z-index:5}
 
-header .wrap{display:flex;align-items:center;gap:20px;min-height:84px}
-.logo{display:flex;align-items:center;gap:14px;font-family:var(--disp);font-weight:600;font-size:21px;text-decoration:none;margin-right:auto;line-height:1.1}
-.logo img{width:56px;height:51px}
-.logo small{display:block;font:500 12px var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
-header nav{display:flex;gap:26px;font-size:15px;font-weight:500}
-header nav a{text-decoration:none;color:var(--mute)}header nav a:hover{color:var(--navy)}
+/* header over the hero */
+.top{position:absolute;z-index:4;left:0;right:0}
+.top .wrap{display:flex;align-items:center;gap:28px;min-height:88px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;margin-right:auto;color:#fff}
+.logo .hb{width:46px;height:42px;background:#fff;padding:3px}
+.logo b{font-family:var(--disp);font-size:20px;font-weight:600;line-height:1.05}
+.logo small{display:block;font:500 11px var(--body);letter-spacing:.2em;text-transform:uppercase;color:#c9d2e3}
+.top nav{display:flex;gap:30px}
+.top nav a{color:#dfe5f0;text-decoration:none;font-size:14px;letter-spacing:.06em}.top nav a:hover{color:#fff}
+.top .btn{min-height:44px;padding:0 20px;font-size:13px}
 
-.hero .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(32px,5vw,72px);align-items:start;padding-block:clamp(28px,4vw,56px) clamp(56px,7vw,96px)}
-.status{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:15px;padding:7px 14px;background:var(--card);box-shadow:inset 0 0 0 1px var(--line)}
-.status i{width:10px;height:10px;border-radius:50%;background:#b9b2a3}
-.status.open i{background:var(--ok);box-shadow:0 0 0 4px rgba(18,128,92,.18)}
-.hero h1{font-size:clamp(48px,6.6vw,92px);margin:22px 0 20px}
-.hero h1 em{font-style:italic;color:var(--gold-d)}
-.stars{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:22px;font-weight:600;text-decoration:none}
-.stars b{font-family:var(--disp);font-size:30px}
-.stars .s{color:var(--gold);letter-spacing:2px;font-size:20px}
-.stars small{color:var(--mute);font-weight:500;font-size:15px}
-/* the mirrors: his gold arched mirrors, used as photo frames */
-.mirrors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:34px;align-items:end;max-width:560px}
-.mir{margin:0;border-radius:999px 999px 0 0;padding:5px;background:linear-gradient(160deg,#e6cd86,var(--gold) 45%,#8f6f25);box-shadow:0 18px 30px -18px rgba(19,44,85,.5)}
-.mir img{width:100%;aspect-ratio:3/4.4;object-fit:cover;border-radius:999px 999px 0 0}
-.mir:nth-child(2){transform:translateY(-22px)}
-
-.book{background:var(--card);padding:28px;box-shadow:0 0 0 1px var(--navy),0 0 0 6px var(--paper),0 0 0 8px var(--navy),0 34px 60px -30px rgba(19,44,85,.45);display:grid;gap:20px;margin:8px}
-.book h2{font-size:32px}
-fieldset{border:0;padding:0;min-width:0}
-legend{font-weight:600;font-size:14px;color:var(--mute);margin-bottom:9px;padding:0}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chips input{position:absolute;opacity:0;pointer-events:none;width:1px}
-.chips label{padding:10px 15px;box-shadow:inset 0 0 0 1.5px var(--line);font-weight:500;font-size:15.5px;cursor:pointer;background:#fff;user-select:none}
-.chips input:checked+label{background:var(--navy);color:#fff;box-shadow:none}
-.chips input:focus-visible+label{outline:3px solid var(--gold-d);outline-offset:2px}
-.chips.t label{min-width:72px;text-align:center;padding:9px 8px}
-.name{width:100%;min-height:50px;border:0;box-shadow:inset 0 0 0 1.5px var(--line);background:#fff;font:16px var(--body);color:var(--navy);padding:0 14px}
-.name:focus{outline:none;box-shadow:inset 0 0 0 2px var(--navy)}
-.msg{background:var(--stone);padding:13px 15px;font-size:15px;border-left:3px solid var(--gold)}
-.msg small{display:block;font-weight:600;color:var(--mute);font-size:12.5px;margin-bottom:3px}
-.book{gap:18px}
-.chips.row{flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;margin:0 -28px;padding:2px 28px;-webkit-overflow-scrolling:touch}
-.chips.row::-webkit-scrollbar{display:none}
-.chips.row label{flex:none;scroll-snap-align:start;min-height:48px;display:grid;place-items:center;padding:0 18px;border-radius:999px;white-space:nowrap}
-.chips.d label{min-width:64px;min-height:64px;border-radius:14px;padding:6px 10px;line-height:1.15;text-align:center}
-.chips.d label small{display:block;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;opacity:.7}
-.chips.d label b{display:block;font-family:var(--disp);font-size:22px;font-weight:600}
-.chips.t label{min-width:68px;padding:0 12px}
-.sum{font-family:var(--disp);font-size:20px;font-weight:600;text-align:center;padding-top:16px;border-top:1px solid var(--line)}
-.book .btn{width:100%;min-height:58px;font-size:17px}
-.fine{font-size:13.5px;color:var(--mute);text-align:center}
-
-section{padding-block:clamp(64px,8vw,112px)}
-.work{background:var(--stone)}
-.work .head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px;margin-bottom:36px}
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;list-style:none;padding:0}
-.grid img{width:100%;aspect-ratio:4/5;object-fit:cover}
-.grid li:nth-child(1),.grid li:nth-child(6){grid-column:span 2;grid-row:span 2}
-.grid li:nth-child(1) img,.grid li:nth-child(6) img{height:100%;aspect-ratio:auto}
-.grid figure{margin:0;height:100%;position:relative}
-.grid figcaption{position:absolute;left:0;bottom:0;background:var(--navy);color:#fff;font-size:13px;font-weight:600;letter-spacing:.04em;padding:5px 10px}
-
-.svc{background:var(--navy);color:#eef1f8}
-.svc h2{color:#fff}.svc .lede{color:#aab6cf;margin-top:16px}
-.svc ul{list-style:none;padding:0;margin-top:44px;border-top:1px solid #2d4675;display:grid;grid-template-columns:1fr 1fr;column-gap:56px}
-.svc li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 20px;align-items:center;padding:22px 0;border-bottom:1px solid #2d4675}
-.svc h3{font-size:clamp(24px,2.6vw,32px);color:#fff}
-.svc li p{color:#aab6cf;grid-column:1;font-size:16px}
-.svc li button{grid-row:1/3;grid-column:2;background:transparent;color:var(--gold);box-shadow:inset 0 0 0 1.5px var(--gold);min-height:44px;padding:0 18px;font-size:14.5px}
-.svc li button:hover{background:var(--gold);color:var(--navy-2)}
-.svc .note{margin-top:22px;color:#aab6cf;font-size:15px}
-
-.shop .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:center}
-.shop .pics{display:grid;grid-template-columns:1.3fr 1fr;gap:12px;align-items:end}
-.shop .pics img{width:100%;object-fit:cover;aspect-ratio:4/5}
-.shop .pics img:last-child{aspect-ratio:3/4}
-.shop p{color:var(--mute);margin-top:18px;max-width:44ch}
-
-.proof{background:var(--stone)}
-.proof .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,90px);align-items:center}
-.score{font-family:var(--disp);font-weight:600;font-size:clamp(120px,18vw,230px);line-height:.8;letter-spacing:-.03em}
-.score+p{font-weight:600;margin-top:22px}
-.score+p .s{color:var(--gold-d);letter-spacing:3px;font-size:22px;display:block}
-.themes{list-style:none;padding:0;border-top:2px solid var(--navy);margin:28px 0}
-.themes li{padding:16px 0;border-bottom:1px solid #cfcac0;font-size:19px;font-weight:600}
-.themes li span{color:var(--mute);font-weight:400;font-size:16px;display:block}
-
-.visit dl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin:40px 0 34px}
-.visit dt{font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-d);margin-bottom:6px}
-.visit dd{font-size:19px;font-weight:500;line-height:1.45}
-.visit dd a{text-underline-offset:4px}
-
-footer{background:var(--navy-2);color:#aab6cf;font-size:14.5px;padding-block:40px 36px}
-footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;align-items:center}
-footer .logo{color:#fff;margin:0}footer .logo img{background:#fff;padding:3px}
-footer a{text-decoration:none}
-
-.bar{display:none}
-@media (max-width:900px){
-  header nav{display:none}
-  .hero .wrap,.proof .wrap,.shop .wrap{grid-template-columns:minmax(0,1fr)}
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .svc ul{grid-template-columns:1fr}
-  .visit dl{grid-template-columns:1fr;gap:22px}
-}
-@media (max-width:600px){
-  .logo small{display:none}
-  header .btn{display:none}
-  .book{padding:20px;gap:16px;margin:8px 8px 0}
-  .chips.row{margin:0 -20px;padding:2px 20px}
-  .book h2{font-size:28px}
-  .mirrors{gap:10px}
-  .bar{display:grid;grid-template-columns:1fr auto;gap:8px;position:fixed;z-index:30;left:0;right:0;bottom:0;padding:10px max(12px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:rgba(251,250,247,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 -1px 0 var(--line)}
-  .bar .btn{min-height:50px}
-  footer{padding-bottom:104px}
-}
-
-/* ===== HERO: the mirror wall (his gold arched LED mirrors under the hexagon ceiling) ===== */
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-section.hx{padding:0}
-.hx{position:relative;overflow:hidden;background:var(--navy-2);color:#fff;height:calc(100vh - 118px);height:calc(100svh - 118px);min-height:600px;max-height:1000px;display:flex;flex-direction:column;isolation:isolate}
-.hx::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 55% at 50% 55%,rgba(200,162,76,.18),transparent 70%),radial-gradient(120% 80% at 50% 0%,#1b3a6b 0%,transparent 60%),linear-gradient(180deg,#0f2448,#0a1a36 70%)}
-.ceiling{height:clamp(64px,10vh,110px);perspective:420px;flex:none}
-.hex{width:100%;height:220%;transform:rotateX(58deg);transform-origin:50% 0;display:block}
-.hex polygon{fill:none;stroke:#eaf2ff;stroke-width:2.2;opacity:.08;filter:drop-shadow(0 0 4px rgba(220,235,255,.9))}
-.js .hex polygon{animation:lightup .5s ease-out forwards;animation-delay:calc(.15s + var(--d))}
-@keyframes lightup{0%{opacity:.08}40%{opacity:1}70%{opacity:.6}100%{opacity:.92}}
-.wall{flex:1 1 auto;height:58%;position:relative;display:flex;justify-content:center;align-items:flex-end;gap:clamp(14px,3vw,46px);padding-top:8px;min-height:0}
-.mr{position:relative;margin:0;flex:none;border-radius:999px 999px 6px 6px;padding:7px;background:linear-gradient(160deg,#f1dc9b,var(--gold) 38%,#8a6a22 70%,#d9bd6c);box-shadow:0 40px 80px -30px rgba(0,0,0,.8)}
-.mr.main{height:100%;max-height:620px;width:auto;aspect-ratio:3/4.4;min-width:0}
-.mr.side{height:74%;max-height:460px;aspect-ratio:3/4.4;opacity:.9}
-.lay{position:absolute;inset:7px;border-radius:999px 999px 2px 2px;overflow:hidden;background:#000}
-.lay img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.lay img.next{clip-path:inset(100% 0 0 0)}
-.lay img.next.go{transition:clip-path 1.1s cubic-bezier(.7,0,.25,1);clip-path:inset(0 0 0 0)}
-.lay .blade{position:absolute;left:-5%;right:-5%;height:3px;bottom:0;z-index:3;background:linear-gradient(90deg,transparent,#fff6d6 20%,#fff 50%,#fff6d6 80%,transparent);box-shadow:0 0 18px 4px rgba(255,236,170,.75);opacity:0}
-.lay .blade.go{opacity:1;transition:bottom 1.1s cubic-bezier(.7,0,.25,1),opacity .2s;bottom:100%}
-.led{position:absolute;inset:7px;border-radius:999px 999px 2px 2px;pointer-events:none;box-shadow:inset 0 0 0 3px rgba(255,255,255,.55),inset 0 0 22px 4px rgba(255,255,255,.35)}
-.js .mr{opacity:0;transform:translateY(60px)}
-.js .ready .mr{opacity:1;transform:none;transition:opacity 1s ease,transform 1.2s cubic-bezier(.2,.8,.2,1)}
-.js .ready .mr.side{opacity:.9}
-.js .ready .mr:nth-child(1){transition-delay:.55s}.js .ready .mr:nth-child(2){transition-delay:.35s}.js .ready .mr:nth-child(3){transition-delay:.7s}
-.hx-copy{flex:none;position:relative;text-align:center;padding-block:clamp(18px,3vh,32px) clamp(22px,4vh,40px);display:grid;justify-items:center;gap:14px}
-.hx-copy h1{font-size:clamp(40px,5.6vw,78px);line-height:1;color:#fff;margin:0}
-.hx-copy h1 em{font-style:italic;color:var(--gold)}
-.hx-meta{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px 22px;margin:0}
-.hx .status{background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2);color:#fff}
-.hx .stars{margin:0;color:#fff;gap:8px}.hx .stars b{font-size:22px;color:#fff}.hx .stars small{color:#b7c3dc}
-.btn-gold{background:var(--gold);color:var(--navy-2);min-width:220px}.btn-gold:hover{background:#d8b45e}
-.js .hx-copy>*{opacity:0;transform:translateY(14px)}
-.js .ready .hx-copy>*{opacity:1;transform:none;transition:opacity .8s ease,transform .8s ease}
-.js .ready .hx-copy>:nth-child(1){transition-delay:.9s}.js .ready .hx-copy>:nth-child(2){transition-delay:1.05s}.js .ready .hx-copy>:nth-child(3){transition-delay:1.2s}
-.booksec{padding-block:clamp(40px,6vw,80px)}
-.booksec .book{max-width:560px;margin:0 auto}
-@media (max-width:700px){
-  section.hx{height:calc(100svh - 112px);min-height:560px;padding:0 0 72px}
-  .wall{gap:10px}
-  .mr.main{max-height:none}
-  .mr.side{height:62%;margin-bottom:5%}
-  .wall .mr:first-child{margin-left:-30vw}.wall .mr:last-child{margin-right:-30vw}
-  .hx-copy{gap:12px;padding-block:18px 8px}
-  .hx-copy .btn-gold{display:none}
-}
-@media (prefers-reduced-motion:reduce){.js .hex polygon{animation:none;opacity:.9}.js .mr,.js .hx-copy>*{opacity:1!important;transform:none!important}}
-
-/* ===== HERO: scissors cut ===== */
-section.cut{position:relative;padding:0;background:var(--paper);overflow:hidden}
-.cut-in{position:relative;display:grid;justify-items:center;text-align:center;padding-block:clamp(30px,5vw,64px) clamp(60px,8vw,110px)}
-.mono{position:relative;width:74px;height:68px;margin-bottom:clamp(18px,3vw,30px)}
-.mono svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.mono rect{fill:none;stroke:var(--navy);stroke-width:3;stroke-dasharray:440;stroke-dashoffset:0}
-.mono .f2{stroke-width:2}
-.mono img{position:absolute;inset:12%;width:76%;height:76%;object-fit:contain;clip-path:inset(18% 18% 18% 18%)}
-.cut h1{font-size:clamp(46px,8.6vw,124px);line-height:.98;color:var(--navy);display:grid;gap:.08em}
-.cut h1 .l2{font-size:.46em;font-weight:500;letter-spacing:0;color:var(--navy)}
-.cut h1 em{color:var(--gold-d)}
-.track{position:relative;width:min(100%,920px);height:120px;margin-top:-6px}
-.track .dash,.track .done{position:absolute;left:0;top:60px;height:0;border-top:2px dashed rgba(168,132,47,.55);width:100%}
-.track .done{border-top:3px solid var(--gold);width:0;top:59px;box-shadow:0 0 12px rgba(200,162,76,.5)}
-.cutter{position:absolute;left:0;top:60px;width:clamp(180px,22vw,300px);transform:translate(-110%,-50%)}
-.sc{width:100%;display:block;overflow:visible;filter:drop-shadow(0 10px 14px rgba(19,44,85,.28))}
-.bl{transform-origin:0 0}
-.bl.a{transform:rotate(-17deg)}.bl.b{transform:rotate(17deg)}
-.cutting .bl.a{animation:snA .34s ease-in-out infinite}.cutting .bl.b{animation:snB .34s ease-in-out infinite}
-.idle .bl.a{animation:snA2 2.4s ease-in-out infinite}.idle .bl.b{animation:snB2 2.4s ease-in-out infinite}
+/* ===== HERO ===== */
+.hero{position:relative;min-height:min(100svh,940px);color:#fff;background:var(--ink);overflow:hidden;display:flex;align-items:flex-end}
+.hero .bg{position:absolute;inset:0}
+.hero .bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.08);transition:opacity 1.6s ease}
+.hero .bg img.on{opacity:1;animation:kb 9s ease-out forwards}
+@keyframes kb{from{transform:scale(1.08)}to{transform:scale(1)}}
+.hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,15,30,.92) 0%,rgba(7,15,30,.7) 38%,rgba(7,15,30,.15) 70%,rgba(7,15,30,.35) 100%),linear-gradient(0deg,rgba(7,15,30,.85) 0%,transparent 45%)}
+.hero .wrap{position:relative;width:100%;padding-block:150px clamp(48px,7vw,90px)}
+.hero h1{font-size:clamp(56px,8.4vw,128px);line-height:.92;max-width:9ch;color:#fff}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero .lede{color:#d3dae7;margin:24px 0 32px;font-size:19px}
+.acts{display:flex;flex-wrap:wrap;gap:12px}
+.facts{display:flex;flex-wrap:wrap;gap:14px 34px;margin-top:40px;padding-top:24px;border-top:1px solid rgba(255,255,255,.18);max-width:640px;font-size:14.5px;color:#c9d2e3}
+.facts b{display:block;font-family:var(--disp);font-size:28px;font-weight:600;color:#fff;line-height:1.1}
+.facts .s{color:var(--gold);letter-spacing:2px}
+.status{display:inline-flex;align-items:center;gap:8px}
+.status i{width:9px;height:9px;border-radius:50%;background:#8b93a3}
+.status.open i{background:#2ecc8f;box-shadow:0 0 0 4px rgba(46,204,143,.2)}
+/* scissors line along the bottom of the hero */
+.snip{position:absolute;left:0;right:0;bottom:22px;height:60px;pointer-events:none}
+.snip .dash{position:absolute;left:0;right:0;top:30px;border-top:1px dashed rgba(200,162,76,.45)}
+.snip .done{position:absolute;left:0;top:29px;height:2px;width:0;background:var(--gold);box-shadow:0 0 10px rgba(200,162,76,.6)}
+.cutter{position:absolute;left:0;top:30px;width:120px;transform:translate(-120%,-50%)}
+.sc{width:100%;display:block;overflow:visible;filter:drop-shadow(0 6px 10px rgba(0,0,0,.5))}
+.bl{transform-origin:0 0}.bl.a{transform:rotate(-17deg)}.bl.b{transform:rotate(17deg)}
+.cutting .bl.a{animation:snA .3s ease-in-out infinite}.cutting .bl.b{animation:snB .3s ease-in-out infinite}
 @keyframes snA{50%{transform:rotate(-1deg)}}@keyframes snB{50%{transform:rotate(1deg)}}
-@keyframes snA2{0%,30%,100%{transform:rotate(-17deg)}10%,20%{transform:rotate(-1deg)}15%{transform:rotate(-12deg)}}
-@keyframes snB2{0%,30%,100%{transform:rotate(17deg)}10%,20%{transform:rotate(1deg)}15%{transform:rotate(12deg)}}
-.hair{position:absolute;top:58px;width:2px;height:var(--l);border-radius:2px;background:#16120d;pointer-events:none;animation:fall var(--t) cubic-bezier(.35,.1,.6,1) forwards}
-@keyframes fall{0%{transform:translate(0,0) rotate(var(--r0));opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(var(--r1));opacity:0}}
-.cut-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;align-items:center;margin:0}
-.cut-meta .stars{margin:0}
-.cut-acts{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:22px}
-.js .cut .mono rect{stroke-dashoffset:440}
-.js .cut.go .mono rect{transition:stroke-dashoffset 1.1s cubic-bezier(.6,0,.2,1);stroke-dashoffset:0}
-.js .cut.go .mono .f2{transition-delay:.2s}
-.js .cut .mono img{opacity:0;transform:scale(.8)}
-.js .cut.go .mono img{opacity:1;transform:none;transition:opacity .6s .6s,transform .8s .6s cubic-bezier(.2,.8,.2,1)}
-.js .cut h1 span{opacity:0;transform:translateY(24px)}
-.js .cut.go h1 span{opacity:1;transform:none;transition:opacity .8s,transform .9s cubic-bezier(.2,.8,.2,1)}
-.js .cut.go h1 .l1{transition-delay:.25s}.js .cut.go h1 .l2{transition-delay:.4s}
-.js .cut-meta,.js .cut-acts{opacity:0;transform:translateY(12px)}
-.js .cut.done .cut-meta,.js .cut.done .cut-acts{opacity:1;transform:none;transition:opacity .7s,transform .7s}
-.js .cut.done .cut-acts{transition-delay:.12s}
-.floor{position:absolute;left:0;right:0;bottom:0;height:10px;border-top:3px solid var(--navy);border-bottom:1px solid var(--navy)}
-@media (max-width:700px){.track{height:96px}.track .dash,.track .done,.cutter{top:48px}.track .done{top:47px}.hair{top:46px}.cut-acts .btn{flex:1 1 100%}.cutter{width:150px}}
+.js .hero .reveal{opacity:0;transform:translateY(22px)}
+.js .hero.go .reveal{opacity:1;transform:none;transition:opacity .9s ease,transform 1s cubic-bezier(.2,.8,.2,1)}
+.js .hero.go .reveal:nth-child(2){transition-delay:.15s}.js .hero.go .reveal:nth-child(3){transition-delay:.3s}.js .hero.go .reveal:nth-child(4){transition-delay:.45s}
 
-/* ===== animated service icons ===== */
-.svc li{grid-template-columns:52px minmax(0,1fr) auto!important;column-gap:18px}
-.svc li .ic{grid-row:1/3;grid-column:1;width:52px;height:52px;display:grid;place-items:center;border:1px solid #2d4675;border-radius:50%}
-.svc li h3,.svc li p{grid-column:2}
-.svc li button{grid-column:3!important}
-.ic svg{width:40px;height:40px;fill:none;stroke:var(--gold);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
-.ic .fill{fill:var(--gold);stroke:none}
+/* ===== MARQUEE ===== */
+.marquee{background:var(--gold);color:var(--ink);overflow:hidden;white-space:nowrap;border-block:1px solid var(--gold-d)}
+.marquee div{display:inline-flex;gap:40px;padding:14px 0;animation:mq 34s linear infinite;font-family:var(--disp);font-size:20px;font-weight:600;font-style:italic}
+.marquee span::after{content:"\2726";font-style:normal;margin-left:40px;font-size:13px;vertical-align:3px}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ===== WORK ===== */
+.work{padding-block:clamp(80px,10vw,140px)}
+.work .head{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:24px;margin-bottom:44px}
+.gal{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px;list-style:none;padding:0}
+.gal li{position:relative;overflow:hidden;background:#ddd}
+.gal img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.gal li:hover img{transform:scale(1.04)}
+.gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:40px 18px 16px;background:linear-gradient(0deg,rgba(7,15,30,.8),transparent);color:#fff;font-family:var(--disp);font-size:20px;font-weight:600}
+.gal figcaption small{display:block;font:500 12px var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--gold-hi);margin-bottom:2px}
+.gal figure{margin:0;height:100%}
+.g1{grid-column:1/6;grid-row:span 2;aspect-ratio:auto}
+.g2{grid-column:6/9;aspect-ratio:3/4}.g3{grid-column:9/13;aspect-ratio:auto}
+.g4{grid-column:6/9;aspect-ratio:3/4}.g5{grid-column:9/13;aspect-ratio:auto}
+.g3,.g5{min-height:0}
+
+/* ===== HOUDA ===== */
+.him{background:var(--ink);color:#e7ebf3;overflow:hidden}
+.him .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(36px,6vw,100px);align-items:center;padding-block:clamp(80px,10vw,140px)}
+.him .ph{position:relative}
+.him .ph img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 25%}
+.him .ph::before{content:"";position:absolute;inset:-14px 14px 14px -14px;border:1px solid var(--gold);z-index:-0;pointer-events:none}
+.him .ph img{position:relative;z-index:1}
+.him h2{color:#fff}
+.him h2 em{color:var(--gold);font-style:italic}
+.him p{color:#b8c2d6;margin-top:20px;max-width:46ch}
+.him ul{list-style:none;padding:0;margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:22px 30px}
+.him li{border-top:1px solid #25385c;padding-top:14px;font-size:15px;color:#b8c2d6}
+.him li b{display:block;color:#fff;font-family:var(--disp);font-size:21px;font-weight:600}
+
+/* ===== SERVICES (kept, restyled) ===== */
+.svc{background:var(--paper);color:var(--ink);padding-block:clamp(80px,10vw,140px)}
+.svc h2{color:var(--ink)}.svc .lede{color:var(--mute);margin-top:16px}
+.svc ul{list-style:none;padding:0;margin-top:44px;border-top:1px solid var(--ink);display:grid;grid-template-columns:1fr 1fr;column-gap:64px}
+.svc li{display:grid;grid-template-columns:52px minmax(0,1fr) auto;column-gap:18px;row-gap:2px;align-items:center;padding:24px 0;border-bottom:1px solid var(--line)}
+.svc li .ic{grid-row:1/3;grid-column:1;width:52px;height:52px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:#fff}
+.svc h3{font-size:26px;color:var(--ink);grid-column:2}
+.svc li p{color:var(--mute);grid-column:2;font-size:15.5px}
+.svc li button{grid-row:1/3;grid-column:3;background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink);min-height:42px;padding:0 16px;font-size:12.5px}
+.svc li button:hover{background:var(--ink);color:#fff}
+.svc .note{margin-top:22px;color:var(--mute);font-size:15px}
+.ic svg{width:38px;height:38px;fill:none;stroke:var(--gold-d);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.ic .fill{fill:var(--gold-d);stroke:none}
 .ic g,.ic rect,.ic path{transform-box:view-box}
 .i-sc .ia,.i-sc .ib{transform-origin:24px 24px}
 .live .i-sc .ia{animation:ia 1.6s ease-in-out infinite}.live .i-sc .ib{animation:ib 1.6s ease-in-out infinite}
@@ -252,51 +133,191 @@ section.cut{position:relative;padding:0;background:var(--paper);overflow:hidden}
 .i-rz .rz{offset-path:path('M6 34 Q24 14 42 26');offset-rotate:auto;offset-distance:0%}
 .live .i-rz .ln{animation:draw 2.2s ease-in-out infinite}.live .i-rz .rz{animation:ride 2.2s ease-in-out infinite}
 @keyframes draw{0%{stroke-dashoffset:44}60%,85%{stroke-dashoffset:0}100%{stroke-dashoffset:0;opacity:0}}
-@keyframes ride{0%{offset-distance:0%}60%{offset-distance:100%}85%,100%{offset-distance:100%;opacity:.0}}
+@keyframes ride{0%{offset-distance:0%}60%{offset-distance:100%}85%,100%{offset-distance:100%;opacity:0}}
 .live .i-cb .cmb{animation:comb 1.8s ease-in-out infinite}
 @keyframes comb{0%,100%{transform:translateY(0)}50%{transform:translateY(14px)}}
-.i-mk .mk{fill:rgba(200,162,76,.28)}
-.i-mk .sh{fill:rgba(255,255,255,.75);stroke:none;transform:translateX(0) skewX(-18deg)}
+.i-mk .mk{fill:rgba(200,162,76,.22)}
+.i-mk .sh{fill:rgba(255,255,255,.9);stroke:none;transform:translateX(0) skewX(-18deg)}
 .live .i-mk .sh{animation:shine 2.4s ease-in-out infinite}
 @keyframes shine{0%{transform:translateX(0) skewX(-18deg)}50%,100%{transform:translateX(58px) skewX(-18deg)}}
-.i-kd .st{fill:var(--gold);stroke:none;transform-origin:39px 11px}
+.i-kd .st{fill:var(--gold-d);stroke:none;transform-origin:39px 11px}
 .live .i-kd .st{animation:tw 1.6s ease-in-out infinite}
 @keyframes tw{0%,100%{transform:scale(.5);opacity:.4}50%{transform:scale(1.15);opacity:1}}
-@media (max-width:600px){.svc li{grid-template-columns:44px minmax(0,1fr)!important}.svc li .ic{width:44px;height:44px}.ic svg{width:34px;height:34px}.svc li button{grid-column:2!important;grid-row:3!important}}
-@media (prefers-reduced-motion:reduce){.live *{animation:none!important}.i-rz .ln{stroke-dashoffset:0}}
+
+/* ===== SHOP ===== */
+.shop{position:relative;color:#fff;background:var(--ink);overflow:hidden}
+.shop .grid{display:grid;grid-template-columns:1.1fr .9fr;min-height:min(92vh,820px)}
+.shop .grid>img{width:100%;height:100%;object-fit:cover}
+.shop .txt{padding:clamp(40px,6vw,90px);display:flex;flex-direction:column;justify-content:center;background:var(--navy-2);position:relative}
+.shop .txt img{width:58%;aspect-ratio:4/5;object-fit:cover;object-position:50% 30%;margin-top:34px;align-self:flex-end;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+.shop h2{color:#fff}.shop p{color:#b8c2d6;margin-top:18px;max-width:40ch}
+
+/* ===== BOOKING ===== */
+.booksec{background:var(--stone);padding-block:clamp(80px,10vw,130px)}
+.booksec .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(36px,6vw,96px);align-items:center}
+.booksec aside img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 40%}
+.book{background:#fff;padding:32px;box-shadow:0 30px 60px -30px rgba(11,24,48,.35);display:grid;gap:18px}
+.book h2{font-size:36px}
+fieldset{border:0;padding:0;min-width:0}
+legend{font-weight:600;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);margin-bottom:10px;padding:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips input{position:absolute;opacity:0;pointer-events:none;width:1px}
+.chips label{box-shadow:inset 0 0 0 1px var(--line);font-weight:500;font-size:15px;cursor:pointer;background:#fff;user-select:none}
+.chips input:checked+label{background:var(--ink);color:#fff;box-shadow:none}
+.chips input:focus-visible+label{outline:3px solid var(--gold);outline-offset:2px}
+.chips.row{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -32px;padding:2px 32px;-webkit-overflow-scrolling:touch}
+.chips.row::-webkit-scrollbar{display:none}
+.chips.row label{flex:none;min-height:48px;display:grid;place-items:center;padding:0 18px;white-space:nowrap}
+.chips.d label{min-width:64px;min-height:66px;padding:6px 10px;line-height:1.15;text-align:center}
+.chips.d label small{display:block;font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
+.chips.d label b{display:block;font-family:var(--disp);font-size:22px;font-weight:600}
+.chips.t label{min-width:68px;padding:0 12px}
+.sum{font-family:var(--disp);font-size:20px;font-weight:600;text-align:center;padding-top:16px;border-top:1px solid var(--line)}
+.book .btn{width:100%;min-height:58px}
+.fine{font-size:13.5px;color:var(--mute);text-align:center}
+
+/* ===== REVIEWS + VISIT ===== */
+.proof{padding-block:clamp(80px,10vw,130px)}
+.proof .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,90px);align-items:center}
+.score{font-family:var(--disp);font-weight:600;font-size:clamp(120px,17vw,220px);line-height:.8;letter-spacing:-.03em;color:var(--ink)}
+.score+p{font-weight:600;margin-top:22px}
+.score+p .s{color:var(--gold-d);letter-spacing:3px;font-size:22px;display:block}
+.themes{list-style:none;padding:0;border-top:1px solid var(--ink);margin:28px 0}
+.themes li{padding:16px 0;border-bottom:1px solid var(--line);font-size:19px;font-weight:600}
+.themes li span{color:var(--mute);font-weight:400;font-size:16px;display:block}
+.visit{background:var(--ink);color:#e7ebf3;padding-block:clamp(70px,9vw,120px)}
+.visit h2{color:#fff}
+.visit dl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin:40px 0 36px}
+.visit dt{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.visit dd{font-size:19px;line-height:1.5}
+.visit dd a{text-underline-offset:4px}
+footer{background:#050c19;color:#8b97b0;font-size:14px;padding-block:34px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between}
+
+
+@media (min-width:981px){
+  .hero .bg{left:46%}
+  .hero .bg::after{background:linear-gradient(90deg,var(--ink) 0%,var(--ink) 4%,rgba(11,24,48,.6) 20%,rgba(11,24,48,0) 48%),linear-gradient(0deg,rgba(11,24,48,.7) 0%,transparent 35%)}
+  .hero .bg::before{content:"";position:absolute;z-index:2;top:110px;bottom:60px;left:-1px;width:1px;background:linear-gradient(180deg,transparent,var(--gold),transparent)}
+}
+.bar{display:none}
+@media (max-width:980px){
+  .top nav{display:none}
+  .gal{grid-template-columns:1fr 1fr}
+  .g1,.g2,.g3,.g4,.g5{grid-column:auto;grid-row:auto;aspect-ratio:3/4}
+  .g1{grid-column:1/-1;aspect-ratio:4/5}
+  .him .wrap,.booksec .wrap,.proof .wrap{grid-template-columns:minmax(0,1fr)}
+  .shop .grid{grid-template-columns:1fr;min-height:0}
+  .shop .grid>img{aspect-ratio:4/5;height:auto}
+  .svc ul{grid-template-columns:1fr}
+  .visit dl{grid-template-columns:1fr}
+  .booksec aside{display:none}
+}
+@media (max-width:620px){
+  .top .btn{display:none}
+  .logo small{display:none}
+  .hero{min-height:calc(100svh - 32px)}
+  .hero .bg img{object-position:62% 30%}
+  .hero .bg::after{background:linear-gradient(0deg,rgba(7,15,30,.96) 0%,rgba(7,15,30,.75) 42%,rgba(7,15,30,.15) 75%,rgba(7,15,30,.5) 100%)}
+  .hero .wrap{padding-bottom:110px}
+  .acts .btn{flex:1 1 100%}
+  .facts{gap:14px 26px}.facts b{font-size:23px}
+  .him ul{grid-template-columns:1fr}
+  .shop .txt img{width:72%}
+  .book{padding:22px}
+  .chips.row{margin:0 -22px;padding:2px 22px}
+  .svc li{grid-template-columns:44px minmax(0,1fr)}.svc li .ic{width:44px;height:44px}.svc li button{grid-column:2;grid-row:3;justify-self:start;margin-top:10px}
+  .bar{display:grid;grid-template-columns:1fr auto;gap:8px;position:fixed;z-index:30;left:0;right:0;bottom:0;padding:10px max(12px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:rgba(11,24,48,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  .bar .btn{min-height:50px}
+  .bar .btn-line{color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.5)}
+  footer{padding-bottom:100px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.hero .bg img:first-child{opacity:1}.js .hero .reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 <p class="concept">Concept website by Arcwise Studios for Houda’s Barbers &amp; Grooming</p>
-<div class="pole" aria-hidden="true"></div>
-<header><div class="wrap">
-  <a class="logo" href="#top"><img src="/img/hb.png" width="583" height="531" alt=""><span>Houda’s<small>Barbers &amp; Grooming</small></span></a>
-  <nav aria-label="Main"><a href="#work">The work</a><a href="#services">Services</a><a href="#reviews">Reviews</a><a href="#visit">Find us</a></nav>
-  <a class="btn btn-line" style="min-height:44px;padding:0 18px;font-size:15px" href="#booking">Book a chair</a>
+<header class="top"><div class="wrap">
+  <a class="logo" href="#top"><img class="hb" src="/img/hb.png" width="583" height="531" alt=""><span><b>Houda’s</b><small>Barbers &amp; Grooming</small></span></a>
+  <nav aria-label="Main"><a href="#work">The work</a><a href="#services">Services</a><a href="#shop">The shop</a><a href="#visit">Find us</a></nav>
+  <a class="btn btn-gold" href="#booking">Book a chair</a>
 </div></header>
 
 <main id="top">
-<section class="cut" aria-label="Houda’s Barbers &amp; Grooming">
-  <div class="wrap cut-in">
-    <div class="mono" aria-hidden="true"><svg viewBox="0 0 120 110"><rect class="f1" x="3" y="3" width="114" height="104"/><rect class="f2" x="11" y="11" width="98" height="88"/></svg><img src="/img/hb.png" width="583" height="531" alt=""></div>
-    <h1><span class="l1">Sharp fades.</span><span class="l2"><em>Clean lines.</em> Bukit Bintang.</span></h1>
-    <div class="track" aria-hidden="true"><i class="dash"></i><i class="done"></i><div class="cutter"><svg class="sc" viewBox="-100 -64 290 128" aria-hidden="true"><defs><linearGradient id="gd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6e3a6"/><stop offset=".45" stop-color="#c8a24c"/><stop offset="1" stop-color="#7e5f1c"/></linearGradient><linearGradient id="stl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#d7dde6"/><stop offset="1" stop-color="#8b97aa"/></linearGradient></defs><g class="bl a"><path d="M-4,-3 C50,-13 122,-10 172,-1 C122,3 50,4 -4,5 Z" fill="url(#stl)" stroke="#55627a" stroke-width="1.2"/><path d="M-2,1 L-44,-21" stroke="url(#gd)" stroke-width="12" stroke-linecap="round"/><circle cx="-64" cy="-30" r="20" fill="none" stroke="url(#gd)" stroke-width="9"/></g><g class="bl b"><g transform="scale(1,-1)"><path d="M-4,-3 C50,-13 122,-10 172,-1 C122,3 50,4 -4,5 Z" fill="url(#stl)" stroke="#55627a" stroke-width="1.2"/><path d="M-2,1 L-44,-21" stroke="url(#gd)" stroke-width="12" stroke-linecap="round"/><circle cx="-64" cy="-30" r="20" fill="none" stroke="url(#gd)" stroke-width="9"/></g></g><circle r="7" fill="url(#gd)" stroke="#7e5f1c" stroke-width="1.5"/><circle r="2.2" fill="#4d3a10"/></svg></div></div>
-    <p class="cut-meta"><span class="status" id="status"><i></i><span>Open daily, 11am to 11pm</span></span><a class="stars" href="https://www.google.com/maps/search/?api=1&query=Houda%27s+Barbers+%26+Grooming+Kuala+Lumpur&query_place_id=ChIJbVXGBYc3zDERtidQmHrnjWo" target="_blank" rel="noopener"><span class="s" aria-hidden="true">★★★★★</span><b>5.0</b><small>168 Google reviews</small></a></p>
-    <div class="cut-acts"><a class="btn btn-red" href="#booking">Book a chair</a><a class="btn btn-line" href="tel:+60162367408">Call 016-236 7408</a></div>
+<section class="hero" aria-label="Houda’s Barbers &amp; Grooming">
+  <div class="bg" aria-hidden="true">
+    <img class="on" src="/img/p-houda-work.webp" width="654" height="1165" alt="" fetchpriority="high" style="object-position:58% 30%">
+    <img src="/img/p-quiff-side.webp" width="654" height="1165" alt="" loading="lazy" style="object-position:50% 38%">
+    <img src="/img/p-shop-chairs.webp" width="654" height="1165" alt="" loading="lazy" style="object-position:50% 45%">
   </div>
-  <div class="floor" aria-hidden="true"></div>
+  <div class="wrap">
+    <h1 class="reveal">Sharp fades. <em>Clean lines.</em></h1>
+    <p class="lede reveal">Houda’s Barbers &amp; Grooming, on Jalan Sultan Ismail in Bukit Bintang. Fades, hair designs, beard work and facials, every day until 11pm.</p>
+    <div class="acts reveal"><a class="btn btn-gold" href="#booking"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.6 2 1.1 1 2.1 1.3 2.4 1.4.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>Book a chair</a><a class="btn btn-ghost" href="#work">See the work</a></div>
+    <div class="facts reveal">
+      <a href="https://www.google.com/maps/search/?api=1&query=Houda%27s+Barbers+%26+Grooming+Kuala+Lumpur&query_place_id=ChIJbVXGBYc3zDERtidQmHrnjWo" target="_blank" rel="noopener" style="text-decoration:none"><b>5.0 <span class="s" aria-hidden="true">★★★★★</span></b>168 Google reviews</a>
+      <span><b>11am – 11pm</b>Open every day</span>
+      <span class="status" id="status"><i></i><span>Open daily</span></span>
+    </div>
+  </div>
+  <div class="snip" aria-hidden="true"><i class="dash"></i><i class="done"></i><div class="cutter"><svg class="sc" viewBox="-100 -64 290 128" aria-hidden="true"><defs><linearGradient id="gd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6e3a6"/><stop offset=".45" stop-color="#c8a24c"/><stop offset="1" stop-color="#7e5f1c"/></linearGradient><linearGradient id="stl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#d7dde6"/><stop offset="1" stop-color="#8b97aa"/></linearGradient></defs><g class="bl a"><path d="M-4,-3 C50,-13 122,-10 172,-1 C122,3 50,4 -4,5 Z" fill="url(#stl)" stroke="#55627a" stroke-width="1.2"/><path d="M-2,1 L-44,-21" stroke="url(#gd)" stroke-width="12" stroke-linecap="round"/><circle cx="-64" cy="-30" r="20" fill="none" stroke="url(#gd)" stroke-width="9"/></g><g class="bl b"><g transform="scale(1,-1)"><path d="M-4,-3 C50,-13 122,-10 172,-1 C122,3 50,4 -4,5 Z" fill="url(#stl)" stroke="#55627a" stroke-width="1.2"/><path d="M-2,1 L-44,-21" stroke="url(#gd)" stroke-width="12" stroke-linecap="round"/><circle cx="-64" cy="-30" r="20" fill="none" stroke="url(#gd)" stroke-width="9"/></g></g><circle r="7" fill="url(#gd)" stroke="#7e5f1c" stroke-width="1.5"/><circle r="2.2" fill="#4d3a10"/></svg></div></div>
 </section>
 
-<section class="hx" aria-label="Recent cuts in the shop">
-  <div class="ceiling"><svg class="hex" viewBox="0 0 1200 182" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><polygon points="60.0,26.0 45.0,52.0 15.0,52.0 0.0,26.0 15.0,0.0 45.0,0.0" style="--d:0.75s"/><polygon points="60.0,77.9 45.0,103.9 15.0,103.9 0.0,77.9 15.0,52.0 45.0,52.0" style="--d:0.87s"/><polygon points="60.0,129.9 45.0,155.9 15.0,155.9 0.0,129.9 15.0,103.9 45.0,103.9" style="--d:0.99s"/><polygon points="105.0,52.0 90.0,77.9 60.0,77.9 45.0,52.0 60.0,26.0 90.0,26.0" style="--d:0.69s"/><polygon points="105.0,103.9 90.0,129.9 60.0,129.9 45.0,103.9 60.0,77.9 90.0,77.9" style="--d:0.81s"/><polygon points="105.0,155.9 90.0,181.9 60.0,181.9 45.0,155.9 60.0,129.9 90.0,129.9" style="--d:0.93s"/><polygon points="150.0,26.0 135.0,52.0 105.0,52.0 90.0,26.0 105.0,0.0 135.0,0.0" style="--d:0.63s"/><polygon points="150.0,77.9 135.0,103.9 105.0,103.9 90.0,77.9 105.0,52.0 135.0,52.0" style="--d:0.75s"/><polygon points="150.0,129.9 135.0,155.9 105.0,155.9 90.0,129.9 105.0,103.9 135.0,103.9" style="--d:0.87s"/><polygon points="195.0,52.0 180.0,77.9 150.0,77.9 135.0,52.0 150.0,26.0 180.0,26.0" style="--d:0.57s"/><polygon points="195.0,103.9 180.0,129.9 150.0,129.9 135.0,103.9 150.0,77.9 180.0,77.9" style="--d:0.69s"/><polygon points="195.0,155.9 180.0,181.9 150.0,181.9 135.0,155.9 150.0,129.9 180.0,129.9" style="--d:0.81s"/><polygon points="240.0,26.0 225.0,52.0 195.0,52.0 180.0,26.0 195.0,0.0 225.0,0.0" style="--d:0.51s"/><polygon points="240.0,77.9 225.0,103.9 195.0,103.9 180.0,77.9 195.0,52.0 225.0,52.0" style="--d:0.63s"/><polygon points="240.0,129.9 225.0,155.9 195.0,155.9 180.0,129.9 195.0,103.9 225.0,103.9" style="--d:0.75s"/><polygon points="285.0,52.0 270.0,77.9 240.0,77.9 225.0,52.0 240.0,26.0 270.0,26.0" style="--d:0.45s"/><polygon points="285.0,103.9 270.0,129.9 240.0,129.9 225.0,103.9 240.0,77.9 270.0,77.9" style="--d:0.57s"/><polygon points="285.0,155.9 270.0,181.9 240.0,181.9 225.0,155.9 240.0,129.9 270.0,129.9" style="--d:0.69s"/><polygon points="330.0,26.0 315.0,52.0 285.0,52.0 270.0,26.0 285.0,0.0 315.0,0.0" style="--d:0.39s"/><polygon points="330.0,77.9 315.0,103.9 285.0,103.9 270.0,77.9 285.0,52.0 315.0,52.0" style="--d:0.51s"/><polygon points="330.0,129.9 315.0,155.9 285.0,155.9 270.0,129.9 285.0,103.9 315.0,103.9" style="--d:0.63s"/><polygon points="375.0,52.0 360.0,77.9 330.0,77.9 315.0,52.0 330.0,26.0 360.0,26.0" style="--d:0.33s"/><polygon points="375.0,103.9 360.0,129.9 330.0,129.9 315.0,103.9 330.0,77.9 360.0,77.9" style="--d:0.45s"/><polygon points="375.0,155.9 360.0,181.9 330.0,181.9 315.0,155.9 330.0,129.9 360.0,129.9" style="--d:0.57s"/><polygon points="420.0,26.0 405.0,52.0 375.0,52.0 360.0,26.0 375.0,0.0 405.0,0.0" style="--d:0.27s"/><polygon points="420.0,77.9 405.0,103.9 375.0,103.9 360.0,77.9 375.0,52.0 405.0,52.0" style="--d:0.39s"/><polygon points="420.0,129.9 405.0,155.9 375.0,155.9 360.0,129.9 375.0,103.9 405.0,103.9" style="--d:0.51s"/><polygon points="465.0,52.0 450.0,77.9 420.0,77.9 405.0,52.0 420.0,26.0 450.0,26.0" style="--d:0.21s"/><polygon points="465.0,103.9 450.0,129.9 420.0,129.9 405.0,103.9 420.0,77.9 450.0,77.9" style="--d:0.33s"/><polygon points="465.0,155.9 450.0,181.9 420.0,181.9 405.0,155.9 420.0,129.9 450.0,129.9" style="--d:0.45s"/><polygon points="510.0,26.0 495.0,52.0 465.0,52.0 450.0,26.0 465.0,0.0 495.0,0.0" style="--d:0.15s"/><polygon points="510.0,77.9 495.0,103.9 465.0,103.9 450.0,77.9 465.0,52.0 495.0,52.0" style="--d:0.27s"/><polygon points="510.0,129.9 495.0,155.9 465.0,155.9 450.0,129.9 465.0,103.9 495.0,103.9" style="--d:0.39s"/><polygon points="555.0,52.0 540.0,77.9 510.0,77.9 495.0,52.0 510.0,26.0 540.0,26.0" style="--d:0.09s"/><polygon points="555.0,103.9 540.0,129.9 510.0,129.9 495.0,103.9 510.0,77.9 540.0,77.9" style="--d:0.21s"/><polygon points="555.0,155.9 540.0,181.9 510.0,181.9 495.0,155.9 510.0,129.9 540.0,129.9" style="--d:0.33s"/><polygon points="600.0,26.0 585.0,52.0 555.0,52.0 540.0,26.0 555.0,0.0 585.0,0.0" style="--d:0.03s"/><polygon points="600.0,77.9 585.0,103.9 555.0,103.9 540.0,77.9 555.0,52.0 585.0,52.0" style="--d:0.15s"/><polygon points="600.0,129.9 585.0,155.9 555.0,155.9 540.0,129.9 555.0,103.9 585.0,103.9" style="--d:0.27s"/><polygon points="645.0,52.0 630.0,77.9 600.0,77.9 585.0,52.0 600.0,26.0 630.0,26.0" style="--d:0.03s"/><polygon points="645.0,103.9 630.0,129.9 600.0,129.9 585.0,103.9 600.0,77.9 630.0,77.9" style="--d:0.15s"/><polygon points="645.0,155.9 630.0,181.9 600.0,181.9 585.0,155.9 600.0,129.9 630.0,129.9" style="--d:0.27s"/><polygon points="690.0,26.0 675.0,52.0 645.0,52.0 630.0,26.0 645.0,0.0 675.0,0.0" style="--d:0.09s"/><polygon points="690.0,77.9 675.0,103.9 645.0,103.9 630.0,77.9 645.0,52.0 675.0,52.0" style="--d:0.21s"/><polygon points="690.0,129.9 675.0,155.9 645.0,155.9 630.0,129.9 645.0,103.9 675.0,103.9" style="--d:0.33s"/><polygon points="735.0,52.0 720.0,77.9 690.0,77.9 675.0,52.0 690.0,26.0 720.0,26.0" style="--d:0.15s"/><polygon points="735.0,103.9 720.0,129.9 690.0,129.9 675.0,103.9 690.0,77.9 720.0,77.9" style="--d:0.27s"/><polygon points="735.0,155.9 720.0,181.9 690.0,181.9 675.0,155.9 690.0,129.9 720.0,129.9" style="--d:0.39s"/><polygon points="780.0,26.0 765.0,52.0 735.0,52.0 720.0,26.0 735.0,0.0 765.0,0.0" style="--d:0.21s"/><polygon points="780.0,77.9 765.0,103.9 735.0,103.9 720.0,77.9 735.0,52.0 765.0,52.0" style="--d:0.33s"/><polygon points="780.0,129.9 765.0,155.9 735.0,155.9 720.0,129.9 735.0,103.9 765.0,103.9" style="--d:0.45s"/><polygon points="825.0,52.0 810.0,77.9 780.0,77.9 765.0,52.0 780.0,26.0 810.0,26.0" style="--d:0.27s"/><polygon points="825.0,103.9 810.0,129.9 780.0,129.9 765.0,103.9 780.0,77.9 810.0,77.9" style="--d:0.39s"/><polygon points="825.0,155.9 810.0,181.9 780.0,181.9 765.0,155.9 780.0,129.9 810.0,129.9" style="--d:0.51s"/><polygon points="870.0,26.0 855.0,52.0 825.0,52.0 810.0,26.0 825.0,0.0 855.0,0.0" style="--d:0.33s"/><polygon points="870.0,77.9 855.0,103.9 825.0,103.9 810.0,77.9 825.0,52.0 855.0,52.0" style="--d:0.45s"/><polygon points="870.0,129.9 855.0,155.9 825.0,155.9 810.0,129.9 825.0,103.9 855.0,103.9" style="--d:0.57s"/><polygon points="915.0,52.0 900.0,77.9 870.0,77.9 855.0,52.0 870.0,26.0 900.0,26.0" style="--d:0.39s"/><polygon points="915.0,103.9 900.0,129.9 870.0,129.9 855.0,103.9 870.0,77.9 900.0,77.9" style="--d:0.51s"/><polygon points="915.0,155.9 900.0,181.9 870.0,181.9 855.0,155.9 870.0,129.9 900.0,129.9" style="--d:0.63s"/><polygon points="960.0,26.0 945.0,52.0 915.0,52.0 900.0,26.0 915.0,0.0 945.0,0.0" style="--d:0.45s"/><polygon points="960.0,77.9 945.0,103.9 915.0,103.9 900.0,77.9 915.0,52.0 945.0,52.0" style="--d:0.57s"/><polygon points="960.0,129.9 945.0,155.9 915.0,155.9 900.0,129.9 915.0,103.9 945.0,103.9" style="--d:0.69s"/><polygon points="1005.0,52.0 990.0,77.9 960.0,77.9 945.0,52.0 960.0,26.0 990.0,26.0" style="--d:0.51s"/><polygon points="1005.0,103.9 990.0,129.9 960.0,129.9 945.0,103.9 960.0,77.9 990.0,77.9" style="--d:0.63s"/><polygon points="1005.0,155.9 990.0,181.9 960.0,181.9 945.0,155.9 960.0,129.9 990.0,129.9" style="--d:0.75s"/><polygon points="1050.0,26.0 1035.0,52.0 1005.0,52.0 990.0,26.0 1005.0,0.0 1035.0,0.0" style="--d:0.57s"/><polygon points="1050.0,77.9 1035.0,103.9 1005.0,103.9 990.0,77.9 1005.0,52.0 1035.0,52.0" style="--d:0.69s"/><polygon points="1050.0,129.9 1035.0,155.9 1005.0,155.9 990.0,129.9 1005.0,103.9 1035.0,103.9" style="--d:0.81s"/><polygon points="1095.0,52.0 1080.0,77.9 1050.0,77.9 1035.0,52.0 1050.0,26.0 1080.0,26.0" style="--d:0.63s"/><polygon points="1095.0,103.9 1080.0,129.9 1050.0,129.9 1035.0,103.9 1050.0,77.9 1080.0,77.9" style="--d:0.75s"/><polygon points="1095.0,155.9 1080.0,181.9 1050.0,181.9 1035.0,155.9 1050.0,129.9 1080.0,129.9" style="--d:0.87s"/><polygon points="1140.0,26.0 1125.0,52.0 1095.0,52.0 1080.0,26.0 1095.0,0.0 1125.0,0.0" style="--d:0.69s"/><polygon points="1140.0,77.9 1125.0,103.9 1095.0,103.9 1080.0,77.9 1095.0,52.0 1125.0,52.0" style="--d:0.81s"/><polygon points="1140.0,129.9 1125.0,155.9 1095.0,155.9 1080.0,129.9 1095.0,103.9 1125.0,103.9" style="--d:0.93s"/><polygon points="1185.0,52.0 1170.0,77.9 1140.0,77.9 1125.0,52.0 1140.0,26.0 1170.0,26.0" style="--d:0.75s"/><polygon points="1185.0,103.9 1170.0,129.9 1140.0,129.9 1125.0,103.9 1140.0,77.9 1170.0,77.9" style="--d:0.87s"/><polygon points="1185.0,155.9 1170.0,181.9 1140.0,181.9 1125.0,155.9 1140.0,129.9 1170.0,129.9" style="--d:0.99s"/></svg></div>
-  <div class="wall" aria-hidden="true">
-    <figure class="mr side" data-cycle="/img/houda-chair.webp,/img/shop-hex.webp" data-pos="50% 22%,50% 50%"><div class="lay"><img src="/img/houda-chair.webp" alt=""></div><i class="led"></i></figure>
-    <figure class="mr main" data-cycle="/img/cut-line-wall.webp,/img/fade-profile.webp,/img/cut-back.webp,/img/lines.webp,/img/side-part.webp" data-pos="45% 46%,50% 40%,50% 30%,55% 40%,50% 40%"><div class="lay"><img src="/img/cut-line-wall.webp" alt="" fetchpriority="high"></div><i class="led"></i></figure>
-    <figure class="mr side" data-cycle="/img/fade-wall.webp,/img/shop-mirrors.webp,/img/slick.webp" data-pos="50% 35%,50% 50%,50% 35%"><div class="lay"><img src="/img/fade-wall.webp" alt=""></div><i class="led"></i></figure>
+<div class="marquee" aria-hidden="true"><div><span>Skin fades</span><span>Hair designs</span><span>Beard sculpting</span><span>Hot towel facials</span><span>Gold &amp; black masks</span><span>Colour</span><span>Kids’ cuts</span><span>Skin fades</span><span>Hair designs</span><span>Beard sculpting</span><span>Hot towel facials</span><span>Gold &amp; black masks</span><span>Colour</span><span>Kids’ cuts</span></div></div>
+
+<section class="work" id="work"><div class="wrap">
+  <div class="head"><div><p class="eyebrow">The work</p><h2>Fresh from the chair</h2></div><a class="btn btn-line" href="https://www.instagram.com/houda_barber/" target="_blank" rel="noopener">Instagram</a></div>
+  <ul class="gal">
+    <li class="g1"><figure><img src="/img/p-quiff-side.webp" width="654" height="1165" alt="A high fade with a sculpted, combed-over quiff" loading="lazy" style="object-position:50% 40%"><figcaption><small>High fade</small>Sculpted quiff</figcaption></figure></li>
+    <li class="g2"><figure><img src="/img/p-lines-done.webp" width="654" height="1165" alt="A mid fade with two shaved lines and a swept-back top" loading="lazy" style="object-position:50% 45%"><figcaption><small>Mid fade</small>Twin lines</figcaption></figure></li>
+    <li class="g3"><figure><img src="/img/p-quiff-profile.webp" width="654" height="1165" alt="A skin fade with a textured top and lined-up beard, in profile" loading="lazy" style="object-position:50% 38%"><figcaption><small>Skin fade</small>With beard line-up</figcaption></figure></li>
+    <li class="g4"><figure><img src="/img/p-crop-fade.webp" width="654" height="1165" alt="A short crop with a high fade and a hard part" loading="lazy" style="object-position:40% 45%"><figcaption><small>High fade</small>Crop with hard part</figcaption></figure></li>
+    <li class="g5"><figure><img src="/img/p-mirror-check.webp" width="654" height="1165" alt="Houda holding up a hand mirror so a client can see the back of his cut" loading="lazy" style="object-position:50% 45%"><figcaption><small>The final check</small>Every client sees the back</figcaption></figure></li>
+  </ul>
+</div></section>
+
+<section class="him"><div class="wrap">
+  <div class="ph"><img src="/img/p-lines-spray.webp" width="654" height="1165" alt="A finished mid fade with two shaved lines being set with spray" loading="lazy"></div>
+  <div>
+    <p class="eyebrow">The detail</p>
+    <h2>Every line <em>done by hand.</em></h2>
+    <p>Fades blended skin-tight, parts cut sharp, and every design finished and set before you leave the chair. Clients say it best: he listens, takes his time and pays attention to every detail.</p>
+    <ul>
+      <li><b>Arab barber</b>English and Arabic spoken</li>
+      <li><b>Open late</b>11am to 11pm, every day</li>
+      <li><b>Walk-ins welcome</b>Or book ahead on WhatsApp</li>
+      <li><b>Bukit Bintang</b>Next to Capitol Cafe</li>
+    </ul>
   </div>
-</section>
+</div></section>
+
+<section class="svc" id="services"><div class="wrap">
+  <h2>What we do</h2>
+  <p class="lede">Tell us what you want, or show us a photo. We take the time to get it right.</p>
+  <ul>
+    <li><span class="ic" aria-hidden="true"><svg viewBox="0 0 48 48" class="i-sc"><g class="ia"><path d="M17 28.5 42 17"/><circle cx="12" cy="31" r="5"/></g><g class="ib"><path d="M17 19.5 42 31"/><circle cx="12" cy="17" r="5"/></g><circle cx="24" cy="24" r="1.6" class="fill"/></svg></span><h3>Haircut</h3><p>Scissor or clipper cut, shaped to how you wear it.</p><button class="btn" type="button" data-pick="s1">Book this</button></li>
+    <li><span class="ic" aria-hidden="true"><svg viewBox="0 0 48 48" class="i-cl"><g class="buzz"><path d="M17 12h14v22a7 7 0 0 1-14 0Z"/><path d="M15 12h18M17 8v4M21 8v4M25 8v4M29 8v4M33 8v4M15 8v4"/><path d="M21 22h6"/></g><path class="w w1" d="M9 18q-3 6 0 12"/><path class="w w2" d="M39 18q3 6 0 12"/></svg></span><h3>Skin fade</h3><p>Low, mid or high, blended clean.</p><button class="btn" type="button" data-pick="s2">Book this</button></li>
+    <li><span class="ic" aria-hidden="true"><svg viewBox="0 0 48 48" class="i-rz"><path class="ln" d="M6 34 Q24 14 42 26"/><g class="rz"><rect x="-5" y="-3" width="10" height="6" rx="1"/><path d="M-5 0h-4"/></g></svg></span><h3>Hair design</h3><p>Hard parts and shaved lines.</p><button class="btn" type="button" data-pick="s5">Book this</button></li>
+    <li><span class="ic" aria-hidden="true"><svg viewBox="0 0 48 48" class="i-cb"><path d="M10 12v8c0 11 6 19 14 19s14-8 14-19v-8"/><g class="cmb"><path d="M12 15h24v4H12Z"/><path d="M14 19v4M18 19v4M22 19v4M26 19v4M30 19v4M34 19v4"/></g></svg></span><h3>Beard trim</h3><p>Lined up and shaped to suit your face.</p><button class="btn" type="button" data-pick="s4">Book this</button></li>
+    <li><span class="ic" aria-hidden="true"><svg viewBox="0 0 48 48" class="i-mk"><defs><clipPath id="fc"><ellipse cx="24" cy="24" rx="12" ry="15"/></clipPath></defs><ellipse cx="24" cy="24" rx="12" ry="15" class="mk"/><g clip-path="url(#fc)"><rect class="sh" x="-6" y="0" width="7" height="48" transform="skewX(-18)"/></g><path d="M19 21h3M26 21h3M21 30q3 2 6 0"/></svg></span><h3>Face mask</h3><p>Black, gold or red peel-off mask in the chair.</p><button class="btn" type="button" data-pick="s6">Book this</button></li>
+    <li><span class="ic" aria-hidden="true"><svg viewBox="0 0 48 48" class="i-sc i-kd"><g class="ia"><path d="M17 28.5 38 19"/><circle cx="12" cy="31" r="5"/></g><g class="ib"><path d="M17 19.5 38 29"/><circle cx="12" cy="17" r="5"/></g><path class="st" d="M39 6l1.6 3.4L44 11l-3.4 1.6L39 16l-1.6-3.4L34 11l3.4-1.6Z"/></svg></span><h3>Kids’ cut</h3><p>Patient cuts for the little ones.</p><button class="btn" type="button" data-pick="s7">Book this</button></li>
+  </ul>
+
+  <p class="note">Also on the menu: hot towel facials and hair &amp; beard colour. Ask for prices on WhatsApp.</p>
+</div></section>
+
+<section class="shop" id="shop"><div class="grid">
+  <img src="/img/p-shop-chairs.webp" width="654" height="1165" alt="Inside Houda’s: black barber chairs, gold arched mirrors, a stone wall and hexagon ceiling lights" loading="lazy" style="object-position:50% 50%">
+  <div class="txt">
+    <p class="eyebrow" style="color:var(--gold)">The shop</p>
+    <h2>Stone, gold and good light.</h2>
+    <p>Hexagon lights, gold arched mirrors on a hand-cut stone wall and black leather chairs. Clean, bright and air-conditioned, right on Jalan Sultan Ismail.</p>
+    <img src="/img/p-shop-wall.webp" width="654" height="1165" alt="A gold arched mirror and the Houda’s sign on the stone wall" loading="lazy">
+  </div>
+</div></section>
 
 <section class="booksec" id="booking"><div class="wrap">
+  <aside><img src="/img/p-mirror-check.webp" width="654" height="1165" alt="" loading="lazy"></aside>
   <form class="book" id="book" novalidate>
     <h2>Book a chair</h2>
     <fieldset><legend>Service</legend><div class="chips row" id="svc">
@@ -316,43 +337,10 @@ section.cut{position:relative;padding:0;background:var(--paper);overflow:hidden}
   </form>
 </div></section>
 
-<section class="work" id="work"><div class="wrap">
-  <div class="head"><h2>Fresh from the chair</h2><a class="btn btn-line" href="https://www.instagram.com/houda_barber/" target="_blank" rel="noopener">More on Instagram</a></div>
-  <ul class="grid">
-    <li><figure><img src="/img/fade-wall.webp" width="788" height="890" alt="A burst fade with a combed-back top, seen from behind" loading="lazy"><figcaption>Burst fade</figcaption></figure></li>
-    <li><figure><img src="/img/crop-fade.webp" width="786" height="888" alt="A short crop with a skin fade and a shaved part" loading="lazy"></figure></li>
-    <li><figure><img src="/img/slick.webp" width="786" height="890" alt="A slicked-back pompadour" loading="lazy"></figure></li>
-    <li><figure><img src="/img/curls.webp" width="788" height="876" alt="A curly top being finished with a taper" loading="lazy"></figure></li>
-    <li><figure><img src="/img/pomp.webp" width="786" height="890" alt="A side-swept pompadour with a low fade" loading="lazy"></figure></li>
-    <li><figure><img src="/img/lines.webp" width="786" height="890" alt="A skin fade with two shaved lines" loading="lazy"><figcaption>Fade with design</figcaption></figure></li>
-    <li><figure><img src="/img/side-part.webp" width="786" height="888" alt="A skin fade with a hard side part" loading="lazy"></figure></li>
-    <li><figure><img src="/img/mask-gold.webp" width="788" height="886" alt="A client with a gold face mask" loading="lazy"></figure></li>
-  </ul>
-</div></section>
-
-<section class="svc" id="services"><div class="wrap">
-  <h2>What we do</h2>
-  <p class="lede">Tell us what you want, or show us a photo. We take the time to get it right.</p>
-  <ul>
-    <li><span class="ic" aria-hidden="true"><svg viewBox="0 0 48 48" class="i-sc"><g class="ia"><path d="M17 28.5 42 17"/><circle cx="12" cy="31" r="5"/></g><g class="ib"><path d="M17 19.5 42 31"/><circle cx="12" cy="17" r="5"/></g><circle cx="24" cy="24" r="1.6" class="fill"/></svg></span><h3>Haircut</h3><p>Scissor or clipper cut, shaped to how you wear it.</p><button class="btn" type="button" data-pick="s1">Book this</button></li>
-    <li><span class="ic" aria-hidden="true"><svg viewBox="0 0 48 48" class="i-cl"><g class="buzz"><path d="M17 12h14v22a7 7 0 0 1-14 0Z"/><path d="M15 12h18M17 8v4M21 8v4M25 8v4M29 8v4M33 8v4M15 8v4"/><path d="M21 22h6"/></g><path class="w w1" d="M9 18q-3 6 0 12"/><path class="w w2" d="M39 18q3 6 0 12"/></svg></span><h3>Skin fade</h3><p>Low, mid or high, blended clean.</p><button class="btn" type="button" data-pick="s2">Book this</button></li>
-    <li><span class="ic" aria-hidden="true"><svg viewBox="0 0 48 48" class="i-rz"><path class="ln" d="M6 34 Q24 14 42 26"/><g class="rz"><rect x="-5" y="-3" width="10" height="6" rx="1"/><path d="M-5 0h-4"/></g></svg></span><h3>Hair design</h3><p>Hard parts and shaved lines.</p><button class="btn" type="button" data-pick="s5">Book this</button></li>
-    <li><span class="ic" aria-hidden="true"><svg viewBox="0 0 48 48" class="i-cb"><path d="M10 12v8c0 11 6 19 14 19s14-8 14-19v-8"/><g class="cmb"><path d="M12 15h24v4H12Z"/><path d="M14 19v4M18 19v4M22 19v4M26 19v4M30 19v4M34 19v4"/></g></svg></span><h3>Beard trim</h3><p>Lined up and shaped to suit your face.</p><button class="btn" type="button" data-pick="s4">Book this</button></li>
-    <li><span class="ic" aria-hidden="true"><svg viewBox="0 0 48 48" class="i-mk"><defs><clipPath id="fc"><ellipse cx="24" cy="24" rx="12" ry="15"/></clipPath></defs><ellipse cx="24" cy="24" rx="12" ry="15" class="mk"/><g clip-path="url(#fc)"><rect class="sh" x="-6" y="0" width="7" height="48" transform="skewX(-18)"/></g><path d="M19 21h3M26 21h3M21 30q3 2 6 0"/></svg></span><h3>Face mask</h3><p>Black, gold or red peel-off mask in the chair.</p><button class="btn" type="button" data-pick="s6">Book this</button></li>
-    <li><span class="ic" aria-hidden="true"><svg viewBox="0 0 48 48" class="i-sc i-kd"><g class="ia"><path d="M17 28.5 38 19"/><circle cx="12" cy="31" r="5"/></g><g class="ib"><path d="M17 19.5 38 29"/><circle cx="12" cy="17" r="5"/></g><path class="st" d="M39 6l1.6 3.4L44 11l-3.4 1.6L39 16l-1.6-3.4L34 11l3.4-1.6Z"/></svg></span><h3>Kids’ cut</h3><p>Patient cuts for the little ones.</p><button class="btn" type="button" data-pick="s7">Book this</button></li>
-  </ul>
-
-  <p class="note">Ask for prices when you message. The shop replies with the current price list.</p>
-</div></section>
-
-<section class="shop"><div class="wrap">
-  <div class="pics"><img src="/img/shop-hex.webp" width="788" height="888" alt="Inside Houda’s: black barber chairs, gold arched mirrors, a stone wall and a hexagon-lit ceiling" loading="lazy"><img src="/img/shop-mirrors.webp" width="786" height="890" alt="Barber chairs facing gold-framed arched mirrors" loading="lazy"></div>
-  <div><h2>The shop</h2><p>Gold arched mirrors on a stone wall, black leather chairs and a hexagon-lit ceiling. Clean, bright and comfortable, right on Jalan Sultan Ismail.</p></div>
-</div></section>
-
 <section class="proof" id="reviews"><div class="wrap">
   <div><p class="score">5.0</p><p><span class="s" aria-hidden="true">★★★★★</span>168 reviews on Google</p></div>
   <div>
+    <p class="eyebrow">Reviews</p>
     <h2>What clients keep saying</h2>
     <ul class="themes">
       <li>Attention to detail<span>Reviewers mention the care taken over every fade and beard line.</span></li>
@@ -365,22 +353,19 @@ section.cut{position:relative;padding:0;background:var(--paper);overflow:hidden}
 </div></section>
 
 <section class="visit" id="visit"><div class="wrap">
-  <h2>Find us</h2>
+  <p class="eyebrow" style="color:var(--gold)">Find us</p>
+  <h2>Bukit Bintang, next to Capitol Cafe</h2>
   <dl>
     <div><dt>Address</dt><dd>50, Jalan Sultan Ismail, Bukit Bintang, 50250 Kuala Lumpur</dd></div>
     <div><dt>Hours</dt><dd>Every day<br>11am to 11pm</dd></div>
-    <div><dt>Phone and WhatsApp</dt><dd><a href="tel:+60162367408">+60 16-236 7408</a><br><a href="https://www.instagram.com/houda_barber/" target="_blank" rel="noopener">@houda_barber on Instagram</a></dd></div>
+    <div><dt>Call or WhatsApp</dt><dd><a href="tel:+60162367408">+60 16-236 7408</a><br><a href="https://www.instagram.com/houda_barber/" target="_blank" rel="noopener">@houda_barber</a></dd></div>
   </dl>
-  <a class="btn btn-red" href="https://www.google.com/maps/search/?api=1&query=Houda%27s+Barbers+%26+Grooming+Kuala+Lumpur&query_place_id=ChIJbVXGBYc3zDERtidQmHrnjWo" target="_blank" rel="noopener">Get directions</a>
+  <div class="acts"><a class="btn btn-gold" href="#booking">Book a chair</a><a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&query=Houda%27s+Barbers+%26+Grooming+Kuala+Lumpur&query_place_id=ChIJbVXGBYc3zDERtidQmHrnjWo" target="_blank" rel="noopener">Get directions</a></div>
 </div></section>
 </main>
 
-<footer><div class="wrap">
-  <span class="logo"><img src="/img/hb.png" width="583" height="531" alt=""><span>Houda’s</span></span>
-  <span>Houda’s Barbers &amp; Grooming, Bukit Bintang, Kuala Lumpur</span>
-  <span>Concept website by Arcwise Studios</span>
-</div></footer>
-<div class="bar"><a class="btn btn-red" href="#booking">Book a chair</a><a class="btn btn-line" href="tel:+60162367408" aria-label="Call the shop">Call</a></div>
+<footer><div class="wrap"><span>Houda’s Barbers &amp; Grooming, Bukit Bintang, Kuala Lumpur</span><span>Concept website by Arcwise Studios</span></div></footer>
+<div class="bar"><a class="btn btn-gold" href="#booking">Book a chair</a><a class="btn btn-line" href="tel:+60162367408" aria-label="Call the shop">Call</a></div>
 
 <script>
 (function(){
@@ -417,58 +402,24 @@ section.cut{position:relative;padding:0;background:var(--paper);overflow:hidden}
   document.querySelectorAll('[data-pick]').forEach(function(b){b.addEventListener('click',function(){document.getElementById(b.dataset.pick).checked=true;upd();document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});});});
 })();
 </script>
-
 <script>
 (function(){
-  var root=document.documentElement;root.classList.add('js');
-  var hx=document.querySelector('.hx');requestAnimationFrame(function(){requestAnimationFrame(function(){hx.classList.add('ready')})});
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  document.querySelectorAll('.mr[data-cycle]').forEach(function(m,k){
-    var srcs=m.dataset.cycle.split(','),pos=(m.dataset.pos||'').split(','),lay=m.querySelector('.lay'),cur=lay.querySelector('img'),i=0;
-    cur.style.objectPosition=pos[0]||'50% 50%';
-    srcs.forEach(function(u){var p=new Image();p.src=u});
-    var blade=document.createElement('i');blade.className='blade';lay.appendChild(blade);
-    function step(){
-      i=(i+1)%srcs.length;
-      var n=new Image();n.className='next';n.alt='';n.src=srcs[i];n.style.objectPosition=pos[i]||'50% 50%';lay.insertBefore(n,blade);
-      blade.className='blade';blade.style.bottom='0';
-      requestAnimationFrame(function(){requestAnimationFrame(function(){n.classList.add('go');blade.style.bottom='';blade.className='blade go'})});
-      setTimeout(function(){cur.remove();cur=n;n.className='';blade.className='blade'},1250);
-    }
-    setTimeout(function(){step();setInterval(step,k===1?3200:4600)},k===1?2600:4000+k*900);
-  });
-})();
-</script>
-
-<script>
-(function(){
-  var cut=document.querySelector('.cut');if(!cut)return;
-  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var track=cut.querySelector('.track'),done=cut.querySelector('.done'),cutter=cut.querySelector('.cutter'),sc=cutter.querySelector('.sc');
-  requestAnimationFrame(function(){requestAnimationFrame(function(){cut.classList.add('go')})});
-  function finish(){cut.classList.add('done');sc.classList.remove('cutting');sc.classList.add('idle')}
-  if(reduce){done.style.width='100%';cutter.style.transform='translate(-12%,-50%) translateX('+(track.clientWidth-cutter.clientWidth*0.82)+'px)';finish();return;}
-  function hair(x,big){
-    var h=document.createElement('i');h.className='hair';
-    var l=(big?10:6)+Math.random()*(big?14:10),dx=(Math.random()-.5)*(big?120:70),dy=60+Math.random()*(big?120:80);
-    h.style.cssText='left:'+x+'px;--l:'+l+'px;--dx:'+dx+'px;--dy:'+dy+'px;--r0:'+(Math.random()*180)+'deg;--r1:'+(Math.random()*720-360)+'deg;--t:'+(0.9+Math.random()*0.9)+'s';
-    track.appendChild(h);setTimeout(function(){h.remove()},2000);
-  }
-  var t0=0,D=2300,last=0;
-  function ease(p){return p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2}
-  function frame(t){
-    if(!t0)t0=t;var p=Math.min(1,(t-t0)/D),W=track.clientWidth,x=ease(p)*W;
-    cutter.style.transform='translate(-12%,-50%) translateX('+(x-cutter.clientWidth*0.82)+'px)';
-    done.style.width=x+'px';
-    if(t-last>45&&p<1){last=t;hair(x,false);if(Math.random()<.5)hair(x,false)}
-    if(p<1)requestAnimationFrame(frame);
-    else{for(var i=0;i<14;i++)hair(W-6,true);finish();}
-  }
-  setTimeout(function(){sc.classList.add('cutting');requestAnimationFrame(frame)},1100);
-  /* idle snips drop a few clippings */
-  setInterval(function(){if(cut.classList.contains('done')&&!document.hidden){for(var i=0;i<4;i++)hair(track.clientWidth-6,false)}},2400);
-  addEventListener('resize',function(){if(cut.classList.contains('done')){done.style.width='100%';cutter.style.transform='translate(-12%,-50%) translateX('+(track.clientWidth-cutter.clientWidth*0.82)+'px)'}});
-  /* service icons animate only while visible */
+  document.documentElement.classList.add('js');
+  var hero=document.querySelector('.hero'),reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  requestAnimationFrame(function(){requestAnimationFrame(function(){hero.classList.add('go')})});
+  var st=document.getElementById('status');if(st&&st.classList.contains('open'))st.querySelector('span').textContent='Open now';
+  if(reduce)return;
+  /* crossfade three of his real photos behind the headline */
+  var imgs=[].slice.call(hero.querySelectorAll('.bg img')),k=0;
+  setInterval(function(){imgs[k].classList.remove('on');k=(k+1)%imgs.length;imgs[k].classList.add('on')},6500);
+  /* the scissors cut a gold line along the bottom of the hero, then rest */
+  var snip=hero.querySelector('.snip'),done=snip.querySelector('.done'),cut=snip.querySelector('.cutter'),sc=cut.querySelector('.sc');
+  function run(){var t0=0,D=2600;sc.classList.add('cutting');done.style.opacity=1;
+    function f(t){if(!t0)t0=t;var p=Math.min(1,(t-t0)/D),e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2,W=snip.clientWidth,x=e*(W+cut.clientWidth);
+      cut.style.transform='translate(-100%,-50%) translateX('+x+'px)';done.style.width=Math.min(W,x)+'px';
+      if(p<1)requestAnimationFrame(f);else{sc.classList.remove('cutting');setTimeout(function(){done.style.transition='opacity .8s';done.style.opacity=0;setTimeout(function(){done.style.transition='';done.style.width=0},900)},1200)}}
+    requestAnimationFrame(f)}
+  setTimeout(run,1400);setInterval(function(){if(!document.hidden)run()},9000);
   var ul=document.querySelector('.svc ul');
   if(ul&&'IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){ul.classList.toggle('live',e.isIntersecting)})},{threshold:.15}).observe(ul)}
 })();
