@@ -174,3 +174,33 @@ document.querySelectorAll('.reveal').forEach(el=>{if(el.getBoundingClientRect().
 })();
 
 ;(function(){var s=document.createElement("script");s.src="https://arcwise-front-desk.vercel.app/widget.js";s.defer=true;s.setAttribute("data-client","gentology");s.setAttribute("data-mobile-at","560");s.setAttribute("data-mobile-size","sm");s.setAttribute("data-quiet","true");s.setAttribute("data-reveal","#waiting-list,#visit");document.body.appendChild(s)})();
+
+/* parlour walk-through: scroll drives a slow camera move through three real photographs */
+(function(){
+  const walk=$('walk');if(!walk||reduce)return;
+  const stage=walk.querySelector('.walk-stage'),sc=[...walk.querySelectorAll('.walk-sc')],ims=sc.map(s=>s.querySelector('img')),
+    caps=[...walk.querySelectorAll('.walk-cap')],ticks=[...walk.querySelectorAll('.walk-ticks i')],bar=walk.querySelector('.walk-bar b');
+  walk.classList.add('live');
+  const A=1800/3200,n=sc.length,cl=(v,a,b)=>Math.min(b,Math.max(a,v)),mix=(a,b,t)=>a+(b-a)*t;
+  /* per scene: focus x, focus y, zoom at start -> at end (fractions of the photograph) */
+  const K=[[.46,.28,1,.47,.655,2.1],[.47,.405,1.75,.5,.6,1],[.5,.63,1.8,.45,.36,1]];
+  let W=0,H=0,iw=0,ih=0,cur=0,tgt=0,raf=0,act=-1;
+  function size(){W=stage.clientWidth;H=stage.clientHeight;iw=Math.max(W,H*A);ih=iw/A;ims.forEach(im=>{im.style.width=iw+'px';im.style.height=ih+'px'});paint()}
+  function paint(){
+    const x=cur*n;
+    for(let i=0;i<n;i++){
+      const t=cl((x-(i-.14))/1.28,0,1),k=K[i],e=t*t*(3-2*t),s=mix(k[2],k[5],e)*(W<700&&k[5]>k[2]?1.15:1),w=iw*s,h=ih*s;
+      const tx=cl(W/2-mix(k[0],k[3],e)*w,W-w,0),ty=cl(H/2-mix(k[1],k[4],e)*h,H-h,0);
+      ims[i].style.transform='translate3d('+tx.toFixed(1)+'px,'+ty.toFixed(1)+'px,0) scale('+s.toFixed(4)+')';
+      sc[i].style.opacity=i?cl((x-(i-.14))/.28,0,1).toFixed(3):1;
+    }
+    bar.style.transform='scaleX('+cur.toFixed(4)+')';
+    const a=cl(Math.floor(x+.02),0,n-1);
+    if(a!==act){act=a;caps.forEach((c,i)=>c.classList.toggle('on',i===a));ticks.forEach((c,i)=>c.classList.toggle('on',i===a))}
+    walk.classList.toggle('moved',cur>.03);
+  }
+  function loop(){cur+=(tgt-cur)*.14;if(Math.abs(tgt-cur)<.0004)cur=tgt;paint();raf=cur===tgt?0:requestAnimationFrame(loop)}
+  function onScroll(){const r=walk.getBoundingClientRect();tgt=cl(-r.top/(r.height-H),0,1);if(!raf)raf=requestAnimationFrame(loop)}
+  addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',()=>{size();onScroll()});
+  size();onScroll();
+})();

@@ -476,3 +476,45 @@ footer{padding-bottom:110px}
 }
 @media (max-width:560px){.tray{transition:transform .4s ease,opacity .4s ease}.tray.tucked{transform:translateY(140%);opacity:0;pointer-events:none}}
 @media (prefers-reduced-motion:reduce){.ticket.printing,.ticket .tel.flash,.branches.pulse button{animation:none}}
+
+/* ---------- PARLOUR WALK-THROUGH (scroll-driven; static triptych without JS or with reduced motion) ---------- */
+.walk{position:relative}
+.walk-stage{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+.walk-sc{margin:0;aspect-ratio:9/14;overflow:hidden;background:#07110d}
+.walk-sc img{width:100%;height:100%;object-fit:cover}
+.walk-caps{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
+.walk-cap .n{font-family:var(--deco);color:var(--brass);letter-spacing:.2em;font-size:14px}
+.walk-cap h3{font-weight:400;font-size:clamp(1.3rem,2.4vw,2.6rem);line-height:1.08;margin:6px 0 8px}
+.walk-cap h3 em{font-style:italic;color:var(--brass-hi)}
+.walk-cap p{color:var(--ivory-dim);font-size:16px;line-height:1.5}
+.walk-ui{display:none}
+.walk.live{height:340vh;height:340svh}
+.walk.live .walk-stage{position:sticky;top:0;display:block;height:100vh;height:100svh;max-width:none;padding:0;overflow:hidden;background:#07110d}
+.walk.live .walk-sc{position:absolute;inset:0;aspect-ratio:auto;will-change:opacity}
+.walk.live .walk-sc img{position:absolute;left:0;top:0;max-width:none;object-fit:fill;transform-origin:0 0;will-change:transform;filter:saturate(.95) contrast(1.05)}
+.walk.live .walk-stage::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(120% 90% at 50% 45%,transparent 45%,rgba(7,17,13,.7) 100%),linear-gradient(0deg,rgba(7,17,13,.88) 0%,rgba(7,17,13,.35) 28%,transparent 50%,rgba(7,17,13,.45) 100%)}
+.walk.live .walk-stage::after{content:"";position:absolute;z-index:3;pointer-events:none;inset:84px clamp(12px,1.8vw,26px) clamp(12px,1.8vw,26px);border:1px solid rgba(198,161,90,.55)}
+.walk.live .walk-caps{position:absolute;z-index:4;display:block;margin:0;left:max(var(--gutter),calc(clamp(12px,1.8vw,26px) + 22px));bottom:clamp(96px,14vh,140px);width:min(460px,calc(100% - 2*var(--gutter) - 20px))}
+.walk.live .walk-cap{position:absolute;left:0;bottom:0;width:100%;opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.1,1)}
+.walk.live .walk-cap.on{opacity:1;transform:none;transition-delay:.15s}
+.walk.live .walk-cap h3{font-size:clamp(2rem,4.2vw,3.6rem);text-shadow:0 2px 24px rgba(0,0,0,.6)}
+.walk.live .walk-cap p{color:var(--ivory);font-size:17px;max-width:40ch;text-shadow:0 1px 14px rgba(0,0,0,.7)}
+.walk.live .walk-ui{display:block}
+.walk-ticks{position:absolute;z-index:4;isolation:isolate;right:calc(clamp(12px,1.8vw,26px) + 22px);top:50%;transform:translateY(-50%);display:grid;gap:18px;justify-items:center;font-family:var(--deco);font-size:14px;letter-spacing:.12em;color:rgba(236,226,201,.5)}
+.walk-ticks i{position:relative;font-style:normal;display:grid;place-items:center;width:38px;height:38px;transition:color .4s}
+.walk-ticks i::before{content:"";position:absolute;inset:4px;z-index:-1;transform:rotate(45deg);border:1px solid rgba(198,161,90,.45);transition:background .4s,border-color .4s}
+.walk-ticks i.on{color:#14100A}
+.walk-ticks i.on::before{background:var(--brass);border-color:var(--brass)}
+.walk-bar{position:absolute;z-index:4;left:clamp(12px,1.8vw,26px);right:clamp(12px,1.8vw,26px);bottom:clamp(12px,1.8vw,26px);height:3px}
+.walk-bar b{display:block;height:100%;background:var(--brass);transform-origin:0 50%;transform:scaleX(0)}
+.walk-hint{position:absolute;z-index:4;left:50%;top:112px;transform:translateX(-50%);font-family:var(--deco);font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--brass-hi);padding:7px 16px;border:1px solid rgba(198,161,90,.5);background:rgba(12,29,23,.7);transition:opacity .5s;white-space:nowrap}
+.walk.moved .walk-hint{opacity:0}
+.walk + .wrap .twenties{margin-top:clamp(72px,9vw,120px)}
+@media (max-width:700px){
+  .walk-stage{gap:6px}.walk-caps{grid-template-columns:1fr;gap:16px}
+  .walk.live .walk-stage::after{inset:118px 10px 10px}
+  .walk.live .walk-caps{left:26px;width:calc(100% - 92px);bottom:104px}
+  .walk-ticks{right:20px;gap:14px;font-size:12px}.walk-ticks i{width:30px;height:30px}
+  .walk-hint{top:140px}
+  .walk-bar{left:10px;right:10px;bottom:10px}
+}
