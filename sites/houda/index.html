@@ -6,107 +6,128 @@
 <title>Houda's Barbers & Grooming | Bukit Bintang, Kuala Lumpur</title>
 <meta name="description" content="Fades, haircuts and beard trims in Bukit Bintang, Kuala Lumpur. Open every day, 11am to 11pm. Book your chair on WhatsApp in under a minute.">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#f4efe6">
+<meta name="theme-color" content="#fbfaf7">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Figtree:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Figtree:wght@400;500;600&display=swap">
 <style>
-:root{--paper:#f4efe6;--card:#fffdf8;--navy:#14213d;--navy-2:#0d1730;--red:#c8102e;--mute:#5d6477;--line:#ddd5c6;--ok:#12805c;--disp:"Bricolage Grotesque","Arial Narrow",sans-serif;--body:Figtree,system-ui,sans-serif;color-scheme:light}
+:root{--paper:#fbfaf7;--card:#fff;--navy:#132c55;--navy-2:#0c1f3f;--gold:#c8a24c;--gold-d:#a8842f;--stone:#e9e6e0;--mute:#5a6478;--line:#dcd8cf;--ok:#12805c;--disp:"Playfair Display","Times New Roman",serif;--body:Figtree,system-ui,sans-serif;color-scheme:light}
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth}
 body{background:var(--paper);color:var(--navy);font:17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
 a{color:inherit}
-:focus-visible{outline:3px solid var(--red);outline-offset:3px;border-radius:6px}
+:focus-visible{outline:3px solid var(--gold-d);outline-offset:3px;border-radius:4px}
 .wrap{max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
-h1,h2,h3{font-family:var(--disp);font-weight:800;font-stretch:80%;letter-spacing:-.02em;line-height:.95;text-wrap:balance}
-h2{font-size:clamp(40px,6vw,76px)}
+h1,h2,h3{font-family:var(--disp);font-weight:600;letter-spacing:-.01em;line-height:1.02;text-wrap:balance}
+h2{font-size:clamp(38px,5.4vw,64px)}
 .lede{color:var(--mute);font-size:18px;max-width:46ch}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 26px;border-radius:12px;font:600 17px var(--body);text-decoration:none;border:0;cursor:pointer}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 26px;border-radius:2px;font:600 16px var(--body);letter-spacing:.02em;text-decoration:none;border:0;cursor:pointer}
 .btn svg{width:22px;height:22px;flex:none}
-.btn-red{background:var(--red);color:#fff}.btn-red:hover{background:#a80d26}
-.btn-line{box-shadow:inset 0 0 0 2px var(--navy)}.btn-line:hover{background:var(--navy);color:#fff}
-.concept{background:var(--navy-2);color:#aab3c8;font-size:13px;text-align:center;padding:7px 16px}
+.btn-red{background:var(--navy);color:#fff}.btn-red:hover{background:var(--navy-2)}
+.btn-line{box-shadow:inset 0 0 0 1.5px var(--navy);background:transparent;color:var(--navy)}.btn-line:hover{background:var(--navy);color:#fff}
+.concept{background:var(--navy-2);color:#aab6cf;font-size:13px;text-align:center;padding:7px 16px}
+.pole{height:9px;border-top:3px solid var(--navy);border-bottom:1px solid var(--navy);background:var(--paper)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
-/* the pole: the one moving thing */
-.pole{height:16px;background:repeating-linear-gradient(-45deg,var(--red) 0 18px,#fff 18px 36px,var(--navy) 36px 54px,#fff 54px 72px);background-size:101.82px 100%;animation:spin 3.2s linear infinite}
-@keyframes spin{to{background-position:101.82px 0}}
-@media (prefers-reduced-motion:reduce){.pole{animation:none}html{scroll-behavior:auto}}
-
-header .wrap{display:flex;align-items:center;gap:20px;min-height:68px}
-.logo{font-family:var(--disp);font-weight:800;font-stretch:80%;font-size:26px;text-decoration:none;margin-right:auto;letter-spacing:-.01em}
-header nav{display:flex;gap:24px;font-size:15px;font-weight:500}
+header .wrap{display:flex;align-items:center;gap:20px;min-height:84px}
+.logo{display:flex;align-items:center;gap:14px;font-family:var(--disp);font-weight:600;font-size:21px;text-decoration:none;margin-right:auto;line-height:1.1}
+.logo img{width:56px;height:51px}
+.logo small{display:block;font:500 12px var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+header nav{display:flex;gap:26px;font-size:15px;font-weight:500}
 header nav a{text-decoration:none;color:var(--mute)}header nav a:hover{color:var(--navy)}
 
-.hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(32px,5vw,72px);align-items:start;padding-block:clamp(36px,5vw,72px) clamp(56px,7vw,96px)}
-.status{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:15px;padding:7px 14px;border-radius:99px;background:var(--card);box-shadow:inset 0 0 0 1px var(--line)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(32px,5vw,72px);align-items:start;padding-block:clamp(28px,4vw,56px) clamp(56px,7vw,96px)}
+.status{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:15px;padding:7px 14px;background:var(--card);box-shadow:inset 0 0 0 1px var(--line)}
 .status i{width:10px;height:10px;border-radius:50%;background:#b9b2a3}
 .status.open i{background:var(--ok);box-shadow:0 0 0 4px rgba(18,128,92,.18)}
-.hero h1{font-size:clamp(64px,10.5vw,150px);margin:22px 0 22px}
-.hero h1 span{color:var(--red)}
-.stars{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:26px;font-weight:600;text-decoration:none}
-.stars b{font-family:var(--disp);font-size:30px;font-weight:800}
-.stars .s{color:#e0a100;letter-spacing:2px;font-size:20px}
+.hero h1{font-size:clamp(48px,6.6vw,92px);margin:22px 0 20px}
+.hero h1 em{font-style:italic;color:var(--gold-d)}
+.stars{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:22px;font-weight:600;text-decoration:none}
+.stars b{font-family:var(--disp);font-size:30px}
+.stars .s{color:var(--gold);letter-spacing:2px;font-size:20px}
 .stars small{color:var(--mute);font-weight:500;font-size:15px}
-.acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+/* the mirrors: his gold arched mirrors, used as photo frames */
+.mirrors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:34px;align-items:end;max-width:560px}
+.mir{margin:0;border-radius:999px 999px 0 0;padding:5px;background:linear-gradient(160deg,#e6cd86,var(--gold) 45%,#8f6f25);box-shadow:0 18px 30px -18px rgba(19,44,85,.5)}
+.mir img{width:100%;aspect-ratio:3/4.4;object-fit:cover;border-radius:999px 999px 0 0}
+.mir:nth-child(2){transform:translateY(-22px)}
 
-/* booking card */
-.book{background:var(--card);border-radius:22px;padding:26px;box-shadow:0 0 0 1px var(--line),0 30px 60px -30px rgba(20,33,61,.35);display:grid;gap:20px}
-.book h2{font-size:34px}
+.book{background:var(--card);padding:28px;box-shadow:0 0 0 1px var(--navy),0 0 0 6px var(--paper),0 0 0 8px var(--navy),0 34px 60px -30px rgba(19,44,85,.45);display:grid;gap:20px;margin:8px}
+.book h2{font-size:32px}
 fieldset{border:0;padding:0;min-width:0}
 legend{font-weight:600;font-size:14px;color:var(--mute);margin-bottom:9px;padding:0}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chips input{position:absolute;opacity:0;pointer-events:none;width:1px}
-.chips label{padding:10px 15px;border-radius:10px;box-shadow:inset 0 0 0 1.5px var(--line);font-weight:500;font-size:15.5px;cursor:pointer;background:#fff;user-select:none}
+.chips label{padding:10px 15px;box-shadow:inset 0 0 0 1.5px var(--line);font-weight:500;font-size:15.5px;cursor:pointer;background:#fff;user-select:none}
 .chips input:checked+label{background:var(--navy);color:#fff;box-shadow:none}
-.chips input:focus-visible+label{outline:3px solid var(--red);outline-offset:2px}
-.chips.t label{min-width:74px;text-align:center;padding:9px 8px}
-.name{width:100%;min-height:50px;border:0;border-radius:10px;box-shadow:inset 0 0 0 1.5px var(--line);background:#fff;font:16px var(--body);color:var(--navy);padding:0 14px}
+.chips input:focus-visible+label{outline:3px solid var(--gold-d);outline-offset:2px}
+.chips.t label{min-width:72px;text-align:center;padding:9px 8px}
+.name{width:100%;min-height:50px;border:0;box-shadow:inset 0 0 0 1.5px var(--line);background:#fff;font:16px var(--body);color:var(--navy);padding:0 14px}
 .name:focus{outline:none;box-shadow:inset 0 0 0 2px var(--navy)}
-.msg{background:var(--paper);border-radius:12px;padding:13px 15px;font-size:15px;color:var(--navy)}
+.msg{background:var(--stone);padding:13px 15px;font-size:15px;border-left:3px solid var(--gold)}
 .msg small{display:block;font-weight:600;color:var(--mute);font-size:12.5px;margin-bottom:3px}
 .book .btn{width:100%}
 .fine{font-size:13.5px;color:var(--mute);text-align:center}
 
 section{padding-block:clamp(64px,8vw,112px)}
-.svc{background:var(--navy);color:#eef1f8}
-.svc h2{color:#fff}.svc .lede{color:#aab3c8;margin-top:16px}
-.svc ul{list-style:none;padding:0;margin-top:44px;border-top:1px solid #2c3a5c}
-.svc li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 24px;align-items:center;padding:24px 0;border-bottom:1px solid #2c3a5c}
-.svc h3{font-size:clamp(28px,3.6vw,44px);color:#fff}
-.svc li p{color:#aab3c8;grid-column:1}
-.svc li button{grid-row:1/3;grid-column:2;background:transparent;color:#fff;box-shadow:inset 0 0 0 2px #fff;min-height:46px;padding:0 20px;font-size:15px}
-.svc li button:hover{background:#fff;color:var(--navy)}
-.svc .note{margin-top:22px;color:#aab3c8;font-size:15px}
+.work{background:var(--stone)}
+.work .head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px;margin-bottom:36px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;list-style:none;padding:0}
+.grid img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.grid li:nth-child(1),.grid li:nth-child(6){grid-column:span 2;grid-row:span 2}
+.grid li:nth-child(1) img,.grid li:nth-child(6) img{height:100%;aspect-ratio:auto}
+.grid figure{margin:0;height:100%;position:relative}
+.grid figcaption{position:absolute;left:0;bottom:0;background:var(--navy);color:#fff;font-size:13px;font-weight:600;letter-spacing:.04em;padding:5px 10px}
 
+.svc{background:var(--navy);color:#eef1f8}
+.svc h2{color:#fff}.svc .lede{color:#aab6cf;margin-top:16px}
+.svc ul{list-style:none;padding:0;margin-top:44px;border-top:1px solid #2d4675;display:grid;grid-template-columns:1fr 1fr;column-gap:56px}
+.svc li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 20px;align-items:center;padding:22px 0;border-bottom:1px solid #2d4675}
+.svc h3{font-size:clamp(24px,2.6vw,32px);color:#fff}
+.svc li p{color:#aab6cf;grid-column:1;font-size:16px}
+.svc li button{grid-row:1/3;grid-column:2;background:transparent;color:var(--gold);box-shadow:inset 0 0 0 1.5px var(--gold);min-height:44px;padding:0 18px;font-size:14.5px}
+.svc li button:hover{background:var(--gold);color:var(--navy-2)}
+.svc .note{margin-top:22px;color:#aab6cf;font-size:15px}
+
+.shop .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:center}
+.shop .pics{display:grid;grid-template-columns:1.3fr 1fr;gap:12px;align-items:end}
+.shop .pics img{width:100%;object-fit:cover;aspect-ratio:4/5}
+.shop .pics img:last-child{aspect-ratio:3/4}
+.shop p{color:var(--mute);margin-top:18px;max-width:44ch}
+
+.proof{background:var(--stone)}
 .proof .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,90px);align-items:center}
-.score{font-family:var(--disp);font-weight:800;font-stretch:75%;font-size:clamp(120px,19vw,250px);line-height:.8;letter-spacing:-.04em}
-.score+p{font-weight:600;margin-top:18px}
-.score+p .s{color:#e0a100;letter-spacing:3px;font-size:22px;display:block}
-.themes{list-style:none;padding:0;display:grid;gap:0;border-top:2px solid var(--navy);margin:28px 0}
-.themes li{padding:16px 0;border-bottom:1px solid var(--line);font-size:19px;font-weight:500}
+.score{font-family:var(--disp);font-weight:600;font-size:clamp(120px,18vw,230px);line-height:.8;letter-spacing:-.03em}
+.score+p{font-weight:600;margin-top:22px}
+.score+p .s{color:var(--gold-d);letter-spacing:3px;font-size:22px;display:block}
+.themes{list-style:none;padding:0;border-top:2px solid var(--navy);margin:28px 0}
+.themes li{padding:16px 0;border-bottom:1px solid #cfcac0;font-size:19px;font-weight:600}
 .themes li span{color:var(--mute);font-weight:400;font-size:16px;display:block}
 
-.visit{background:var(--card);border-block:1px solid var(--line)}
 .visit dl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin:40px 0 34px}
-.visit dt{font-weight:600;font-size:14px;color:var(--mute);margin-bottom:6px}
+.visit dt{font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-d);margin-bottom:6px}
 .visit dd{font-size:19px;font-weight:500;line-height:1.45}
 .visit dd a{text-underline-offset:4px}
 
-footer{background:var(--navy-2);color:#aab3c8;font-size:14.5px;padding-block:40px 36px}
+footer{background:var(--navy-2);color:#aab6cf;font-size:14.5px;padding-block:40px 36px}
 footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;align-items:center}
-footer .logo{color:#fff;margin:0}
-footer a{text-decoration:none}footer a:hover{color:#fff}
+footer .logo{color:#fff;margin:0}footer .logo img{background:#fff;padding:3px}
+footer a{text-decoration:none}
 
 .bar{display:none}
 @media (max-width:900px){
   header nav{display:none}
-  .hero .wrap,.proof .wrap{grid-template-columns:minmax(0,1fr)}
+  .hero .wrap,.proof .wrap,.shop .wrap{grid-template-columns:minmax(0,1fr)}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .svc ul{grid-template-columns:1fr}
   .visit dl{grid-template-columns:1fr;gap:22px}
 }
 @media (max-width:600px){
-  .book{padding:20px;border-radius:18px}
-  .svc li{grid-template-columns:1fr}.svc li button{grid-row:auto;grid-column:1;justify-self:start;margin-top:8px}
-  .hero .acts .btn{flex:1 1 100%}
-  .bar{display:grid;grid-template-columns:1fr auto;gap:8px;position:fixed;z-index:30;left:0;right:0;bottom:0;padding:10px max(12px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:rgba(244,239,230,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 -1px 0 var(--line)}
+  .logo small{display:none}
+  header .btn{display:none}
+  .book{padding:20px}
+  .mirrors{gap:10px}
+  .bar{display:grid;grid-template-columns:1fr auto;gap:8px;position:fixed;z-index:30;left:0;right:0;bottom:0;padding:10px max(12px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:rgba(251,250,247,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 -1px 0 var(--line)}
   .bar .btn{min-height:50px}
   footer{padding-bottom:104px}
 }
@@ -116,8 +137,8 @@ footer a{text-decoration:none}footer a:hover{color:#fff}
 <p class="concept">Concept website by Arcwise Studios for Houda’s Barbers &amp; Grooming</p>
 <div class="pole" aria-hidden="true"></div>
 <header><div class="wrap">
-  <a class="logo" href="#top">Houda’s</a>
-  <nav aria-label="Main"><a href="#services">Services</a><a href="#reviews">Reviews</a><a href="#visit">Find us</a></nav>
+  <a class="logo" href="#top"><img src="/img/hb.png" width="583" height="531" alt=""><span>Houda’s<small>Barbers &amp; Grooming</small></span></a>
+  <nav aria-label="Main"><a href="#work">The work</a><a href="#services">Services</a><a href="#reviews">Reviews</a><a href="#visit">Find us</a></nav>
   <a class="btn btn-line" style="min-height:44px;padding:0 18px;font-size:15px" href="#book">Book a chair</a>
 </div></header>
 
@@ -125,12 +146,13 @@ footer a{text-decoration:none}footer a:hover{color:#fff}
 <section class="hero" style="padding:0"><div class="wrap">
   <div>
     <p class="status" id="status"><i></i><span>Open every day, 11am to 11pm</span></p>
-    <h1>Sharp fades in <span>Bukit Bintang.</span></h1>
-    <p class="lede">Houda’s Barbers &amp; Grooming on Jalan Sultan Ismail. Haircuts, fades and beard trims, open late every night of the week.</p>
+    <h1>Sharp fades, <em>clean lines,</em> Bukit Bintang.</h1>
+    <p class="lede">Houda’s Barbers &amp; Grooming on Jalan Sultan Ismail. Fades, hair designs, beard work and facials, open late every night of the week.</p>
     <a class="stars" href="https://www.google.com/maps/search/?api=1&query=Houda%27s+Barbers+%26+Grooming+Kuala+Lumpur&query_place_id=ChIJbVXGBYc3zDERtidQmHrnjWo" target="_blank" rel="noopener"><b>5.0</b><span class="s" aria-hidden="true">★★★★★</span><small>from 168 Google reviews</small></a>
-    <div class="acts">
-      <a class="btn btn-red" href="#book">Book a chair</a>
-      <a class="btn btn-line" href="tel:+60162367408">Call 016-236 7408</a>
+    <div class="mirrors">
+      <figure class="mir"><img src="/img/lines.webp" width="786" height="890" alt="A skin fade with a combed top and two shaved lines"></figure>
+      <figure class="mir"><img src="/img/fade-profile.webp" width="786" height="876" alt="A mid fade with a textured comb-over and lined-up beard" fetchpriority="high"></figure>
+      <figure class="mir"><img src="/img/side-part.webp" width="786" height="888" alt="A skin fade with a hard side part"></figure>
     </div>
   </div>
 
@@ -138,9 +160,12 @@ footer a{text-decoration:none}footer a:hover{color:#fff}
     <h2>Book in under a minute</h2>
     <fieldset><legend>What do you need?</legend><div class="chips" id="svc">
       <input type="radio" name="s" id="s1" value="a haircut" checked><label for="s1">Haircut</label>
-      <input type="radio" name="s" id="s2" value="a fade"><label for="s2">Fade</label>
+      <input type="radio" name="s" id="s2" value="a skin fade"><label for="s2">Skin fade</label>
       <input type="radio" name="s" id="s3" value="a haircut and beard trim"><label for="s3">Haircut + beard</label>
       <input type="radio" name="s" id="s4" value="a beard trim"><label for="s4">Beard trim</label>
+      <input type="radio" name="s" id="s5" value="a fade with a hair design"><label for="s5">Hair design</label>
+      <input type="radio" name="s" id="s6" value="a face mask"><label for="s6">Face mask</label>
+      <input type="radio" name="s" id="s7" value="a kids’ cut"><label for="s7">Kids’ cut</label>
     </div></fieldset>
     <fieldset><legend>Which day?</legend><div class="chips" id="days"></div></fieldset>
     <fieldset><legend>What time?</legend><div class="chips t" id="times"></div></fieldset>
@@ -151,16 +176,38 @@ footer a{text-decoration:none}footer a:hover{color:#fff}
   </form>
 </div></section>
 
+<section class="work" id="work"><div class="wrap">
+  <div class="head"><h2>Fresh from the chair</h2><a class="btn btn-line" href="https://www.instagram.com/houda_barber/" target="_blank" rel="noopener">More on Instagram</a></div>
+  <ul class="grid">
+    <li><figure><img src="/img/fade-wall.webp" width="788" height="890" alt="A burst fade with a combed-back top, seen from behind" loading="lazy"><figcaption>Burst fade</figcaption></figure></li>
+    <li><figure><img src="/img/crop-fade.webp" width="786" height="888" alt="A short crop with a skin fade and a shaved part" loading="lazy"></figure></li>
+    <li><figure><img src="/img/slick.webp" width="786" height="890" alt="A slicked-back pompadour" loading="lazy"></figure></li>
+    <li><figure><img src="/img/curls.webp" width="788" height="876" alt="A curly top being finished with a taper" loading="lazy"></figure></li>
+    <li><figure><img src="/img/pomp.webp" width="786" height="890" alt="A side-swept pompadour with a low fade" loading="lazy"></figure></li>
+    <li><figure><img src="/img/lines.webp" width="786" height="890" alt="A skin fade with two shaved lines" loading="lazy"><figcaption>Fade with design</figcaption></figure></li>
+    <li><figure><img src="/img/side-part.webp" width="786" height="888" alt="A skin fade with a hard side part" loading="lazy"></figure></li>
+    <li><figure><img src="/img/mask-gold.webp" width="788" height="886" alt="A client with a gold face mask" loading="lazy"></figure></li>
+  </ul>
+</div></section>
+
 <section class="svc" id="services"><div class="wrap">
   <h2>What we do</h2>
   <p class="lede">Tell us what you want, or show us a photo. We take the time to get it right.</p>
   <ul>
     <li><h3>Haircut</h3><p>Scissor or clipper cut, shaped to how you wear it.</p><button class="btn" type="button" data-pick="s1">Book this</button></li>
-    <li><h3>Fade</h3><p>Low, mid or high, blended clean.</p><button class="btn" type="button" data-pick="s2">Book this</button></li>
+    <li><h3>Skin fade</h3><p>Low, mid or high, blended clean.</p><button class="btn" type="button" data-pick="s2">Book this</button></li>
+    <li><h3>Hair design</h3><p>Hard parts and shaved lines.</p><button class="btn" type="button" data-pick="s5">Book this</button></li>
     <li><h3>Beard trim</h3><p>Lined up and shaped to suit your face.</p><button class="btn" type="button" data-pick="s4">Book this</button></li>
-    <li><h3>Haircut + beard</h3><p>The full tidy-up in one sitting.</p><button class="btn" type="button" data-pick="s3">Book this</button></li>
+    <li><h3>Face mask</h3><p>Black, gold or red peel-off mask in the chair.</p><button class="btn" type="button" data-pick="s6">Book this</button></li>
+    <li><h3>Kids’ cut</h3><p>Patient cuts for the little ones.</p><button class="btn" type="button" data-pick="s7">Book this</button></li>
   </ul>
+
   <p class="note">Ask for prices when you message. The shop replies with the current price list.</p>
+</div></section>
+
+<section class="shop"><div class="wrap">
+  <div class="pics"><img src="/img/shop-hex.webp" width="788" height="888" alt="Inside Houda’s: black barber chairs, gold arched mirrors, a stone wall and a hexagon-lit ceiling" loading="lazy"><img src="/img/shop-mirrors.webp" width="786" height="890" alt="Barber chairs facing gold-framed arched mirrors" loading="lazy"></div>
+  <div><h2>The shop</h2><p>Gold arched mirrors on a stone wall, black leather chairs and a hexagon-lit ceiling. Clean, bright and comfortable, right on Jalan Sultan Ismail.</p></div>
 </div></section>
 
 <section class="proof" id="reviews"><div class="wrap">
@@ -189,7 +236,7 @@ footer a{text-decoration:none}footer a:hover{color:#fff}
 </main>
 
 <footer><div class="wrap">
-  <span class="logo">Houda’s</span>
+  <span class="logo"><img src="/img/hb.png" width="583" height="531" alt=""><span>Houda’s</span></span>
   <span>Houda’s Barbers &amp; Grooming, Bukit Bintang, Kuala Lumpur</span>
   <span>Concept website by Arcwise Studios</span>
 </div></footer>
