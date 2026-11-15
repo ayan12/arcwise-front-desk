@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RNY Barbershop Kerobokan | Cut, Shave, Style</title>
+<meta name="description" content="RNY Barbershop, Jl Raya Semer No 26A, Kerobokan Kelod, Bali. Grand opening 24 November 2026, up to 15% off all November. Open daily 10am to 8pm. Book on WhatsApp.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0b0a08">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+:root{--ink:#0b0a08;--ink-2:#15130f;--ink-3:#1f1c16;--gold:#d4a84f;--gold-hi:#f3d48a;--gold-d:#9c7a2e;--cream:#f2ead9;--mute:#a59d8c;--line:#2c271e;--red:#c8202f;--blue:#1f3f8f;--disp:Cinzel,"Times New Roman",serif;--body:Manrope,system-ui,sans-serif;color-scheme:dark}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--cream);font:17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--disp);font-weight:600;line-height:1.05;letter-spacing:.01em;text-wrap:balance}
+h2{font-size:clamp(34px,4.6vw,58px)}
+.gold{background:linear-gradient(100deg,var(--gold-d) 0%,var(--gold) 30%,var(--gold-hi) 50%,var(--gold) 70%,var(--gold-d) 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+.kick{font:600 12.5px var(--body);letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.lede{color:var(--mute);font-size:18px;max-width:48ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 30px;font:700 14px var(--body);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;border:0;cursor:pointer;transition:filter .2s,background .2s,color .2s}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-gold{background:linear-gradient(180deg,var(--gold-hi),var(--gold) 55%,var(--gold-d));color:#1a1408;box-shadow:0 10px 30px -10px rgba(212,168,79,.6)}
+.btn-gold:hover{filter:brightness(1.08)}
+.btn-ghost{box-shadow:inset 0 0 0 1px rgba(212,168,79,.6);color:var(--cream);background:transparent}
+.btn-ghost:hover{background:rgba(212,168,79,.12)}
+.concept{background:#000;color:#7c7568;font-size:12.5px;text-align:center;padding:6px 16px}
+
+/* header */
+.top{position:sticky;top:0;z-index:40;background:rgba(11,10,8,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:28px;min-height:70px}
+.mark{font-family:var(--disp);font-size:22px;font-weight:700;letter-spacing:.08em;text-decoration:none;margin-right:auto}
+.mark small{font:600 10.5px var(--body);letter-spacing:.3em;color:var(--mute);margin-left:10px}
+.top nav{display:flex;gap:28px;font-size:14px}
+.top nav a{text-decoration:none;color:var(--mute)}.top nav a:hover{color:var(--cream)}
+.top .btn{min-height:42px;padding:0 18px;font-size:12px}
+
+/* ===== HERO ===== */
+.hero{position:relative;overflow:hidden;isolation:isolate;padding-block:clamp(36px,5vw,64px) clamp(56px,7vw,90px)}
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(50% 55% at 50% 38%,rgba(212,168,79,.18),transparent 70%),radial-gradient(120% 80% at 50% 120%,#1d1913,transparent 60%)}
+.hero::after{content:"";position:absolute;left:50%;top:10%;width:min(900px,120vw);aspect-ratio:1;transform:translateX(-50%);z-index:-1;background:conic-gradient(from 0deg,transparent 0 8deg,rgba(212,168,79,.07) 8deg 10deg,transparent 10deg 30deg);-webkit-mask:radial-gradient(closest-side,#000 30%,transparent 72%);mask:radial-gradient(closest-side,#000 30%,transparent 72%);animation:rays 60s linear infinite}
+@keyframes rays{to{transform:translateX(-50%) rotate(360deg)}}
+.stage{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:clamp(16px,4vw,60px)}
+.pole{width:clamp(44px,5vw,64px);height:clamp(260px,34vw,420px);position:relative}
+.pole .cap{position:absolute;left:-14%;right:-14%;height:9%;border-radius:40% 40% 8px 8px / 60% 60% 8px 8px;background:linear-gradient(90deg,#6d5420,var(--gold-hi) 35%,var(--gold) 55%,#6d5420)}
+.pole .cap.t{top:0}.pole .cap.b{bottom:0;border-radius:8px 8px 40% 40% / 8px 8px 60% 60%}
+.pole .glass{position:absolute;left:0;right:0;top:8%;bottom:8%;border-radius:999px;overflow:hidden;box-shadow:inset 0 0 0 2px rgba(255,255,255,.18)}
+.pole .glass i{position:absolute;inset:-100% 0 0;background:repeating-linear-gradient(-55deg,var(--red) 0 16px,#fff 16px 26px,var(--blue) 26px 42px,#fff 42px 52px);animation:pole 2.6s linear infinite}
+@keyframes pole{to{transform:translateY(calc(52px / .819))}}
+.pole .glass::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.45),rgba(255,255,255,.35) 32%,rgba(255,255,255,0) 50%,rgba(0,0,0,.5))}
+.center{text-align:center;display:grid;justify-items:center}
+.logo{width:clamp(240px,30vw,380px);aspect-ratio:1;position:relative;margin-bottom:-6%}
+.logo img{width:100%;height:100%;object-fit:cover;-webkit-mask:radial-gradient(closest-side,#000 86%,transparent 100%);mask:radial-gradient(closest-side,#000 86%,transparent 100%)}
+.logo::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,240,200,.45) 50%,transparent 65%);background-size:250% 100%;background-position:150% 0;mix-blend-mode:screen;-webkit-mask:radial-gradient(closest-side,#000 60%,transparent 90%);mask:radial-gradient(closest-side,#000 60%,transparent 90%);animation:sheen 5s ease-in-out 1.6s infinite}
+@keyframes sheen{0%{background-position:150% 0}35%,100%{background-position:-50% 0}}
+.hero h1{font-size:clamp(40px,6vw,82px);margin-top:4px}
+.hero h1 .gold{animation:shimmer 6s ease-in-out infinite}
+@keyframes shimmer{0%,100%{background-position:100% 0}50%{background-position:0 0}}
+.hero .sub{color:var(--mute);margin:14px auto 0;max-width:46ch;font-size:18px}
+.offer{display:inline-flex;align-items:center;gap:14px;margin:26px 0 0;padding:10px 20px 10px 10px;border:1px solid rgba(212,168,79,.45);border-radius:999px;background:rgba(212,168,79,.08)}
+.offer b{display:grid;place-items:center;width:62px;height:62px;border-radius:50%;font-family:var(--disp);font-size:20px;color:#1a1408;background:linear-gradient(180deg,var(--gold-hi),var(--gold-d));animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(212,168,79,.5)}50%{box-shadow:0 0 0 10px rgba(212,168,79,0)}}
+.offer span{text-align:left;font-size:15px;line-height:1.35}
+.offer span strong{display:block;color:var(--gold-hi);font-size:16px}
+.count{display:flex;gap:10px;margin-top:26px}
+.count div{min-width:76px;padding:12px 8px 10px;background:var(--ink-3);border:1px solid var(--line);text-align:center}
+.count b{display:block;font-family:var(--disp);font-size:34px;line-height:1;color:var(--gold-hi);font-variant-numeric:tabular-nums}
+.count small{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+.count-l{margin-top:22px;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--mute)}
+.acts{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:28px}
+.js .rise{opacity:0;transform:translateY(20px)}
+.js .ready .rise{opacity:1;transform:none;transition:opacity .9s ease,transform 1s cubic-bezier(.2,.8,.2,1)}
+.js .ready .rise:nth-child(2){transition-delay:.2s}.js .ready .rise:nth-child(3){transition-delay:.35s}.js .ready .rise:nth-child(4){transition-delay:.5s}.js .ready .rise:nth-child(5){transition-delay:.65s}.js .ready .rise:nth-child(6){transition-delay:.8s}
+.js .pole{opacity:0;transform:translateY(40px)}
+.js .ready .pole{opacity:1;transform:none;transition:opacity 1s .3s,transform 1.2s .3s cubic-bezier(.2,.8,.2,1)}
+
+/* strip */
+.strip{border-block:1px solid var(--line);background:var(--ink-2)}
+.strip ul{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.strip li{padding:22px 18px;border-left:1px solid var(--line);font-size:14.5px;color:var(--mute)}
+.strip li:first-child{border-left:0}
+.strip b{display:block;font-family:var(--disp);font-size:20px;color:var(--cream);font-weight:600}
+
+section.sec{padding-block:clamp(80px,10vw,130px)}
+.head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 60px;align-items:end;margin-bottom:46px}
+
+/* services */
+.menu{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.menu li{position:relative;background:var(--ink-2);border:1px solid var(--line);padding:30px 26px 26px;display:grid;gap:8px;align-content:start;transition:border-color .3s,transform .3s}
+.menu li:hover{border-color:rgba(212,168,79,.6);transform:translateY(-3px)}
+.menu .ic{width:58px;height:58px;margin-bottom:10px}
+.menu .ic svg{width:100%;height:100%;fill:none;stroke:var(--gold);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.menu h3{font-size:24px}
+.menu p{color:var(--mute);font-size:15.5px}
+.menu button{justify-self:start;margin-top:10px;min-height:40px;padding:0 16px;font-size:11.5px;background:transparent;color:var(--gold);box-shadow:inset 0 0 0 1px rgba(212,168,79,.5)}
+.menu button:hover{background:var(--gold);color:#1a1408}
+.ic g,.ic path,.ic circle{transform-box:view-box}
+.i-sc .a,.i-sc .b{transform-origin:24px 24px}
+.live .i-sc .a{animation:sa 1.5s ease-in-out infinite}.live .i-sc .b{animation:sb 1.5s ease-in-out infinite}
+@keyframes sa{0%,40%,100%{transform:none}15%,30%{transform:rotate(10deg)}}@keyframes sb{0%,40%,100%{transform:none}15%,30%{transform:rotate(-10deg)}}
+.i-rz .blade{transform-origin:12px 34px}
+.live .i-rz .blade{animation:rz 2.4s ease-in-out infinite}
+@keyframes rz{0%,100%{transform:rotate(0)}50%{transform:rotate(-38deg)}}
+.i-tw .steam{stroke-dasharray:4 6;opacity:.8}
+.live .i-tw .steam{animation:steam 1.4s linear infinite}
+@keyframes steam{to{stroke-dashoffset:-20}}
+.live .i-cl .buzz{animation:buzz .07s linear infinite}
+@keyframes buzz{0%{transform:translate(-.6px,0)}50%{transform:translate(.6px,.3px)}100%{transform:translate(-.6px,0)}}
+.i-st .dry{transform-origin:16px 26px}
+.live .i-st .dry{animation:dry 1.8s ease-in-out infinite}
+@keyframes dry{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+.live .i-st .air{animation:steam 1s linear infinite;stroke-dasharray:3 5}
+.i-kd .star{fill:var(--gold);stroke:none;transform-origin:39px 11px}
+.live .i-kd .star{animation:tw 1.6s ease-in-out infinite}
+@keyframes tw{0%,100%{transform:scale(.5);opacity:.4}50%{transform:scale(1.15);opacity:1}}
+.note{margin-top:22px;color:var(--mute);font-size:15px}
+
+/* craft */
+.craft{background:var(--ink-2);border-block:1px solid var(--line)}
+.gal{display:grid;grid-template-columns:1.25fr 1fr 1fr;grid-template-rows:auto auto;gap:14px}
+.gal figure{margin:0;position:relative;overflow:hidden;background:#000}
+.gal img{width:100%;height:100%;object-fit:cover;aspect-ratio:1;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.gal figure:hover img{transform:scale(1.04)}
+.gal figure:first-child{grid-row:span 2}.gal figure:first-child img{aspect-ratio:auto}
+.gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:36px 16px 14px;background:linear-gradient(0deg,rgba(0,0,0,.85),transparent);font-family:var(--disp);font-size:18px}
+.credit{margin-top:18px;font-size:14px;color:var(--mute)}
+
+/* book */
+.book-sec .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(36px,6vw,90px);align-items:center}
+.book{background:var(--ink-2);border:1px solid rgba(212,168,79,.35);padding:30px;display:grid;gap:18px}
+.book h3{font-size:28px}
+fieldset{border:0;padding:0;min-width:0}
+legend{font:600 12px var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--mute);margin-bottom:10px;padding:0}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -30px;padding:2px 30px}
+.chips::-webkit-scrollbar{display:none}
+.chips input{position:absolute;opacity:0;pointer-events:none;width:1px}
+.chips label{flex:none;min-height:48px;display:grid;place-items:center;padding:0 18px;white-space:nowrap;border:1px solid var(--line);background:var(--ink-3);font-size:15px;cursor:pointer;user-select:none}
+.chips input:checked+label{background:var(--gold);border-color:var(--gold);color:#1a1408;font-weight:700}
+.chips input:focus-visible+label{outline:2px solid var(--gold-hi);outline-offset:2px}
+.chips.d label{min-width:64px;min-height:66px;padding:6px 10px;line-height:1.15;text-align:center}
+.chips.d small{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.75}
+.chips.d b{display:block;font-family:var(--disp);font-size:22px}
+.chips.t label{min-width:70px;padding:0 12px}
+.sum{font-family:var(--disp);font-size:19px;text-align:center;padding-top:16px;border-top:1px solid var(--line);color:var(--gold-hi)}
+.book .btn{width:100%;min-height:58px}
+.fine{font-size:13.5px;color:var(--mute);text-align:center}
+.promise{list-style:none;padding:0;margin-top:30px;display:grid;gap:16px}
+.promise li{display:grid;grid-template-columns:28px 1fr;gap:12px;color:var(--mute)}
+.promise li::before{content:"";width:16px;height:16px;margin-top:6px;transform:rotate(45deg);border:1px solid var(--gold)}
+.promise b{color:var(--cream);display:block}
+
+/* visit */
+.visit{background:var(--ink-2);border-top:1px solid var(--line)}
+.visit dl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin:40px 0 34px}
+.visit dt{font:600 12px var(--body);letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.visit dd{font-size:19px;line-height:1.5}
+.visit .acts{justify-content:flex-start}
+footer{border-top:1px solid var(--line);padding-block:30px;font-size:14px;color:#7c7568}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px}
+.bar{display:none}
+
+@media (max-width:900px){
+  .top nav{display:none}
+  .head,.book-sec .wrap{grid-template-columns:minmax(0,1fr)}
+  .menu{grid-template-columns:1fr 1fr}
+  .strip ul{grid-template-columns:1fr 1fr}.strip li:nth-child(3){border-left:0}.strip li:nth-child(n+3){border-top:1px solid var(--line)}
+  .gal{grid-template-columns:1fr 1fr}.gal figure:first-child{grid-column:1/-1;grid-row:auto}.gal figure:first-child img{aspect-ratio:4/3}
+  .visit dl{grid-template-columns:1fr}
+}
+@media (max-width:620px){
+  .top .btn{display:none}.mark small{display:none}
+  .stage{grid-template-columns:minmax(0,1fr);position:relative}
+  .pole{position:absolute;top:6px;width:22px;height:200px}
+  .stage>.pole:first-child{left:max(10px,env(safe-area-inset-left,0px))}
+  .stage>.pole:last-child{right:max(10px,env(safe-area-inset-right,0px))}
+  .logo{width:min(260px,64vw)}
+  .count div{min-width:64px}.count b{font-size:28px}
+  .offer{border-radius:18px}
+  .acts .btn{flex:1 1 100%}
+  .menu{grid-template-columns:1fr}
+  .book{padding:22px}.chips{margin:0 -22px;padding:2px 22px}
+  .bar{display:grid;grid-template-columns:1fr auto;gap:8px;position:fixed;z-index:50;left:0;right:0;bottom:0;padding:10px max(12px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:rgba(11,10,8,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+  .bar .btn{min-height:50px}
+  footer{padding-bottom:100px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.js .rise,.js .pole{opacity:1!important;transform:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<p class="concept">Concept website by Arcwise Studios for RNY Barbershop</p>
+<header class="top"><div class="wrap">
+  <a class="mark gold" href="#top">RNY<small>Barbershop</small></a>
+  <nav aria-label="Main"><a href="#services">Services</a><a href="#craft">The craft</a><a href="#book">Book</a><a href="#visit">Find us</a></nav>
+  <a class="btn btn-gold" href="#book">Book a chair</a>
+</div></header>
+
+<main id="top">
+<section class="hero" aria-label="RNY Barbershop Kerobokan"><div class="wrap stage">
+  <div class="pole" aria-hidden="true"><i class="cap t"></i><span class="glass"><i></i></span><i class="cap b"></i></div>
+  <div class="center">
+    <div class="logo rise"><img src="/img/logo.webp" width="546" height="546" alt="RNY Barbershop logo: a gold crown over the letters RN with scissors, between two barber poles" fetchpriority="high"></div>
+    <h1 class="rise"><span class="gold">Cut. Shave. Style.</span></h1>
+    <p class="sub rise">A new barbershop on Jalan Raya Semer, Kerobokan. Sharp cuts, hot towel shaves and proper grooming, every day from 10am to 8pm.</p>
+    <div class="rise" id="opening">
+      <p class="count-l" id="count-l">Grand opening · Tuesday 24 November</p>
+      <div class="count" id="count" aria-live="off"><div><b id="cd-d">00</b><small>Days</small></div><div><b id="cd-h">00</b><small>Hours</small></div><div><b id="cd-m">00</b><small>Min</small></div><div><b id="cd-s">00</b><small>Sec</small></div></div>
+    </div>
+    <p class="offer rise" id="offer"><b>15%</b><span><strong>Up to 15% off</strong>All through November</span></p>
+    <div class="acts rise"><a class="btn btn-gold" href="#book"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.6 2 1.1 1 2.1 1.3 2.4 1.4.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>Reserve your chair</a><a class="btn btn-ghost" href="#services">See services</a></div>
+  </div>
+  <div class="pole" aria-hidden="true"><i class="cap t"></i><span class="glass"><i></i></span><i class="cap b"></i></div>
+</div></section>
+
+<div class="strip"><ul class="wrap">
+  <li><b>24 Nov 2026</b>Grand opening</li>
+  <li><b>Up to 15% off</b>During November</li>
+  <li><b>10am – 8pm</b>Open every day</li>
+  <li><b>Kerobokan Kelod</b>Jl Raya Semer No 26A</li>
+</ul></div>
+
+<section class="sec" id="services"><div class="wrap">
+  <div class="head"><div><p class="kick">Services</p><h2>Cut, shave &amp; style</h2></div><p class="lede">Tell us the look you want, or bring a photo. We take the time to get it right.</p></div>
+  <ul class="menu" id="menu">
+    <li><span class="ic i-sc" aria-hidden="true"><svg viewBox="0 0 48 48"><g class="a"><path d="M17 28.5 42 17"/><circle cx="12" cy="31" r="5"/></g><g class="b"><path d="M17 19.5 42 31"/><circle cx="12" cy="17" r="5"/></g><circle cx="24" cy="24" r="1.4" fill="currentColor"/></svg></span><h3>Haircut</h3><p>Scissor or clipper cut, shaped to your face and how you wear it.</p><button class="btn" type="button" data-pick="s1">Book this</button></li>
+    <li><span class="ic i-cl" aria-hidden="true"><svg viewBox="0 0 48 48"><g class="buzz"><path d="M17 12h14v22a7 7 0 0 1-14 0Z"/><path d="M15 12h18M15 8v4M19 8v4M23 8v4M27 8v4M31 8v4M21 22h6"/></g></svg></span><h3>Skin fade</h3><p>Low, mid or high, blended clean from skin up.</p><button class="btn" type="button" data-pick="s2">Book this</button></li>
+    <li><span class="ic i-rz" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 36h12"/><g class="blade"><path d="M12 34 40 18l2 4-28 14Z"/></g><circle cx="12" cy="34" r="2"/></svg></span><h3>Hot towel shave</h3><p>Hot towel, straight razor and a clean, close finish.</p><button class="btn" type="button" data-pick="s3">Book this</button></li>
+    <li><span class="ic i-tw" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M10 14c0 0 4-6 14-6s14 6 14 6v10c0 9-6 16-14 16S10 33 10 24Z"/><path class="steam" d="M17 4v-6M24 4v-8M31 4v-6"/><path d="M18 22h3M27 22h3M20 30q4 3 8 0"/></svg></span><h3>Beard trim</h3><p>Shaped, lined up and finished with a hot towel.</p><button class="btn" type="button" data-pick="s4">Book this</button></li>
+    <li><span class="ic i-st" aria-hidden="true"><svg viewBox="0 0 48 48"><g class="dry"><path d="M8 18h18a6 6 0 0 1 0 12H8Z"/><path d="M14 30v10h6V30"/></g><path class="air" d="M34 20h10M34 24h12M34 28h10"/></svg></span><h3>Hair styling</h3><p>Wash, blow-dry and styled with the right product.</p><button class="btn" type="button" data-pick="s5">Book this</button></li>
+    <li><span class="ic i-kd i-sc" aria-hidden="true"><svg viewBox="0 0 48 48"><g class="a"><path d="M17 28.5 38 19"/><circle cx="12" cy="31" r="5"/></g><g class="b"><path d="M17 19.5 38 29"/><circle cx="12" cy="17" r="5"/></g><path class="star" d="M39 6l1.6 3.4L44 11l-3.4 1.6L39 16l-1.6-3.4L34 11l3.4-1.6Z"/></svg></span><h3>Kids’ haircut</h3><p>Patient, friendly cuts for the little ones.</p><button class="btn" type="button" data-pick="s6">Book this</button></li>
+  </ul>
+  <p class="note">Ask for the price list on WhatsApp. Up to 15% off during November.</p>
+</div></section>
+
+<section class="sec craft" id="craft"><div class="wrap">
+  <div class="head"><div><p class="kick">The craft</p><h2>Cuts that hold their shape</h2></div><p class="lede">Clean fades, sharp lines and texture that works with your hair, not against it.</p></div>
+  <div class="gal">
+    <figure><img src="/img/cut-quiff.webp" width="710" height="710" alt="A high fade with a swept-back quiff, in profile" loading="lazy"><figcaption>High fade, swept quiff</figcaption></figure>
+    <figure><img src="/img/cut-fade.webp" width="710" height="710" alt="A mid skin fade with a textured top" loading="lazy"><figcaption>Mid skin fade</figcaption></figure>
+    <figure><img src="/img/cut-texture.webp" width="710" height="710" alt="A textured crop with a taper on curly hair" loading="lazy"><figcaption>Textured crop</figcaption></figure>
+    <figure style="grid-column:2/4"><img src="/img/beard.webp" width="710" height="710" alt="A barber in a straw hat trimming a client’s beard" loading="lazy" style="aspect-ratio:2/1;object-position:50% 40%"><figcaption>Beard work</figcaption></figure>
+  </div>
+  <p class="credit">Work by the team behind TM Barbershop, Amed.</p>
+</div></section>
+
+<section class="sec book-sec" id="book"><div class="wrap">
+  <div>
+    <p class="kick">Book</p>
+    <h2>Reserve your chair</h2>
+    <p class="lede" style="margin-top:16px">Pick a service, a day and a time. WhatsApp opens with your request ready to send.</p>
+    <ul class="promise">
+      <li><span><b>Up to 15% off</b>On your visit during November.</span></li>
+      <li><span><b>Confirmed on WhatsApp</b>We reply to lock in your time.</span></li>
+      <li><span><b>Walk in or book ahead</b>Booking means no waiting.</span></li>
+    </ul>
+  </div>
+  <form class="book" id="req" novalidate>
+    <h3>Book a chair</h3>
+    <fieldset><legend>Service</legend><div class="chips" id="svc">
+      <input type="radio" name="s" id="s1" value="a haircut" checked><label for="s1">Haircut</label>
+      <input type="radio" name="s" id="s2" value="a skin fade"><label for="s2">Skin fade</label>
+      <input type="radio" name="s" id="s3" value="a hot towel shave"><label for="s3">Hot towel shave</label>
+      <input type="radio" name="s" id="s4" value="a beard trim"><label for="s4">Beard trim</label>
+      <input type="radio" name="s" id="s5" value="hair styling"><label for="s5">Styling</label>
+      <input type="radio" name="s" id="s6" value="a kids’ haircut"><label for="s6">Kids’ cut</label>
+    </div></fieldset>
+    <fieldset><legend>Day</legend><div class="chips d" id="days"></div></fieldset>
+    <fieldset><legend>Time</legend><div class="chips t" id="times"></div></fieldset>
+    <p class="sum" aria-live="polite"><span id="out"></span></p>
+    <a class="btn btn-gold" id="go" href="https://wa.me/6281999728000" target="_blank" rel="noopener">Book on WhatsApp</a>
+    <p class="fine">Opens WhatsApp with your request ready to send.</p>
+  </form>
+</div></section>
+
+<section class="sec visit" id="visit"><div class="wrap">
+  <p class="kick">Find us</p>
+  <h2>Kerobokan Kelod, Bali</h2>
+  <dl>
+    <div><dt>Address</dt><dd>Jl Raya Semer No 26A, Lingkungan Dukuh Sari, Kerobokan Kelod, Badung, Bali</dd></div>
+    <div><dt>Hours</dt><dd>Every day<br>10am to 8pm</dd></div>
+    <div><dt>WhatsApp</dt><dd><a href="https://wa.me/6281999728000" target="_blank" rel="noopener">+62 819-9972-8000</a><br><a href="https://www.instagram.com/rnybarbershop.bali/" target="_blank" rel="noopener">@rnybarbershop.bali</a></dd></div>
+  </dl>
+  <div class="acts"><a class="btn btn-gold" href="#book">Book a chair</a><a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&query=Jl+Raya+Semer+No+26A+Kerobokan+Kelod+Bali" target="_blank" rel="noopener">Get directions</a></div>
+</div></section>
+</main>
+
+<footer><div class="wrap"><span>RNY Barbershop · Cut · Shave · Style · Kerobokan, Bali</span><span>Concept website by Arcwise Studios</span></div></footer>
+<div class="bar"><a class="btn btn-gold" href="#book">Book a chair</a><a class="btn btn-ghost" href="https://wa.me/6281999728000" target="_blank" rel="noopener">Chat</a></div>
+
+<script>
+(function(){
+  var root=document.documentElement;root.classList.add('js');
+  var hero=document.querySelector('.hero');requestAnimationFrame(function(){requestAnimationFrame(function(){hero.classList.add('ready')})});
+  var TZ='Asia/Makassar',OPEN=10,CLOSE=20,WA='6281999728000';
+  var OPENING=Date.UTC(2026,10,24,2,0,0); /* 24 Nov 2026, 10:00 Bali time (UTC+8) */
+  var NOV_END=Date.UTC(2026,10,30,16,0,0);
+
+  /* countdown, then "now open" */
+  var cd=document.getElementById('count'),cl=document.getElementById('count-l');
+  function pad(n){return (n<10?'0':'')+n}
+  function tick(){
+    var ms=OPENING-Date.now();
+    if(ms<=0){cd.hidden=true;cl.textContent='Now open · every day 10am to 8pm';return false}
+    var s=Math.floor(ms/1000);
+    document.getElementById('cd-d').textContent=pad(Math.floor(s/86400));
+    document.getElementById('cd-h').textContent=pad(Math.floor(s%86400/3600));
+    document.getElementById('cd-m').textContent=pad(Math.floor(s%3600/60));
+    document.getElementById('cd-s').textContent=pad(s%60);
+    return true;
+  }
+  if(tick())var iv=setInterval(function(){if(!tick())clearInterval(iv)},1000);
+  if(Date.now()>NOV_END){var o=document.getElementById('offer');if(o)o.hidden=true}
+
+  /* booking card: only days on/after opening, only open hours */
+  function parts(d){var p={};new Intl.DateTimeFormat('en-GB',{timeZone:TZ,hour12:false,hour:'numeric',weekday:'short',day:'numeric',month:'short'}).formatToParts(d).forEach(function(x){p[x.type]=x.value});return p}
+  var now=new Date(),h=+parts(now).hour%24;
+  var start=Math.max(Date.now(),OPENING-2*3600e3);
+  var f=document.getElementById('req'),days=document.getElementById('days'),times=document.getElementById('times');
+  var fmt=new Intl.DateTimeFormat('en-GB',{timeZone:TZ,weekday:'short',day:'numeric',month:'short'}),wd=new Intl.DateTimeFormat('en-GB',{timeZone:TZ,weekday:'short'}),dn=new Intl.DateTimeFormat('en-GB',{timeZone:TZ,day:'numeric'});
+  var startIsToday=start===Date.now(),k=0;
+  for(var i=0;i<8;i++){
+    var d=new Date(start+i*864e5),today=startIsToday&&i===0;
+    if(today&&h>=CLOSE-1)continue;
+    var lab=today?'Today':wd.format(d),say=today?'today':'on '+fmt.format(d);
+    days.insertAdjacentHTML('beforeend','<input type="radio" name="d" id="d'+k+'" value="'+say+'" data-today="'+(today?1:0)+'" data-short="'+(today?'Today':fmt.format(d))+'"'+(k?'':' checked')+'><label for="d'+k+'"><small>'+lab+'</small><b>'+dn.format(d)+'</b></label>');
+    k++;
+  }
+  function hr(x){return (x%12||12)+(x<12?'am':'pm')}
+  function drawTimes(){var dv=f.querySelector('input[name=d]:checked'),from=dv&&dv.dataset.today==='1'?Math.max(OPEN,h+1):OPEN,html='';for(var x=from;x<CLOSE;x++)html+='<input type="radio" name="t" id="t'+x+'" value="'+hr(x)+'"'+(x===from?' checked':'')+'><label for="t'+x+'">'+hr(x)+'</label>';times.innerHTML=html}
+  function val(n){var x=f.querySelector('input[name='+n+']:checked');return x?x.value:''}
+  function upd(){
+    var sv=f.querySelector('input[name=s]:checked'),dv=f.querySelector('input[name=d]:checked');
+    document.getElementById('out').textContent=f.querySelector('label[for='+sv.id+']').textContent+', '+dv.dataset.short+', '+val('t');
+    var t='Hi RNY Barbershop, I’d like to book '+val('s')+' '+val('d')+' at '+val('t')+'. Is that time free?';
+    document.getElementById('go').href='https://wa.me/'+WA+'?text='+encodeURIComponent(t);
+  }
+  drawTimes();upd();
+  f.addEventListener('change',function(e){if(e.target.name==='d')drawTimes();upd();var l=f.querySelector('label[for="'+e.target.id+'"]');if(l&&l.scrollIntoView)l.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'})});
+  f.addEventListener('submit',function(e){e.preventDefault()});
+  document.querySelectorAll('[data-pick]').forEach(function(b){b.addEventListener('click',function(){document.getElementById(b.dataset.pick).checked=true;upd();document.getElementById('book').scrollIntoView({behavior:'smooth'})})});
+
+  /* service icons move only while on screen */
+  var menu=document.getElementById('menu');
+  if('IntersectionObserver' in window)new IntersectionObserver(function(es){es.forEach(function(e){menu.classList.toggle('live',e.isIntersecting)})},{threshold:.15}).observe(menu);
+})();
+</script>
+</body>
+</html>
