@@ -73,27 +73,60 @@ h2{font-size:clamp(38px,5.4vw,76px)}
 @keyframes drop{from{opacity:0;transform:rotate(4deg) translateY(-30px)}to{opacity:1;transform:rotate(-5deg)}}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
-.hero::before{content:"";position:absolute;inset:0;background:url(img/trail.webp) 70% 62%/cover;filter:blur(2px) saturate(.85);opacity:.55;transform:scale(1.04)}
-.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--night) 8%,rgba(15,13,12,.35) 60%,rgba(15,13,12,.55)),linear-gradient(transparent 55%,var(--night))}
-.hero .wrap{position:relative;z-index:1}
-.stage3{position:relative;min-width:0}
-.lid3d{position:relative;aspect-ratio:1/1;width:100%;max-width:620px;margin-left:auto}
-.lid3d::before{content:"";position:absolute;left:8%;right:8%;top:2%;bottom:14%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,196,120,.26),transparent 72%)}
-.lid3d::after{content:"";position:absolute;left:20%;right:20%;bottom:9%;height:7%;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.75),transparent)}
-.lid3d canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;opacity:0;transition:opacity 1.4s}
-.lid3d.ready canvas{opacity:1}
-.lid3d .fallback{position:absolute;inset:14%;width:72%;height:72%;object-fit:cover;border-radius:50%}
-.lid3d.ready .fallback{display:none}
-.drag{position:absolute;right:4%;top:6%;font-size:18px;color:var(--bone);transform:rotate(6deg);transition:opacity .4s}
-.lid3d.touched~.drag{opacity:0}
-.paintbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;max-width:620px;margin-left:auto;border-top:1px solid rgba(241,234,220,.25);padding-top:14px}
-.paintbar .name{font:400 20px var(--lab);letter-spacing:.1em}
-.pots{display:flex;gap:8px}
+
+/* ===== hero film ===== */
+.film{position:relative;height:520vh;--q:0;--q2:0;--lamp:0;--bar:120px}
+.frame{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#000}
+.backdrop{position:absolute;inset:0;opacity:calc(var(--q)*.62)}
+.backdrop img{width:100%;height:100%;object-fit:cover;object-position:62% 60%;filter:blur(1.5px) saturate(.85);transform:scale(calc(1.12 - var(--q)*.08))}
+.backdrop::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.85) 10%,rgba(0,0,0,.25) 62%,rgba(0,0,0,.4)),linear-gradient(transparent 60%,var(--night))}
+.glow{position:absolute;left:50%;top:50%;width:min(80vw,900px);aspect-ratio:1;transform:translate(-50%,-52%);border-radius:50%;background:radial-gradient(closest-side,rgba(255,190,110,.2),rgba(255,150,70,.05) 55%,transparent 72%);opacity:calc(var(--lamp)*(1 - var(--q)))}
+.lid3d{position:absolute;inset:0}
+.lid3d canvas{position:absolute;inset:0;width:100%;height:100%}
+.lid3d .fb{display:none}
+.nogl .lid3d .fb{display:block;position:absolute;left:50%;top:50%;width:min(52vh,70vw);height:auto;transform:translate(-50%,-50%);border-radius:50%}
+.bar{position:absolute;left:0;right:0;height:var(--bar);background:#000;z-index:3;transform:scaleY(calc(1 - var(--q)))}
+.bar.t{top:0;transform-origin:top}.bar.b{bottom:0;transform-origin:bottom}
+.slate{position:absolute;z-index:4;left:0;right:0;top:calc(var(--bar) - 34px);display:flex;justify-content:space-between;gap:16px;padding-inline:max(20px,env(safe-area-inset-left,0px)) max(20px,env(safe-area-inset-right,0px));font:400 15px var(--lab);letter-spacing:.16em;color:var(--mute);opacity:calc(1 - var(--q)*1.6)}
+.slate b{font-weight:400;color:var(--bone)}
+#tc{font-variant-numeric:tabular-nums;color:var(--red)}
+.sub{position:absolute;z-index:4;left:50%;bottom:calc(var(--bar)/2);transform:translate(-50%,50%);width:min(92vw,760px);text-align:center;font:600 clamp(15px,1.35vw,19px)/1.45 var(--head);color:var(--bone);opacity:0;transition:opacity .5s}
+.sub.on{opacity:calc(1 - var(--q)*2)}
+.hint{position:absolute;z-index:4;left:50%;bottom:14px;width:1px;height:28px;background:var(--bone);transform-origin:top;animation:hint 2.2s ease-in-out infinite;transition:opacity .4s}
+.moving .hint{opacity:0}
+@keyframes hint{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1) translateY(28px);opacity:0}}
+.skip{position:absolute;z-index:5;right:max(20px,env(safe-area-inset-right,0px));bottom:calc(var(--bar)/2);transform:translateY(50%);border:0;background:none;color:var(--mute);font:600 13px var(--head);text-decoration:underline;text-underline-offset:3px;padding:10px 0;opacity:calc(1 - var(--q)*2)}
+.done .skip{visibility:hidden}
+.final{position:absolute;z-index:4;inset:0;display:flex;align-items:center;opacity:var(--q2);pointer-events:none}
+.final .wrap{width:100%}
+.final .in{max-width:540px;transform:translateY(calc((1 - var(--q2))*18px))}
+.done .final .in{pointer-events:auto}
+.final .since{font:400 19px var(--lab);letter-spacing:.14em;color:var(--red);margin-bottom:18px}
+.final h1{font-size:clamp(50px,7vw,108px);margin-bottom:22px}
+.final h1 span{display:block;white-space:nowrap}
+.final .acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.final .paintbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-top:30px;border-top:1px solid rgba(241,234,220,.22);padding-top:14px}
+.paintbar .name{font:400 18px var(--lab);letter-spacing:.1em;min-width:150px}
+.pots{display:flex;gap:6px}
 .pots button{width:44px;height:44px;border-radius:50%;border:2px solid transparent;background:none;padding:0;display:grid;place-items:center}
-.pots button i{width:30px;height:30px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(255,255,255,.35)}
+.pots button i{width:28px;height:28px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(255,255,255,.35)}
 .pots button span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .pots button[aria-pressed=true]{border-color:var(--red)}
-.open .stage3{animation:rise 1.4s .3s both}
+.final .drag{position:absolute;right:9%;top:22%;font-size:18px;color:var(--bone);transform:rotate(6deg);transition:opacity .4s}
+.touched .final .drag{opacity:0}
+.still{height:auto}.still .frame{position:relative}
+@media (max-width:820px){
+  .final{align-items:flex-end;padding-bottom:max(22px,env(safe-area-inset-bottom,0px))}
+  .final h1{font-size:clamp(42px,12vw,64px);margin-bottom:12px}
+  .final .since{font-size:15px;margin-bottom:10px}
+  .final .lede{font-size:14.5px}
+  .final .acts{margin-top:16px}.final .acts .btn{min-height:48px;padding:0 18px;font-size:12.5px}
+  .final .paintbar{margin-top:16px}
+  .final .drag{right:6%;top:9%}
+  .backdrop::after{background:linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.55) 45%,var(--night) 92%)}
+  .skip{bottom:calc(var(--bar) - 28px)}
+  .slate{font-size:13px}
+}
 
 section.sec{padding-block:clamp(64px,9vw,128px)}
 .sec-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:14px 40px;margin-bottom:clamp(28px,4vw,52px)}
@@ -266,11 +299,6 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 @media (max-width:820px){
   .bar nav{display:none}.bar .wrap{gap:10px}.logo{margin-right:auto}
   .hero-g{grid-template-columns:minmax(0,1fr);gap:0}
-  .stage3{order:-1;margin-top:8px}
-  .lid3d{max-width:440px;margin:0 auto}
-  .drag{right:auto;left:2%;top:2%;transform:rotate(-6deg)}
-  .paintbar{max-width:none;margin:0 0 30px}
-  .hero::after{background:linear-gradient(rgba(15,13,12,.45),var(--night) 78%)}
   .gar,.bld,.fit,.contact .wrap{grid-template-columns:minmax(0,1fr)}
   .bld-view{position:relative;top:0}
   .about .cols{grid-template-columns:1fr;gap:22px}
@@ -301,32 +329,35 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 </div></header>
 
 <main id="top">
-<section class="hero"><div class="wrap hero-g">
-  <div class="hero-t">
-    <p class="since">Traditional fibreglass manufacturing since 2019</p>
-    <h1><span>Take the</span><span>long way.</span></h1>
-    <p class="lede">Lids laid up, sanded and painted by hand in Indonesia. Made for slow roads, loud colours and nowhere to be.</p>
-    <div class="acts"><a class="btn" href="#shop">Shop the lids</a><a class="btn line" href="#build">Build your own</a></div>
-    <p class="note hand">shipped worldwide, one by one</p>
-  </div>
-  <div class="stage3">
-    <div class="lid3d" id="lid3d" role="img" aria-label="A 3D BRAP 500TX helmet in raw fibreglass. Drag to turn it.">
-      <img class="fallback" src="img/h-orange.webp" alt="" width="682" height="682">
-    </div>
-    <p class="drag hand">drag me round</p>
-    <div class="paintbar">
-      <span class="name" id="lid3d-name">500TX, unfinished</span>
-      <div class="pots" role="group" aria-label="Paint the helmet">
-        <button type="button" data-paint="raw" aria-pressed="true" title="Unfinished"><i style="background:#4a4741"></i><span>Unfinished</span></button>
-        <button type="button" data-paint="red" aria-pressed="false" title="Brap red"><i style="background:#d62906"></i><span>Brap red</span></button>
-        <button type="button" data-paint="bone" aria-pressed="false" title="Bone"><i style="background:#efe8da"></i><span>Bone</span></button>
-        <button type="button" data-paint="black" aria-pressed="false" title="Gloss black"><i style="background:#0c0b0b"></i><span>Gloss black</span></button>
-        <button type="button" data-paint="sky" aria-pressed="false" title="Sky blue"><i style="background:#7fa9c4"></i><span>Sky blue</span></button>
-        <button type="button" data-paint="orange" aria-pressed="false" title="Tangerine"><i style="background:#e46a1c"></i><span>Tangerine</span></button>
+<section class="film" id="film" aria-label="How a BRAP helmet is made">
+  <div class="frame">
+    <div class="backdrop" aria-hidden="true"><img src="img/trail.webp" alt="" width="686" height="1221"></div>
+    <div class="glow" aria-hidden="true"></div>
+    <div class="lid3d" id="lid3d"><img class="fb" src="img/h-orange.webp" alt="A BRAP 500TX helmet" width="682" height="682"></div>
+    <div class="bar t" aria-hidden="true"></div><div class="bar b" aria-hidden="true"></div>
+    <div class="slate" aria-hidden="true"><span>Brap Helmet MFG presents <b>The Lay-Up</b></span><span id="tc">00:00:00:00</span></div>
+    <p class="sub" id="sub" aria-live="polite"></p>
+    <span class="hint" aria-hidden="true"></span>
+    <button class="skip" id="skip" type="button">Skip the film</button>
+    <div class="final"><div class="wrap"><div class="in">
+      <p class="since">Traditional fibreglass manufacturing since 2019</p>
+      <h1><span>Take the</span><span>long way.</span></h1>
+      <p class="lede">Every lid you just watched is made by hand in Indonesia, one at a time. Made for slow roads, loud colours and nowhere to be.</p>
+      <div class="acts"><a class="btn" href="#shop">Shop the lids</a><a class="btn line" href="#build">Build your own</a></div>
+      <div class="paintbar">
+        <span class="name" id="lid3d-name">500TX, Brap red</span>
+        <div class="pots" role="group" aria-label="Repaint the helmet">
+          <button type="button" data-paint="raw" aria-pressed="false"><i style="background:#4a4741"></i><span>Unfinished</span></button>
+          <button type="button" data-paint="red" aria-pressed="true"><i style="background:#d62906"></i><span>Brap red</span></button>
+          <button type="button" data-paint="bone" aria-pressed="false"><i style="background:#efe8da"></i><span>Bone</span></button>
+          <button type="button" data-paint="black" aria-pressed="false"><i style="background:#0c0b0b"></i><span>Gloss black</span></button>
+          <button type="button" data-paint="sky" aria-pressed="false"><i style="background:#7fa9c4"></i><span>Sky blue</span></button>
+          <button type="button" data-paint="orange" aria-pressed="false"><i style="background:#e46a1c"></i><span>Tangerine</span></button>
+        </div>
       </div>
-    </div>
+    </div></div><p class="drag hand">drag the lid round</p></div>
   </div>
-</div></section>
+</section>
 
 <section class="sec garage" id="garage"><div class="wrap gar">
   <div class="gar-ph">
@@ -505,7 +536,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 <p class="toast" id="toast" role="status"></p>
 
 <script src="three.min.js" defer></script>
-<script src="hero3d.js" defer></script>
+<script src="film.js" defer></script>
 <script>
 (function(){
 'use strict';
