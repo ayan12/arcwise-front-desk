@@ -8,7 +8,7 @@
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#0f0d0c">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800;900&family=Permanent+Marker&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800;900&family=Permanent+Marker&family=Rye&family=Special+Elite&family=Big+Shoulders+Stencil+Display:wght@900&display=swap">
 <style>
 :root{--night:#0f0d0c;--night-2:#191614;--line:#2e2925;--bone:#f1eadc;--paper:#e9e1d0;--ink:#141211;--red:#d62906;--mute:#a39a8d;--mute-d:#5f584f;--head:Montserrat,"Arial Black",system-ui,sans-serif;--lab:"Bebas Neue",Impact,sans-serif;--hand:"Permanent Marker",cursive;color-scheme:dark}
 *{box-sizing:border-box;margin:0}
@@ -75,7 +75,7 @@ h2{font-size:clamp(38px,5.4vw,76px)}
 
 
 /* ===== hero film ===== */
-.film{position:relative;height:520vh;--q:0;--q2:0;--lamp:0;--bar:120px}
+.film{position:relative;height:400vh;--q:0;--q2:0;--lamp:0;--bar:120px}
 .frame{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#000}
 .backdrop{position:absolute;inset:0;opacity:calc(var(--q)*.62)}
 .backdrop img{width:100%;height:100%;object-fit:cover;object-position:62% 60%;filter:blur(1.5px) saturate(.85);transform:scale(calc(1.12 - var(--q)*.08))}
@@ -316,6 +316,186 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   .gar-ph{padding-left:0}.gar-ph .hand{font-size:16px}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+/* ===== zine pages ===== */
+.type{font-family:"Special Elite","Courier New",monospace;font-weight:400;letter-spacing:0}
+.type.small{font-size:13.5px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.zine{position:relative;padding-block:clamp(70px,9vw,130px);overflow:hidden}
+.zine::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;mix-blend-mode:multiply;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='4' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .28 0 0 0 .32 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23p)'/%3E%3C/svg%3E")}
+.zine .wrap{position:relative}
+.tape::before{content:"";position:absolute;z-index:2;left:50%;top:-14px;width:96px;height:28px;margin-left:-48px;background:rgba(236,224,196,.78);box-shadow:0 1px 2px rgba(0,0,0,.15);transform:rotate(-4deg)}
+.tape.r::before{left:auto;right:12%;transform:rotate(5deg)}
+
+/* biker mag spread */
+.biker{background:#ece3cf;color:var(--ink)}
+.mag-h{display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px 48px;align-items:end;margin-bottom:clamp(30px,4vw,56px)}
+.chop{font:400 clamp(70px,11vw,170px)/.8 "Rye","Bebas Neue",serif;text-transform:none;letter-spacing:-.01em;color:var(--red);-webkit-text-stroke:2px var(--ink);text-shadow:6px 6px 0 var(--ink);transform:rotate(-3deg);transform-origin:left bottom}
+.chop span{display:block}
+.chop span:last-child{margin-left:.6em;color:#f2b632}
+.mag-k{max-width:48ch;display:grid;gap:10px;padding-bottom:10px;font-size:16.5px;line-height:1.55}
+.mag-k b{font-weight:400;background:var(--ink);color:#ece3cf;padding:0 4px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.spread{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:26px 22px;align-items:start}
+.ft{position:relative;background:#fff;padding:10px 10px 14px;box-shadow:0 10px 24px rgba(40,25,10,.18)}
+.ft img{width:100%;height:auto;aspect-ratio:1;object-fit:cover}
+.ft.tall img{aspect-ratio:3/4.6}
+.ft figcaption{display:grid;gap:4px;margin-top:10px}
+.ft figcaption .hand{font-size:19px;line-height:1.15;color:var(--red)}
+.ft figcaption .type{font-size:13px;color:#4a443c}
+.ft.big{grid-column:span 2;grid-row:span 2;transform:rotate(-1.4deg)}
+.ft.tall{grid-row:span 2;transform:rotate(1.2deg)}
+.ft:nth-child(3){transform:rotate(2deg)}.ft:nth-child(5){transform:rotate(-1.6deg)}.ft:nth-child(6){transform:rotate(1deg)}.ft:nth-child(8){transform:rotate(-2deg)}
+.stamp{width:min(520px,80%);margin:clamp(30px,4vw,54px) 0 0 auto;transform:rotate(-4deg)}
+.folio{margin-top:20px;font:400 14px var(--lab);letter-spacing:.16em;color:#6c6355;border-top:2px solid var(--ink);padding-top:10px}
+
+/* commission ritual */
+.ritual{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:2px solid var(--ink);margin-bottom:clamp(30px,4vw,48px);counter-reset:r}
+.ritual li{counter-increment:r;padding:18px 18px 20px;border-right:2px solid var(--ink);display:grid;gap:6px;background:#f6f1e6}
+.ritual li:last-child{border-right:0;background:var(--red);color:#fff}
+.ritual li::before{content:counter(r);font:400 34px/1 var(--lab);color:var(--red)}
+.ritual li:last-child::before{color:var(--ink)}
+.ritual b{font:900 17px/1.1 var(--head);text-transform:uppercase}
+.ritual span{font-size:14px;color:#5f584f}.ritual li:last-child span{color:#ffe1d8}
+.bld-left{display:grid;gap:18px;position:sticky;top:84px}
+.bld-left .bld-view{position:relative;top:0}
+.ig{background:#fff;border:1px solid #d8d0bf;border-radius:10px;overflow:hidden;max-width:360px;font:400 13.5px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;color:#111;box-shadow:0 10px 24px rgba(40,25,10,.12);transform:rotate(-1.5deg)}
+.ig-top{display:flex;align-items:center;gap:8px;padding:9px 12px;font-size:13px}
+.ig-av{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--red);color:#fff;font:400 15px var(--lab)}
+.ig-art{background:#efe9dc;aspect-ratio:1;display:grid;place-items:center;padding:18px}
+.ig-art svg{width:100%;height:auto}
+.ig figcaption{padding:10px 12px 14px}
+#ig-title{font-style:italic}
+.cm-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cm-fields label{display:grid;gap:8px;font:800 13px var(--head)}
+.cm-fields input{min-height:48px;border:2px solid var(--ink);background:#f6f1e6;color:var(--ink);font:500 15px var(--head);padding:0 12px;width:100%}
+.cm-fields input:focus{outline:none;border-color:var(--red)}
+
+/* shop, atmos style */
+.shop{border-top:1px solid var(--line)}
+.shop-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px 30px;margin-bottom:26px}
+.brands{display:flex;gap:0;border-bottom:1px solid var(--line);overflow-x:auto;max-width:100%}
+.brands button{border:0;border-bottom:3px solid transparent;background:none;padding:12px 16px;font:800 13.5px var(--head);color:var(--mute);white-space:nowrap}
+.brands button[aria-selected=true]{color:var(--bone);border-color:var(--red)}
+.brands button:disabled{opacity:.45;cursor:default}
+.shop-g{display:grid;grid-template-columns:210px minmax(0,1fr);gap:clamp(20px,3vw,40px);align-items:start}
+.filters{position:sticky;top:84px;display:grid;gap:22px}
+.fg p{font:800 12.5px var(--head);color:var(--bone);margin-bottom:10px}
+.chips{display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.chips button{border:0;background:none;padding:6px 0;font:600 14px var(--head);color:var(--mute);display:flex;align-items:center;gap:10px;min-height:32px}
+.chips button::before{content:"";width:14px;height:14px;border:1.5px solid var(--mute);border-radius:3px}
+.chips button[aria-pressed=true]{color:var(--bone)}
+.chips button[aria-pressed=true]::before{background:var(--red);border-color:var(--red)}
+.res-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px;font-size:14px;color:var(--mute)}
+.res-bar select{margin-left:8px;min-height:40px;background:var(--night-2);color:var(--bone);border:1px solid var(--line);font:600 13.5px var(--head);padding:0 8px}
+.shop .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.card{position:relative}
+.card .flag{position:absolute;z-index:1;top:10px;left:10px;background:var(--ink);color:var(--bone);font:400 13px var(--lab);letter-spacing:.12em;padding:4px 8px}
+.card .flag.one{background:var(--red);color:#fff}
+.card .art{background:#efeae0}
+.card .art svg{width:100%;height:100%;padding:12%}
+.card .com{flex:1;min-height:46px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--bone);color:var(--bone);font:800 12.5px var(--head);text-transform:uppercase;letter-spacing:.04em;text-decoration:none}
+.card .com:hover{background:var(--red);border-color:var(--red)}
+.none{padding:40px 0;color:var(--mute)}
+
+/* apparel */
+.apparel{background:var(--bone);color:var(--ink);padding-block:clamp(70px,9vw,130px)}
+.app-g{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(28px,5vw,72px);align-items:center}
+.kick{font:400 18px var(--lab);letter-spacing:.14em;color:var(--red);margin-bottom:14px}
+.apparel h2{font-size:clamp(40px,4.4vw,72px)}
+.apparel .lede{color:#4d473f;margin-top:18px}
+.app-specs{list-style:none;padding:0;margin-top:26px;border-top:2px solid var(--ink)}
+.app-specs li{padding:12px 0;border-bottom:1px solid #cfc6b4;font:800 15px var(--head);text-transform:uppercase}
+.app-ph{display:grid;grid-template-columns:1.1fr .9fr;grid-template-rows:auto auto;gap:14px}
+.app-ph figure{overflow:hidden;background:#fff}
+.app-ph img{width:100%;height:100%;object-fit:cover}
+.a1{grid-row:span 2;aspect-ratio:4/5.6}.a2,.a3{aspect-ratio:4/5}
+.apparel .fit{border-top-color:var(--ink);margin-top:clamp(56px,7vw,96px)}
+.apparel .fit-p{color:#5f584f;margin-bottom:24px;max-width:44ch}
+.apparel .ch label{background:#fff}
+.apparel .ch.sw label,.apparel .ch.sw input:checked+label{background:#fff}
+.apparel .btn.red-b{background:var(--red);border-color:var(--red);color:#fff}
+.apparel .btn.red-b:hover{background:var(--ink);border-color:var(--ink)}
+
+/* surf mag essay */
+.surf{background:#efe6d2;color:#2b241c}
+.surf::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 80% at 80% 0%,rgba(255,196,120,.28),transparent 60%)}
+.surf-k{font-size:15px;color:#8a5a2a;margin-bottom:14px}
+.surf-h{font:italic 800 clamp(34px,5vw,74px)/.98 var(--head);text-transform:none;letter-spacing:-.03em;max-width:18ch;margin-bottom:clamp(30px,4vw,56px)}
+.essay{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:18px;align-items:start}
+.essay figure{position:relative}
+.essay img{width:100%;height:auto}
+.essay figcaption{margin-top:8px;font-size:13.5px;color:#6b5a45}
+.sun img{filter:sepia(.28) saturate(.85) contrast(.94) brightness(1.04);border:8px solid #fbf7ee;box-shadow:0 8px 20px rgba(80,50,20,.18)}
+.e1{grid-column:1/4;grid-row:1/3}.e2{grid-column:4/7;align-self:center;padding:10px 0 10px 10px}.e3{grid-column:4/6}.e4{grid-column:6/7;margin-top:40%}
+.e5{grid-column:1/4;margin-top:-6%}.e6{grid-column:4/6;margin-top:6%}
+.drop{font:500 clamp(17px,1.5vw,21px)/1.6 var(--head);max-width:40ch;margin-bottom:14px}
+.drop::first-letter{float:left;font:900 4.2em/.8 var(--head);color:var(--red);margin:.06em .08em 0 0}
+
+/* riders */
+.regions{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.regions li{background:var(--night);padding:24px;display:grid;gap:8px;min-height:180px;align-content:start}
+.regions li.home{background:var(--red)}
+.regions .cc{font:400 46px/1 var(--lab);letter-spacing:.04em;color:var(--red)}
+.regions li.home .cc{color:var(--ink)}
+.regions h3{font-size:20px}
+.regions p{font-size:14.5px;color:var(--mute)}.regions li.home p{color:#ffe1d8}
+.regions a{color:var(--bone);font-weight:700}
+.tagline{margin-top:22px;color:var(--mute)}.tagline b{color:var(--bone)}
+
+/* skate zine about */
+.skate{background:#d9d4ca;color:#111}
+.skate::before{opacity:.65}
+.skate-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(30px,5vw,72px);align-items:center}
+.strips{position:relative;display:grid;gap:10px;justify-items:start}
+.strip{position:relative;z-index:2;background:#111;color:#f2efe8;font:900 clamp(32px,4.8vw,70px)/1 var(--head);text-transform:uppercase;letter-spacing:-.03em;padding:6px 14px 8px}
+.strip.s1{transform:rotate(-2deg)}.strip.s2{transform:rotate(1.5deg);margin-left:8%}.strip.s3{transform:rotate(-1deg);background:var(--red);color:#fff}
+.strip s{text-decoration-thickness:.12em;text-decoration-color:#111}
+.xerox{position:relative;width:78%;margin:-20px 0 0 18%;aspect-ratio:4/4.4;overflow:hidden;transform:rotate(2deg)}
+.xerox img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.9) brightness(1.1)}
+.halftone::after{content:"";position:absolute;inset:0;background:radial-gradient(circle,#000 .9px,transparent 1.3px) 0 0/4px 4px;mix-blend-mode:multiply;opacity:.45}
+.skate-t>.type{font-size:17px;line-height:1.6;max-width:44ch}
+.skate .cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:28px;border-top:3px solid #111;padding-top:18px}
+.skate h3{font-size:17px;margin-bottom:6px}
+.skate .cols p{font-size:14px;color:#3a3630}
+.wallstencil{margin-top:34px;background:#1b1916;padding:18px 20px;transform:rotate(-1.5deg)}
+
+/* universe: two live brands */
+.uni li.live{background:var(--night-2)}
+.uni li.live h3{color:var(--red)}
+
+@media (max-width:1000px){
+  .spread{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .shop .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .regions{grid-template-columns:1fr 1fr}
+}
+@media (max-width:820px){
+  .mag-h,.app-g,.skate-g{grid-template-columns:minmax(0,1fr)}
+  .ritual{grid-template-columns:1fr 1fr}.ritual li:nth-child(2){border-right:0}.ritual li:nth-child(-n+2){border-bottom:2px solid var(--ink)}
+  .bld-left{position:relative;top:0}
+  .ig{max-width:none}
+  .shop-g{grid-template-columns:minmax(0,1fr)}
+  .filters{position:relative;top:0;display:flex;gap:14px;overflow-x:auto;padding-bottom:4px}
+  .fg{flex:none}.fg p{display:none}
+  .chips{flex-direction:row;gap:6px}
+  .chips button{border:1px solid var(--line);border-radius:99px;padding:0 14px;white-space:nowrap}
+  .chips button::before{display:none}
+  .chips button[aria-pressed=true]{background:var(--bone);color:var(--ink);border-color:var(--bone)}
+  .essay{grid-template-columns:1fr 1fr;gap:14px}
+  .e1{grid-column:1/3;grid-row:auto}.e2{grid-column:1/3;padding:0}.e3,.e4,.e5,.e6{grid-column:auto;margin-top:0}
+  .xerox{width:86%;margin-left:10%}
+  .skate .cols{grid-template-columns:1fr;gap:16px}
+}
+@media (max-width:560px){
+  .spread{gap:18px 12px}
+  .ft{padding:6px 6px 10px}.ft figcaption .hand{font-size:15px}.ft figcaption .type{font-size:11.5px}
+  .ft.big{grid-column:span 2;grid-row:auto}.ft.tall{grid-row:auto}
+  .chop{-webkit-text-stroke:1.5px var(--ink);text-shadow:4px 4px 0 var(--ink)}
+  .ritual{grid-template-columns:1fr}.ritual li{border-right:0;border-bottom:2px solid var(--ink)}.ritual li:last-child{border-bottom:0}
+  .cm-fields{grid-template-columns:1fr}
+  .regions{grid-template-columns:1fr}.regions li{min-height:0}
+  .card .row{flex-direction:column}
+  .app-ph{grid-template-columns:1fr 1fr}.a1{grid-column:span 2;grid-row:auto;aspect-ratio:4/4.4}
+}
 </style>
 </head>
 <body>
@@ -323,7 +503,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 
 <header class="bar"><div class="wrap">
   <a class="logo" href="#top" aria-label="BRAP home"><svg viewBox="0 0 13 20" aria-hidden="true"><path d="M8 0L0 11h5l-2 9 10-13H7z" fill="currentColor"/></svg>BRAP</a>
-  <nav aria-label="Main"><a href="#gallery">Gallery</a><a href="#shop">Shop</a><a href="#build">Build your lid</a><a href="#order">How to order</a><a href="#universe">Universe</a><a href="#contact">Contact</a></nav>
+  <nav aria-label="Main"><a href="#shop">Shop</a><a href="#commission">Commission a lid</a><a href="#gallery">Gallery</a><a href="#apparel">Apparel</a><a href="#riders">Riders</a><a href="#contact">Contact</a></nav>
   <button class="tog" id="sound" type="button" aria-pressed="false" aria-label="Garage sound"><i aria-hidden="true"><b></b><b></b><b></b></i><span>Sound</span></button>
   <button class="bag-btn" id="bag-open" type="button">Bag<b id="bag-n">0</b></button>
 </div></header>
@@ -343,7 +523,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
       <p class="since">Traditional fibreglass manufacturing since 2019</p>
       <h1><span>Take the</span><span>long way.</span></h1>
       <p class="lede">Every lid you just watched is made by hand in Indonesia, one at a time. Made for slow roads, loud colours and nowhere to be.</p>
-      <div class="acts"><a class="btn" href="#shop">Shop the lids</a><a class="btn line" href="#build">Build your own</a></div>
+      <div class="acts"><a class="btn" href="#shop">Shop the lids</a><a class="btn line" href="#commission">Commission your lid</a></div>
       <div class="paintbar">
         <span class="name" id="lid3d-name">500TX, Brap red</span>
         <div class="pots" role="group" aria-label="Repaint the helmet">
@@ -379,45 +559,49 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   </div>
 </div></section>
 
-<section class="sec" id="gallery"><div class="wrap">
-  <div class="sec-h"><h2>Special made.</h2><p>Every custom lid gets a name. These are real ones, made for real riders, with the titles we gave them.</p></div>
-  <ul class="gal">
-    <li><img src="img/h-phoenix.webp" alt="Black helmet with orange and yellow flames" loading="lazy" width="682" height="682"><p>A phoenix flame in a black sky<small>500TX</small></p></li>
-    <li><img src="img/h-rusty.webp" alt="Helmet with a real rust finish" loading="lazy" width="682" height="682"><p>Not aging. Not patina. THIS IS RUSTY!!!<small>500TX</small></p></li>
-    <li><img src="img/h-mxtred.webp" alt="Full-face helmet in red carbon weave" loading="lazy" width="682" height="682"><p>Texalium carbon in red. It's a statement.<small>Mini MXT</small></p></li>
-    <li class="say"><p>Everyone copies the unfinished one. Fine. We started it.</p><small>BRAP Unfinished series</small></li>
-    <li><img src="img/h-tiger.webp" alt="Pale blue helmet with a hand-painted tiger" loading="lazy" width="682" height="682"><p>The dragon and the tigre<small>500TX</small></p></li>
-    <li><img src="img/green.webp" alt="Three green exposed-fibreglass helmets on grass" loading="lazy" width="640" height="854"><p>Exposed fibreglass, deep green. Simple. Tough. Brap.<small>Mini MXT</small></p></li>
-    <li><img src="img/h-union.webp" alt="Gold and silver carbon weave helmet" loading="lazy" width="682" height="682"><p>Silver can do anything...<small>500TX</small></p></li>
-    <li><img src="img/h-mxtflame.webp" alt="White full-face helmet with flames" loading="lazy" width="682" height="682"><p>An eternal flame<small>Mini MXT</small></p></li>
-    <li><img src="img/h-13.webp" alt="Close-up of two red helmets with hand-lettered club graphics" loading="lazy" width="682" height="682"><p>A friend's home is never too far away<small>Club pair</small></p></li>
-    <li><img src="img/h-silver.webp" alt="Brushed steel-look helmet with pinstriped flames" loading="lazy" width="682" height="682"><p>Stainless steel 304<small>500TX</small></p></li>
-    <li><img src="img/h-loud.webp" alt="Full-face helmet in red, orange and yellow shards" loading="lazy" width="640" height="640"><p>Loud colors. Bold attitude. No need to blend in.<small>Mini MXT</small></p></li>
-    <li><img src="img/badge.webp" alt="Close-up of the BRAP Helmet MFG badge on gold metal flake" loading="lazy" width="640" height="854"><p>Flake, up close<small>500TX Flake</small></p></li>
-  </ul>
-</div></section>
-
-<section class="sec" id="shop" style="padding-top:0"><div class="wrap">
-  <div class="sec-h"><h2>The catalogue.</h2><p>Lids and things to wear with them. Pick a size, put it in the bag.</p></div>
-  <div class="tabs" role="tablist" aria-label="Catalogue">
-    <button type="button" role="tab" aria-selected="true" data-f="all">Everything</button>
-    <button type="button" role="tab" aria-selected="false" data-f="helmet">Helmets</button>
-    <button type="button" role="tab" aria-selected="false" data-f="apparel">Apparel</button>
-    <button type="button" role="tab" aria-selected="false" data-f="acc">Accessories</button>
+<section class="zine biker" id="gallery" aria-labelledby="gal-t">
+  <div class="wrap">
+    <header class="mag-h">
+      <h2 id="gal-t" class="chop"><span>Special</span><span>made</span></h2>
+      <div class="mag-k">
+        <p class="type">Every custom BRAP is made for one rider, gets a name, and goes out with the same words: <b>"Special made for you. Thx mate for brapin' with us."</b></p>
+        <p class="type small">Below: real lids, real names. The riders keep the rest of the story.</p>
+      </div>
+    </header>
+    <div class="spread">
+      <figure class="ft big tape"><img src="img/h-tiger.webp" alt="Pale blue 500TX with a hand-painted tiger and gold leaf trim" loading="lazy" width="682" height="682"><figcaption><b class="hand">The dragon and the tigre</b><span class="type">500TX. Hand-painted. Special made for one rider.</span></figcaption></figure>
+      <figure class="ft tall"><img src="img/painter.webp" alt="An artist painting a tiger and blossom tree onto a white helmet" loading="lazy" width="480" height="854"><figcaption><span class="type">One brush, one rider, one lid.</span></figcaption></figure>
+      <figure class="ft tape r"><img src="img/h-rusty.webp" alt="500TX in a real rust finish" loading="lazy" width="682" height="682"><figcaption><b class="hand">Not aging. Not patina. THIS IS RUSTY!!!</b><span class="type">500TX</span></figcaption></figure>
+      <figure class="ft"><img src="img/h-phoenix.webp" alt="Black 500TX with orange and yellow flames and chrome trim" loading="lazy" width="682" height="682"><figcaption><b class="hand">A phoenix flame in a black sky</b><span class="type">500TX</span></figcaption></figure>
+      <figure class="ft tape"><img src="img/h-mxtred.webp" alt="Mini MXT full face in red Texalium carbon" loading="lazy" width="682" height="682"><figcaption><b class="hand">It's a statement.</b><span class="type">Mini MXT, Texalium carbon in red</span></figcaption></figure>
+      <figure class="ft r"><img src="img/h-silver.webp" alt="500 Legend in brushed steel look with pinstriped flames" loading="lazy" width="682" height="682"><figcaption><b class="hand">Stainless steel 304</b><span class="type">500 Legend</span></figcaption></figure>
+      <figure class="ft"><img src="img/green.webp" alt="Three Mini MXT helmets in exposed green fibreglass on grass" loading="lazy" width="640" height="854"><figcaption><b class="hand">Simple. Tough. Brap.</b><span class="type">Exposed fibreglass, deep green</span></figcaption></figure>
+      <figure class="ft tape r"><img src="img/h-loud.webp" alt="Mini MXT in red, orange and yellow shards" loading="lazy" width="640" height="640"><figcaption><b class="hand">No need to blend in.</b><span class="type">Mini MXT</span></figcaption></figure>
+    </div>
+    <div class="stamp" aria-hidden="true"><svg viewBox="0 0 420 120"><defs><filter id="spray"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="5"/><feGaussianBlur stdDeviation=".5"/></filter></defs><g filter="url(#spray)" fill="#d62906"><path d="M30 8L6 64h20l-10 48 40-62H34z"/><text x="70" y="88" font-family="'Big Shoulders Stencil Display',Impact,sans-serif" font-weight="900" font-size="86" letter-spacing="2">ONE OF ONE</text></g></svg></div>
+    <p class="folio">BRAP zine, issue 01. Garage &amp; Gallery.</p>
   </div>
-  <ul class="grid" id="grid"></ul>
-  <p class="range"><b>Also in the range:</b> Shorty, Speed Master, Wind Master, Club Master, Hatop, Basic and the Unfinished series, plus visors and inner pads. The full list goes in at launch.</p>
-</div></section>
+</section>
 
-<section class="sec paper" id="build"><div class="wrap">
-  <div class="sec-h"><h2>Sketch yours.</h2><p>Free and easy. Play with it here, and we turn the sketch into a real lid. You get a proof before any paint goes on.</p></div>
+<section class="sec paper commission" id="commission"><div class="wrap">
+  <div class="sec-h"><h2>Commission your lid.</h2><p>This is how most BRAPs are born. You sketch it, we send a proof, a real person makes it, and it goes out with your name on it.</p></div>
+  <ol class="ritual">
+    <li><b>Sketch it</b><span>Play with the lid below. Free, no account.</span></li>
+    <li><b>Get a proof</b><span>We draw it properly and send it to you before any paint goes on.</span></li>
+    <li><b>We make it</b><span>Laid up, sanded and painted by hand in our garage.</span></li>
+    <li><b>Special made for you</b><span>It ships with your name on it, and gets its own post.</span></li>
+  </ol>
   <div class="bld">
-    <div>
+    <div class="bld-left">
       <div class="bld-view" aria-live="polite">
         <div id="b-lid"></div>
         <div class="cap"><span class="name" id="b-name">500TX</span><span>Made to order</span></div>
       </div>
-      <div class="real"><img src="img/painter.webp" alt="" loading="lazy"><p>Then a real person paints it. By hand. With a very small brush.</p></div>
+      <figure class="ig" aria-label="Preview of the post your lid gets">
+        <div class="ig-top"><span class="ig-av">B</span><b>brap_helmet</b></div>
+        <div class="ig-art" id="ig-art"></div>
+        <figcaption><b>brap_helmet</b> <span id="ig-title">Your lid's name</span><br><span id="ig-cap">Special made for @you. Thx mate for brapin' with us 🤘</span></figcaption>
+      </figure>
     </div>
     <form class="opts" id="b-form" novalidate>
       <fieldset class="opt"><legend><span>A</span>Finish</legend><div class="ch">
@@ -447,15 +631,56 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
         <input type="radio" name="size" id="z4" value="L"><label for="z4">L</label>
         <input type="radio" name="size" id="z5" value="XL"><label for="z5">XL</label>
       </div></fieldset>
-      <div class="bld-acts"><button class="btn red-b" type="button" id="b-add">Put my lid in the bag</button><button class="btn ghost" type="button" id="b-rand">Surprise me</button></div>
-      <span class="note-hand">↑ we send a proof before we paint</span>
+      <div class="cm-fields"><label>Name your lid<input id="c-title" maxlength="48" placeholder="A phoenix flame in a black sky" autocomplete="off"></label><label>Your Instagram<input id="c-handle" maxlength="31" placeholder="@yourname" autocomplete="off" autocapitalize="off" spellcheck="false"></label></div>
+      <div class="bld-acts"><button class="btn red-b" type="button" id="b-add">Request my proof</button><button class="btn ghost" type="button" id="b-rand">Surprise me</button></div>
+      <span class="note-hand">no paint goes on until you say yes</span>
     </form>
   </div>
-  <div class="fit" id="fit">
+</div></section>
+
+<section class="sec shop" id="shop"><div class="wrap">
+  <div class="shop-h">
+    <h2>The shop.</h2>
+    <div class="brands" role="tablist" aria-label="Brand">
+      <button type="button" role="tab" aria-selected="true" data-brand="all">All</button>
+      <button type="button" role="tab" aria-selected="false" data-brand="helmet">BRAP Helmet</button>
+      <button type="button" role="tab" aria-selected="false" data-brand="apparel">BRAP Apparel</button>
+      <button type="button" role="tab" aria-selected="false" disabled title="More BRAP brands join the shop later">More brands soon</button>
+    </div>
+  </div>
+  <div class="shop-g">
+    <aside class="filters" aria-label="Filters">
+      <div class="fg"><p>Type</p><div class="chips" data-f="cat"><button type="button" data-v="open" aria-pressed="false">Open face</button><button type="button" data-v="full" aria-pressed="false">Full face</button><button type="button" data-v="apparel" aria-pressed="false">Apparel</button><button type="button" data-v="acc" aria-pressed="false">Accessories</button></div></div>
+      <div class="fg"><p>Finish</p><div class="chips" data-f="fin"><button type="button" data-v="raw" aria-pressed="false">Unfinished</button><button type="button" data-v="enamel" aria-pressed="false">Enamel</button><button type="button" data-v="flake" aria-pressed="false">Flake</button><button type="button" data-v="carbon" aria-pressed="false">Carbon</button><button type="button" data-v="painted" aria-pressed="false">Hand-painted</button></div></div>
+      <div class="fg"><p>Availability</p><div class="chips" data-f="stock"><button type="button" data-v="in" aria-pressed="false">Ready to ship</button><button type="button" data-v="one" aria-pressed="false">One-offs</button></div></div>
+    </aside>
+    <div class="results">
+      <div class="res-bar"><p id="count">17 items</p><label>Sort <select id="sort"><option value="feat">Featured</option><option value="stock">Ready to ship first</option><option value="az">A to Z</option></select></label></div>
+      <ul class="grid" id="grid"></ul>
+      <p class="none" id="none" hidden>Nothing matches. Clear a filter, or <a href="#commission">commission exactly what you want</a>.</p>
+    </div>
+  </div>
+</div></section>
+
+<section class="apparel" id="apparel">
+  <div class="wrap app-g">
+    <div class="app-t">
+      <p class="kick">BRAP Apparel. Drop 01, December 2026.</p>
+      <h2>Workwear, reworked.</h2>
+      <p class="lede">Same garage, softer material. Combed cotton, 230gsm, screen printed by hand. Cut boxy, made to be ridden in and worn out.</p>
+      <ul class="app-specs"><li>Boxy Tee, Brap Tour</li><li>#1 Victory Coach Jacket</li><li>Brap Type Rope Cap</li><li>Helmet Bag</li></ul>
+    </div>
+    <div class="app-ph">
+      <figure class="a1"><img src="img/a-jacket.webp" alt="Model in the red BRAP #1 Victory coach jacket and white cap" loading="lazy" width="640" height="800"></figure>
+      <figure class="a2"><img src="img/a-tee.webp" alt="Model in the red BRAP boxy tee wearing a black BRAP helmet" loading="lazy" width="640" height="800"></figure>
+      <figure class="a3"><img src="img/a-work.webp" alt="BRAP rope cap and coach jacket lookbook page" loading="lazy" width="640" height="800"></figure>
+    </div>
+  </div>
+  <div class="wrap fit" id="fit">
     <div class="fit-view" id="fit-view"></div>
     <div>
       <h3>Mix your fit.</h3>
-      <p style="color:var(--mute-d);margin-bottom:24px;max-width:44ch">Match your threads to your lid. Swap colours and prints until it feels like you.</p>
+      <p class="fit-p">Match your threads to your lid. Swap colours and prints until it feels like you.</p>
       <form class="opts" id="fit-form" novalidate>
       <fieldset class="opt"><legend><span>1</span>Tee colour</legend><div class="ch sw" id="tee-col"></div></fieldset>
       <fieldset class="opt"><legend><span>2</span>Print</legend><div class="ch">
@@ -469,48 +694,79 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     </form>
     </div>
   </div>
-</div></section>
+</section>
 
-<section class="rides" aria-label="Riding">
-  <div class="wrap"><p class="quote">Not every journey is about finding a destination.</p><p>Brap riders, out there</p></div>
-  <div class="reel" tabindex="0">
-    <figure><img src="img/scrambler.webp" alt="A rider on a scrambler on the beach at dusk" loading="lazy" width="916" height="1221"><figcaption>Low tide</figcaption></figure>
-    <figure><img src="img/road.webp" alt="A scooter rider on an empty coastal road" loading="lazy" width="682" height="454"><figcaption>The long way</figcaption></figure>
-    <figure><img src="img/night.webp" alt="A rider on an old enduro bike at night" loading="lazy" width="478" height="714"><figcaption>After hours</figcaption></figure>
-    <figure><img src="img/mount.webp" alt="A rider and bike in front of green mountains" loading="lazy" width="916" height="1221"><figcaption>Up high</figcaption></figure>
-    <figure><img src="img/beach.webp" alt="A rider napping on a motorcycle on the sand" loading="lazy" width="478" height="854"><figcaption>Nowhere to be</figcaption></figure>
-    <figure><img src="img/wall.webp" alt="The BRAP shop wall, stacked with helmets" loading="lazy" width="478" height="854"><figcaption>Home base</figcaption></figure>
+<section class="zine surf" aria-labelledby="surf-t">
+  <div class="wrap">
+    <p class="surf-k type">Field notes. Riders, out there.</p>
+    <h2 id="surf-t" class="surf-h">Not every journey is about finding a destination.</h2>
+    <div class="essay">
+      <figure class="e1 sun"><img src="img/scrambler.webp" alt="A rider on a scrambler on the beach at dusk" loading="lazy" width="916" height="1221"><figcaption class="type">Low tide. Nobody in a hurry.</figcaption></figure>
+      <div class="e2"><p class="drop">You don't buy a BRAP to get somewhere faster. You buy one for the long way round: the coast road, the mountain pass, the stop for coffee that turns into an afternoon.</p><p class="type small">Photos: BRAP riders. Shared on @brap_helmet.</p></div>
+      <figure class="e3 sun"><img src="img/mount.webp" alt="A rider and bike in front of green mountains" loading="lazy" width="916" height="1221"><figcaption class="type">Up high.</figcaption></figure>
+      <figure class="e4 sun"><img src="img/beach.webp" alt="A rider napping on a motorcycle on the sand" loading="lazy" width="478" height="854"><figcaption class="type">Nowhere to be.</figcaption></figure>
+      <figure class="e5 sun"><img src="img/road.webp" alt="A scooter rider on an empty coastal road" loading="lazy" width="682" height="454"><figcaption class="type">The long way.</figcaption></figure>
+      <figure class="e6 sun"><img src="img/night.webp" alt="A rider on an old enduro bike at night" loading="lazy" width="478" height="714"><figcaption class="type">After hours.</figcaption></figure>
+    </div>
   </div>
 </section>
 
+<section class="sec riders" id="riders"><div class="wrap">
+  <div class="sec-h"><h2>Brapin' with us.</h2><p>One garage in Indonesia. Riders across Asia and further. Each region has its own person for prices, shipping and questions.</p></div>
+  <ul class="regions">
+    <li class="home"><span class="cc">ID</span><h3>Indonesia</h3><p>The garage. Where every shell is laid up.</p></li>
+    <li><span class="cc">KR</span><h3>South Korea</h3><p>Dealer: <a href="https://www.instagram.com/ggandomet/" target="_blank" rel="noopener">@ggandomet</a>. Riders here matched a BRAP to the Vespa 80th colours.</p></li>
+    <li><span class="cc">JP</span><h3>Japan</h3><p>Local contact at launch.</p></li>
+    <li><span class="cc">MY</span><h3>Malaysia</h3><p>Local contact at launch.</p></li>
+    <li><span class="cc">SG</span><h3>Singapore</h3><p>Local contact at launch.</p></li>
+    <li><span class="cc">🌏</span><h3>Everywhere else</h3><p>We ship worldwide. Message us first.</p></li>
+  </ul>
+  <p class="tagline">Ride in a BRAP? Tag <b>#braphelmet</b> and you might end up on this page.</p>
+</div></section>
+
 <section class="sec how" id="order"><div class="wrap">
-  <div class="sec-h"><h2>How to order.</h2><p>Stock pieces ship fast. Custom lids take longer, because someone is making yours.</p></div>
+  <div class="sec-h"><h2>How to order.</h2><p>Ready-to-ship pieces go out fast. Commissions take longer, because someone is making yours.</p></div>
   <ol>
-    <li><h3>Pick or sketch</h3><p>Choose from the catalogue, or sketch your own lid.</p></li>
+    <li><h3>Pick or commission</h3><p>Buy from the shop, or sketch your own lid.</p></li>
     <li><h3>Check out</h3><p>Pay online. Shipping is worked out for your country and box size.</p></li>
-    <li><h3>We make it</h3><p>Custom lids get a proof first. Then the garage gets to work.</p></li>
+    <li><h3>We make it</h3><p>Commissions get a proof first. Then the garage gets to work.</p></li>
     <li><h3>It ships</h3><p>Boxed, tracked and on its way, wherever you ride.</p></li>
   </ol>
   <p class="pay"><b>At launch:</b> cards, PayPal, Apple Pay and Google Pay. Worldwide shipping.</p>
 </div></section>
 
-<section class="sec about" id="about"><div class="wrap">
-  <p class="big">Born 2019.<br>Raised in lockdown.<br>Never <s>enough</s>.</p>
-  <div class="cols">
-    <div><h3>Made by hand</h3><p>Fibreglass, resin, carbon and enamel paint. Old methods, on purpose.</p></div>
-    <div><h3>Ride free</h3><p>Open roads, big skies, nature all around. That is the world a BRAP is made for.</p></div>
-    <div><h3>What we stand against</h3><p>Oppression, injustice and misery. Also boring helmets.</p></div>
+<section class="zine skate" id="about" aria-labelledby="ab-t">
+  <div class="wrap skate-g">
+    <div class="strips">
+      <h2 id="ab-t" class="sr">About BRAP</h2>
+      <p class="strip s1">Born 2019.</p>
+      <p class="strip s2">Raised in lockdown.</p>
+      <p class="strip s3">Never <s>enough</s>.</p>
+      <div class="xerox halftone"><img src="img/workshop.webp" alt="The BRAP garage at night, a maker working under a hanging lamp" loading="lazy" width="686" height="1221"></div>
+    </div>
+    <div class="skate-t">
+      <p class="type">It started in one garage in 2019 and took off while the world stayed home. Now it is a helmet brand, a clothing line and a crowd of riders who wave at each other on the road.</p>
+      <div class="cols">
+        <div><h3>Made by hand</h3><p>Fibreglass, resin, carbon and enamel paint. Old methods, on purpose.</p></div>
+        <div><h3>Ride free</h3><p>Open roads, big skies, nature all around. That is the world a BRAP is made for.</p></div>
+        <div><h3>Against</h3><p>Oppression, injustice and misery. Also boring helmets.</p></div>
+      </div>
+      <div class="wallstencil" aria-hidden="true"><svg viewBox="0 0 660 170"><g filter="url(#spray)"><text x="4" y="70" font-family="'Big Shoulders Stencil Display',Impact,sans-serif" font-weight="900" font-size="66" fill="#f1eadc">HANDMADE MEANS SLOW.</text><text x="4" y="150" font-family="'Big Shoulders Stencil Display',Impact,sans-serif" font-weight="900" font-size="66" fill="#d62906">DEAL WITH IT.</text></g></svg></div>
+    </div>
   </div>
-</div></section>
+</section>
 
-<section class="sec uni" id="universe" style="padding-top:0"><div class="wrap">
+<section class="sec uni" id="universe"><div class="wrap">
   <div class="sec-h"><h2>The BRAP universe.</h2><p>One garage, a lot of side roads.</p></div>
   <ul>
+    <li class="live"><h3>BRAP Helmet</h3><p>Lids, since 2019. You are here.</p></li>
+    <li class="live"><h3>BRAP Apparel</h3><p>Drop 01, December 2026.</p></li>
+    <li><h3>BRAP Fibrecase</h3><p><a href="https://www.instagram.com/brap_fibrecase/" target="_blank" rel="noopener">@brap_fibrecase</a></p></li>
     <li><h3>BRAP Chopshit</h3><p>Link coming soon</p></li>
     <li><h3>Rolliemonkie</h3><p>Link coming soon</p></li>
     <li><h3>Bolt</h3><p>Link coming soon</p></li>
     <li><h3>HellYeah</h3><p>Link coming soon</p></li>
-    <li><h3>BRAP Fibrecase</h3><p><a href="https://www.instagram.com/brap_fibrecase/" target="_blank" rel="noopener">@brap_fibrecase</a></p></li>
+    <li><h3>Speakers &amp; surfboards</h3><p>Coming from the same garage.</p></li>
     <li><h3>The catalogue</h3><p><a href="https://www.instagram.com/brap_helmet.catalogue/" target="_blank" rel="noopener">@brap_helmet.catalogue</a></p></li>
   </ul>
 </div></section>
@@ -595,25 +851,52 @@ function cap(col,label){
 }
 
 function ph(n,alt){return '<img src="img/'+n+'.webp" alt="'+alt+'" loading="lazy">'}
+/* stock: true = ready to ship, false = one-off already made for a rider */
 var P=[
- {id:'tx',k:'helmet',name:'500TX',sub:'The slim open-face. Our most-loved shape.',art:function(){return ph('h-orange','500TX helmet in orange with white flames')},sizes:1},
- {id:'mxt',k:'helmet',name:'Mini MXT',sub:'Small-shell full face with the lightning vent.',art:function(){return ph('h-mxtflame','Mini MXT full-face helmet with flames')},sizes:1},
- {id:'leg',k:'helmet',name:'500 Legend',sub:'Leather trim, white stitching, old soul.',art:function(){return ph('h-checker','500 Legend helmet in red and white checker')},sizes:1},
- {id:'flk',k:'helmet',name:'500TX Flake',sub:'Heavy metal flake. Catches every light.',art:function(){return ph('badge','Gold metal flake helmet close-up')},sizes:1},
- {id:'tee',k:'apparel',name:'Boxy Tee, Brap Tour',sub:'230gsm combed cotton, screen printed by hand.',art:function(){return ph('a-tee','Model wearing the red BRAP boxy tee')},sizes:1},
- {id:'jkt',k:'apparel',name:'#1 Victory Coach Jacket',sub:'Fleece lined. Black, red or white.',art:function(){return ph('a-jacket','Model wearing the red BRAP coach jacket')},sizes:1},
- {id:'cap',k:'apparel',name:'Brap Type Rope Cap',sub:'Workwear, reworked.',art:function(){return ph('a-work','BRAP rope cap and coach jacket')}},
- {id:'bag',k:'acc',name:'Helmet Bag',sub:'150g crinkle shell, water repellent.',art:function(){return ph('a-bag','Black BRAP helmet bag')}}
+ {id:'tx',b:'helmet',cat:'open',fin:'painted',stock:true,name:'500TX',sub:'The slim open face. Our most-loved shape.',img:'h-orange',alt:'500TX in orange with white pinstripe flames',sizes:1},
+ {id:'unf',b:'helmet',cat:'open',fin:'raw',stock:true,name:'500TX Unfinished',sub:'Raw fibreglass. The one that started it.',svg:1,alt:'500TX in raw unfinished fibreglass',sizes:1},
+ {id:'mxt',b:'helmet',cat:'full',fin:'enamel',stock:true,name:'Mini MXT',sub:'Small-shell full face with the lightning vent.',img:'h-mxtflame',alt:'Mini MXT, white with flames',sizes:1},
+ {id:'leg',b:'helmet',cat:'open',fin:'enamel',stock:true,name:'500 Legend',sub:'Leather trim, white stitching, old soul.',img:'h-checker',alt:'500 Legend in red and white checker',sizes:1},
+ {id:'flk',b:'helmet',cat:'open',fin:'flake',stock:true,name:'500TX Flake',sub:'Heavy metal flake. Catches every light.',img:'badge',alt:'Gold metal flake with the BRAP badge',sizes:1},
+ {id:'grn',b:'helmet',cat:'full',fin:'raw',stock:true,name:'Mini MXT Exposed',sub:'Exposed fibreglass, deep green. Simple. Tough.',img:'green',alt:'Three Mini MXT helmets in exposed green fibreglass',sizes:1},
+ {id:'tee',b:'apparel',cat:'apparel',fin:'',stock:true,name:'Boxy Tee, Brap Tour',sub:'230gsm combed cotton, screen printed by hand.',img:'a-tee',alt:'Model in the red BRAP boxy tee',sizes:1},
+ {id:'jkt',b:'apparel',cat:'apparel',fin:'',stock:true,name:'#1 Victory Coach Jacket',sub:'Fleece lined. Black, red or white.',img:'a-jacket',alt:'Model in the red BRAP coach jacket',sizes:1},
+ {id:'cap',b:'apparel',cat:'apparel',fin:'',stock:true,name:'Brap Type Rope Cap',sub:'Workwear, reworked.',img:'a-work',alt:'BRAP rope cap and coach jacket'},
+ {id:'bag',b:'apparel',cat:'acc',fin:'',stock:true,name:'Helmet Bag',sub:'150g crinkle shell, water repellent.',img:'a-bag',alt:'Black BRAP helmet bag'},
+ {id:'phx',b:'helmet',cat:'open',fin:'painted',stock:false,name:'A phoenix flame in a black sky',sub:'500TX. Made for one rider.',img:'h-phoenix',alt:'Black 500TX with orange flames'},
+ {id:'rst',b:'helmet',cat:'open',fin:'painted',stock:false,name:'THIS IS RUSTY!!!',sub:'500TX in a real rust finish.',img:'h-rusty',alt:'500TX in a rust finish'},
+ {id:'tgr',b:'helmet',cat:'open',fin:'painted',stock:false,name:'The dragon and the tigre',sub:'500TX, hand-painted.',img:'h-tiger',alt:'500TX with a hand-painted tiger'},
+ {id:'txl',b:'helmet',cat:'full',fin:'carbon',stock:false,name:'It\'s a statement',sub:'Mini MXT, Texalium carbon in red.',img:'h-mxtred',alt:'Mini MXT in red carbon weave'},
+ {id:'stl',b:'helmet',cat:'open',fin:'painted',stock:false,name:'Stainless steel 304',sub:'500 Legend, steel look, pinstripe flames.',img:'h-silver',alt:'Brushed steel look helmet with pinstriped flames'},
+ {id:'sil',b:'helmet',cat:'open',fin:'carbon',stock:false,name:'Silver can do anything',sub:'500TX, gold and silver carbon weave.',img:'h-union',alt:'Gold and silver carbon helmet'},
+ {id:'lud',b:'helmet',cat:'full',fin:'enamel',stock:false,name:'No need to blend in',sub:'Mini MXT, loud colours.',img:'h-loud',alt:'Mini MXT in red, orange and yellow shards'}
 ];
-var grid=document.getElementById('grid');
-function renderGrid(f){
-  grid.innerHTML=P.filter(function(p){return f==='all'||p.k===f}).map(function(p){
-    return '<li class="card"><div class="art">'+p.art()+'</div><div class="meta"><h3>'+p.name+'</h3><p>'+p.sub+'</p><p class="price">Price at launch</p><div class="row">'+(p.sizes?'<select class="sz" aria-label="Size for '+p.name+'"><option>XS</option><option>S</option><option selected>M</option><option>L</option><option>XL</option></select>':'')+'<button class="add" type="button" data-id="'+p.id+'">Add to bag</button></div></div></li>';
+function art(p){return p.svg?lid({fin:'raw',col:'black',gfx:'none',vis:'white',label:p.alt}):ph(p.img,p.alt)}
+var grid=document.getElementById('grid'),cnt=document.getElementById('count'),none=document.getElementById('none'),sortEl=document.getElementById('sort');
+var F={brand:'all',cat:[],fin:[],stock:[]};
+function renderGrid(){
+  var list=P.filter(function(p){
+    if(F.brand!=='all'&&p.b!==F.brand)return false;
+    if(F.cat.length&&F.cat.indexOf(p.cat)<0)return false;
+    if(F.fin.length&&F.fin.indexOf(p.fin)<0)return false;
+    if(F.stock.length&&F.stock.indexOf(p.stock?'in':'one')<0)return false;
+    return true;
+  });
+  if(sortEl.value==='az')list.sort(function(a,b){return a.name.localeCompare(b.name)});
+  else if(sortEl.value==='stock')list.sort(function(a,b){return (b.stock?1:0)-(a.stock?1:0)});
+  cnt.textContent=list.length+(list.length===1?' item':' items');none.hidden=list.length>0;
+  grid.innerHTML=list.map(function(p){
+    var act=p.stock?(p.sizes?'<select class="sz" aria-label="Size for '+esc(p.name)+'"><option>XS</option><option>S</option><option selected>M</option><option>L</option><option>XL</option></select>':'')+'<button class="add" type="button" data-id="'+p.id+'">Add to bag</button>'
+      :'<a class="com" href="#commission" data-like="'+p.id+'">Commission one like it</a>';
+    return '<li class="card">'+(p.stock?'':'<span class="flag one">One-off, gone</span>')+'<div class="art">'+art(p)+'</div><div class="meta"><h3>'+esc(p.name)+'</h3><p>'+esc(p.sub)+'</p><p class="price">'+(p.stock?'Price at launch':'Made for one rider')+'</p><div class="row">'+act+'</div></div></li>';
   }).join('');
 }
-renderGrid('all');
-document.querySelectorAll('.tabs button').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.tabs button').forEach(function(x){x.setAttribute('aria-selected',x===b)});renderGrid(b.dataset.f)})});
-grid.addEventListener('click',function(e){var b=e.target.closest('.add');if(!b)return;var p=P.filter(function(x){return x.id===b.dataset.id})[0],sz=b.parentNode.querySelector('.sz');add({name:p.name,note:sz?'Size '+sz.value:'One size',art:p.art()})});
+document.querySelectorAll('.brands [data-brand]').forEach(function(b){b.addEventListener('click',function(){F.brand=b.dataset.brand;document.querySelectorAll('.brands [data-brand]').forEach(function(x){x.setAttribute('aria-selected',x===b)});renderGrid()})});
+document.querySelectorAll('.chips').forEach(function(g){g.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var k=g.dataset.f,v=b.dataset.v,arr=F[k],i=arr.indexOf(v);if(i<0)arr.push(v);else arr.splice(i,1);b.setAttribute('aria-pressed',i<0);renderGrid()})});
+sortEl.addEventListener('change',renderGrid);
+grid.addEventListener('click',function(e){
+  var c=e.target.closest('[data-like]');if(c){var q=P.filter(function(x){return x.id===c.dataset.like})[0];setTimeout(function(){var t=document.getElementById('c-title');if(t&&!t.value){t.value='Something like "'+q.name+'"';igDraw()}},50);return}
+  var b=e.target.closest('.add');if(!b)return;var p=P.filter(function(x){return x.id===b.dataset.id})[0],sz=b.parentNode.querySelector('.sz');add({name:p.name,note:sz?'Size '+sz.value:'One size',art:art(p)})});
 
 /* ---------- bag ---------- */
 var bag=[],dr=document.getElementById('drawer'),lines=document.getElementById('lines'),bn=document.getElementById('bag-n'),bb=document.getElementById('bag-open'),toastEl=document.getElementById('toast'),tt;
@@ -629,7 +912,7 @@ dr.addEventListener('click',function(e){if(e.target.closest('[data-close]'))clos
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&dr.classList.contains('open'))closeBag()});
 document.getElementById('checkout').addEventListener('click',function(){toast(bag.length?'Concept: checkout goes live at launch':'Your bag is empty')});
 drawBag();
-
+renderGrid();
 
 /* ---------- builder ---------- */
 var bf=document.getElementById('b-form'),bcol=document.getElementById('b-col'),bview=document.getElementById('b-lid'),bname=document.getElementById('b-name'),btag=document.getElementById('b-tag');
@@ -637,10 +920,14 @@ var bf=document.getElementById('b-form'),bcol=document.getElementById('b-col'),b
 function bval(n){var x=bf.querySelector('input[name='+n+']:checked');return x?x.value:''}
 function bstate(){return {fin:bval('fin'),col:bval('col'),gfx:bval('gfx'),vis:bval('vis'),tag:btag.value.trim().toUpperCase(),size:bval('size')}}
 var FN={raw:'Raw',gloss:'Enamel',matte:'Matte',flake:'Flake'};
-function bdraw(){var s=bstate();bview.innerHTML=lid({fin:s.fin,col:s.col,gfx:s.gfx,vis:s.vis,tag:s.tag,label:'Your custom 500TX helmet'});bname.textContent='500TX, '+FN[s.fin]+(s.fin==='raw'?'':' '+s.col)+(s.gfx!=='none'?', '+s.gfx:'')}
+var cTitle=document.getElementById('c-title'),cHandle=document.getElementById('c-handle'),igArt=document.getElementById('ig-art'),igT=document.getElementById('ig-title'),igC=document.getElementById('ig-cap');
+function handle(){return cHandle.value.replace(/[^A-Za-z0-9._]/g,'').slice(0,30)}
+function igDraw(){var t=cTitle.value.trim();igT.textContent=t||'Your lid\'s name';igC.textContent='Special made for @'+(handle()||'you')+'. Thx mate for brapin\' with us 🤘'}
+[cTitle,cHandle].forEach(function(x){x.addEventListener('input',igDraw)});
+function bdraw(){var s=bstate();bview.innerHTML=lid({fin:s.fin,col:s.col,gfx:s.gfx,vis:s.vis,tag:s.tag,label:'Your custom 500TX helmet'});igArt.innerHTML=lid({fin:s.fin,col:s.col,gfx:s.gfx,vis:s.vis,tag:s.tag,label:'Your lid in the post'});igDraw();bname.textContent='500TX, '+FN[s.fin]+(s.fin==='raw'?'':' '+s.col)+(s.gfx!=='none'?', '+s.gfx:'')}
 bf.addEventListener('change',function(e){if(e.target.name==='col'&&bval('fin')==='raw')bf.querySelector('#f2').checked=true;bdraw();sfx()});btag.addEventListener('input',bdraw);
 document.getElementById('b-rand').addEventListener('click',function(){['fin','col','gfx','vis'].forEach(function(n){var o=bf.querySelectorAll('input[name='+n+']');o[Math.floor(Math.random()*o.length)].checked=true});bdraw();sfx()});
-document.getElementById('b-add').addEventListener('click',function(){var s=bstate();add({name:'Custom 500TX',note:FN[s.fin]+(s.fin==='raw'?'':', '+s.col)+', '+s.gfx+', visor '+s.vis+', size '+s.size+(s.tag?', “'+s.tag+'”':''),art:lid(s)})});
+document.getElementById('b-add').addEventListener('click',function(){var s=bstate(),t=cTitle.value.trim(),h=handle();add({name:t?'Commission: '+t:'Commission: custom 500TX',note:(h?'For @'+h+'. ':'')+FN[s.fin]+(s.fin==='raw'?'':', '+s.col)+', '+s.gfx+', visor '+s.vis+', size '+s.size+(s.tag?', “'+s.tag+'”':''),art:lid(s)})});
 bdraw();
 
 /* ---------- fit ---------- */
