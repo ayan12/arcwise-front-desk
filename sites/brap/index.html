@@ -3,320 +3,357 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>BRAP | Your lid. Your flames. Your world.</title>
-<meta name="description" content="BRAP. Handmade slim-profile helmets and apparel, born in 2019. Build your own lid, mix your fit, and order online.">
+<title>BRAP Helmet | Handmade fibreglass lids since 2019</title>
+<meta name="description" content="BRAP Helmet. Traditional fibreglass manufacturing since 2019. Handmade lids and apparel, shipped worldwide.">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#ede6d8">
+<meta name="theme-color" content="#0f0d0c">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800&family=Permanent+Marker&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800;900&family=Permanent+Marker&display=swap">
 <style>
-:root{--paper:#ede6d8;--paper-2:#e2d9c6;--ink:#121110;--ink-2:#1d1b19;--red:#d62906;--red-d:#a81f03;--bone:#f6f1e6;--mute:#5d5850;--line:#121110;--disp:"Bebas Neue",Impact,"Arial Narrow",sans-serif;--body:Montserrat,system-ui,sans-serif;--hand:"Permanent Marker",cursive;color-scheme:light}
+:root{--night:#0f0d0c;--night-2:#191614;--line:#2e2925;--bone:#f1eadc;--paper:#e9e1d0;--ink:#141211;--red:#d62906;--mute:#a39a8d;--mute-d:#5f584f;--head:Montserrat,"Arial Black",system-ui,sans-serif;--lab:"Bebas Neue",Impact,sans-serif;--hand:"Permanent Marker",cursive;color-scheme:dark}
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth}
-body{background:var(--paper);color:var(--ink);font:500 16px/1.55 var(--body);-webkit-font-smoothing:antialiased;overflow-x:clip}
-body::before{content:"";position:fixed;inset:0;z-index:100;pointer-events:none;opacity:.32;mix-blend-mode:multiply;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .1 0 0 0 0 .08 0 0 0 0 .06 0 0 0 .35 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E")}
+body{background:var(--night);color:var(--bone);font:500 16px/1.6 var(--head);-webkit-font-smoothing:antialiased;overflow-x:clip}
+body::after{content:"";position:fixed;inset:0;z-index:80;pointer-events:none;opacity:.2;mix-blend-mode:overlay;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E")}
 img,svg{max-width:100%;display:block}
 a{color:inherit}
 button{font:inherit;color:inherit;cursor:pointer}
 :focus-visible{outline:3px solid var(--red);outline-offset:3px}
-.wrap{max-width:1320px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
-.disp{font-family:var(--disp);font-weight:400;letter-spacing:.01em;line-height:.86;text-transform:uppercase}
-.hand{font-family:var(--hand)}
+.wrap{max-width:1280px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--head);font-weight:900;text-transform:uppercase;letter-spacing:-.025em;line-height:.92;text-wrap:balance}
+h2{font-size:clamp(38px,5.4vw,76px)}
+.hand{font-family:var(--hand);font-weight:400;letter-spacing:0;text-transform:none}
 .red{color:var(--red)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 26px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);font:800 14px var(--body);letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:transform .15s,box-shadow .15s,background .15s;box-shadow:4px 4px 0 var(--red)}
-.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--red)}
-.btn:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--red)}
-.btn.red-b{background:var(--red);border-color:var(--red);color:#fff;box-shadow:4px 4px 0 var(--ink)}
-.btn.red-b:hover{box-shadow:6px 6px 0 var(--ink)}
-.btn.ghost{background:transparent;color:var(--ink)}
-.concept{background:var(--ink);color:#9d968a;font:500 12px var(--body);text-align:center;padding:6px 16px}
+.lede{font-size:clamp(16px,1.35vw,19px);color:var(--mute);max-width:46ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 28px;border:2px solid var(--bone);background:var(--bone);color:var(--ink);font:800 14px var(--head);letter-spacing:.04em;text-transform:uppercase;text-decoration:none;transition:background .2s,color .2s,border-color .2s}
+.btn:hover{background:var(--red);border-color:var(--red);color:#fff}
+.btn.line{background:transparent;color:var(--bone)}
+.btn.red-b{background:var(--red);border-color:var(--red);color:#fff}
+.btn.red-b:hover{background:var(--ink);border-color:var(--ink)}
+.concept{background:#000;color:#8d857a;font:500 12px var(--head);text-align:center;padding:6px 16px}
 
-/* ===== masthead bar ===== */
-.bar{position:sticky;top:0;z-index:60;background:var(--paper);border-bottom:2px solid var(--ink)}
-.bar .wrap{display:flex;align-items:center;gap:18px;min-height:58px}
-.bar .logo{font:400 34px/1 var(--disp);letter-spacing:.02em;text-decoration:none;color:var(--red);margin-right:6px}
-.bar nav{display:flex;gap:22px;margin-right:auto}
-.bar nav a{font:700 13px var(--body);letter-spacing:.14em;text-transform:uppercase;text-decoration:none}
-.bar nav a:hover{color:var(--red)}
-.tog{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--ink);background:transparent;min-height:40px;padding:0 12px;font:800 12px var(--body);letter-spacing:.12em;text-transform:uppercase}
-.tog i{display:flex;gap:2px;align-items:flex-end;height:14px}
-.tog i b{width:3px;background:currentColor;height:4px;transition:height .2s}
-.tog[aria-pressed=true]{background:var(--ink);color:var(--paper)}
-.tog[aria-pressed=true] i b{animation:eq .7s ease-in-out infinite alternate}
-.tog[aria-pressed=true] i b:nth-child(2){animation-delay:.2s}.tog[aria-pressed=true] i b:nth-child(3){animation-delay:.4s}
+.bar{position:sticky;top:0;z-index:60;background:rgba(15,13,12,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;gap:22px;min-height:62px}
+.logo{display:inline-flex;align-items:center;gap:6px;background:var(--bone);color:var(--red);border:2px solid var(--red);border-radius:9px;padding:3px 10px 2px;font:400 26px/1 var(--lab);letter-spacing:.04em;text-decoration:none;transform:rotate(-2deg)}
+.logo svg{width:13px;height:20px}
+.bar nav{display:flex;gap:24px;margin:0 auto 0 14px}
+.bar nav a{font:700 13.5px var(--head);text-decoration:none;color:var(--mute)}
+.bar nav a:hover{color:var(--bone)}
+.tog{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);background:transparent;border-radius:99px;min-height:40px;padding:0 14px;font:700 12.5px var(--head);color:var(--mute)}
+.tog i{display:flex;gap:2px;align-items:center;height:14px}
+.tog i b{width:2px;background:currentColor;height:4px;border-radius:2px}
+.tog[aria-pressed=true]{color:var(--bone);border-color:var(--bone)}
+.tog[aria-pressed=true] i b{animation:eq 1.6s ease-in-out infinite alternate}
+.tog[aria-pressed=true] i b:nth-child(2){animation-delay:.5s}.tog[aria-pressed=true] i b:nth-child(3){animation-delay:1s}
 @keyframes eq{from{height:3px}to{height:14px}}
-.bag-btn{position:relative;border:2px solid var(--ink);background:var(--red);color:#fff;min-height:40px;padding:0 14px;font:800 12px var(--body);letter-spacing:.12em;text-transform:uppercase}
-.bag-btn b{display:inline-grid;place-items:center;min-width:20px;height:20px;margin-left:6px;background:#fff;color:var(--ink);border-radius:50%;font-size:11px}
-.bag-btn.bump{animation:bump .4s}
-@keyframes bump{40%{transform:scale(1.15) rotate(-4deg)}}
+.bag-btn{border:0;background:var(--red);color:#fff;border-radius:99px;min-height:40px;padding:0 16px;font:800 12.5px var(--head)}
+.bag-btn b{display:inline-grid;place-items:center;min-width:20px;height:20px;margin-left:8px;background:#fff;color:var(--ink);border-radius:50%;font-size:11px}
 
-/* ===== COVER (sticky, scroll paints the lid) ===== */
-.cover{position:relative;height:230vh;height:230svh;border-bottom:2px solid var(--ink)}
-.cover-in{position:sticky;top:58px;height:calc(100vh - 58px);height:calc(100svh - 58px);overflow:hidden;display:grid;grid-template-rows:auto 1fr auto}
-.issue{display:flex;justify-content:space-between;gap:12px;padding:12px 0 0;font:800 11.5px var(--body);letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid var(--ink);padding-bottom:10px}
-.mast{position:absolute;left:0;right:0;top:38px;text-align:center;font:400 clamp(150px,34vw,520px)/.78 var(--disp);color:var(--red);letter-spacing:-.01em;pointer-events:none;user-select:none;white-space:nowrap}
-.mast span{display:inline-block;transition:transform .4s cubic-bezier(.3,1.6,.5,1)}
-.revving .mast span{animation:shake .08s linear infinite}
-.revving .mast span:nth-child(2){animation-delay:.02s}.revving .mast span:nth-child(3){animation-delay:.04s}.revving .mast span:nth-child(4){animation-delay:.06s}
-@keyframes shake{0%{transform:translate(0,0)}25%{transform:translate(2px,-1px)}50%{transform:translate(-2px,1px)}75%{transform:translate(1px,2px)}}
-.lid-stage{position:relative;display:grid;place-items:center;z-index:2;min-height:0;padding-top:clamp(70px,11vw,150px);padding-bottom:10px}
-.lid-stage>div,.lid-stage svg{height:100%;min-height:0}
-.lid-stage svg{width:auto;max-width:88vw;max-height:62vh;margin:0 auto;filter:drop-shadow(12px 14px 0 rgba(18,17,16,.9))}
-.coverlines{position:absolute;inset:0;z-index:3;pointer-events:none}
-.cl{position:absolute;max-width:270px;pointer-events:auto}
-.cl .disp{font-size:clamp(34px,3.6vw,54px)}
-.cl p{font-size:14px;font-weight:600;margin-top:6px}
-.cl.a{left:0;top:46%}.cl.b{right:0;top:30%;text-align:right}
-.sticker{position:absolute;z-index:4;left:56%;top:24%;transform:rotate(-12deg);background:var(--ink);color:var(--paper);padding:10px 16px;font:400 28px/1 var(--disp);letter-spacing:.04em;border:3px solid var(--paper);box-shadow:0 0 0 2px var(--ink)}
-.sticker small{display:block;font:800 10px var(--body);letter-spacing:.2em;color:var(--red);margin-top:4px}
-.state{display:flex;justify-content:space-between;align-items:end;gap:16px;padding:8px 0 12px;border-top:1px solid var(--ink)}
-.state .disp{font-size:clamp(44px,5vw,76px)}
-.state .now{transition:color .3s}
-.meter{flex:1;max-width:420px;height:12px;border:2px solid var(--ink);position:relative;margin-bottom:12px}
-.meter b{position:absolute;inset:0;background:var(--red);transform-origin:0 50%;transform:scaleX(0)}
-.meter small{position:absolute;top:-22px;left:0;font:800 10.5px var(--body);letter-spacing:.2em;text-transform:uppercase}
-.rev{position:absolute;z-index:5;right:max(18px,env(safe-area-inset-right,0px));bottom:130px;width:92px;height:92px;border-radius:50%;border:3px solid var(--ink);background:var(--red);color:#fff;font:400 26px/1 var(--disp);letter-spacing:.04em;box-shadow:4px 4px 0 var(--ink);transform:rotate(-8deg)}
-.rev small{display:block;font:800 9px var(--body);letter-spacing:.14em}
-.rev:active{transform:rotate(-8deg) scale(.94)}
+/* hero: dim outside, bright within */
+.hero{position:relative;padding-block:clamp(36px,6vw,84px) clamp(56px,8vw,110px);overflow:hidden}
+.hero-g{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(28px,5vw,80px);align-items:center}
+.since{font:400 19px var(--lab);letter-spacing:.14em;color:var(--red);margin-bottom:22px}
+.hero h1{font-size:clamp(50px,7.4vw,112px);margin-bottom:26px}
+.hero h1 span{display:block;white-space:nowrap}
+.hero .acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.hero .note{margin-top:26px;font-size:19px;color:var(--bone);transform:rotate(-2deg);display:inline-block}
+.stills{position:relative;justify-self:end;width:min(100%,500px);padding-bottom:9%}
+.still{position:relative;overflow:hidden;background:#000}
+.still img{width:100%;height:100%;object-fit:cover}
+.still.a{aspect-ratio:4/5.6;box-shadow:0 0 120px rgba(214,120,40,.22)}
+.still.a img{animation:drift 26s ease-in-out infinite alternate}
+@keyframes drift{from{transform:scale(1.02)}to{transform:scale(1.14) translateY(-2%)}}
+.still.b{position:absolute;left:-22%;bottom:0;width:48%;aspect-ratio:3/4;border:8px solid var(--bone);transform:rotate(-5deg);box-shadow:0 18px 40px rgba(0,0,0,.6)}
+.still.b::before{content:"";position:absolute;z-index:2;left:50%;top:-20px;width:84px;height:26px;margin-left:-42px;background:rgba(214,41,6,.85);transform:rotate(3deg)}
+.cap-film{position:absolute;right:0;bottom:calc(9% - 30px);font:400 15px var(--lab);letter-spacing:.14em;color:var(--mute)}
+.open .still.a{animation:iris 1.6s cubic-bezier(.2,.7,.1,1) both}
+.open .still.b{animation:drop 1s .9s cubic-bezier(.2,.9,.2,1) both}
+.open .hero-t>*{animation:rise 1s both}.open .hero-t>*:nth-child(2){animation-delay:.15s}.open .hero-t>*:nth-child(3){animation-delay:.3s}.open .hero-t>*:nth-child(4){animation-delay:.45s}.open .hero-t>*:nth-child(5){animation-delay:.9s}
+@keyframes iris{from{clip-path:inset(46% 0 46% 0)}to{clip-path:inset(0)}}
+@keyframes drop{from{opacity:0;transform:rotate(4deg) translateY(-30px)}to{opacity:1;transform:rotate(-5deg)}}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
-/* ticker */
-.tick{background:var(--ink);color:var(--paper);overflow:hidden;white-space:nowrap;border-bottom:2px solid var(--ink)}
-.tick div{display:inline-flex;gap:34px;padding:12px 0;animation:mq 30s linear infinite;font:400 26px/1 var(--disp);letter-spacing:.05em}
-.tick span::after{content:"\2731";color:var(--red);margin-left:34px}
-@keyframes mq{to{transform:translateX(-50%)}}
+section.sec{padding-block:clamp(64px,9vw,128px)}
+.sec-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:14px 40px;margin-bottom:clamp(28px,4vw,52px)}
+.sec-h p{max-width:40ch;color:var(--mute)}
 
-/* sections */
-section.sec{padding-block:clamp(70px,9vw,120px);border-bottom:2px solid var(--ink)}
-.sec-h{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:end;gap:18px 28px;margin-bottom:42px}
-.sec-h .no{font:400 clamp(70px,9vw,130px)/.8 var(--disp);color:var(--red)}
-.sec-h h2{font:400 clamp(52px,7vw,104px)/.86 var(--disp);text-transform:uppercase}
-.sec-h p{max-width:34ch;font-weight:600;color:var(--mute)}
+/* garage */
+.garage{background:var(--night-2);border-block:1px solid var(--line)}
+.gar{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,80px);align-items:center}
+.gar-ph{position:relative;padding:0 0 12% 10%}
+.gar-ph .p1{aspect-ratio:4/5;overflow:hidden;box-shadow:0 0 140px rgba(255,190,110,.16)}
+.gar-ph .p1 img,.gar-ph .p2 img{width:100%;height:100%;object-fit:cover}
+.gar-ph .p2{position:absolute;left:0;bottom:0;width:44%;aspect-ratio:3/4;overflow:hidden;border:8px solid var(--bone);transform:rotate(4deg);box-shadow:0 18px 40px rgba(0,0,0,.6)}
+.gar-ph .hand{position:absolute;right:-4px;bottom:4%;font-size:19px;color:var(--bone);transform:rotate(-4deg);max-width:46%;text-align:right;line-height:1.25}
+.garage h2 span{display:block}
+.garage .lede{margin-top:20px}
+.steps{list-style:none;padding:0;margin-top:34px;counter-reset:s;border-top:1px solid var(--line)}
+.steps li{counter-increment:s;display:grid;grid-template-columns:44px minmax(0,150px) minmax(0,1fr);gap:6px 14px;padding:15px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.steps li::before{content:counter(s);font:400 26px/1 var(--lab);color:var(--red)}
+.steps b{font:900 17px var(--head);text-transform:uppercase;letter-spacing:-.01em}
+.steps span{color:var(--mute);font-size:15px}
+.steps em{font:400 15px var(--hand);color:var(--red);font-style:normal;margin-left:6px;white-space:nowrap}
+.rev{margin-top:28px;display:inline-flex;align-items:center;gap:12px;background:none;border:0;padding:0;color:var(--mute);font:600 14px var(--head)}
+.rev i{display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:var(--red);color:#fff;font:400 20px var(--lab);font-style:normal;letter-spacing:.04em;transform:rotate(-8deg);transition:transform .15s}
+.rev:hover i{transform:rotate(-8deg) scale(1.06)}.rev.go i{animation:shake .09s linear 14}
+@keyframes shake{0%{transform:rotate(-8deg) translate(0,0)}50%{transform:rotate(-8deg) translate(2px,-2px)}100%{transform:rotate(-8deg) translate(-2px,1px)}}
 
-/* process: the craft */
-.craft{background:var(--ink);color:var(--paper)}
-.craft .sec-h p{color:#b5ad9f}
-.steps{list-style:none;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:2px solid var(--paper)}
-.steps li{padding:22px 18px 26px;border-right:1px solid #3a3631;position:relative;min-height:290px;display:flex;flex-direction:column}
-.steps li:last-child{border-right:0}
-.steps .n{font:400 22px var(--disp);color:var(--red)}
-.steps h3{font:400 40px/.9 var(--disp);margin:8px 0 10px;text-transform:uppercase}
-.steps p{color:#b5ad9f;font-size:14.5px}
-.steps svg{margin-top:auto;width:100%;height:96px}
-.steps li.pick{background:var(--red);color:#fff}.steps li.pick p{color:#ffe3da}.steps li.pick .n{color:var(--ink)}
-.steps li.pick .hand{position:absolute;right:12px;top:14px;transform:rotate(6deg);font-size:15px;color:var(--ink)}
-.weave{animation:lay 6s linear infinite}
-@keyframes lay{to{stroke-dashoffset:-60}}
+/* gallery */
+.gal{columns:4;column-gap:18px;list-style:none;padding:0}
+.gal li{break-inside:avoid;margin-bottom:18px;background:#f6f4f0;color:var(--ink);position:relative}
+.gal img{width:100%;height:auto}
+.gal p{padding:10px 14px 14px;font:400 17px/1.25 var(--hand)}
+.gal small{display:block;font:400 14px var(--lab);letter-spacing:.12em;color:var(--mute-d);margin-top:5px}
+.gal li:nth-child(3n+2){transform:rotate(.7deg)}.gal li:nth-child(4n+1){transform:rotate(-.6deg)}
+.gal li.say{background:var(--red);color:#fff;padding:26px 22px}
+.gal li.say p{padding:0;font:900 clamp(24px,2.4vw,34px)/.95 var(--head);text-transform:uppercase;letter-spacing:-.02em}
+.gal li.say small{color:#ffd9cf;margin-top:14px}
 
-/* catalogue */
-.cat-tabs{display:flex;gap:0;border:2px solid var(--ink);width:max-content;max-width:100%;margin-bottom:28px;overflow:auto}
-.cat-tabs button{border:0;border-right:2px solid var(--ink);background:transparent;padding:12px 20px;font:800 13px var(--body);letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
-.cat-tabs button:last-child{border-right:0}
-.cat-tabs button[aria-selected=true]{background:var(--ink);color:var(--paper)}
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;list-style:none;padding:0}
-.card{background:var(--bone);border:2px solid var(--ink);display:flex;flex-direction:column;position:relative;transition:transform .2s,box-shadow .2s}
-.card:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--ink)}
-.card:nth-child(4n+2){transform:rotate(.6deg)}.card:nth-child(4n+3){transform:rotate(-.5deg)}
-.card:nth-child(4n+2):hover,.card:nth-child(4n+3):hover{transform:translate(-3px,-3px)}
-.card .art{aspect-ratio:1;display:grid;place-items:center;padding:18px;border-bottom:2px solid var(--ink);background:var(--paper-2)}
-.card .art svg{width:100%;height:100%}
-.card .meta{padding:14px 14px 16px;display:grid;gap:4px;flex:1}
-.card .tag{position:absolute;top:10px;left:10px;background:var(--red);color:#fff;font:800 10px var(--body);letter-spacing:.16em;text-transform:uppercase;padding:4px 8px}
-.card h3{font:400 30px/.95 var(--disp);text-transform:uppercase}
+/* shop */
+.tabs{display:flex;gap:8px;margin-bottom:26px;overflow:auto}
+.tabs button{border:1px solid var(--line);background:transparent;border-radius:99px;padding:10px 18px;font:700 13.5px var(--head);color:var(--mute);white-space:nowrap}
+.tabs button[aria-selected=true]{background:var(--bone);border-color:var(--bone);color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;list-style:none;padding:0}
+.card{background:var(--night-2);border:1px solid var(--line);display:flex;flex-direction:column}
+.card .art{aspect-ratio:1;background:#f6f4f0;overflow:hidden}
+.card .art img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.card:hover .art img{transform:scale(1.04)}
+.card .meta{padding:16px;display:grid;gap:5px;flex:1}
+.card h3{font-size:19px;letter-spacing:-.01em;line-height:1.05}
 .card p{font-size:13.5px;color:var(--mute)}
-.card .row{display:flex;gap:8px;align-items:center;margin-top:10px}
-.card .add{flex:1;min-height:44px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);font:800 12px var(--body);letter-spacing:.14em;text-transform:uppercase}
-.card .add:hover{background:var(--red);border-color:var(--red)}
-.card .sz{min-height:44px;border:2px solid var(--ink);background:transparent;font:700 13px var(--body);padding:0 6px}
-.specs{margin-top:28px;font-size:14px;color:var(--mute);max-width:80ch}
-.specs b{color:var(--ink)}
+.card .price{font:400 17px var(--lab);letter-spacing:.1em;color:var(--bone)}
+.card .row{display:flex;gap:8px;margin-top:10px}
+.card .add{flex:1;min-height:46px;border:0;background:var(--bone);color:var(--ink);font:800 12.5px var(--head);text-transform:uppercase;letter-spacing:.04em}
+.card .add:hover{background:var(--red);color:#fff}
+.card .sz{min-height:46px;border:1px solid var(--line);background:var(--night);color:var(--bone);font:700 13px var(--head);padding:0 6px}
+.range{margin-top:26px;color:var(--mute);font-size:14.5px;max-width:80ch}
+.range b{color:var(--bone)}
 
-/* builder */
-.build{background:var(--paper-2)}
-.bld{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(24px,4vw,56px);align-items:start}
-.bld-view{position:sticky;top:78px;background:var(--bone);border:2px solid var(--ink);box-shadow:8px 8px 0 var(--ink);padding:20px;display:grid;gap:10px}
+/* sketchbook (paper: bright within) */
+.paper{background:var(--paper);color:var(--ink);--mute:#5f584f}
+.paper .sec-h p{color:var(--mute-d)}
+.bld{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,4vw,56px);align-items:start}
+.bld-view{position:sticky;top:84px;background:#f6f1e6;border:2px solid var(--ink);padding:20px;display:grid;gap:10px}
 .bld-view svg{width:100%;height:auto}
-.bld-view .cap{display:flex;justify-content:space-between;align-items:center;font:800 12px var(--body);letter-spacing:.16em;text-transform:uppercase;border-top:2px solid var(--ink);padding-top:10px}
-.bld-view .name{font:400 34px/1 var(--disp);letter-spacing:.02em}
+.bld-view .cap{display:flex;justify-content:space-between;gap:10px;align-items:center;font:700 13px var(--head);border-top:2px solid var(--ink);padding-top:10px}
+.bld-view .name{font:400 26px/1 var(--lab);letter-spacing:.04em}
+.real{display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;align-items:center;margin-top:6px}
+.real img{width:96px;height:120px;object-fit:cover;border:5px solid #fff;transform:rotate(-3deg);box-shadow:0 6px 14px rgba(0,0,0,.25)}
+.real p{font:400 17px/1.3 var(--hand)}
 .opts{display:grid;gap:22px}
 .opt{border:0;padding:0;min-width:0}
-.opt legend{font:800 12px var(--body);letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px;padding:0;display:flex;gap:8px;align-items:baseline}
-.opt legend span{font:400 22px var(--disp);color:var(--red)}
+.opt legend,.opt-l{font:800 13px var(--head);margin-bottom:10px;padding:0;display:flex;gap:8px;align-items:baseline}
+.opt legend span{font:400 20px var(--lab);color:var(--red)}
 .ch{display:flex;flex-wrap:wrap;gap:8px}
 .ch input{position:absolute;opacity:0;pointer-events:none;width:1px}
-.ch label{min-height:44px;display:inline-flex;align-items:center;gap:8px;padding:0 14px;border:2px solid var(--ink);background:var(--bone);font:700 13.5px var(--body);cursor:pointer;user-select:none}
-.ch input:checked+label{background:var(--ink);color:var(--paper)}
+.ch label{min-height:44px;display:inline-flex;align-items:center;gap:8px;padding:0 14px;border:2px solid var(--ink);background:#f6f1e6;font:700 13.5px var(--head);cursor:pointer;user-select:none}
+.ch input:checked+label{background:var(--ink);color:var(--bone)}
 .ch input:focus-visible+label{outline:3px solid var(--red);outline-offset:2px}
 .ch.sw label{width:44px;padding:0;justify-content:center;border-radius:50%}
 .ch.sw label i{width:28px;height:28px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.25)}
-.ch.sw input:checked+label{background:var(--bone);box-shadow:0 0 0 3px var(--red)}
-.txt{width:100%;min-height:50px;border:2px solid var(--ink);background:var(--bone);font:400 26px var(--disp);letter-spacing:.06em;padding:0 14px;text-transform:uppercase}
+.ch.sw input:checked+label{background:#f6f1e6;box-shadow:0 0 0 3px var(--red)}
+.txt{width:100%;min-height:50px;border:2px solid var(--ink);background:#f6f1e6;color:var(--ink);font:400 26px var(--lab);letter-spacing:.06em;padding:0 14px;text-transform:uppercase}
 .txt:focus{outline:none;border-color:var(--red)}
 .bld-acts{display:flex;flex-wrap:wrap;gap:12px}
+.paper .btn{border-color:var(--ink);background:var(--ink);color:var(--bone)}
+.paper .btn.red-b{background:var(--red);border-color:var(--red);color:#fff}
+.paper .btn.line{background:transparent;color:var(--ink)}
+.paper .btn:hover{background:var(--red);border-color:var(--red);color:#fff}
 .note-hand{font-family:var(--hand);font-size:17px;color:var(--red);transform:rotate(-2deg);display:inline-block}
+.fit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center;margin-top:clamp(56px,7vw,96px);padding-top:clamp(40px,5vw,64px);border-top:2px dashed var(--ink)}
+.fit h3{font-size:clamp(30px,3.6vw,48px);margin-bottom:10px}
+.fit-view{background:#d9cfb9;border:2px solid var(--ink);padding:24px;display:grid;grid-template-columns:1fr .7fr;align-items:end;gap:10px;min-height:380px}
+.fit-view .cap{width:90%;justify-self:center;margin-bottom:40%}
 
-/* fit */
-.fit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
-.fit-view{position:relative;background:#cdc2ab;border:2px solid var(--ink);padding:24px;display:grid;grid-template-columns:1fr .7fr;align-items:end;gap:10px;min-height:440px;overflow:hidden}
-.fit-view::before{content:"YOUR FIT";position:absolute;left:14px;top:4px;font:400 120px/.9 var(--disp);color:#bfb39a}
-.fit-view svg{position:relative}
-.fit-view .tee{width:100%}.fit-view .cap{width:90%;justify-self:center;margin-bottom:40%}
+/* rides */
+.rides{padding-block:clamp(64px,9vw,128px) 0}
+.quote{font:900 clamp(30px,5vw,68px)/.95 var(--head);text-transform:uppercase;letter-spacing:-.025em;max-width:16ch}
+.quote+p{margin-top:16px;color:var(--mute);font:400 16px var(--lab);letter-spacing:.14em}
+.reel{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:clamp(28px,4vw,48px);padding-bottom:clamp(64px,9vw,128px);scrollbar-width:none;padding-left:max(20px,calc((100vw - 1240px)/2));padding-right:20px}
+.reel::-webkit-scrollbar{display:none}
+.reel figure{flex:none;height:clamp(340px,46vw,560px);scroll-snap-align:start;position:relative;background:#000}
+.reel img{height:100%;width:auto;display:block;max-width:none;filter:saturate(.85) contrast(1.05)}
+.reel figcaption{position:absolute;left:12px;bottom:10px;font:400 14px var(--lab);letter-spacing:.14em;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.8)}
 
-/* how to order */
-.how ol{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:2px solid var(--ink)}
-.how li{padding:24px 20px 28px;border-right:2px solid var(--ink);background:var(--bone)}
-.how li:last-child{border-right:0}
-.how li:nth-child(even){background:var(--paper-2)}
-.how .n{font:400 64px/.8 var(--disp);color:var(--red)}
-.how h3{font:400 32px/.95 var(--disp);text-transform:uppercase;margin:12px 0 8px}
+/* order */
+.how{background:var(--night-2);border-block:1px solid var(--line)}
+.how ol{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;counter-reset:h}
+.how li{counter-increment:h;padding:0 24px 0 0;margin-right:24px;border-right:1px solid var(--line)}
+.how li:last-child{border:0;margin:0;padding:0}
+.how li::before{content:counter(h);font:400 46px/1 var(--lab);color:var(--red)}
+.how h3{font-size:20px;margin:10px 0 8px}
 .how p{font-size:14.5px;color:var(--mute)}
-.pay{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
-.pay span{border:2px solid var(--ink);padding:6px 12px;font:800 11.5px var(--body);letter-spacing:.14em;text-transform:uppercase}
+.pay{margin-top:34px;color:var(--mute);font-size:14.5px}
+.pay b{color:var(--bone)}
 
-/* manifesto */
-.mani{background:var(--red);color:#fff}
-.mani .big{font:400 clamp(60px,10.5vw,170px)/.84 var(--disp);text-transform:uppercase}
-.mani .big s{text-decoration-thickness:.09em;text-decoration-color:var(--ink)}
-.mani .cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;margin-top:48px;border-top:2px solid #fff;padding-top:24px}
-.mani h3{font:400 34px var(--disp);text-transform:uppercase}
-.mani p{font-weight:600;color:#ffe3da;margin-top:6px}
+/* about */
+.about .big{font:900 clamp(40px,7.4vw,112px)/.9 var(--head);text-transform:uppercase;letter-spacing:-.03em}
+.about .big s{text-decoration-color:var(--red);text-decoration-thickness:.1em}
+.about .cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;margin-top:48px;border-top:1px solid var(--line);padding-top:26px}
+.about h3{font-size:18px;margin-bottom:8px}
+.about .cols p{color:var(--mute);font-size:15px}
 
 /* universe */
-.uni ul{list-style:none;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border:2px solid var(--ink)}
-.uni li{border-right:2px solid var(--ink);min-height:240px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;background:var(--bone);transition:background .2s,color .2s}
-.uni li:last-child{border-right:0}
-.uni li:hover{background:var(--ink);color:var(--paper)}
-.uni h3{font:400 44px/.9 var(--disp);text-transform:uppercase}
-.uni p{font-size:13.5px;font-weight:600}
-.uni li.home{background:var(--red);color:#fff}
-.uni small{font:800 11px var(--body);letter-spacing:.16em;text-transform:uppercase;opacity:.7}
+.uni ul{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.uni li{background:var(--night);min-height:170px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;gap:20px;transition:background .25s}
+.uni li:hover{background:var(--night-2)}
+.uni h3{font-size:clamp(22px,2.4vw,32px)}
+.uni p{font-size:14px;color:var(--mute)}
+.uni a{font-weight:700;color:var(--bone)}
 
-footer{background:var(--ink);color:#b5ad9f;padding-block:56px 40px}
-footer .wrap{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:30px}
-footer .logo{font:400 120px/.8 var(--disp);color:var(--red)}
-footer h4{font:800 12px var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--paper);margin-bottom:10px}
-footer ul{list-style:none;padding:0;display:grid;gap:6px;font-weight:600}
-footer a{text-decoration:none}footer a:hover{color:var(--red)}
-footer .fine{grid-column:1/-1;border-top:1px solid #3a3631;padding-top:18px;font-size:12.5px}
+/* contact */
+.contact{background:var(--red);color:#fff}
+.contact .wrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:40px;align-items:end}
+.contact h2{font-size:clamp(36px,5.6vw,84px)}
+.contact p{margin-top:16px;max-width:44ch;color:#ffe1d8}
+.contact ul{list-style:none;padding:0;display:grid;gap:10px}
+.contact li a{display:flex;justify-content:space-between;gap:12px;border-bottom:2px solid #fff;padding:12px 0;font:800 17px var(--head);text-decoration:none}
+.contact li a span{font-weight:500;opacity:.85}
+.contact li a:hover{padding-left:8px}
 
-/* bag drawer */
+footer{padding-block:34px;color:var(--mute);font-size:13px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+
 .drawer{position:fixed;inset:0;z-index:90;display:none}
 .drawer.open{display:block}
-.drawer .scrim{position:absolute;inset:0;background:rgba(18,17,16,.55)}
-.drawer aside{position:absolute;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--paper);border-left:2px solid var(--ink);display:flex;flex-direction:column;animation:slide .3s cubic-bezier(.2,.8,.2,1)}
+.drawer .scrim{position:absolute;inset:0;background:rgba(0,0,0,.6)}
+.drawer aside{position:absolute;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--paper);color:var(--ink);display:flex;flex-direction:column;animation:slide .3s cubic-bezier(.2,.8,.2,1)}
 @keyframes slide{from{transform:translateX(100%)}}
 .drawer header{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;border-bottom:2px solid var(--ink)}
-.drawer header h2{font:400 40px/1 var(--disp)}
-.drawer header button{border:2px solid var(--ink);background:transparent;width:44px;height:44px;font:800 20px var(--body)}
+.drawer header h2{font-size:26px}
+.drawer header button{border:2px solid var(--ink);background:transparent;width:44px;height:44px;font:800 20px var(--head)}
 .lines{flex:1;overflow:auto;padding:8px 18px;list-style:none;margin:0}
 .lines li{display:grid;grid-template-columns:72px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px dashed var(--ink)}
-.lines .th{width:72px;height:72px;background:var(--paper-2);border:2px solid var(--ink);padding:6px}
-.lines b{font:400 22px/1 var(--disp);text-transform:uppercase;display:block}
-.lines small{color:var(--mute);font-size:12.5px}
-.lines button{border:0;background:none;font:700 12px var(--body);text-decoration:underline}
-.empty{padding:40px 0;text-align:center;font-family:var(--hand);font-size:22px;color:var(--mute)}
-.drawer footer{background:none;color:var(--ink);padding:16px 18px;border-top:2px solid var(--ink);display:grid;gap:10px}
-.drawer footer p{font-size:12.5px;color:var(--mute)}
-.toast{position:fixed;z-index:85;left:50%;bottom:24px;transform:translate(-50%,calc(100% + 60px));visibility:hidden;background:var(--ink);color:var(--paper);padding:12px 18px;font:800 13px var(--body);letter-spacing:.08em;border:2px solid var(--red);transition:transform .3s;max-width:calc(100% - 32px)}
+.lines .th{width:72px;height:72px;background:#f6f4f0;border:2px solid var(--ink);overflow:hidden}
+.lines .th img{width:100%;height:100%;object-fit:cover}
+.lines b{font:900 15px/1.1 var(--head);text-transform:uppercase;display:block}
+.lines small{color:var(--mute-d);font-size:12.5px}
+.lines button{border:0;background:none;font:700 12px var(--head);text-decoration:underline}
+.empty{padding:40px 0;text-align:center;font-family:var(--hand);font-size:20px;color:var(--mute-d)}
+.drawer .foot{padding:16px 18px;border-top:2px solid var(--ink);display:grid;gap:10px}
+.drawer .foot p{font-size:12.5px;color:var(--mute-d)}
+.drawer .btn{border-color:var(--red);background:var(--red);color:#fff}
+.toast{position:fixed;z-index:85;left:50%;bottom:24px;transform:translate(-50%,calc(100% + 60px));visibility:hidden;background:var(--bone);color:var(--ink);padding:12px 18px;font:700 13.5px var(--head);border-left:6px solid var(--red);transition:transform .3s;max-width:calc(100% - 32px)}
 .toast.show{transform:translate(-50%,0);visibility:visible}
 
-@media (max-width:1080px){
+@media (max-width:1000px){
   .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .steps{grid-template-columns:1fr 1fr}.steps li{border-bottom:1px solid #3a3631;min-height:0}
-  .uni ul{grid-template-columns:1fr 1fr}.uni li{border-bottom:2px solid var(--ink);min-height:170px}
-  .how ol{grid-template-columns:1fr 1fr}.how li{border-bottom:2px solid var(--ink)}
+  .gal{columns:3}
+  .how ol{grid-template-columns:1fr 1fr;gap:34px 0}.how li:nth-child(2){border:0;margin:0;padding:0}
 }
-@media (max-width:860px){
-  .bar nav{display:none}.bar .wrap{gap:8px}.bar .logo{margin-right:auto}
-  .bld,.fit{grid-template-columns:minmax(0,1fr)}
+@media (max-width:820px){
+  .bar nav{display:none}.bar .wrap{gap:10px}.logo{margin-right:auto}
+  .hero{padding-top:0}
+  .hero-g{grid-template-columns:minmax(0,1fr);gap:0}
+  .stills{order:-1;width:auto;justify-self:stretch;margin-inline:-20px;padding-bottom:0}
+  .still.a{aspect-ratio:4/4.4}
+  .still.a::after{content:"";position:absolute;inset:40% 0 0;background:linear-gradient(transparent,var(--night))}
+  .still.b,.cap-film{display:none}
+  .hero-t{margin-top:-74px;position:relative}
+  .gar,.bld,.fit,.contact .wrap{grid-template-columns:minmax(0,1fr)}
   .bld-view{position:relative;top:0}
-  .sec-h{grid-template-columns:auto minmax(0,1fr)}.sec-h p{grid-column:1/-1}
-  .mani .cols{grid-template-columns:1fr}
-  footer .wrap{grid-template-columns:1fr}
-  .cl{max-width:200px}.cl.a{top:auto;bottom:118px}.cl.b{top:22%}
-  .sticker{left:auto;right:8px;top:21%;font-size:22px}
+  .about .cols{grid-template-columns:1fr;gap:22px}
+  .uni ul{grid-template-columns:1fr 1fr}
+  .gal{columns:2;column-gap:12px}.gal li{margin-bottom:12px}
 }
 @media (max-width:560px){
   .tog span{display:none}
-  .grid{grid-template-columns:1fr 1fr;gap:12px}
-  .card h3{font-size:24px}.card .meta{padding:10px}.card .row{flex-direction:column;align-items:stretch}
-  .steps{grid-template-columns:1fr}
-  .how ol,.uni ul{grid-template-columns:1fr}.how li,.uni li{border-right:0}
-  .cl.a{max-width:190px}.cl.a .disp{font-size:38px}.cl.b{display:none}
-  .issue span:nth-child(2){display:none}
-  .mast{top:40px;font-size:40vw}
-  .lid-stage{padding-top:24vw;padding-bottom:150px}
-  .sticker{top:auto;bottom:200px;right:4px}
-  .rev{width:76px;height:76px;font-size:22px;bottom:96px}
+  .grid{gap:12px}.card .meta{padding:12px}.card h3{font-size:16px}.card .row{flex-direction:column}
+  .steps li{grid-template-columns:30px minmax(0,1fr)}.steps span{grid-column:2}
+  .how ol{grid-template-columns:1fr}.how li{border:0;margin:0;padding:0}
+  .uni ul{grid-template-columns:1fr}.uni li{min-height:0}
   .fit-view{grid-template-columns:1fr;min-height:0}.fit-view .cap{width:55%;margin:0 auto}
-  .state .meter{display:none}
+  .gal p{font-size:15px;padding:8px 10px 12px}
+  .gar-ph{padding-left:0}.gar-ph .hand{font-size:16px}
 }
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}.cover{height:auto}.cover-in{position:relative;top:0;height:auto;min-height:calc(100svh - 58px)}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<p class="concept">Concept website by Arcwise Studios for BRAP. Prices and checkout are placeholders until launch.</p>
+<p class="concept">Concept website by Arcwise Studios for BRAP Helmet. Photos from BRAP's own Instagram. Prices and checkout are placeholders until launch.</p>
 
 <header class="bar"><div class="wrap">
-  <a class="logo" href="#top" aria-label="BRAP home">BRAP</a>
-  <nav aria-label="Main"><a href="#shop">Shop</a><a href="#build">Build your lid</a><a href="#fit">Fit</a><a href="#order">How to order</a><a href="#universe">Universe</a></nav>
-  <button class="tog" id="sound" type="button" aria-pressed="false" aria-label="Garage sound"><i aria-hidden="true"><b></b><b></b><b></b></i><span>Garage sound</span></button>
+  <a class="logo" href="#top" aria-label="BRAP home"><svg viewBox="0 0 13 20" aria-hidden="true"><path d="M8 0L0 11h5l-2 9 10-13H7z" fill="currentColor"/></svg>BRAP</a>
+  <nav aria-label="Main"><a href="#gallery">Gallery</a><a href="#shop">Shop</a><a href="#build">Build your lid</a><a href="#order">How to order</a><a href="#universe">Universe</a><a href="#contact">Contact</a></nav>
+  <button class="tog" id="sound" type="button" aria-pressed="false" aria-label="Garage sound"><i aria-hidden="true"><b></b><b></b><b></b></i><span>Sound</span></button>
   <button class="bag-btn" id="bag-open" type="button">Bag<b id="bag-n">0</b></button>
 </div></header>
 
 <main id="top">
-<section class="cover" id="cover" aria-label="BRAP cover"><div class="cover-in wrap">
-  <div class="issue"><span>Issue 01 · Raw</span><span>Helmets · Apparel · Garage noise</span><span>Est. 2019</span></div>
-  <div class="mast" aria-hidden="true"><span>B</span><span>R</span><span>A</span><span>P</span></div>
-  <div class="lid-stage" id="hero-lid"></div>
-  <div class="coverlines">
-    <div class="cl a"><p class="disp">The Unfinished.</p><p>Everyone copies it. Fine. We started it.</p></div>
-    <div class="cl b"><p class="disp">Handmade<br>lids for <span class="red">loud</span> people</p></div>
-        <p class="sticker" id="sticker">500TX<small>Raw fiberglass</small></p>
+<section class="hero"><div class="wrap hero-g">
+  <div class="hero-t">
+    <p class="since">Traditional fibreglass manufacturing since 2019</p>
+    <h1><span>Take the</span><span>long way.</span></h1>
+    <p class="lede">Lids laid up, sanded and painted by hand in Indonesia. Made for slow roads, loud colours and nowhere to be.</p>
+    <div class="acts"><a class="btn" href="#shop">Shop the lids</a><a class="btn line" href="#build">Build your own</a></div>
+    <p class="note hand">shipped worldwide, one by one</p>
   </div>
-  <div class="state">
-    <p class="disp"><span class="now" id="now">Raw.</span></p>
-    <div class="meter" aria-hidden="true"><small>Scroll to paint</small><b id="meter"></b></div>
-    <a class="btn red-b" href="#shop">Shop the lids</a>
+  <div class="stills">
+    <figure class="still a"><img src="img/trail.webp" alt="A rider in a BRAP helmet walking a dirt trail toward the mountains at sunset" width="686" height="1221" fetchpriority="high"></figure>
+    <figure class="still b"><img src="img/mount.webp" alt="A rider and motorcycle parked in front of green mountains" width="916" height="1221"></figure>
+    <p class="cap-film">Free ride. No destination.</p>
   </div>
-  <button class="rev" id="rev" type="button" aria-label="Rev the engine">BRAP<small>PUSH ME</small></button>
 </div></section>
 
-<div class="tick" aria-hidden="true"><div><span>No sterile shops</span><span>Fiberglass, resin &amp; clashing playlists</span><span>Born 2019, raised in lockdown</span><span>Ride free</span><span>Never “enough”</span><span>Organised chaos</span><span>No sterile shops</span><span>Fiberglass, resin &amp; clashing playlists</span><span>Born 2019, raised in lockdown</span><span>Ride free</span><span>Never “enough”</span><span>Organised chaos</span></div></div>
-
-<section class="sec craft" id="craft"><div class="wrap">
-  <div class="sec-h"><span class="no">01</span><h2>How a lid<br>is born</h2><p>Every BRAP is laid up, sanded and painted by hand. It gets loud in here. That’s the point.</p></div>
-  <ol class="steps">
-    <li class="pick"><span class="n">Step 1</span><span class="hand">our favourite</span><h3>Lay-up</h3><p>Fiberglass laid into the mould, layer by layer. The most beautiful part to watch.</p>
-      <svg viewBox="0 0 200 96" aria-hidden="true"><g fill="none" stroke="#121110" stroke-width="2"><path class="weave" stroke-dasharray="6 4" d="M0 20h200M0 36h200M0 52h200M0 68h200M0 84h200"/><path class="weave" stroke-dasharray="6 4" d="M20 0v96M40 0v96M60 0v96M80 0v96M100 0v96M120 0v96M140 0v96M160 0v96M180 0v96" opacity=".55"/></g></svg></li>
-    <li><span class="n">Step 2</span><h3>Resin</h3><p>Resin soaks the weave and sets the shell hard and light.</p>
-      <svg viewBox="0 0 200 96" aria-hidden="true"><path d="M10 80 Q100 10 190 80" fill="none" stroke="#d62906" stroke-width="10" stroke-linecap="round"/><circle cx="100" cy="30" r="6" fill="#d62906"><animate attributeName="cy" values="30;90;30" dur="2.4s" repeatCount="indefinite"/></circle></svg></li>
-    <li><span class="n">Step 3</span><h3>Sand</h3><p>Hand-sanded until the curve is right. Then once more.</p>
-      <svg viewBox="0 0 200 96" aria-hidden="true"><path d="M10 80 Q100 10 190 80" fill="none" stroke="#ede6d8" stroke-width="6"/><rect x="70" y="18" width="60" height="18" fill="#ede6d8"><animateTransform attributeName="transform" type="translate" values="-40 14;40 14;-40 14" dur="1.6s" repeatCount="indefinite"/></rect></svg></li>
-    <li><span class="n">Step 4</span><h3>Paint</h3><p>Enamel, flake or left raw. The Unfinished stays naked on purpose.</p>
-      <svg viewBox="0 0 200 96" aria-hidden="true"><path d="M10 80 Q100 10 190 80" fill="none" stroke="#3a3631" stroke-width="10"/><path d="M10 80 Q100 10 190 80" fill="none" stroke="#d62906" stroke-width="10" stroke-dasharray="230" stroke-dashoffset="230"><animate attributeName="stroke-dashoffset" values="230;0;0;230" dur="3.2s" repeatCount="indefinite"/></path></svg></li>
-    <li><span class="n">Step 5</span><h3>The pad</h3><p>The part people miss: lambskin, soft nylex and memory foam on the inside.</p>
-      <svg viewBox="0 0 200 96" aria-hidden="true"><path d="M20 70 Q100 20 180 70" fill="none" stroke="#c9a77c" stroke-width="16" stroke-linecap="round"/><path d="M30 70 Q100 32 170 70" fill="none" stroke="#ede6d8" stroke-width="2" stroke-dasharray="4 5"/></svg></li>
-  </ol>
+<section class="sec garage" id="garage"><div class="wrap gar">
+  <div class="gar-ph">
+    <div class="p1"><img src="img/workshop.webp" alt="A BRAP maker in the workshop working on a red helmet shell under a hanging lamp" loading="lazy" width="686" height="1221"></div>
+    <div class="p2"><img src="img/painter.webp" alt="An artist hand-painting a tiger and blossom tree onto a white helmet" loading="lazy" width="480" height="854"></div>
+    <p class="hand">songs clashing, resin curing, somebody laughing</p>
+  </div>
+  <div>
+    <h2><span>Dim outside.</span><span class="red">Bright within.</span></h2>
+    <p class="lede">Our garage is organised chaos. Every BRAP passes through real hands here, start to finish. That is why no two are the same.</p>
+    <ol class="steps">
+      <li><b>Lay-up</b><span>Fibreglass laid into the mould, layer by layer.<em>our favourite part</em></span></li>
+      <li><b>Resin</b><span>It soaks the weave and sets the shell hard and light.</span></li>
+      <li><b>Sand</b><span>By hand, until the curve is right. Then once more.</span></li>
+      <li><b>Paint</b><span>Enamel, flake, carbon weave, rust. Or left unfinished, on purpose.</span></li>
+      <li><b>Inner pad</b><span>The part people miss. It is what makes a BRAP feel like yours.</span></li>
+    </ol>
+    <button class="rev" id="rev" type="button"><i>Brap</i>Press it. You know you want to.</button>
+  </div>
 </div></section>
 
-<section class="sec" id="shop"><div class="wrap">
-  <div class="sec-h"><span class="no">02</span><h2>The<br>catalogue</h2><p>Lids, threads and bits for the garage. Pick a size, throw it in the bag.</p></div>
-  <div class="cat-tabs" role="tablist" aria-label="Catalogue">
+<section class="sec" id="gallery"><div class="wrap">
+  <div class="sec-h"><h2>Special made.</h2><p>Every custom lid gets a name. These are real ones, made for real riders, with the titles we gave them.</p></div>
+  <ul class="gal">
+    <li><img src="img/h-phoenix.webp" alt="Black helmet with orange and yellow flames" loading="lazy" width="682" height="682"><p>A phoenix flame in a black sky<small>500TX</small></p></li>
+    <li><img src="img/h-rusty.webp" alt="Helmet with a real rust finish" loading="lazy" width="682" height="682"><p>Not aging. Not patina. THIS IS RUSTY!!!<small>500TX</small></p></li>
+    <li><img src="img/h-mxtred.webp" alt="Full-face helmet in red carbon weave" loading="lazy" width="682" height="682"><p>Texalium carbon in red. It's a statement.<small>Mini MXT</small></p></li>
+    <li class="say"><p>Everyone copies the unfinished one. Fine. We started it.</p><small>BRAP Unfinished series</small></li>
+    <li><img src="img/h-tiger.webp" alt="Pale blue helmet with a hand-painted tiger" loading="lazy" width="682" height="682"><p>The dragon and the tigre<small>500TX</small></p></li>
+    <li><img src="img/green.webp" alt="Three green exposed-fibreglass helmets on grass" loading="lazy" width="640" height="854"><p>Exposed fibreglass, deep green. Simple. Tough. Brap.<small>Mini MXT</small></p></li>
+    <li><img src="img/h-union.webp" alt="Gold and silver carbon weave helmet" loading="lazy" width="682" height="682"><p>Silver can do anything...<small>500TX</small></p></li>
+    <li><img src="img/h-mxtflame.webp" alt="White full-face helmet with flames" loading="lazy" width="682" height="682"><p>An eternal flame<small>Mini MXT</small></p></li>
+    <li><img src="img/h-13.webp" alt="Close-up of two red helmets with hand-lettered club graphics" loading="lazy" width="682" height="682"><p>A friend's home is never too far away<small>Club pair</small></p></li>
+    <li><img src="img/h-silver.webp" alt="Brushed steel-look helmet with pinstriped flames" loading="lazy" width="682" height="682"><p>Stainless steel 304<small>500TX</small></p></li>
+    <li><img src="img/h-loud.webp" alt="Full-face helmet in red, orange and yellow shards" loading="lazy" width="640" height="640"><p>Loud colors. Bold attitude. No need to blend in.<small>Mini MXT</small></p></li>
+    <li><img src="img/badge.webp" alt="Close-up of the BRAP Helmet MFG badge on gold metal flake" loading="lazy" width="640" height="854"><p>Flake, up close<small>500TX Flake</small></p></li>
+  </ul>
+</div></section>
+
+<section class="sec" id="shop" style="padding-top:0"><div class="wrap">
+  <div class="sec-h"><h2>The catalogue.</h2><p>Lids and things to wear with them. Pick a size, put it in the bag.</p></div>
+  <div class="tabs" role="tablist" aria-label="Catalogue">
     <button type="button" role="tab" aria-selected="true" data-f="all">Everything</button>
     <button type="button" role="tab" aria-selected="false" data-f="helmet">Helmets</button>
     <button type="button" role="tab" aria-selected="false" data-f="apparel">Apparel</button>
     <button type="button" role="tab" aria-selected="false" data-f="acc">Accessories</button>
   </div>
   <ul class="grid" id="grid"></ul>
-  <p class="specs"><b>500TX series:</b> slim-profile shell in composite fiberglass, lambskin and soft nylex lining, memory foam, tubular strap with D-ring, brass snaps and rivets, around 700g. Sizes XS to XL.</p>
+  <p class="range"><b>Also in the range:</b> Shorty, Speed Master, Wind Master, Club Master, Hatop, Basic and the Unfinished series, plus visors and inner pads. The full list goes in at launch.</p>
 </div></section>
 
-<section class="sec build" id="build"><div class="wrap">
-  <div class="sec-h"><span class="no">04</span><h2>Build<br>your lid</h2><p>Free and easy. Pick it, paint it, sign it. We make it by hand and send you a proof first.</p></div>
+<section class="sec paper" id="build"><div class="wrap">
+  <div class="sec-h"><h2>Sketch yours.</h2><p>Free and easy. Play with it here, and we turn the sketch into a real lid. You get a proof before any paint goes on.</p></div>
   <div class="bld">
-    <div class="bld-view" aria-live="polite">
-      <div id="b-lid"></div>
-      <div class="cap"><span class="name" id="b-name">500TX · Raw</span><span>Made to order</span></div>
+    <div>
+      <div class="bld-view" aria-live="polite">
+        <div id="b-lid"></div>
+        <div class="cap"><span class="name" id="b-name">500TX</span><span>Made to order</span></div>
+      </div>
+      <div class="real"><img src="img/painter.webp" alt="" loading="lazy"><p>Then a real person paints it. By hand. With a very small brush.</p></div>
     </div>
     <form class="opts" id="b-form" novalidate>
       <fieldset class="opt"><legend><span>A</span>Finish</legend><div class="ch">
@@ -338,7 +375,7 @@ footer .fine{grid-column:1/-1;border-top:1px solid #3a3631;padding-top:18px;font
         <input type="radio" name="vis" id="v2" value="black"><label for="v2">Black snap</label>
         <input type="radio" name="vis" id="v3" value="none"><label for="v3">No visor</label>
       </div></fieldset>
-      <label class="opt" style="display:block"><span class="opt-l" style="font:800 12px var(--body);letter-spacing:.2em;text-transform:uppercase;display:block;margin-bottom:10px">E · Your name or number on the back</span><input class="txt" id="b-tag" maxlength="10" placeholder="07" autocomplete="off"></label>
+      <label class="opt" style="display:block"><span class="opt-l">Your name or number on the back</span><input class="txt" id="b-tag" maxlength="10" placeholder="07" autocomplete="off"></label>
       <fieldset class="opt"><legend><span>F</span>Size</legend><div class="ch">
         <input type="radio" name="size" id="z1" value="XS"><label for="z1">XS</label>
         <input type="radio" name="size" id="z2" value="S"><label for="z2">S</label>
@@ -350,13 +387,12 @@ footer .fine{grid-column:1/-1;border-top:1px solid #3a3631;padding-top:18px;font
       <span class="note-hand">↑ we send a proof before we paint</span>
     </form>
   </div>
-</div></section>
-
-<section class="sec" id="fit"><div class="wrap">
-  <div class="sec-h"><span class="no">05</span><h2>Mix your<br>fit</h2><p>Match your lid to your threads. Swap colours and prints until it feels like you.</p></div>
-  <div class="fit">
+  <div class="fit" id="fit">
     <div class="fit-view" id="fit-view"></div>
-    <form class="opts" id="fit-form" novalidate>
+    <div>
+      <h3>Mix your fit.</h3>
+      <p style="color:var(--mute-d);margin-bottom:24px;max-width:44ch">Match your threads to your lid. Swap colours and prints until it feels like you.</p>
+      <form class="opts" id="fit-form" novalidate>
       <fieldset class="opt"><legend><span>1</span>Tee colour</legend><div class="ch sw" id="tee-col"></div></fieldset>
       <fieldset class="opt"><legend><span>2</span>Print</legend><div class="ch">
         <input type="radio" name="print" id="p1" value="logo" checked><label for="p1">BRAP</label>
@@ -367,53 +403,70 @@ footer .fine{grid-column:1/-1;border-top:1px solid #3a3631;padding-top:18px;font
       <fieldset class="opt"><legend><span>3</span>Cap colour</legend><div class="ch sw" id="cap-col"></div></fieldset>
       <div class="bld-acts"><button class="btn red-b" type="button" id="fit-add">Add the fit to the bag</button></div>
     </form>
+    </div>
   </div>
 </div></section>
+
+<section class="rides" aria-label="Riding">
+  <div class="wrap"><p class="quote">Not every journey is about finding a destination.</p><p>Brap riders, out there</p></div>
+  <div class="reel" tabindex="0">
+    <figure><img src="img/scrambler.webp" alt="A rider on a scrambler on the beach at dusk" loading="lazy" width="916" height="1221"><figcaption>Low tide</figcaption></figure>
+    <figure><img src="img/road.webp" alt="A scooter rider on an empty coastal road" loading="lazy" width="682" height="454"><figcaption>The long way</figcaption></figure>
+    <figure><img src="img/night.webp" alt="A rider on an old enduro bike at night" loading="lazy" width="478" height="714"><figcaption>After hours</figcaption></figure>
+    <figure><img src="img/mount.webp" alt="A rider and bike in front of green mountains" loading="lazy" width="916" height="1221"><figcaption>Up high</figcaption></figure>
+    <figure><img src="img/beach.webp" alt="A rider napping on a motorcycle on the sand" loading="lazy" width="478" height="854"><figcaption>Nowhere to be</figcaption></figure>
+    <figure><img src="img/wall.webp" alt="The BRAP shop wall, stacked with helmets" loading="lazy" width="478" height="854"><figcaption>Home base</figcaption></figure>
+  </div>
+</section>
 
 <section class="sec how" id="order"><div class="wrap">
-  <div class="sec-h"><span class="no">06</span><h2>How to<br>order</h2><p>Stock pieces ship fast. Custom lids are made to order, by hand.</p></div>
+  <div class="sec-h"><h2>How to order.</h2><p>Stock pieces ship fast. Custom lids take longer, because someone is making yours.</p></div>
   <ol>
-    <li><span class="n">1</span><h3>Pick or build</h3><p>Grab a ready lid or apparel from the catalogue, or build your own lid.</p></li>
-    <li><span class="n">2</span><h3>Check out</h3><p>Pay in your currency. Shipping is worked out for your country and box size.</p></li>
-    <li><span class="n">3</span><h3>We make it</h3><p>Custom lids get a design proof before we paint. Then the garage gets loud.</p></li>
-    <li><span class="n">4</span><h3>It ships</h3><p>Boxed, tracked and on its way to you, wherever you ride.</p></li>
+    <li><h3>Pick or sketch</h3><p>Choose from the catalogue, or sketch your own lid.</p></li>
+    <li><h3>Check out</h3><p>Pay online. Shipping is worked out for your country and box size.</p></li>
+    <li><h3>We make it</h3><p>Custom lids get a proof first. Then the garage gets to work.</p></li>
+    <li><h3>It ships</h3><p>Boxed, tracked and on its way, wherever you ride.</p></li>
   </ol>
-  <div class="pay" aria-label="Payment at launch"><span>Cards</span><span>Apple Pay</span><span>Google Pay</span><span>PayPal</span><span>QRIS</span><span>Ships worldwide</span></div>
+  <p class="pay"><b>At launch:</b> cards, PayPal, Apple Pay and Google Pay. Worldwide shipping.</p>
 </div></section>
 
-<section class="sec mani" id="about"><div class="wrap">
+<section class="sec about" id="about"><div class="wrap">
   <p class="big">Born 2019.<br>Raised in lockdown.<br>Never <s>enough</s>.</p>
   <div class="cols">
-    <div><h3>Made by hand</h3><p>Fiberglass, resin, carbon and enamel. Every shell passes through our hands before it touches your head.</p></div>
-    <div><h3>Ride free</h3><p>Open roads, nature and nowhere to be. That’s the world BRAP was made for.</p></div>
-    <div><h3>Stands against</h3><p>Oppression, injustice and misery. And sterile, boring shops.</p></div>
+    <div><h3>Made by hand</h3><p>Fibreglass, resin, carbon and enamel paint. Old methods, on purpose.</p></div>
+    <div><h3>Ride free</h3><p>Open roads, big skies, nature all around. That is the world a BRAP is made for.</p></div>
+    <div><h3>What we stand against</h3><p>Oppression, injustice and misery. Also boring helmets.</p></div>
   </div>
 </div></section>
 
-<section class="sec uni" id="universe"><div class="wrap">
-  <div class="sec-h"><span class="no">07</span><h2>The BRAP<br>universe</h2><p>One garage, many worlds. Go wander.</p></div>
+<section class="sec uni" id="universe" style="padding-top:0"><div class="wrap">
+  <div class="sec-h"><h2>The BRAP universe.</h2><p>One garage, a lot of side roads.</p></div>
   <ul>
-    <li class="home"><small>You are here</small><h3>BRAP</h3><p>Helmets, apparel and accessories.</p></li>
-    <li><small>Sister brand</small><h3>BRAP Chopshit</h3><p>Link coming soon.</p></li>
-    <li><small>Group</small><h3>Rolliemonkie</h3><p>Link coming soon.</p></li>
-    <li><small>Group</small><h3>Bolt</h3><p>Link coming soon.</p></li>
-    <li><small>Sister brand</small><h3>HellYeah</h3><p>Link coming soon.</p></li>
+    <li><h3>BRAP Chopshit</h3><p>Link coming soon</p></li>
+    <li><h3>Rolliemonkie</h3><p>Link coming soon</p></li>
+    <li><h3>Bolt</h3><p>Link coming soon</p></li>
+    <li><h3>HellYeah</h3><p>Link coming soon</p></li>
+    <li><h3>BRAP Fibrecase</h3><p><a href="https://www.instagram.com/brap_fibrecase/" target="_blank" rel="noopener">@brap_fibrecase</a></p></li>
+    <li><h3>The catalogue</h3><p><a href="https://www.instagram.com/brap_helmet.catalogue/" target="_blank" rel="noopener">@brap_helmet.catalogue</a></p></li>
+  </ul>
+</div></section>
+
+<section class="sec contact" id="contact"><div class="wrap">
+  <div><h2>We hear you. We care about you. And yeah, we love you.</h2><p>Questions, custom ideas, a size you are not sure about. Message us and a human answers.</p></div>
+  <ul>
+    <li><a href="https://www.instagram.com/brap_helmet/" target="_blank" rel="noopener">Instagram <span>@brap_helmet</span></a></li>
+    <li><a href="https://linktr.ee/braphelmet" target="_blank" rel="noopener">All our links <span>linktr.ee/braphelmet</span></a></li>
   </ul>
 </div></section>
 </main>
 
-<footer><div class="wrap">
-  <div><span class="logo">BRAP</span><p style="margin-top:12px;font-weight:600">Your lid. Your flames. Your world.</p></div>
-  <div><h4>Shop</h4><ul><li><a href="#shop">Helmets</a></li><li><a href="#shop">Apparel</a></li><li><a href="#build">Build your lid</a></li><li><a href="#order">How to order</a></li></ul></div>
-  <div><h4>Garage</h4><ul><li><a href="#about">About BRAP</a></li><li><a href="#universe">The BRAP universe</a></li><li><a href="#order">Shipping &amp; returns</a></li><li><a href="#top">Contact</a></li></ul></div>
-  <p class="fine">Concept website by Arcwise Studios. Helmet and apparel illustrations are placeholders for BRAP’s own photography.</p>
-</div></footer>
+<footer><div class="wrap"><span>BRAP Helmet MFG. Indonesia. Since 2019.</span><span>Concept by Arcwise Studios</span></div></footer>
 
 <div class="drawer" id="drawer" aria-hidden="true"><div class="scrim" data-close></div>
   <aside role="dialog" aria-modal="true" aria-labelledby="bag-t">
     <header><h2 id="bag-t">Your bag</h2><button type="button" data-close aria-label="Close bag">×</button></header>
     <ul class="lines" id="lines"></ul>
-    <footer><button class="btn red-b" type="button" id="checkout">Checkout</button><p>Concept: checkout opens at launch, with cards, PayPal and QRIS, and shipping worked out for your country.</p></footer>
+    <div class="foot"><button class="btn" type="button" id="checkout">Checkout</button><p>Concept: checkout opens at launch.</p></div>
   </aside>
 </div>
 <p class="toast" id="toast" role="status"></p>
@@ -474,37 +527,33 @@ function hoodie(col,label){
 function cap(col,label){
   var c=COL[col]||col;return '<svg class="cap" viewBox="0 0 300 220" role="img" aria-label="'+(label||'BRAP cap')+'"><path d="M50 150C48 80 96 40 158 40S262 84 258 150Z" fill="'+c+'" stroke="#121110" stroke-width="5"/><path d="M50 150C110 140 200 140 258 150C280 156 290 168 284 176C220 166 120 166 30 172C24 164 34 154 50 150Z" fill="'+c+'" stroke="#121110" stroke-width="5"/><path d="M158 40V146" stroke="#121110" stroke-width="3"/><circle cx="158" cy="40" r="7" fill="#d62906" stroke="#121110" stroke-width="3"/><text x="112" y="116" text-anchor="middle" font-family="Bebas Neue,Impact,sans-serif" font-size="34" fill="#d62906" stroke="#121110" stroke-width="1">BRAP</text></svg>';
 }
-function plate(label){return '<svg viewBox="0 0 300 300" role="img" aria-label="'+label+'"><rect x="40" y="90" width="220" height="120" rx="10" fill="#efe8da" stroke="#121110" stroke-width="5"/><text x="150" y="172" text-anchor="middle" font-family="Bebas Neue,Impact,sans-serif" font-size="78" fill="#d62906">BRAP</text><circle cx="62" cy="112" r="6" fill="#c9a24a" stroke="#121110" stroke-width="2"/><circle cx="238" cy="112" r="6" fill="#c9a24a" stroke="#121110" stroke-width="2"/></svg>'}
-function visor(label){return '<svg viewBox="0 0 300 300" role="img" aria-label="'+label+'"><path d="M40 150C110 110 200 110 260 150C230 190 80 190 40 150Z" fill="#f3eee4" stroke="#121110" stroke-width="5"/><circle cx="70" cy="146" r="7" fill="#c9a24a" stroke="#121110" stroke-width="2"/><circle cx="150" cy="128" r="7" fill="#c9a24a" stroke="#121110" stroke-width="2"/><circle cx="230" cy="146" r="7" fill="#c9a24a" stroke="#121110" stroke-width="2"/></svg>'}
 
-/* ---------- catalogue ---------- */
+function ph(n,alt){return '<img src="img/'+n+'.webp" alt="'+alt+'" loading="lazy">'}
 var P=[
- {id:'unf',k:'helmet',name:'500TX Unfinished',sub:'Raw black fiberglass. The original.',tag:'Signature',art:function(){return lid({fin:'raw',col:'black',gfx:'none',vis:'white',label:'500TX Unfinished helmet in raw fiberglass'})},sizes:1},
- {id:'enm',k:'helmet',name:'500TX Enamel Red',sub:'Hand-painted gloss enamel.',art:function(){return lid({fin:'gloss',col:'red',gfx:'stripe',vis:'white',label:'500TX helmet in red enamel with stripe'})},sizes:1},
- {id:'flk',k:'helmet',name:'500TX Flake',sub:'Chrome metal flake, catches every light.',tag:'New',art:function(){return lid({fin:'flake',col:'chrome',gfx:'none',vis:'black',label:'500TX helmet in silver metal flake'})},sizes:1},
- {id:'fla',k:'helmet',name:'500TX Inferno',sub:'Bone shell, hand-laid flames.',art:function(){return lid({fin:'gloss',col:'bone',gfx:'flames',vis:'black',label:'500TX helmet, bone with flames'})},sizes:1},
- {id:'tub',k:'apparel',name:'Unfinished Business Tee',sub:'Heavy cotton. Bone or black.',art:function(){return tee('bone','unf','Unfinished Business tee')},sizes:1},
- {id:'hod',k:'apparel',name:'Lockdown Hoodie',sub:'Born 2019. Raised in lockdown.',tag:'Drop 01',art:function(){return hoodie('black','Lockdown hoodie')},sizes:1},
- {id:'rft',k:'apparel',name:'Ride Free Tee',sub:'Hand-lettered on the back.',art:function(){return tee('red','free','Ride Free tee')},sizes:1},
- {id:'cap',k:'apparel',name:'Garage Cap',sub:'Six panels, one red button.',art:function(){return cap('black','Garage cap')}},
- {id:'vis',k:'acc',name:'Snap Visor',sub:'Three brass snaps. White or black.',art:function(){return visor('Snap visor')}},
- {id:'plt',k:'acc',name:'Enamel Plate',sub:'For the garage wall.',art:function(){return plate('Enamel BRAP plate')}}
+ {id:'tx',k:'helmet',name:'500TX',sub:'The slim open-face. Our most-loved shape.',art:function(){return ph('h-orange','500TX helmet in orange with white flames')},sizes:1},
+ {id:'mxt',k:'helmet',name:'Mini MXT',sub:'Small-shell full face with the lightning vent.',art:function(){return ph('h-mxtflame','Mini MXT full-face helmet with flames')},sizes:1},
+ {id:'leg',k:'helmet',name:'500 Legend',sub:'Leather trim, white stitching, old soul.',art:function(){return ph('h-checker','500 Legend helmet in red and white checker')},sizes:1},
+ {id:'flk',k:'helmet',name:'500TX Flake',sub:'Heavy metal flake. Catches every light.',art:function(){return ph('badge','Gold metal flake helmet close-up')},sizes:1},
+ {id:'tee',k:'apparel',name:'Boxy Tee, Brap Tour',sub:'230gsm combed cotton, screen printed by hand.',art:function(){return ph('a-tee','Model wearing the red BRAP boxy tee')},sizes:1},
+ {id:'jkt',k:'apparel',name:'#1 Victory Coach Jacket',sub:'Fleece lined. Black, red or white.',art:function(){return ph('a-jacket','Model wearing the red BRAP coach jacket')},sizes:1},
+ {id:'cap',k:'apparel',name:'Brap Type Rope Cap',sub:'Workwear, reworked.',art:function(){return ph('a-work','BRAP rope cap and coach jacket')}},
+ {id:'bag',k:'acc',name:'Helmet Bag',sub:'150g crinkle shell, water repellent.',art:function(){return ph('a-bag','Black BRAP helmet bag')}}
 ];
 var grid=document.getElementById('grid');
 function renderGrid(f){
   grid.innerHTML=P.filter(function(p){return f==='all'||p.k===f}).map(function(p){
-    return '<li class="card">'+(p.tag?'<span class="tag">'+p.tag+'</span>':'')+'<div class="art">'+p.art()+'</div><div class="meta"><h3>'+p.name+'</h3><p>'+p.sub+'</p><p style="font-weight:800;color:var(--ink)">Price at launch</p><div class="row">'+(p.sizes?'<select class="sz" aria-label="Size for '+p.name+'"><option>XS</option><option>S</option><option selected>M</option><option>L</option><option>XL</option></select>':'')+'<button class="add" type="button" data-id="'+p.id+'">Add to bag</button></div></div></li>';
+    return '<li class="card"><div class="art">'+p.art()+'</div><div class="meta"><h3>'+p.name+'</h3><p>'+p.sub+'</p><p class="price">Price at launch</p><div class="row">'+(p.sizes?'<select class="sz" aria-label="Size for '+p.name+'"><option>XS</option><option>S</option><option selected>M</option><option>L</option><option>XL</option></select>':'')+'<button class="add" type="button" data-id="'+p.id+'">Add to bag</button></div></div></li>';
   }).join('');
 }
 renderGrid('all');
-document.querySelectorAll('.cat-tabs button').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.cat-tabs button').forEach(function(x){x.setAttribute('aria-selected',x===b)});renderGrid(b.dataset.f);sfx('tick')})});
+document.querySelectorAll('.tabs button').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.tabs button').forEach(function(x){x.setAttribute('aria-selected',x===b)});renderGrid(b.dataset.f)})});
 grid.addEventListener('click',function(e){var b=e.target.closest('.add');if(!b)return;var p=P.filter(function(x){return x.id===b.dataset.id})[0],sz=b.parentNode.querySelector('.sz');add({name:p.name,note:sz?'Size '+sz.value:'One size',art:p.art()})});
 
 /* ---------- bag ---------- */
 var bag=[],dr=document.getElementById('drawer'),lines=document.getElementById('lines'),bn=document.getElementById('bag-n'),bb=document.getElementById('bag-open'),toastEl=document.getElementById('toast'),tt;
 function toast(t){toastEl.textContent=t;toastEl.classList.add('show');clearTimeout(tt);tt=setTimeout(function(){toastEl.classList.remove('show')},2200)}
-function add(it){bag.push(it);drawBag();bb.classList.remove('bump');void bb.offsetWidth;bb.classList.add('bump');toast(it.name+' is in the bag');sfx('rev')}
-function drawBag(){bn.textContent=bag.length;lines.innerHTML=bag.length?bag.map(function(it,i){return '<li><div class="th">'+it.art+'</div><div><b>'+esc(it.name)+'</b><small>'+esc(it.note)+'</small></div><button type="button" data-rm="'+i+'">Remove</button></li>'}).join(''):'<li class="empty" style="display:block;border:0">Empty. Go make some noise.</li>'}
+function add(it){bag.push(it);drawBag();bb.classList.remove('bump');void bb.offsetWidth;bb.classList.add('bump');toast(it.name+' is in the bag');sfx()}
+function drawBag(){bn.textContent=bag.length;lines.innerHTML=bag.length?bag.map(function(it,i){return '<li><div class="th">'+it.art+'</div><div><b>'+esc(it.name)+'</b><small>'+esc(it.note)+'</small></div><button type="button" data-rm="'+i+'">Remove</button></li>'}).join(''):'<li class="empty" style="display:block;border:0">Nothing in here yet.</li>'}
 lines.addEventListener('click',function(e){var b=e.target.closest('[data-rm]');if(b){bag.splice(+b.dataset.rm,1);drawBag()}});
 var lastFocus;
 function openBag(){lastFocus=document.activeElement;drawBag();dr.classList.add('open');dr.setAttribute('aria-hidden','false');dr.querySelector('header button').focus()}
@@ -515,15 +564,16 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'&&dr.classLis
 document.getElementById('checkout').addEventListener('click',function(){toast(bag.length?'Concept: checkout goes live at launch':'Your bag is empty')});
 drawBag();
 
+
 /* ---------- builder ---------- */
 var bf=document.getElementById('b-form'),bcol=document.getElementById('b-col'),bview=document.getElementById('b-lid'),bname=document.getElementById('b-name'),btag=document.getElementById('b-tag');
 ['black','red','bone','army','sky','orange','cream','chrome'].forEach(function(c,i){bcol.insertAdjacentHTML('beforeend','<input type="radio" name="col" id="c'+i+'" value="'+c+'"'+(c==='red'?' checked':'')+'><label for="c'+i+'" title="'+c+'"><i style="background:'+COL[c]+'"></i><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">'+c+'</span></label>')});
 function bval(n){var x=bf.querySelector('input[name='+n+']:checked');return x?x.value:''}
 function bstate(){return {fin:bval('fin'),col:bval('col'),gfx:bval('gfx'),vis:bval('vis'),tag:btag.value.trim().toUpperCase(),size:bval('size')}}
 var FN={raw:'Raw',gloss:'Enamel',matte:'Matte',flake:'Flake'};
-function bdraw(){var s=bstate();bview.innerHTML=lid({fin:s.fin,col:s.col,gfx:s.gfx,vis:s.vis,tag:s.tag,label:'Your custom 500TX helmet'});bname.textContent='500TX · '+FN[s.fin]+(s.fin==='raw'?'':' '+s.col)+(s.gfx!=='none'?' · '+s.gfx:'')}
-bf.addEventListener('change',function(e){if(e.target.name==='col'&&bval('fin')==='raw')bf.querySelector('#f2').checked=true;bdraw();sfx('tick')});btag.addEventListener('input',bdraw);
-document.getElementById('b-rand').addEventListener('click',function(){['fin','col','gfx','vis'].forEach(function(n){var o=bf.querySelectorAll('input[name='+n+']');o[Math.floor(Math.random()*o.length)].checked=true});bdraw();sfx('rev')});
+function bdraw(){var s=bstate();bview.innerHTML=lid({fin:s.fin,col:s.col,gfx:s.gfx,vis:s.vis,tag:s.tag,label:'Your custom 500TX helmet'});bname.textContent='500TX, '+FN[s.fin]+(s.fin==='raw'?'':' '+s.col)+(s.gfx!=='none'?', '+s.gfx:'')}
+bf.addEventListener('change',function(e){if(e.target.name==='col'&&bval('fin')==='raw')bf.querySelector('#f2').checked=true;bdraw();sfx()});btag.addEventListener('input',bdraw);
+document.getElementById('b-rand').addEventListener('click',function(){['fin','col','gfx','vis'].forEach(function(n){var o=bf.querySelectorAll('input[name='+n+']');o[Math.floor(Math.random()*o.length)].checked=true});bdraw();sfx()});
 document.getElementById('b-add').addEventListener('click',function(){var s=bstate();add({name:'Custom 500TX',note:FN[s.fin]+(s.fin==='raw'?'':', '+s.col)+', '+s.gfx+', visor '+s.vis+', size '+s.size+(s.tag?', “'+s.tag+'”':''),art:lid(s)})});
 bdraw();
 
@@ -534,62 +584,44 @@ sw(document.getElementById('tee-col'),'tc',['black','bone','red','army','sky'],'
 sw(document.getElementById('cap-col'),'cc',['black','red','bone','army'],'black');
 function fval(n){return ff.querySelector('input[name='+n+']:checked').value}
 function fdraw(){fv.innerHTML=tee(fval('tc'),fval('print'),'Your tee')+cap(fval('cc'),'Your cap')}
-ff.addEventListener('change',function(){fdraw();sfx('tick')});fdraw();
+ff.addEventListener('change',function(){fdraw();sfx()});fdraw();
 document.getElementById('fit-add').addEventListener('click',function(){var pn={logo:'BRAP',unf:'Unfinished Business',lid:'Flame lid',free:'Ride free'}[fval('print')];add({name:'Tee + cap fit',note:fval('tc')+' tee, '+pn+' print, '+fval('cc')+' cap',art:tee(fval('tc'),fval('print'))})});
 
-/* ---------- cover: scroll paints the raw lid ---------- */
-var cover=document.getElementById('cover'),hl=document.getElementById('hero-lid'),now=document.getElementById('now'),meter=document.getElementById('meter'),stk=document.getElementById('sticker'),lp=-1;
-function heroDraw(p){hl.innerHTML=lid({fin:'raw',col:'red',paint:p,gfxP:'flames',vis:'white',label:'A raw fiberglass BRAP helmet being painted red with flames'})}
-function onScroll(){
-  if(reduce){if(lp<0){heroDraw(0);lp=0}return}
-  var r=cover.getBoundingClientRect(),h=r.height-innerHeight,p=Math.min(1,Math.max(0,-r.top/h));
-  p=Math.round(p*60)/60;if(p===lp)return;lp=p;
-  heroDraw(Math.min(1,p*1.25));meter.style.transform='scaleX('+p+')';
-  now.textContent=p<.25?'Raw.':p<.75?'Painting…':'Ride.';now.classList.toggle('red',p>=.75);
-  stk.firstChild.textContent=p<.75?'500TX':'Your lid';
-}
-addEventListener('scroll',onScroll,{passive:true});onScroll();
 
-/* ---------- sound: Web Audio garage, made in code ---------- */
+
+/* ---------- sound: a warm, quiet garage. Off until asked. ---------- */
 var ctx,master,room,on=false,sbtn=document.getElementById('sound');
-function ac(){if(!ctx){var A=window.AudioContext||window.webkitAudioContext;if(!A)return null;ctx=new A();master=ctx.createGain();master.gain.value=.5;master.connect(ctx.destination)}if(ctx.state==='suspended')ctx.resume();return ctx}
-function noiseBuf(sec){var b=ctx.createBuffer(1,ctx.sampleRate*sec,ctx.sampleRate),d=b.getChannelData(0),l=0;for(var i=0;i<d.length;i++){var w=Math.random()*2-1;l=(l+.02*w)/1.02;d[i]=l*3.2}return b}
-function garage(start){
+function ac(){if(!ctx){var A=window.AudioContext||window.webkitAudioContext;if(!A)return null;ctx=new A();master=ctx.createGain();master.gain.value=.6;master.connect(ctx.destination)}if(ctx.state==='suspended')ctx.resume();return ctx}
+function noiseBuf(sec){var b=ctx.createBuffer(1,ctx.sampleRate*sec,ctx.sampleRate),d=b.getChannelData(0),l=0;for(var i=0;i<d.length;i++){var w=Math.random()*2-1;l=(l+.02*w)/1.02;d[i]=l*3}return b}
+function ambient(start){
   if(!ac())return;
   if(start){
-    room=ctx.createGain();room.gain.value=0;room.connect(master);
-    var n=ctx.createBufferSource();n.buffer=noiseBuf(4);n.loop=true;var lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=420;n.connect(lp);lp.connect(room);n.start();room._n=n;
-    var hum=ctx.createOscillator();hum.type='triangle';hum.frequency.value=55;var hg=ctx.createGain();hg.gain.value=.05;hum.connect(hg);hg.connect(room);hum.start();room._h=hum;
-    room.gain.linearRampToValueAtTime(.35,ctx.currentTime+1.2);
-    room._t=setInterval(function(){if(Math.random()<.55)clank()},1700);
-  }else if(room){var r=room;r.gain.linearRampToValueAtTime(0,ctx.currentTime+.5);clearInterval(r._t);setTimeout(function(){try{r._n.stop();r._h.stop()}catch(e){}},600);room=null}
+    var t=ctx.currentTime,nodes=[];room=ctx.createGain();room.gain.value=0;room.connect(master);
+    /* soft pad: a slow, warm open chord */
+    var lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=520;lp.connect(room);
+    [110,164.8,220,277.2,329.6].forEach(function(f,i){var o=ctx.createOscillator(),g=ctx.createGain(),l=ctx.createOscillator(),lg=ctx.createGain();o.type=i<2?'sine':'triangle';o.frequency.value=f;o.detune.value=(i%2?5:-5);g.gain.value=.05;l.frequency.value=.05+i*.03;lg.gain.value=.035;l.connect(lg);lg.connect(g.gain);o.connect(g);g.connect(lp);o.start();l.start();nodes.push(o,l)});
+    /* wind through an open door */
+    var n=ctx.createBufferSource();n.buffer=noiseBuf(5);n.loop=true;var bp=ctx.createBiquadFilter();bp.type='lowpass';bp.frequency.value=300;var ng=ctx.createGain();ng.gain.value=.5;n.connect(bp);bp.connect(ng);ng.connect(room);n.start();nodes.push(n);
+    /* a bike idling somewhere far off, like a purr */
+    var p=ctx.createOscillator(),pg=ctx.createGain(),pl=ctx.createOscillator(),plg=ctx.createGain(),pf=ctx.createBiquadFilter();p.type='sawtooth';p.frequency.value=46;pf.type='lowpass';pf.frequency.value=150;pg.gain.value=.03;pl.type='sine';pl.frequency.value=11;plg.gain.value=.03;pl.connect(plg);plg.connect(pg.gain);p.connect(pf);pf.connect(pg);pg.connect(room);p.start();pl.start();nodes.push(p,pl);
+    room._n=nodes;room.gain.linearRampToValueAtTime(.8,t+3);
+  }else if(room){var r=room;r.gain.cancelScheduledValues(ctx.currentTime);r.gain.linearRampToValueAtTime(0,ctx.currentTime+.8);setTimeout(function(){r._n.forEach(function(x){try{x.stop()}catch(e){}})},900);room=null}
 }
-function clank(){var t=ctx.currentTime,o=ctx.createOscillator(),g=ctx.createGain();o.type='square';o.frequency.value=900+Math.random()*1800;g.gain.setValueAtTime(.05,t);g.gain.exponentialRampToValueAtTime(.0001,t+.18);var bp=ctx.createBiquadFilter();bp.type='bandpass';bp.frequency.value=2500;o.connect(bp);bp.connect(g);g.connect(room||master);o.start(t);o.stop(t+.2)}
-function sfx(kind){
-  if(!on||!ac())return;var t=ctx.currentTime;
-  if(kind==='tick'){var o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=1600;g.gain.setValueAtTime(.08,t);g.gain.exponentialRampToValueAtTime(.0001,t+.05);o.connect(g);g.connect(master);o.start(t);o.stop(t+.06);return}
-  brap(kind==='rev'?.8:1.6);
-}
+function sfx(){if(!on||!ac())return;var t=ctx.currentTime,o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.setValueAtTime(520,t);o.frequency.exponentialRampToValueAtTime(390,t+.12);g.gain.setValueAtTime(.06,t);g.gain.exponentialRampToValueAtTime(.0001,t+.16);o.connect(g);g.connect(master);o.start(t);o.stop(t+.18)}
 function brap(dur){
-  /* two-stroke "brap": sawtooth engine pulsed by an LFO, revving up then down */
-  var t=ctx.currentTime,o=ctx.createOscillator(),lfo=ctx.createOscillator(),lg=ctx.createGain(),g=ctx.createGain(),f=ctx.createBiquadFilter(),ws=ctx.createWaveShaper();
-  var curve=new Float32Array(256);for(var i=0;i<256;i++){var x=i/128-1;curve[i]=Math.tanh(x*3)}ws.curve=curve;
-  o.type='sawtooth';f.type='lowpass';f.Q.value=6;
-  o.frequency.setValueAtTime(48,t);o.frequency.exponentialRampToValueAtTime(190,t+dur*.45);o.frequency.exponentialRampToValueAtTime(60,t+dur);
-  f.frequency.setValueAtTime(500,t);f.frequency.exponentialRampToValueAtTime(2600,t+dur*.45);f.frequency.exponentialRampToValueAtTime(600,t+dur);
-  lfo.type='square';lfo.frequency.setValueAtTime(22,t);lfo.frequency.exponentialRampToValueAtTime(70,t+dur*.45);lfo.frequency.exponentialRampToValueAtTime(26,t+dur);
-  lg.gain.value=.5;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.32,t+.04);g.gain.setValueAtTime(.32,t+dur*.8);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
-  var amp=ctx.createGain();amp.gain.value=.5;lfo.connect(lg);lg.connect(amp.gain);
-  o.connect(ws);ws.connect(f);f.connect(amp);amp.connect(g);g.connect(master);
-  o.start(t);lfo.start(t);o.stop(t+dur+.05);lfo.stop(t+dur+.05);
+  var t=ctx.currentTime,o=ctx.createOscillator(),lfo=ctx.createOscillator(),lg=ctx.createGain(),g=ctx.createGain(),f=ctx.createBiquadFilter(),ws=ctx.createWaveShaper(),amp=ctx.createGain();
+  var c=new Float32Array(256);for(var i=0;i<256;i++){c[i]=Math.tanh((i/128-1)*3)}ws.curve=c;
+  o.type='sawtooth';f.type='lowpass';f.Q.value=5;
+  o.frequency.setValueAtTime(48,t);o.frequency.exponentialRampToValueAtTime(180,t+dur*.45);o.frequency.exponentialRampToValueAtTime(58,t+dur);
+  f.frequency.setValueAtTime(450,t);f.frequency.exponentialRampToValueAtTime(2200,t+dur*.45);f.frequency.exponentialRampToValueAtTime(500,t+dur);
+  lfo.type='square';lfo.frequency.setValueAtTime(22,t);lfo.frequency.exponentialRampToValueAtTime(66,t+dur*.45);lfo.frequency.exponentialRampToValueAtTime(26,t+dur);
+  lg.gain.value=.5;amp.gain.value=.5;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.24,t+.05);g.gain.setValueAtTime(.24,t+dur*.8);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  lfo.connect(lg);lg.connect(amp.gain);o.connect(ws);ws.connect(f);f.connect(amp);amp.connect(g);g.connect(master);o.start(t);lfo.start(t);o.stop(t+dur+.05);lfo.stop(t+dur+.05);
 }
-sbtn.addEventListener('click',function(){on=!on;sbtn.setAttribute('aria-pressed',on);garage(on);if(on)brap(1.2);toast(on?'Garage sound on':'Garage sound off')});
-var rev=document.getElementById('rev'),ci=document.querySelector('.cover-in');
-rev.addEventListener('click',function(){
-  if(!on){on=true;sbtn.setAttribute('aria-pressed','true');garage(true)}
-  if(ac())brap(1.6);
-  ci.classList.add('revving');setTimeout(function(){ci.classList.remove('revving')},1500);
-});
+sbtn.addEventListener('click',function(){on=!on;sbtn.setAttribute('aria-pressed',on);ambient(on);toast(on?'Garage sound on':'Garage sound off')});
+var rev=document.getElementById('rev');
+rev.addEventListener('click',function(){if(ac())brap(1.5);rev.classList.remove('go');void rev.offsetWidth;rev.classList.add('go')});
+if(!reduce)document.body.classList.add('open');
 })();
 </script>
 </body>
