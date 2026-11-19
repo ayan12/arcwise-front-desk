@@ -201,14 +201,34 @@ legend i{display:grid;place-items:center;width:26px;height:26px;border-radius:50
 .fine{font-size:13.5px;color:var(--mute);text-align:center}
 
 /* ===== REVIEWS + VISIT ===== */
-.proof{padding-block:clamp(80px,10vw,130px)}
-.proof .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,90px);align-items:center}
-.score{font-family:var(--disp);font-weight:600;font-size:clamp(120px,17vw,220px);line-height:.8;letter-spacing:-.03em;color:var(--ink)}
-.score+p{font-weight:600;margin-top:22px}
-.score+p .s{color:var(--gold-d);letter-spacing:3px;font-size:22px;display:block}
-.themes{list-style:none;padding:0;border-top:1px solid var(--ink);margin:28px 0}
-.themes li{padding:16px 0;border-bottom:1px solid var(--line);font-size:19px;font-weight:600}
-.themes li span{color:var(--mute);font-weight:400;font-size:16px;display:block}
+.proof{background:#0a1630;color:#e7ebf3;padding-block:clamp(80px,10vw,130px);overflow:hidden;position:relative}
+.proof::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 50% at 18% 20%,rgba(200,162,76,.14),transparent 70%);pointer-events:none}
+.pr-top{position:relative;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,90px);align-items:center}
+.proof .eyebrow{color:var(--gold)}
+.score{font-family:var(--disp);font-weight:600;font-size:clamp(110px,14vw,190px);line-height:.8;letter-spacing:-.03em;color:#fff}
+.stars{color:var(--gold);font-size:28px;letter-spacing:6px;margin-top:14px}
+.cnt{color:#b8c2d6;margin-top:4px}.cnt b{color:#fff}
+.tags{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.tags li{border:1px solid #2a3d63;border-radius:99px;padding:6px 14px;font-size:14px;color:#dfe5f0}
+.tags b{color:var(--gold-hi);font-weight:600;margin-left:4px}
+.feat{margin:0;position:relative;padding-left:clamp(0px,3vw,40px)}
+.feat::before{content:"“";position:absolute;left:clamp(-14px,0vw,0px);top:-.42em;font:600 180px/1 var(--disp);color:var(--gold);opacity:.35}
+.feat blockquote{font-family:var(--disp);font-size:clamp(28px,3.4vw,46px);line-height:1.14;color:#fff;text-wrap:balance;position:relative}
+.feat figcaption{display:flex;align-items:center;gap:12px;margin-top:26px}
+.feat figcaption b{display:block;font-size:17px}.feat figcaption small{color:#9fabc2;font-size:14px}
+.av{display:grid;place-items:center;flex:none;width:42px;height:42px;border-radius:50%;background:var(--gold);color:var(--ink);font:600 18px var(--disp)}
+.wall{position:relative;margin-top:clamp(50px,6vw,80px);display:grid;gap:16px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.lane{list-style:none;padding:0;display:flex;gap:16px;width:max-content;animation:lane 60s linear infinite}
+.lane.l2{animation-direction:reverse;animation-duration:70s}
+.wall:hover .lane{animation-play-state:paused}
+@keyframes lane{to{transform:translateX(-50%)}}
+.lane li{width:340px;flex:none;background:#fff;color:var(--ink);padding:22px 22px 20px;display:flex;flex-direction:column;gap:12px;border-radius:4px}
+.lane .st{color:var(--gold-d);letter-spacing:3px;font-size:15px}
+.lane blockquote{font-size:16px;line-height:1.5;flex:1}
+.lane .who{display:flex;align-items:center;gap:10px;padding-top:12px;border-top:1px solid var(--line)}
+.lane .who .av{width:34px;height:34px;font-size:15px}
+.lane .who b{font-size:15px}.lane .who small{margin-left:auto;color:var(--mute);font-size:12.5px;text-align:right}
+.pr-acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(40px,5vw,60px)}
 .visit{background:var(--ink);color:#e7ebf3;padding-block:clamp(70px,9vw,120px)}
 .visit h2{color:#fff}
 .visit dl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin:40px 0 36px}
@@ -230,7 +250,10 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-bet
   .work .head .btn{justify-self:start;min-height:46px}
   .gal li.g1{grid-column:1/-1;grid-row:auto;aspect-ratio:4/4.4}
   .gal figcaption{font-size:17px;padding:36px 12px 12px}
-  .him .wrap,.booksec .wrap,.proof .wrap{grid-template-columns:minmax(0,1fr)}
+  .him .wrap,.booksec .wrap,.pr-top{grid-template-columns:minmax(0,1fr)}
+  .lane li{width:290px}
+  .feat::before{font-size:110px;top:-.32em}
+  .feat{padding-top:30px}
   .shop .grid{grid-template-columns:1fr;min-height:0}
   .shop .grid>img{aspect-ratio:4/5;height:auto}
   .svc ul{grid-template-columns:1fr}
@@ -264,7 +287,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-bet
   .bar .btn-line{color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.5)}
   footer{padding-bottom:100px}
 }
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.hexes path{opacity:.3}.js .mirror .frame{clip-path:none}.js .mirror figcaption{opacity:1}.js .hero .reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){.wall{overflow-x:auto;-webkit-mask-image:none;mask-image:none}.lane{width:auto}.lane[aria-hidden]{display:none}*,*::before,*::after{animation:none!important;transition:none!important}.hexes path{opacity:.3}.js .mirror .frame{clip-path:none}.js .mirror figcaption{opacity:1}.js .hero .reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
@@ -383,20 +406,29 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-bet
   </form>
 </div></section>
 
-<section class="proof" id="reviews"><div class="wrap">
-  <div><p class="score">5.0</p><p><span class="s" aria-hidden="true">★★★★★</span>172 reviews on Google</p></div>
-  <div>
-    <p class="eyebrow">Reviews</p>
-    <h2>What clients keep saying</h2>
-    <ul class="themes">
-      <li>Attention to detail<span>Reviewers mention the care taken over every fade and beard line.</span></li>
-      <li>A clean shop and clean tools<span>Cleanliness comes up again and again.</span></li>
-      <li>He listens<span>Clients say the barber understood the style they asked for.</span></li>
-      <li>Worth the trip<span>Visitors to Kuala Lumpur recommend it to other travellers.</span></li>
-    </ul>
-    <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&query=Houda%27s+Barbers+%26+Grooming+Kuala+Lumpur&query_place_id=ChIJbVXGBYc3zDERtidQmHrnjWo" target="_blank" rel="noopener">Read the reviews on Google</a>
+<section class="proof" id="reviews">
+  <div class="wrap pr-top">
+    <div class="pr-score">
+      <p class="eyebrow">Google reviews</p>
+      <p class="score">5.0</p>
+      <p class="stars" aria-label="5 out of 5 stars">★★★★★</p>
+      <p class="cnt">from <b>172</b> reviews on Google</p>
+      <ul class="tags" aria-label="What reviewers mention most"><li>Friendly barber <b>15</b></li><li>Arab barber <b>4</b></li><li>Classy service <b>4</b></li><li>Quality haircut <b>4</b></li></ul>
+    </div>
+    <figure class="feat">
+      <blockquote>“There are no 6 stars, but if there were, I would instantly click it. Cool and nice guy, and a great haircut!”</blockquote>
+      <figcaption><span class="av" aria-hidden="true">M</span><span><b>Majid</b><small>Local Guide on Google</small></span></figcaption>
+    </figure>
   </div>
-</div></section>
+  <div class="wall" aria-label="More reviews">
+    <ul class="lane l1"><li><p class="st" aria-label="5 out of 5 stars">★★★★★</p><blockquote>“Amazing attention to detail and an excellent fade and beard trim by Houda. If you're travelling through or live here, this is the place to go to.”</blockquote><p class="who"><span class="av" aria-hidden="true">S</span><b>S.</b><small>Visiting KL</small></p></li><li><p class="st" aria-label="5 out of 5 stars">★★★★★</p><blockquote>“Haircut by Houda. Welcoming & comfortable. Clean equipment & place. He's very skilled and attentive to customers.”</blockquote><p class="who"><span class="av" aria-hidden="true">S</span><b>Syakirah</b><small>Brought her husband</small></p></li><li><p class="st" aria-label="5 out of 5 stars">★★★★★</p><blockquote>“The barber was awesome, professional, and really understood the style I wanted.”</blockquote><p class="who"><span class="av" aria-hidden="true">R</span><b>Rasel</b><small>Haircut</small></p></li><li><p class="st" aria-label="5 out of 5 stars">★★★★★</p><blockquote>“The barbers here are true artists who pay attention to every single detail. I walked out looking and feeling like a brand new man.”</blockquote><p class="who"><span class="av" aria-hidden="true">T</span><b>Taki</b><small>Fade, beard trim, hot towel</small></p></li><li><p class="st" aria-label="5 out of 5 stars">★★★★★</p><blockquote>“A wonderful barbershop with a clean and tidy space. Tip-top skills from the barber allowed my hair to turn out neat.”</blockquote><p class="who"><span class="av" aria-hidden="true">H</span><b>Hadif</b><small>Haircut</small></p></li></ul>
+    <ul class="lane l2"><li><p class="st" aria-label="5 out of 5 stars">★★★★★</p><blockquote>“Very nice barber shop close to the center, clean and professional.”</blockquote><p class="who"><span class="av" aria-hidden="true">K</span><b>Khaled</b><small>Beard shave</small></p></li><li><p class="st" aria-label="5 out of 5 stars">★★★★★</p><blockquote>“Amazing high quality barber and most suitable price, positive energy and great work.”</blockquote><p class="who"><span class="av" aria-hidden="true">V</span><b>Vine</b><small>Haircut</small></p></li><li><p class="st" aria-label="5 out of 5 stars">★★★★★</p><blockquote>“Very caring barber and very good experience there! They use quality products!”</blockquote><p class="who"><span class="av" aria-hidden="true">A</span><b>A reviewer</b><small>Haircut</small></p></li><li><p class="st" aria-label="5 out of 5 stars">★★★★★</p><blockquote>“Good experience and clean barber. Highly recommended.”</blockquote><p class="who"><span class="av" aria-hidden="true">A</span><b>Ahmed</b><small>Haircut</small></p></li></ul>
+  </div>
+  <div class="wrap pr-acts">
+    <a class="btn btn-gold" href="https://www.google.com/maps/search/?api=1&query=Houda%27s+Barbers+%26+Grooming+Kuala+Lumpur&query_place_id=ChIJbVXGBYc3zDERtidQmHrnjWo" target="_blank" rel="noopener">Read all 172 on Google</a>
+    <a class="btn btn-ghost" href="https://search.google.com/local/writereview?placeid=ChIJbVXGBYc3zDERtidQmHrnjWo" target="_blank" rel="noopener">Been in? Leave a review</a>
+  </div>
+</section>
 
 <section class="visit" id="visit"><div class="wrap">
   <p class="eyebrow" style="color:var(--gold)">Find us</p>
@@ -475,6 +507,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-bet
       if(p<1)requestAnimationFrame(f);else{sc.classList.remove('cutting');setTimeout(function(){done.style.transition='opacity .8s';done.style.opacity=0;setTimeout(function(){done.style.transition='';done.style.width=0},900)},1200)}}
     requestAnimationFrame(f)}
   setTimeout(run,1400);setInterval(function(){if(!document.hidden)run()},9000);
+  document.querySelectorAll('.lane').forEach(function(l){var c=l.innerHTML;l.insertAdjacentHTML('beforeend',c.replace(/<li>/g,'<li aria-hidden="true">'))});
   var ul=document.querySelector('.svc ul');
   if(ul&&'IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){ul.classList.toggle('live',e.isIntersecting)})},{threshold:.15}).observe(ul)}
 })();
